@@ -1,0 +1,28 @@
+{% extends 'SimplerApp/base.html' %}
+
+{% block header_block %}
+	<div class="header">
+				  {% if user.is_authenticated %}
+				  <ul class="nav nav-pills pull-right">
+				            <li class="active"><a style="background-color:#FF4000;" href="/logout/">Logout</a></li>
+				          </ul>
+						  {% endif %}
+		        <h3 class="text-muted"><a href='/'>Simpler.</a></h3>
+		      </div>
+{% endblock %}
+
+{% block body_block %}
+<div style='padding-bottom:300px;'>
+{% for request in reqs %}
+{% autoescape off %}
+	<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{request.req_by}} wants this simplified:</h3>
+  </div>
+  <div class="panel-body">
+    {{request.simpler.simpler}}<h4><div align="right"><a class="glyphicon glyphicon-chevron-right"href ='/simpler/{{request.simpler.post.id}}/'></a></div></h4>
+  </div>
+</div>{% endautoescape %}
+{% endfor %}
+</div>
+{% endblock %}

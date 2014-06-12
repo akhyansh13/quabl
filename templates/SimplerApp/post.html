@@ -1,0 +1,38 @@
+{% extends 'SimplerApp/base.html' %}
+{% block body_block %}
+<div style="padding-bottom:500px;">
+<div id="Post" class="jumbotron">
+	<h3>{{post.post}}</h3><div align="right"><h2><div class="glyphicon glyphicon-chevron-down" style='color:#808080'></div></h2></div>
+		<form method='post' action='' style='text-align:center; display:none;'>
+		{% csrf_token %}
+		{% for f in form.visible_fields %}
+			{{f.errors}}
+			{{f}}
+		{%endfor%}
+	<div align="center">
+		<button type="submit" class="btn-primary">Add Simpler.</button>
+	</div>
+	</form>
+</div>
+<br/><br/><br/><br/><br/>
+<div>
+	{% for i in loop %}
+		<div>
+			{% for simpler in post.simpler_set.all %}
+			{% if simpler.coeficient == i %} {% autoescape off %}
+				<div class="jumbotron {{simpler.parent_list}}" id="{{simpler.id}}">{{simpler.author}}: <br/><br/>
+					{{simpler.simpler}}<div align="right"><button type="button" class = "btn-success reqsimp" id="{{simpler.id}}">Ask for Simpler.</button></div>
+					<div align="right"><h2><div style="padding:20px;color:#808080;" class="glyphicon glyphicon-chevron-down"></div><div class="glyphicon glyphicon-align-center" style="color:#808080;"></div><div class="glyphicon glyphicon-chevron-up" style="color:#808080; display:none;"></div></h2></div>
+				<div align="center"><textarea cols="80" rows="8" style='display:none;'></textarea></input>{% csrf_token %}</div>
+				<div align="center"><button type="button" class="btn-primary addsimp" id="{{simpler.id}}" align="center" style="display:none;">Add Simpler.</button>
+				</div>
+				<div style="display:none; color:red;" class=".successtext">Thanks! We'll notify you when someone simplifies this for you!</div>
+			</div> {% endautoescape %}
+			{% endif %}
+			{% endfor %}
+		</div>
+		<br/><br/><br/><br/><br/>
+	{% endfor %}
+</div>
+</div>
+{% endblock %}

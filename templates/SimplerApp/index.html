@@ -1,0 +1,31 @@
+{% extends 'SimplerApp/base.html' %}
+
+{% block body_block %}
+<div style='padding-bottom:300px;'>
+	{% if user.is_authenticated %}
+	<div style="text-align:center;padding-bottom:30px;"><h1>Hi {{user.username}}!</h1></div>
+		{% else %}
+	<div style="text-align:center;"><h1><a href='/register/'>Register Here</a> or <a href="/login/">Login.</a></h1></div>
+	{% endif %}
+	{% if user.is_authenticated %}
+<div align = "center"><form method='post' action=''>
+	{% csrf_token %}
+	{% for f in form.visible_fields %}
+		{{f.errors}}
+		{{f}}
+	{%endfor%}
+</div>
+<div align = "center" style="padding-bottom:30px;"><button type="submit" class="btn btn-primary btn-lg">Add Post</button></div>
+	{% endif %}
+	{% for post in posts %}
+		<div>
+			<blockquote>
+				<h3>
+			{{post.post}}
+		</h3>
+		<a href='/simpler/{{post.id}}/'><div align="right"><span class="glyphicon glyphicon-chevron-right"></span></div></a>
+	</blockquote>
+	</div>
+	{% endfor %}
+	 </div>
+{% endblock %}
