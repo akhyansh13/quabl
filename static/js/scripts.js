@@ -10,13 +10,13 @@ $(document).ready(function(){
 		$(".glyphicon-align-center").click(function(){
 			var $this = $(this);
 			var $t = $(this).parent().parent().parent();
-			var jum_id = $(this).parent().parent().parent().attr("id");
+			var jum_id = $t.attr("id");
 			var jclass = ".parent"+jum_id;
 			var jid = "#" + jum_id;
 			$(".jumbotron").not(jid).not(jclass).toggle('slow',function(){
 		        $.scrollTo($t.position().top, 300);
 				$(".glyphicon-align-center").hide("slow",function(){
-					$(".glyphicon-chevron-up").show();
+					$(".glyphicon-chevron-up").show("slow");
 				});
 			});
 	});
@@ -41,8 +41,22 @@ $(document).ready(function(){
 			var simpler_id = $(this).attr('id');
 			$.get(('/requestsimpler/'), {simpler_id:simpler_id},function(){
 				$button.toggle("slow");
-				$button.parent().html("Done!We'll notify you.");
+				$button.parent().html("Done! We'll notify you.");
 			});
+		});
+
+		$(".glyphicon-trash").click(function(){
+			var $t = $(this).parent().parent().parent();
+			$(this).toggle("slow",function(){
+				$t.find(".glyphicon-ok, .glyphicon-remove").toggle("slow");
+			});			
+		});
+
+		$(".glyphicon-remove").click(function(){
+			var $t = $(this).parent().parent().parent();
+			$(this).toggle("slow",function(){
+				$t.find(".glyphicon-ok, .glyphicon-trash").toggle("slow");
+			});			
 		});
 			
 		 		

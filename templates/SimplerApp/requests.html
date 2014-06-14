@@ -1,16 +1,5 @@
 {% extends 'SimplerApp/base.html' %}
 
-{% block header_block %}
-	<div class="header">
-				  {% if user.is_authenticated %}
-				  <ul class="nav nav-pills pull-right">
-				            <li class="active"><a style="background-color:#FF4000;" href="/logout/">Logout</a></li>
-				          </ul>
-						  {% endif %}
-		        <h3 class="text-muted"><a href='/'>Simpler.</a></h3>
-		      </div>
-{% endblock %}
-
 {% block body_block %}
 <div style='padding-bottom:300px;'>
 {% for request in reqs %}
@@ -25,4 +14,4 @@
 </div>{% endautoescape %}
 {% endfor %}
 </div>
-{% endblock %}
+{% endblock %} 

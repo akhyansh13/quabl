@@ -20,5 +20,3 @@ urlpatterns = patterns('',
     url(r'^requestsimpler/$', requestsimpler),
     url(r'^requests/$', requests)
     ) 
-    
-

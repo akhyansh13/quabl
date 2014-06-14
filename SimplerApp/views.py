@@ -143,4 +143,5 @@ def requests(request):
     context_dict = {'reqs':reqs}
     return render_to_response('SimplerApp/requests.html', context_dict, context)
 
- 
+#def deletesimpler(request):
+    #context = RequestContext(request)
