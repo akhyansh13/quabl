@@ -143,5 +143,10 @@ def requests(request):
     context_dict = {'reqs':reqs}
     return render_to_response('SimplerApp/requests.html', context_dict, context)
 
-#def deletesimpler(request):
-    #context = RequestContext(request)
+def deletesimpler(request):
+    context = RequestContext(request)
+    deleted_simp = request.GET['curr_simp_id']
+    required_simpler = Simpler.objects.get(id=int(deleted_simp))
+    required_simpler.display='none'
+    required_simpler.save()
+    return HttpResponse('success')

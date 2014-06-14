@@ -58,6 +58,23 @@ $(document).ready(function(){
 				$t.find(".glyphicon-ok, .glyphicon-trash").toggle("slow");
 			});			
 		});
+
+		$(".glyphicon-ok").click(function(){
+			var $t = $(this).parent().parent().parent();
+			var simpler_id = $t.attr("id");
+			var parent_class = ".parent"+ simpler_id;
+			curr_simp_id = simpler_id;
+			$.get(('/deletesimpler/'), {curr_simp_id:curr_simp_id}, function(){
+				$(parent_class).hide("slow");
+			});
+			$(parent_class).each(function(){
+				$s = $(this);
+				curr_simp_id = $s.attr('id');
+				$.get(('/deletesimpler/'), {curr_simp_id:curr_simp_id}, function(){
+					$t.hide("slow");
+				});
+			});
+		});
 			
 		 		
 });

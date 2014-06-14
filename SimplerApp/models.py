@@ -14,6 +14,7 @@ class Simpler(models.Model):
     coeficient = models.IntegerField(null = False, blank = False)
     parent_list = models.CharField(max_length=100000)
     author = models.CharField(max_length=100000)
+    display = models.CharField(max_length=1000, default=' ')
 
 class simpler_request(models.Model):
     simpler = models.ForeignKey(Simpler)
