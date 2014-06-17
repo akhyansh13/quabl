@@ -5,6 +5,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="{% static 'js/jquery-1.11.1.js' %}"></script>
+  <script src="{% static 'js/scripts.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'jquery.scrollTo-1.4.12/jquery.scrollTo.js' %}"></script>
+  <script src='{% static "ckeditor/ckeditor.js" %}'></script>
+  <script>               
+CKEDITOR.replaceClass = 'ckeditor';
+</script>
+
     <title>{% block title_block %}Simpler.{% endblock %}</title>
 
     <!-- Bootstrap -->
@@ -43,8 +52,5 @@
   <div id=class="footer navbar-fixed-bottom" style='text-align:center;'>
           <p class="muted credit">"Pounced with fire on flaming roads using ideas as our maps." - Dylan</p>
       </div>
-  <script src="{% static 'js/jquery-1.11.1.js' %}"></script>
-  <script src="{% static 'js/scripts.js' %}"></script>
-  <script src="{% static 'js/bootstrap.min.js' %}"></script>
-  <script src="{% static 'jquery.scrollTo-1.4.12/jquery.scrollTo.js' %}"></script>
+
 </html>

@@ -34,38 +34,27 @@ def post(request, post_id):
     for simpler in simplers:
         if simpler.coeficient > maximum:
             maximum = simpler.coeficient
-        parent_list = ''
-        while(simpler.parent_simpler != None):
-            parent_list = "parent" + str(simpler.parent_simpler.id) + " "
-            simpler = simpler.parent_simpler
-        parent_list_dict[simpler.id] = parent_list
-    context_dict['parent_list_dict']=parent_list_dict
     context_dict['max'] = maximum
     context_dict['loop'] = range(1, maximum+1)
-    if request.method == 'POST':
-        form = SimplerBox(request.POST)
-        if form.is_valid():
-            f = form.save(commit=False)
-            f.coeficient = 1
-            f.author = request.user.username
-            f.post = post
-            f.save()
-    else:
-        form = SimplerBox()
-    context_dict['form']=form
     return render_to_response('SimplerApp/post.html', context_dict, context) 
     
 def makesimpler(request):
     context = RequestContext(request)
-    parent_simpler_id = int(request.GET['simpler_id'])
-    simpler_text = request.GET['simpler_text']
-    parent_simpler = Simpler.objects.get(id=parent_simpler_id)
-    parent_list = 'parent' + str(parent_simpler.id) + ' '
-    curr_simpler = parent_simpler
-    while curr_simpler.parent_simpler != None:
-        parent_list += "parent" + str(curr_simpler.parent_simpler.id) + " "
-        curr_simpler = curr_simpler.parent_simpler
-    c = Simpler.objects.get_or_create(post = parent_simpler.post, parent_simpler = parent_simpler,  simpler = simpler_text, coeficient = parent_simpler.coeficient + 1, parent_list = parent_list, author = request.user.username)[0]
+    if request.GET['simpler_id']=='level1-simp':
+        post_id = int(request.GET['post_id'])
+        post = Post.objects.get(id=post_id)
+        simpler_text = request.GET['simpler_text']
+        c = Simpler.objects.get_or_create(post=post, simpler = simpler_text, coeficient=1, author=request.user.username, display=' ', parent_list=' ')[0]
+    else: 
+        parent_simpler_id = int(request.GET['simpler_id'])
+        simpler_text = request.GET['simpler_text']
+        parent_simpler = Simpler.objects.get(id=parent_simpler_id)
+        parent_list = 'parent' + str(parent_simpler.id) + ' '
+        curr_simpler = parent_simpler
+        while curr_simpler.parent_simpler != None:
+            parent_list += "parent" + str(curr_simpler.parent_simpler.id) + " "
+            curr_simpler = curr_simpler.parent_simpler
+        c = Simpler.objects.get_or_create(post = parent_simpler.post, parent_simpler = parent_simpler,  simpler = simpler_text, coeficient = parent_simpler.coeficient + 1, parent_list = parent_list, author = request.user.username, display=' ')[0]
     new_simpler_id = c.id
     return HttpResponse(new_simpler_id)
     

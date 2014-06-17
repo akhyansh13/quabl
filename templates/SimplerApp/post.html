@@ -1,39 +1,50 @@
 {% extends 'SimplerApp/base.html' %}
 {% block body_block %}
 <div style="padding-bottom:500px;">
+
 <div id="Post" class="jumbotron">
-	<h3>{{post.post}}</h3><div align="right"><h2><div class="glyphicon glyphicon-chevron-down" style='color:#808080'></div></h2></div>
-		<form method='post' action='' style='text-align:center; display:none;'>
-		{% csrf_token %}
-		{% for f in form.visible_fields %}
-			{{f.errors}}
-			{{f}}
-		{%endfor%}
-	<div align="center">
-		<button type="submit" class="btn-primary">Add Simpler.</button>
+	<h3>{{post.post}}</h3>
+	<div align="right"><h2>
+		<div class="glyphicon glyphicon-chevron-down" style='color:#808080'></div></h2></div>
+
+	<div class="simpler-textarea" style='display:none;'>
+	<div align="center"><textarea class="ckeditor" cols="80" rows="8" id='level1-textarea'></textarea></input>{% csrf_token %}</div>
+	<div align="center" style='padding-top:10px;'>
+		<button type="button" class=" btn btn-primary addsimp" id="level1-simp" align="center" data =' {{post.id}} '>Add Simpler.</button>
 	</div>
-	</form>                                                    
-</div>
-<br/><br/><br/><br/><br/>
+	</div></div>
 <div>
 	{% for i in loop %}
 		<div>
+			<br/><br/><br/><br/><br/>
 			{% for simpler in post.simpler_set.all %}
 			{% if simpler.coeficient == i %}
 			{% if simpler.display != 'none' %}
 			{% autoescape off %}
-				<div class="jumbotron {{simpler.parent_list}}" id="{{simpler.id}}"style="display:{{simpler.display}};">{{simpler.author}}: <br/><br/>
-					{{simpler.simpler}}<div align="right"><button type="button" class = "btn btn-success reqsimp" id="{{simpler.id}}">Ask for Simpler.</button></div>
-					<div align="right"><h3><div style="padding-right:20px;color:#808080;" class="glyphicon glyphicon-chevron-down"></div><div class="glyphicon glyphicon-align-center" style="padding-right:20px;color:#808080;"></div><div class="glyphicon glyphicon-chevron-up" style="color:#808080; display:none; padding-right:20px;"></div><div class="glyphicon glyphicon-trash" style="color:#808080; padding-right:20px;"></div><div class="glyphicon glyphicon-ok" style="color:#808080; padding-right:20px; display:none;"></div><div class="glyphicon glyphicon-remove" style="color:#808080; padding-right:20px; display:none;"></div></h3></div>
-				<div align="center"><textarea cols="80" rows="8" style='display:none;'></textarea></input>{% csrf_token %}</div>
-				<div align="center"><button type="button" class="btn-primary addsimp" id="{{simpler.id}}" align="center" style="display:none;">Add Simpler.</button>
+				<div class="jumbotron {{simpler.parent_list}}" id="{{simpler.id}}"style="display:{{simpler.display}};">{{simpler.author}} <br/><br/>
+					{{simpler.simpler}}
+					<div align="right">
+						<button type="button" class = "btn btn-success reqsimp" id="{{simpler.id}}">Ask for Simpler.</button></div>
+					<div align="right"><h3>
+						<div style="padding-right:20px;color:#808080;" class="glyphicon glyphicon-chevron-down"></div>
+						<div class="glyphicon glyphicon-align-center" style="padding-right:20px;color:#808080;"></div>
+						<div class="glyphicon glyphicon-chevron-up" style="color:#808080; display:none; padding-right:20px;"></div>
+						<div class="glyphicon glyphicon-trash" style="color:#808080; padding-right:20px;"></div>
+						<div class="glyphicon glyphicon-ok" style="color:#808080; padding-right:20px; display:none;"></div>
+						<div class="glyphicon glyphicon-remove" style="color:#808080; padding-right:20px; display:none;"></div></h3></div>
+				<div class="simpler-textarea" style='display:none;'>
+				<div align="center"><textarea class="ckeditor" cols="80" rows="8" id='simp{{simpler.id}}'>
+				</textarea>{% csrf_token %}</div>
+				<div align="center" style='padding-top:10px;'>
+					<button type="button" class=" btn btn-primary addsimp" id="{{simpler.id}}" align="center" data ='{{ post.id }}'>Add Simpler.</button>
 				</div>
-			</div> {% endautoescape %}
+			</div>
+			</div> 
+			{% endautoescape %}
 			{% endif %}
 			{% endif %}
 			{% endfor %}
 		</div>
-		<br/><br/><br/><br/><br/>
 	{% endfor %}
 </div>
 </div>

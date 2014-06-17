@@ -1,10 +1,6 @@
 $(document).ready(function(){
-	$("#Post .glyphicon-chevron-down").click(function(){
-		$(this).parent().parent().parent().find("form").toggle('slow');
-	});
-	$(".glyphicon-chevron-down").not("#Post .glyphicon-chevron-down").click(function(){
-		$(this).parent().parent().parent().find("textarea").toggle("slow");
-		$(this).parent().parent().parent().find("button").toggle("slow");
+	$(".glyphicon-chevron-down").click(function(){
+		$(this).parent().parent().parent().find(".simpler-textarea").toggle("slow");
 	});
 		
 		$(".glyphicon-align-center").click(function(){
@@ -31,10 +27,23 @@ $(document).ready(function(){
 			
 		$(".addsimp").click(function(){
 			var simpler_id = $(this).attr('id');
-			var simpler_text = $(this).parent().parent().find("textarea").val();
-				$.get(('/makesimpler/'),{simpler_id:simpler_id, simpler_text:simpler_text }, function(data){
+			var post_id = $(this).attr("data");
+			
+			if(simpler_id == 'level1-simp'){
+
+			var simpler_textarea_id = 'level1-textarea';
+			var simpler_text = CKEDITOR.instances[simpler_textarea_id].getData();
+				$.get(('/makesimpler/'),{simpler_id:simpler_id, simpler_text:simpler_text, post_id:post_id,}, function(data){
 				    location.reload();
 				});
+		}
+		else{
+			var simpler_textarea_id = 'simp'+ simpler_id;
+			var simpler_text = CKEDITOR.instances[simpler_textarea_id].getData();
+				$.get(('/makesimpler/'),{simpler_id:simpler_id, simpler_text:simpler_text, post_id:post_id,}, function(data){
+				    location.reload();
+				});
+			}
 			});
 		$(".reqsimp").click(function(){
 			$button = $(this);
