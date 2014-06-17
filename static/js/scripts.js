@@ -66,12 +66,15 @@ $(document).ready(function(){
 			curr_simp_id = simpler_id;
 			$.get(('/deletesimpler/'), {curr_simp_id:curr_simp_id}, function(){
 				$(parent_class).hide("slow");
+				$(parent_class).remove();
 			});
 			$(parent_class).each(function(){
 				$s = $(this);
 				curr_simp_id = $s.attr('id');
 				$.get(('/deletesimpler/'), {curr_simp_id:curr_simp_id}, function(){
 					$t.hide("slow");
+					$t.remove();
+
 				});
 			});
 		});

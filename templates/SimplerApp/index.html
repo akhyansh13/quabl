@@ -1,5 +1,4 @@
 {% extends 'SimplerApp/base.html' %}
-
 {% block body_block %}
 <div style='padding-bottom:300px;'>
 	{% if user.is_authenticated %}
@@ -20,9 +19,9 @@
 	{% for post in posts %}
 		<div>
 			<blockquote>
-				<h3>
+				{% autoescape off %}
 			{{post.post}}
-		</h3>
+				{% endautoescape %}
 		<a href='/simpler/{{post.id}}/'><div align="right"><span class="glyphicon glyphicon-chevron-right"></span></div></a>
 	</blockquote>
 	</div>
