@@ -3,7 +3,7 @@
 <div style="padding-bottom:500px;">
 
 <div id="Post" class="jumbotron">
-	<h3>{{post.post}}</h3>
+	{% autoescape off %}<h3>{{post.post}}</h3>{% endautoescape %}
 	<div align="right"><h2>
 		<div class="glyphicon glyphicon-chevron-down" style='color:#808080'></div></h2></div>
 
