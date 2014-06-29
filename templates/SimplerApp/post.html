@@ -18,25 +18,28 @@
 		<div>
 			<br/><br/><br/><br/><br/>
 			{% for simpler in post.simpler_set.all %}
-			{% if simpler.coeficient == i %}
 			{% if simpler.display != 'none' %}
+			{% if simpler.coeficient == i %}
 			{% autoescape off %}
 				<div class="jumbotron {{simpler.parent_list}}" id="{{simpler.id}}"style="display:{{simpler.display}};">{{simpler.author}} <br/><br/>
 					{{simpler.simpler}}
+					<hr/>
 					<div align="right">
 						<button type="button" class = "btn btn-success reqsimp" id="{{simpler.id}}">Ask for Simpler.</button></div>
 					<div align="right"><h3>
-						<div style="padding-right:20px;color:#808080;" class="glyphicon glyphicon-chevron-down"></div>
-						<div class="glyphicon glyphicon-align-center" style="padding-right:20px;color:#808080;"></div>
-						<div class="glyphicon glyphicon-chevron-up" style="color:#808080; display:none; padding-right:20px;"></div>
-						<div class="glyphicon glyphicon-trash" style="color:#808080; padding-right:20px;"></div>
-						<div class="glyphicon glyphicon-ok" style="color:#808080; padding-right:20px; display:none;"></div>
-						<div class="glyphicon glyphicon-remove" style="color:#808080; padding-right:20px; display:none;"></div></h3></div>
+						<div style="padding-bottom:20px;">
+						<button class="btn btn-primary addsimp-toggle">Add Simpler.</button></div>
+						<button class="btn btn-default glyphicon glyphicon-align-center" style="padding-right:20px;color:#808080;"></button>
+						<button class="btn btn-default glyphicon glyphicon-chevron-up" style="color:#808080; display:none; padding-right:20px;"></button>
+						<button class="btn btn-default glyphicon glyphicon-trash" style="color:#808080; padding-right:20px;"></button>
+						<button class="btn btn-default glyphicon glyphicon-ok remove" style="color:#808080; padding-right:20px; display:none;"></button>
+						<button class="btn btn-default glyphicon glyphicon-remove go-back" style="color:#808080; padding-right:20px; display:none;"></button></h3></div>
 				<div class="simpler-textarea" style='display:none;'>
 				<div align="center"><textarea class="ckeditor" cols="80" rows="8" id='simp{{simpler.id}}'>
 				</textarea>{% csrf_token %}</div>
 				<div align="center" style='padding-top:10px;'>
-					<button type="button" class=" btn btn-primary addsimp" id="{{simpler.id}}" align="center" data ='{{ post.id }}'>Add Simpler.</button>
+					<button type="button" class="btn btn-default glyphicon glyphicon-ok addsimp" id="{{simpler.id}}" data ='{{ post.id }}'></button>
+					<button type="button" class="btn btn-default glyphicon glyphicon-remove close-textarea addsimp-toggle" data ='{{ post.id }}'></button>
 				</div>
 			</div>
 			</div> 

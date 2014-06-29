@@ -1,6 +1,6 @@
 $(document).ready(function(){
-	$(".glyphicon-chevron-down").click(function(){
-		$(this).parent().parent().parent().find(".simpler-textarea").toggle("slow");
+	$(".addsimp-toggle").click(function(){
+		$(this).parent().parent().parent().parent().find(".simpler-textarea").toggle("slow");
 	});
 		
 		$(".glyphicon-align-center").click(function(){
@@ -57,18 +57,18 @@ $(document).ready(function(){
 		$(".glyphicon-trash").click(function(){
 			var $t = $(this).parent().parent().parent();
 			$(this).toggle("slow",function(){
-				$t.find(".glyphicon-ok, .glyphicon-remove").toggle("slow");
+				$t.find(".remove, .go-back").show("slow");
 			});			
 		});
 
-		$(".glyphicon-remove").click(function(){
+		$(".go-back").click(function(){
 			var $t = $(this).parent().parent().parent();
 			$(this).toggle("slow",function(){
-				$t.find(".glyphicon-ok, .glyphicon-trash").toggle("slow");
+				$t.find(".remove, .glyphicon-trash").toggle("slow");
 			});			
 		});
 
-		$(".glyphicon-ok").click(function(){
+		$(".remove").click(function(){
 			var $t = $(this).parent().parent().parent();
 			var simpler_id = $t.attr("id");
 			var parent_class = ".parent"+ simpler_id;
@@ -76,17 +76,26 @@ $(document).ready(function(){
 			$.get(('/deletesimpler/'), {curr_simp_id:curr_simp_id}, function(){
 				$(parent_class).hide("slow");
 				$(parent_class).remove();
+				$t.hide("slow");
+				$t.remove();
 			});
 			$(parent_class).each(function(){
 				$s = $(this);
 				curr_simp_id = $s.attr('id');
-				$.get(('/deletesimpler/'), {curr_simp_id:curr_simp_id}, function(){
-					$t.hide("slow");
-					$t.remove();
-
-				});
+				$.get(('/deletesimpler/'), {curr_simp_id:curr_simp_id});
 			});
 		});
+
+	function getSelected() {
+    if(window.getSelection) { return window.getSelection(); }
+        else if(document.getSelection) { return document.getSelection(); }
+                    else {
+                            var selection = document.selection && document.selection.createRange();
+                            if(selection.text) { return selection.text; }
+                return false;
+            }
+            return false;
+        }
 			
 		 		
 });
