@@ -1,9 +1,9 @@
 $(document).ready(function(){
-	$(".addsimp-toggle").click(function(){
+	$(".addsimp-toggle").click(function(){		//toggles simpler addition text area.
 		$(this).parent().parent().parent().parent().find(".simpler-textarea").toggle("slow");
 	});
 		
-		$(".glyphicon-align-center").click(function(){
+		$(".glyphicon-align-center").click(function(){		//hierarchy button code.
 			var $this = $(this);
 			var $t = $(this).parent().parent().parent();
 			var jum_id = $t.attr("id");
@@ -17,7 +17,7 @@ $(document).ready(function(){
 			});
 	});
 	
-	$(".glyphicon-chevron-up").click(function(){
+	$(".glyphicon-chevron-up").click(function(){		//scrolls up after viewing hierarchy of a particular simpler.
 		$(".jumbotron").show("slow");
 		$(".glyphicon-chevron-up").hide("slow", function(){
 	        $.scrollTo($("html").position().top, 300);
@@ -25,7 +25,7 @@ $(document).ready(function(){
 		});		
 });
 			
-		$(".addsimp").click(function(){
+		$(".addsimp").click(function(){					//add simpler button code [AJAX].
 			var simpler_id = $(this).attr('id');
 			var post_id = $(this).attr("data");
 			
@@ -37,7 +37,7 @@ $(document).ready(function(){
 				    location.reload();
 				});
 		}
-		else{
+		else{											//handles level1 simplers.
 			var simpler_textarea_id = 'simp'+ simpler_id;
 			var simpler_text = CKEDITOR.instances[simpler_textarea_id].getData();
 				$.get(('/makesimpler/'),{simpler_id:simpler_id, simpler_text:simpler_text, post_id:post_id,}, function(data){
@@ -45,7 +45,7 @@ $(document).ready(function(){
 				});
 			}
 			});
-		$(".reqsimp").click(function(){
+		$(".reqsimp").click(function(){					//handles simplers of level greater than or equal to 2.
 			$button = $(this);
 			var simpler_id = $(this).attr('id');
 			$.get(('/requestsimpler/'), {simpler_id:simpler_id},function(){
@@ -68,7 +68,7 @@ $(document).ready(function(){
 			});			
 		});
 
-		$(".remove").click(function(){
+		$(".remove").click(function(){				//Deletes the simpler and its children and immediately removes them out of the page [AJAX].
 			var $t = $(this).parent().parent().parent();
 			var simpler_id = $t.attr("id");
 			var parent_class = ".parent"+ simpler_id;
@@ -86,7 +86,7 @@ $(document).ready(function(){
 			});
 		});
 
-	function getSelected() {
+	function getSelected() {					//Gets selected text.
     if(window.getSelection) { return window.getSelection(); }
         else if(document.getSelection) { return document.getSelection(); }
                     else {
