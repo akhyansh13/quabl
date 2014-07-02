@@ -64,7 +64,7 @@ $(document).ready(function(){
 		$(".go-back").click(function(){
 			var $t = $(this).parent().parent().parent();
 			$(this).toggle("slow",function(){
-				$t.find(".remove, .glyphicon-trash").toggle("slow");
+				$t.find(".remove, .glyphicon-trash").toggle();
 			});			
 		});
 
