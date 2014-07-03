@@ -11,15 +11,18 @@ def index(request):
     context = RequestContext(request)
     posts = Post.objects.all()
     context_dict = {'posts':posts}
-    if request.method == 'POST':
-        form = postBox(request.POST)
-        f = form.save(commit=False)
-        f.author = request.user.username
-        f.save()
-    else:
-        form = postBox()
+    form = postBox()
     context_dict['form'] = form
     return render_to_response('SimplerApp/index.html',context_dict, context)
+
+def addpost(request):
+    if request.method == 'POST':
+        form = postBox(request.POST)
+        if form.is_valid():
+            f = form.save(commit=False)
+            f.author = request.user.username
+            f.save()
+    return HttpResponseRedirect('/')
 
 @login_required    
 def post(request, post_id):

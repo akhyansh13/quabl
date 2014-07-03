@@ -7,15 +7,17 @@
 	<div style="text-align:center;"><h1><a href='/register/'>Register Here</a> or <a href="/login/">Login.</a></h1></div>
 	{% endif %}
 	{% if user.is_authenticated %}
-<div align = "center"><form method='post' action=''>
+<form method='post' action='/addpost/'>
+<div align = "center" style="padding:10px;">
 	{% csrf_token %}
 	{% for f in form.visible_fields %}
-		{{f.errors}}
-		{{f}}
-	{%endfor%}
+	{{ f.errors }}
+	{{ f }}
+	{% endfor %}
 </div>
 <div align = "center" style="padding-bottom:30px;"><button type="submit" class="btn btn-primary btn-lg">Add Post</button></div>
 	{% endif %}
+	</form>
 	{% for post in posts %}
 		<div>
 			<blockquote>

@@ -29,7 +29,7 @@ $(document).ready(function(){
 			var simpler_id = $(this).attr('id');
 			var post_id = $(this).attr("data");
 			
-			if(simpler_id == 'level1-simp'){
+			if(simpler_id == 'level1-simp'){			//handles level1 simplers.
 
 			var simpler_textarea_id = 'level1-textarea';
 			var simpler_text = CKEDITOR.instances[simpler_textarea_id].getData();
@@ -37,7 +37,7 @@ $(document).ready(function(){
 				    location.reload();
 				});
 		}
-		else{											//handles level1 simplers.
+		else{											//handles simplers of level greater than or equal to 2.											
 			var simpler_textarea_id = 'simp'+ simpler_id;
 			var simpler_text = CKEDITOR.instances[simpler_textarea_id].getData();
 				$.get(('/makesimpler/'),{simpler_id:simpler_id, simpler_text:simpler_text, post_id:post_id,}, function(data){
@@ -45,7 +45,7 @@ $(document).ready(function(){
 				});
 			}
 			});
-		$(".reqsimp").click(function(){					//handles simplers of level greater than or equal to 2.
+		$(".reqsimp").click(function(){					
 			$button = $(this);
 			var simpler_id = $(this).attr('id');
 			$.get(('/requestsimpler/'), {simpler_id:simpler_id},function(){
@@ -85,17 +85,21 @@ $(document).ready(function(){
 				$.get(('/deletesimpler/'), {curr_simp_id:curr_simp_id});
 			});
 		});
-
-	function getSelected() {					//Gets selected text.
-    if(window.getSelection) { return window.getSelection(); }
-        else if(document.getSelection) { return document.getSelection(); }
-                    else {
-                            var selection = document.selection && document.selection.createRange();
-                            if(selection.text) { return selection.text; }
-                return false;
-            }
-            return false;
-        }
-			
-		 		
 });
+
+function getSelected() {					//Gets selected text.
+    if(window.getSelection){ 
+    	return window.getSelection(); 
+    }
+    else if(document.getSelection){ 
+        return document.getSelection(); 
+    }
+    else{
+        var selection = document.selection && document.selection.createRange();
+        if(selection.text) { return selection.text; }
+        return false;
+    }
+    return false;
+}
+			
+
