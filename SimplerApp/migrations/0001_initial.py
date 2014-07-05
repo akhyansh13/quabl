@@ -24,7 +24,7 @@ class Migration(SchemaMigration):
             ('parent_simpler', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='parent', null=True, to=orm['SimplerApp.Simpler'])),
             ('simpler', self.gf('django.db.models.fields.CharField')(max_length=10000000)),
             ('coeficient', self.gf('django.db.models.fields.IntegerField')()),
-            ('parent_list', self.gf('django.db.models.fields.CharField')(max_length=100000, null=True, blank=True)),
+            ('parent_list', self.gf('django.db.models.fields.CharField')(max_length=100000)),
             ('author', self.gf('django.db.models.fields.CharField')(max_length=100000)),
             ('display', self.gf('django.db.models.fields.CharField')(default=' ', max_length=1000)),
         ))
@@ -76,7 +76,7 @@ class Migration(SchemaMigration):
             'coeficient': ('django.db.models.fields.IntegerField', [], {}),
             'display': ('django.db.models.fields.CharField', [], {'default': "' '", 'max_length': '1000'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'parent_list': ('django.db.models.fields.CharField', [], {'max_length': '100000', 'null': 'True', 'blank': 'True'}),
+            'parent_list': ('django.db.models.fields.CharField', [], {'max_length': '100000'}),
             'parent_simpler': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'parent'", 'null': 'True', 'to': u"orm['SimplerApp.Simpler']"}),
             'post': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['SimplerApp.Post']"}),
             'simpler': ('django.db.models.fields.CharField', [], {'max_length': '10000000'})

@@ -22,7 +22,7 @@
 		<div>
 			<blockquote>
 				{% autoescape off %}
-			{{post.post}}
+			<p> {{ post.topic }}: </p> {{post.post}}
 				{% endautoescape %}
 		<a href='/simpler/{{post.id}}/'><div align="right"><span class="glyphicon glyphicon-chevron-right"></span></div></a>
 	</blockquote>

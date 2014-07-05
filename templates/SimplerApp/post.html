@@ -3,7 +3,7 @@
 <div style="padding-bottom:500px;">
 
 <div id="Post" class="jumbotron">
-	{% autoescape off %}<h3>{{post.post}}</h3>{% endautoescape %}
+	{% autoescape off %}<h4>{{ post.topic }}:</h4><h3>{{ post.post }}</h3>{% endautoescape %}
 	<div align="right"><h2>
 		<button class="btn btn-default glyphicon glyphicon-chevron-down addsimp-toggle" style='color:#808080'></button></h2></div>
 

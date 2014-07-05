@@ -6,6 +6,7 @@ class Post(models.Model):
     post = models.CharField(max_length=10000000)
     levels_simplified = models.IntegerField(null = True, blank = True, default = 0)
     author = models.CharField(max_length=100000)
+    topic = models.CharField(max_length=10000000, default=' ')
     
 class Simpler(models.Model):
     post = models.ForeignKey(Post)
