@@ -23,10 +23,11 @@ class simpler_request(models.Model):
     req_by = models.ForeignKey(User)
     
 class postBox(forms.ModelForm):
+    topic = forms.CharField(max_length=10000000,widget=forms.Textarea(attrs={'rows': 1, 'cols': 80}),)
     post = forms.CharField(max_length=10000000,widget=forms.Textarea(attrs={'rows': 8, 'cols': 80}))
     class Meta:
         model = Post
-        fields = ('post',)
+        fields = ('topic','post',)
     
 class SimplerBox(forms.ModelForm):
     simpler = forms.CharField(max_length=10000000,widget=forms.Textarea(attrs={'rows': 8, 'cols': 80}))
