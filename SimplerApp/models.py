@@ -1,17 +1,22 @@
 from django.db import models
 from django import forms
 from django.contrib.auth.models import User
+from functions import show_less
 
-class post_topic(models.Model):
+class topic(models.Model):
     topic = models.CharField(max_length=1000000, default='Uncategorized')
     topic_description = models.CharField(max_length=10000000, null=True, blank=True)
+    def __unicode__(self):
+        return self.topic
 
 class Post(models.Model):
     post = models.CharField(max_length=10000000)
     levels_simplified = models.IntegerField(null = True, blank = True, default = 0)
     author = models.CharField(max_length=100000)
-    topic = models.CharField(max_length=10000000, default=' ')
-    topic_key = models.ForeignKey(post_topic, null=True, blank = True)
+    topic = models.ForeignKey(topic, null=True, blank = True)
+    def __unicode__(self):
+        post_less = show_less(self.post)
+        return post_less
     
 class Simpler(models.Model):
     post = models.ForeignKey(Post)
@@ -21,6 +26,9 @@ class Simpler(models.Model):
     parent_list = models.CharField(max_length=100000)
     author = models.CharField(max_length=100000)
     display = models.CharField(max_length=1000, default=' ')
+    def __unicode__(self):
+        simpler_less = show_less(self.simpler)
+        return simpler_less
 
 class simpler_request(models.Model):
     simpler = models.ForeignKey(Simpler)
@@ -28,11 +36,10 @@ class simpler_request(models.Model):
     req_by = models.ForeignKey(User)
     
 class postBox(forms.ModelForm):
-    topic = forms.CharField(max_length=10000000,widget=forms.Textarea(attrs={'rows': 1, 'cols': 80}),)
     post = forms.CharField(max_length=10000000,widget=forms.Textarea(attrs={'rows': 8, 'cols': 80}))
     class Meta:
         model = Post
-        fields = ('topic','post',)
+        fields = ('post',)
     
 class SimplerBox(forms.ModelForm):
     simpler = forms.CharField(max_length=10000000,widget=forms.Textarea(attrs={'rows': 8, 'cols': 80}))

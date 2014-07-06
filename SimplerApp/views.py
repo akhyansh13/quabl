@@ -1,5 +1,5 @@
 import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'simpler.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Simpler.settings')
 from django.shortcuts import render_to_response 
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
@@ -21,6 +21,8 @@ def addpost(request):
         if form.is_valid():
             f = form.save(commit=False)
             f.author = request.user.username
+            p = f.post
+            f.post = '<p>' + p + '</p>'         #Encloses in <p></p>.
             f.save()
     return HttpResponseRedirect('/')
 
