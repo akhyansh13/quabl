@@ -5,7 +5,7 @@
 <div id="Post" class="jumbotron">
 	{% autoescape off %}<h4>{{ post.topic.topic }}:</h4><h3>{{ post.post }}</h3>{% endautoescape %}
 	<div align="right"><h2>
-		<button class="btn btn-default glyphicon glyphicon-chevron-down addsimp-toggle" style='color:#808080'></button></h2></div>
+		<button class="btn btn-default glyphicon glyphicon-chevron-down addsimp-toggle-post" style='color:#808080'></button></h2></div>
 
 	<div class="simpler-textarea" style='display:none;'>
 	<div align="center"><textarea class="ckeditor" cols="80" rows="8" id='level1-textarea'></textarea></input>{% csrf_token %}</div>

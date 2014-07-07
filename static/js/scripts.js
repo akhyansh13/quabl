@@ -1,7 +1,12 @@
 $(document).ready(function(){
+	$(".addsimp-toggle-post").click(function(){		//toggles simpler addition text area.
+		$(this).parent().parent().parent().find(".simpler-textarea").toggle("slow");
+	});
+	
 	$(".addsimp-toggle").click(function(){		//toggles simpler addition text area.
 		$(this).parent().parent().parent().parent().find(".simpler-textarea").toggle("slow");
 	});
+
 		
 		$(".glyphicon-align-center").click(function(){		//hierarchy button code.
 			var $this = $(this);
