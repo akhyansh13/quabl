@@ -11,7 +11,6 @@ class topic(models.Model):
 
 class Post(models.Model):
     post = models.CharField(max_length=10000000)
-    levels_simplified = models.IntegerField(null = True, blank = True, default = 0)
     author = models.CharField(max_length=100000)
     topic = models.ForeignKey(topic, null=True, blank = True)
     def __unicode__(self):
@@ -22,6 +21,7 @@ class Simpler(models.Model):
     post = models.ForeignKey(Post)
     parent_simpler = models.ForeignKey('self', related_name="parent", blank= True, null= True)
     simpler = models.CharField(max_length=10000000)
+    simpler_original = models.CharField(max_length=10000000, default=' ')
     coeficient = models.IntegerField(null = False, blank = False)
     parent_list = models.CharField(max_length=100000)
     author = models.CharField(max_length=100000)
@@ -30,10 +30,14 @@ class Simpler(models.Model):
         simpler_less = show_less(self.simpler)
         return simpler_less
 
-class simpler_request(models.Model):
+class highlight(models.Model):
+    highlight = models.CharField(max_length=100000000)
     simpler = models.ForeignKey(Simpler)
     status = models.IntegerField(null=False)
     req_by = models.ForeignKey(User)
+    description = models.CharField(max_length=10000000)
+    def __unicode__(self):
+        return self.highlight
     
 class postBox(forms.ModelForm):
     post = forms.CharField(max_length=10000000,widget=forms.Textarea(attrs={'rows': 8, 'cols': 80}))
@@ -65,9 +69,11 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ('picture',)
 
-class simpler_request(models.Model):
-    simpler = models.ForeignKey(Simpler)
-    status = models.IntegerField(null=False)
-    req_by = models.ForeignKey(User)
+class HighlightDesc(forms.ModelForm):
+    description = forms.CharField(max_length=10000000,widget=forms.Textarea(attrs={'rows': 8, 'cols': 80}))
+    class Meta:
+        model = highlight
+        fields = ('description',)
+
     
     

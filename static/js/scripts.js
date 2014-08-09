@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	$('.jumbotron').not(".level-1").not('#Post').hide();
 	$(".addsimp-toggle-post").click(function(){		//toggles simpler addition text area.
 		$(this).parent().parent().parent().find(".simpler-textarea").toggle("slow");
 	});
@@ -10,25 +11,22 @@ $(document).ready(function(){
 		
 		$(".glyphicon-align-center").click(function(){		//hierarchy button code.
 			var $this = $(this);
-			var $t = $(this).parent().parent().parent();
-			var jum_id = $t.attr("id");
-			var jclass = ".parent"+jum_id;
-			var jid = "#" + jum_id;
-			$(".jumbotron").not(jid).not(jclass).toggle('slow',function(){
-		        $.scrollTo($t.position().top, 300);
-				$(".glyphicon-align-center").hide("slow",function(){
-					$(".glyphicon-chevron-up").show("slow");
+			var $t = $this.parent().parent().parent();
+			var this_level = $(this).parent().parent().parent().attr("class");	//Gets the current level.
+			var level = this_level.split("level-");
+			level = parseInt(level[(level.length-1)]);
+			curr_level_string = String(level)
+			var curr_jumbotron = "#"+$this.parent().parent().parent().attr("id");
+			var curr_jumbotron_class = "."+$this.parent().parent().parent().attr("id");
+			$this.hide('slow', function(){
+					$(curr_jumbotron_class).show();
+					$("#Post").hide();
+					$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").hide(function(){
+					$.scrollTo($t.position().top, 100);
 				});
 			});
+			
 	});
-	
-	$(".glyphicon-chevron-up").click(function(){		//scrolls up after viewing hierarchy of a particular simpler.
-		$(".jumbotron").show("slow");
-		$(".glyphicon-chevron-up").hide("slow", function(){
-	        $.scrollTo($("html").position().top, 300);
-			$(".glyphicon-align-center").show('slow');
-		});		
-});
 			
 		$(".addsimp").click(function(){					//add simpler button code [AJAX].
 			var simpler_id = $(this).attr('id');
@@ -50,13 +48,13 @@ $(document).ready(function(){
 				});
 			}
 			});
+
 		$(".reqsimp").click(function(){					
 			$button = $(this);
 			var simpler_id = $(this).attr('id');
-			$.get(('/requestsimpler/'), {simpler_id:simpler_id},function(){
-				$button.toggle("slow");
-				$button.parent().html("Done! We'll notify you.");
-			});
+			var highlight = String(getSelected());
+			uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/'+ highlight+'/';
+			window.location.href= uri;
 		});
 
 		$(".glyphicon-trash").click(function(){
@@ -101,7 +99,9 @@ function getSelected() {					//Gets selected text.
     }
     else{
         var selection = document.selection && document.selection.createRange();
-        if(selection.text) { return selection.text; }
+        if(selection.text) { 
+        	return selection.text; 
+        }
         return false;
     }
     return false;

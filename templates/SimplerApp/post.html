@@ -1,7 +1,7 @@
 {% extends 'SimplerApp/base.html' %}
 {% block body_block %}
-<div style="padding-bottom:500px;">
 
+<div id="post-wrapper" style="padding-bottom:100px;">
 <div id="Post" class="jumbotron">
 	{% autoescape off %}<h4>{{ post.topic.topic }}:</h4><h3>{{ post.post }}</h3>{% endautoescape %}
 	<div align="right"><h2>
@@ -12,26 +12,26 @@
 	<div align="center" style='padding-top:10px;'>
 		<button type="button" class=" btn btn-primary addsimp" id="level1-simp" align="center" data =' {{post.id}} '>Add Simpler.</button>
 	</div>
-	</div></div>
-<div>
+	</div>
+</div>
+</div>
 	{% for i in loop %}
-		<div>
-			<br/><br/><br/><br/><br/>
-			{% for simpler in post.simpler_set.all %}
-			{% if simpler.display != 'none' %}
+	<div class="level-wrapper" style='padding-bottom:100px;'>
+	{% for simpler in post.simpler_set.all %}
+		{% if simpler.display != 'none' %}
 			{% if simpler.coeficient == i %}
 			{% autoescape off %}
-				<div class="jumbotron {{simpler.parent_list}}" id="{{simpler.id}}"style="display:{{simpler.display}};">{{simpler.author}} <br/><br/>
+			<div class='simpler-wrapper' style='padding-bottom:10px;'>
+				<div class="jumbotron {{simpler.parent_simpler.id}} {{simpler.parent_list}} level-{{i}}" id="{{simpler.id}}"style="display:{{simpler.display}};">{{simpler.author}} <br/><br/>
 					{{simpler.simpler}}
 					<hr/>
 					<div align="right">
-						<button type="button" class = "btn btn-success reqsimp" id="{{simpler.id}}">Ask for Simpler.</button></div>
+						<button type="button" class = "btn btn-success reqsimp" id="{{simpler.id}}" data='{{ post.id }}'>Ask for Simpler.</button></div>
 					<div align="right"><h3>
 						<div style="padding-bottom:20px;">
 						<button class="btn btn-primary addsimp-toggle">Add Simpler.</button></div>
 						<a href="/admin/SimplerApp/simpler/{{simpler.id}}/"><button type="button" class = "btn btn-default glyphicon glyphicon-pencil"></button></a>
 						<button class="btn btn-default glyphicon glyphicon-align-center" style="padding-right:20px;color:#808080;"></button>
-						<button class="btn btn-default glyphicon glyphicon-chevron-up" style="color:#808080; display:none; padding-right:20px;"></button>
 						<button class="btn btn-default glyphicon glyphicon-trash" style="color:#808080; padding-right:20px;"></button>
 						<button class="btn btn-default glyphicon glyphicon-ok remove" style="color:#808080; padding-right:20px; display:none;"></button>
 						<button class="btn btn-default glyphicon glyphicon-remove go-back" style="color:#808080; padding-right:20px; display:none;"></button></h3></div>
@@ -43,13 +43,12 @@
 					<button type="button" class="btn btn-default glyphicon glyphicon-remove close-textarea addsimp-toggle" data ='{{ post.id }}'></button>
 				</div>
 			</div>
-			</div> 
+			</div> <!-- simpler/jumbotron close. -->
+		</div>		<!-- simpler-wrapper close. -->
 			{% endautoescape %}
 			{% endif %}
 			{% endif %}
 			{% endfor %}
 		</div>
 	{% endfor %}
-</div>
-</div>
 {% endblock %}
