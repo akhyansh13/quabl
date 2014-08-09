@@ -143,8 +143,8 @@ def define(request, post_id, simpler_id, highlight):
             f.highlight = highlight
             f.req_by = request.user
             f.save()
-            highlight_simpler_context = '<h4><i>' + highlight + '</i></h4>'
-            simpler_content = highlight_simpler_context + '<h3>' + f.description + '<h3>'
+            highlight_simpler_context = '<h4 style="line-height:1.35em;"><i>' + highlight + '</i></h4>'
+            simpler_content = highlight_simpler_context + '<p style="font-size:14pt;">' + f.description + '</p>'
             parent_list = 'parent' + str(simpler.id) + ' '
             curr_simpler = simpler
             while curr_simpler.parent_simpler != None:
