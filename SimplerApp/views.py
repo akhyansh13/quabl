@@ -137,7 +137,7 @@ def define(request, post_id, simpler_id, highlight):
             f = form.save(commit=False)
             f.simpler = simpler
             broken = simpler.simpler.split(highlight)               #Edit the highlighted part.
-            simpler.simpler = ('<span class="highlight">'+highlight+'</span>').join(broken)
+            simpler.simpler = ('<span class="highlight">'+highlight+'&nbsp<input type="checkbox" name="highlights" value="'+highlight+'"></span>').join(broken)
             simpler.save()
             f.status = 0
             f.highlight = highlight
