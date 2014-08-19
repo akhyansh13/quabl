@@ -42,6 +42,8 @@ class highlight(models.Model):
 class highlightq(models.Model):
     highlight = models.ForeignKey(highlight)
     question = models.CharField(max_length=10000000, blank=True, null=True)
+    def __unicode__(self):
+        return '#' + str(self.highlight.simpler.id) + ': ' + self.question
 
 class postBox(forms.ModelForm):
     post = forms.CharField(max_length=10000000,widget=forms.Textarea(attrs={'rows': 8, 'cols': 80}))
