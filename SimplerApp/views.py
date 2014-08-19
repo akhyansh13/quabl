@@ -3,7 +3,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Simpler.settings')
 from django.shortcuts import render_to_response 
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
-from models import Post, Simpler, postBox, SimplerBox, UserForm, UserProfileForm, HighlightDesc
+from models import Post, Simpler, postBox, SimplerBox, UserForm, UserProfileForm, HighlightDesc, highlightq
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
@@ -151,6 +151,7 @@ def define(request, post_id, simpler_id, highlight):
                 parent_list += "parent" + str(curr_simpler.parent_simpler.id) + " "
                 curr_simpler = curr_simpler.parent_simpler
             g = Simpler.objects.get_or_create(post = simpler.post, parent_simpler = simpler, simpler = simpler_content, coeficient=simpler.coeficient+1, parent_list = parent_list, author = request.user.username)
+            question = highlightq.objects.get_or_create(highlight=f, question=f.description)
             return HttpResponseRedirect('/simpler/'+str(f.simpler.post.id))
     else:
         form = HighlightDesc()

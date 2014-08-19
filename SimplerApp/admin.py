@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib import admin
 from django.forms import TextInput, Textarea
-from models import Post, Simpler, UserProfile, topic, highlight
+from models import Post, Simpler, UserProfile, topic, highlight, highlightq
 
 class SimplerAdmin(admin.ModelAdmin):
     formfield_overrides = {
@@ -18,3 +18,4 @@ admin.site.register(Simpler, SimplerAdmin)
 admin.site.register(UserProfile)
 admin.site.register(topic)
 admin.site.register(highlight)
+admin.site.register(highlightq)
