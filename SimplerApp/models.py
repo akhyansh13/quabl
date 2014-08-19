@@ -39,6 +39,10 @@ class highlight(models.Model):
     def __unicode__(self):
         return self.highlight
     
+class highlightq(models.Model):
+    highlight = models.ForeignKey(highlight)
+    question = models.CharField(max_length=10000000, blank=True, null=True)
+
 class postBox(forms.ModelForm):
     post = forms.CharField(max_length=10000000,widget=forms.Textarea(attrs={'rows': 8, 'cols': 80}))
     class Meta:
