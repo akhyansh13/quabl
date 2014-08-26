@@ -135,14 +135,13 @@ def define(request, post_id, simpler_id, highlight):
         form = HighlightDesc(request.POST)
         if form.is_valid():
             f = form.save(commit=False)
-            f.simpler = simpler
+            f.highlight_parent = simpler
             broken = simpler.simpler.split(highlight)               #Edit the highlighted part.
-            simpler.simpler = ('<span class="highlight">'+highlight+'&nbsp<input type="checkbox" name="highlights" value="'+highlight+'"></span>').join(broken)
+            simpler.simpler = ('<span class="highlight" id="'+str(simpler_id)+'" data='+str(post_id)+' high='+highlight+'>'+highlight+'&nbsp<input type="radio" class="checkedhigh" value="'+highlight+'" name="highlight"/></span>').join(broken)
             simpler.save()
             f.status = 0
             f.highlight = highlight
             f.req_by = request.user
-            f.save()
             highlight_simpler_context = '<h4 style="line-height:1.35em;"><i>' + highlight + '</i></h4>'
             simpler_content = highlight_simpler_context + '<p style="font-size:14pt;">' + f.description + '</p>'
             parent_list = 'parent' + str(simpler.id) + ' '
@@ -150,7 +149,9 @@ def define(request, post_id, simpler_id, highlight):
             while curr_simpler.parent_simpler != None:
                 parent_list += "parent" + str(curr_simpler.parent_simpler.id) + " "
                 curr_simpler = curr_simpler.parent_simpler
-            g = Simpler.objects.get_or_create(post = simpler.post, parent_simpler = simpler, simpler = simpler_content, coeficient=simpler.coeficient+1, parent_list = parent_list, author = request.user.username)
+            g = Simpler.objects.get_or_create(post = simpler.post, parent_simpler = simpler, simpler = simpler_content, coeficient=simpler.coeficient+1, parent_list = parent_list, author = request.user.username)[0]
+            f.highlight_simpler = g
+            f.save()
             question = highlightq.objects.get_or_create(highlight=f, question=f.description)
             return HttpResponseRedirect('/simpler/'+str(f.simpler.post.id))
     else:
@@ -159,6 +160,14 @@ def define(request, post_id, simpler_id, highlight):
     context_dict['form']=form
     return render_to_response('SimplerApp/define.html',context_dict,context)
 
+def highlight(request, post_id, simpler_id, highlight):
+	context = RequestContext(request)
+	post_id=int(post_id)
+	parent_simpler_id=int(simpler_id)
+	post = Post.objects.get(id=post_id)
+	parent_simpler = Simpler.objects.get(id=parent_simpler_id)
+	return render_to_response('SimplerApp/highlight.html', context_dict, context)
+	
 def deletesimpler(request):
     context = RequestContext(request)
     deleted_simp = request.GET['curr_simp_id']

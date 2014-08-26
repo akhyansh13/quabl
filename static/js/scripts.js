@@ -88,6 +88,15 @@ $(document).ready(function(){
 				$.get(('/deletesimpler/'), {curr_simp_id:curr_simp_id});
 			});
 		});
+		
+		$(".checkedhigh").click(function(){
+			var highlight = $(this).val();
+			var simpler_id = $(this).parent().attr('id');
+			var post_id = $(this).parent().attr('data');
+			uri = '/highlight/' + post_id + '/' + simpler_id + '/' + highlight + '/';
+			$(".addhigh").attr('href', uri);
+			$(".addhigh").attr('style', 'color:#0099CC');
+		});
 });
 
 function getSelected() {					//Gets selected text.
@@ -106,5 +115,3 @@ function getSelected() {					//Gets selected text.
     }
     return false;
 }
-			
-

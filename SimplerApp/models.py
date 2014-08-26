@@ -32,7 +32,8 @@ class Simpler(models.Model):
 
 class highlight(models.Model):
     highlight = models.CharField(max_length=100000000)
-    simpler = models.ForeignKey(Simpler)
+    highlight_parent = models.ForeignKey(Simpler, related_name=u'highlight_parent', blank=True, null=True)
+    highlight_simpler = models.ForeignKey(Simpler, blank=True, null=True)
     status = models.IntegerField(null=False)
     req_by = models.ForeignKey(User)
     description = models.CharField(max_length=10000000)

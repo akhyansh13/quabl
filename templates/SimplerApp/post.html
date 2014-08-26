@@ -10,7 +10,7 @@
 	<div class="simpler-textarea" style='display:none;'>
 	<div align="center"><textarea class="ckeditor" cols="80" rows="8" id='level1-textarea'></textarea></input>{% csrf_token %}</div>
 	<div align="center" style='padding-top:10px;'>
-		<button type="button" class=" btn btn-primary addsimp" id="level1-simp" align="center" data =' {{post.id}} '>Add Simpler.</button>
+		<button type="button" class=" btn btn-primary addsimp" id="level1-simp" align="center" data =' {{post.id}} '>Add Answer.</button>
 	</div>
 	</div>
 </div>
@@ -28,8 +28,10 @@
 					<div align="right">
 						<button type="button" class = "btn btn-success reqsimp" id="{{simpler.id}}" data='{{ post.id }}'>Ask for Simpler.</button></div>
 					<div align="right"><h3>
-						<div style="padding-bottom:20px;">
-						<button class="btn btn-primary addsimp-toggle">Add Simpler.</button></div>
+					<div style="padding-bottom:20px;">
+						<button class="btn btn-primary addsimp-toggle">Add Answer.</button></div>
+					<div align="left" style="padding-bottom:20px;">
+						<a style="color:grey;" class="addhigh" id="{{simpler.id}}" data='{{post.id}}'>Add Simpler.</a></div>
 						<a href="/admin/SimplerApp/simpler/{{simpler.id}}/"><button type="button" class = "btn btn-default glyphicon glyphicon-pencil"></button></a>
 						<button class="btn btn-default glyphicon glyphicon-align-center" style="padding-right:20px;color:#808080;"></button>
 						<button class="btn btn-default glyphicon glyphicon-trash" style="color:#808080; padding-right:20px;"></button>
