@@ -19,5 +19,5 @@ urlpatterns = patterns('',
     url(r'^deletesimpler/$', deletesimpler),
     url(r'^addpost/$', addpost),
     url(r'^define/(?P<post_id>\w+)/(?P<simpler_id>\w+)/(?P<highlight>[\w|\W]+)/$', define),
-	url(r'^highlight/(?P<post_id>\w+)/(?P<simpler_id>\w+)/(?P<highlight>[\w|\W]+)/$', highlight),
+	url(r'^highlight/(?P<post_id>\w+)/(?P<simpler_id>\w+)/(?P<highlightx>[\w|\W]+)/$', highlight),
 ) 

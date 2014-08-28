@@ -39,22 +39,21 @@ $(document).ready(function(){
 				$.get(('/makesimpler/'),{simpler_id:simpler_id, simpler_text:simpler_text, post_id:post_id,}, function(data){
 				    location.reload();
 				});
-		}
-		else{											//handles simplers of level greater than or equal to 2.											
-			var simpler_textarea_id = 'simp'+ simpler_id;
-			var simpler_text = CKEDITOR.instances[simpler_textarea_id].getData();
+			}
+			else{											//handles simplers of level greater than or equal to 2.											
+				var simpler_textarea_id = 'simp'+ simpler_id;
+				var simpler_text = CKEDITOR.instances[simpler_textarea_id].getData();
 				$.get(('/makesimpler/'),{simpler_id:simpler_id, simpler_text:simpler_text, post_id:post_id,}, function(data){
-				    location.reload();
+					location.reload();
 				});
 			}
-			});
-
-		$(".reqsimp").click(function(){					
-			$button = $(this);
+		});
+						
+		$(".reqsimp").click(function(){							
 			var simpler_id = $(this).attr('id');
 			var highlight = String(getSelected());
 			uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/'+ highlight+'/';
-			window.location.href= uri;
+			window.location.href = uri;
 		});
 
 		$(".glyphicon-trash").click(function(){
@@ -89,13 +88,29 @@ $(document).ready(function(){
 			});
 		});
 		
-		$(".checkedhigh").click(function(){
-			var highlight = $(this).val();
-			var simpler_id = $(this).parent().attr('id');
-			var post_id = $(this).parent().attr('data');
-			uri = '/highlight/' + post_id + '/' + simpler_id + '/' + highlight + '/';
-			$(".addhigh").attr('href', uri);
-			$(".addhigh").attr('style', 'color:#0099CC');
+		$(".checkedhigh").on("change", function(){
+			var aHrefVals = [];
+			
+			$('.checkedhigh').filter(":checked").each(function() {
+				aHrefVals.push($(this).val());
+			});
+			if (aHrefVals.length != 0) {
+				var highlight = aHrefVals.join("xhex");
+				var simpler_id = $(this).parent().attr('id');
+				var post_id = $(this).parent().attr('data');
+				uri = '/highlight/' + post_id + '/' + simpler_id + '/' + highlight + '/';
+				$(".addhigh").attr('href', uri);
+				$(".addness").attr('class', "btn btn-success addness");
+			}
+			else {
+				$(".addhigh").removeAttr('href');
+				$(".addness").attr('class', 'btn btn-default addness');
+			}
+		});
+
+		$(".addhigh").click(function(){
+			var uri = $(this).attr('data');
+			window.locaion.href = uri;
 		});
 });
 

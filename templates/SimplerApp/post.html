@@ -22,35 +22,33 @@
 			{% if simpler.coeficient == i %}
 			{% autoescape off %}
 			<div class='simpler-wrapper' style='padding-bottom:10px;'>
-				<div class="jumbotron {{simpler.parent_simpler.id}} {{simpler.parent_list}} level-{{i}}" id="{{simpler.id}}"style="display:{{simpler.display}};">{{simpler.author}} <br/><br/>
-					{{simpler.simpler}}
-					<hr/>
-					<div align="right">
-						<button type="button" class = "btn btn-success reqsimp" id="{{simpler.id}}" data='{{ post.id }}'>Ask for Simpler.</button></div>
-					<div align="right"><h3>
-					<div style="padding-bottom:20px;">
-						<button class="btn btn-primary addsimp-toggle">Add Answer.</button></div>
-					<div align="left" style="padding-bottom:20px;">
-						<a style="color:grey;" class="addhigh" id="{{simpler.id}}" data='{{post.id}}'>Add Simpler.</a></div>
-						<a href="/admin/SimplerApp/simpler/{{simpler.id}}/"><button type="button" class = "btn btn-default glyphicon glyphicon-pencil"></button></a>
-						<button class="btn btn-default glyphicon glyphicon-align-center" style="padding-right:20px;color:#808080;"></button>
-						<button class="btn btn-default glyphicon glyphicon-trash" style="color:#808080; padding-right:20px;"></button>
-						<button class="btn btn-default glyphicon glyphicon-ok remove" style="color:#808080; padding-right:20px; display:none;"></button>
-						<button class="btn btn-default glyphicon glyphicon-remove go-back" style="color:#808080; padding-right:20px; display:none;"></button></h3></div>
-				<div class="simpler-textarea" style='display:none;'>
-				<div align="center"><textarea class="ckeditor" cols="80" rows="8" id='simp{{simpler.id}}'>
-				</textarea>{% csrf_token %}</div>
-				<div align="center" style='padding-top:10px;'>
-					<button type="button" class="btn btn-default glyphicon glyphicon-ok addsimp" id="{{simpler.id}}" data ='{{ post.id }}'></button>
-					<button type="button" class="btn btn-default glyphicon glyphicon-remove close-textarea addsimp-toggle" data ='{{ post.id }}'></button>
-				</div>
-			</div>
-			</div> <!-- simpler/jumbotron close. -->
-		</div>		<!-- simpler-wrapper close. -->
+				<div class="jumbotron {{simpler.parent_simpler.id}} {{simpler.parent_list}} level-{{i}}" id="{{simpler.id}}"style="display:{{simpler.display}};">
+					<div class = "postsgalore">{{simpler.author}} <br/><br/>{{simpler.simpler}}<hr/></div>
+					<div class = "btn-group">
+						<button class = "btn btn-default" data=''>Previous.</button>
+						<button type="button" class = "btn btn-default reqsimp" id="{{simpler.id}}" data='{{post.id}}'>Ask.</button>
+						<button class = "btn btn-default" data=''>Next.</button>
+						<a class="addhigh"><button class = "btn btn-default addness" data=''>Add Simpler.</button></a>
+					</div><br/>
+					<a href="/admin/SimplerApp/simpler/{{simpler.id}}/"><button type="button" class = "btn btn-default glyphicon glyphicon-pencil"></button></a>
+					<button class="btn btn-default glyphicon glyphicon-align-center" style="color:#808080;"></button>
+					<button class="btn btn-default glyphicon glyphicon-trash" style="color:#808080;"></button>
+					<button class="btn btn-default glyphicon glyphicon-ok remove" style="color:#808080; padding-right:20px; display:none;"></button>
+					<button class="btn btn-default glyphicon glyphicon-remove go-back" style="color:#808080; padding-right:20px; display:none;"></button>
+					<div class="simpler-textarea" style='display:none;'>
+						<div align="center"><textarea class="ckeditor" cols="80" rows="8" id='simp{{simpler.id}}'></textarea>{% csrf_token %}</div>
+						<div align="center" style='padding-top:10px;'>
+							<button type="button" class="btn btn-default glyphicon glyphicon-ok addsimp" id="{{simpler.id}}" data ='{{ post.id }}'></button>
+							<button type="button" class="btn btn-default glyphicon glyphicon-remove close-textarea addsimp-toggle" data ='{{ post.id }}'></button>
+						</div>
+					</div>
+				</div> <!-- simpler/jumbotron close. -->	
+			</div>		<!-- simpler-wrapper close. -->		
+		
 			{% endautoescape %}
 			{% endif %}
-			{% endif %}
-			{% endfor %}
-		</div>
+		{% endif %}
+	{% endfor %}
+	</div>
 	{% endfor %}
 {% endblock %}
