@@ -3,7 +3,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Simpler.settings')
 from django.shortcuts import render_to_response 
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
-from models import Post, Simpler, postBox, SimplerBox, UserForm, UserProfileForm, HighlightDesc, highlightq
+from models import Post, Simpler, postBox, SimplerBox, UserForm, UserProfileForm, HighlightDesc, highlightq, highlight
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
@@ -137,7 +137,7 @@ def define(request, post_id, simpler_id, highlight):
             f = form.save(commit=False)
             f.highlight_parent = simpler
             broken = simpler.simpler.split(highlight)               #Edit the highlighted part.
-            simpler.simpler = ('<span class="highlight" id="'+str(simpler_id)+'" data='+str(post_id)+' high='+highlight+'>'+highlight+'&nbsp<input type="radio" class="checkedhigh" value="'+highlight+'" name="highlight"/></span>').join(broken)
+            simpler.simpler = ('<span class="highlight" id="'+str(simpler_id)+'" data="'+str(post_id)+'">'+highlight+'&nbsp<input type="checkbox" class="checkedhigh" value="'+highlight.replace(" ","_")+'" name="highlight"/></span>').join(broken)
             simpler.save()
             f.status = 0
             f.highlight = highlight
@@ -153,19 +153,24 @@ def define(request, post_id, simpler_id, highlight):
             f.highlight_simpler = g
             f.save()
             question = highlightq.objects.get_or_create(highlight=f, question=f.description)
-            return HttpResponseRedirect('/simpler/'+str(f.simpler.post.id))
+            return HttpResponseRedirect('/simpler/'+str(f.highlight_parent.post.id))
     else:
         form = HighlightDesc()
 
     context_dict['form']=form
     return render_to_response('SimplerApp/define.html',context_dict,context)
 
-def highlight(request, post_id, simpler_id, highlight):
+def highlightt(request, post_id, simpler_id, highlightx):
 	context = RequestContext(request)
 	post_id=int(post_id)
 	parent_simpler_id=int(simpler_id)
-	post = Post.objects.get(id=post_id)
-	parent_simpler = Simpler.objects.get(id=parent_simpler_id)
+	highlights = highlightx.split("xhex")
+	highs = []
+	for high in highlights:
+		highss = highlight.objects.filter(highlight=high)
+		for hihss in highss:
+			highs.append(hihss)
+	context_dict = {'highlights':highs}
 	return render_to_response('SimplerApp/highlight.html', context_dict, context)
 	
 def deletesimpler(request):

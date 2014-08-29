@@ -11,13 +11,13 @@ $(document).ready(function(){
 		
 		$(".glyphicon-align-center").click(function(){		//hierarchy button code.
 			var $this = $(this);
-			var $t = $this.parent().parent().parent();
-			var this_level = $(this).parent().parent().parent().attr("class");	//Gets the current level.
+			var $t = $this.parent().parent()/*.parent()*/;
+			var this_level = $(this).parent().parent()/*.parent()*/.attr("class");	//Gets the current level.
 			var level = this_level.split("level-");
 			level = parseInt(level[(level.length-1)]);
 			curr_level_string = String(level)
-			var curr_jumbotron = "#"+$this.parent().parent().parent().attr("id");
-			var curr_jumbotron_class = "."+$this.parent().parent().parent().attr("id");
+			var curr_jumbotron = "#"+$this.parent().parent()/*.parent()*/.attr("id");
+			var curr_jumbotron_class = "."+$this.parent().parent()/*.parent()*/.attr("id");
 			$this.hide('slow', function(){
 					$(curr_jumbotron_class).show();
 					$("#Post").hide();
@@ -39,40 +39,39 @@ $(document).ready(function(){
 				$.get(('/makesimpler/'),{simpler_id:simpler_id, simpler_text:simpler_text, post_id:post_id,}, function(data){
 				    location.reload();
 				});
-		}
-		else{											//handles simplers of level greater than or equal to 2.											
-			var simpler_textarea_id = 'simp'+ simpler_id;
-			var simpler_text = CKEDITOR.instances[simpler_textarea_id].getData();
+			}
+			else{											//handles simplers of level greater than or equal to 2.											
+				var simpler_textarea_id = 'simp'+ simpler_id;
+				var simpler_text = CKEDITOR.instances[simpler_textarea_id].getData();
 				$.get(('/makesimpler/'),{simpler_id:simpler_id, simpler_text:simpler_text, post_id:post_id,}, function(data){
-				    location.reload();
+					location.reload();
 				});
 			}
-			});
-
-		$(".reqsimp").click(function(){					
-			$button = $(this);
+		});
+						
+		$(".reqsimp").click(function(){							
 			var simpler_id = $(this).attr('id');
 			var highlight = String(getSelected());
 			uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/'+ highlight+'/';
-			window.location.href= uri;
+			window.location.href = uri;
 		});
 
 		$(".glyphicon-trash").click(function(){
-			var $t = $(this).parent().parent().parent();
+			var $t = $(this).parent().parent()/*.parent()*/;
 			$(this).toggle("slow",function(){
 				$t.find(".remove, .go-back").show("slow");
 			});			
 		});
 
 		$(".go-back").click(function(){
-			var $t = $(this).parent().parent().parent();
+			var $t = $(this).parent().parent()/*.parent()*/;
 			$(this).toggle("slow",function(){
 				$t.find(".remove, .glyphicon-trash").toggle("200");
 			});			
 		});
 
 		$(".remove").click(function(){				//Deletes the simpler and its children and immediately removes them out of the page [AJAX].
-			var $t = $(this).parent().parent().parent();
+			var $t = $(this).parent().parent()/*.parent()*/;
 			var simpler_id = $t.attr("id");
 			var parent_class = ".parent"+ simpler_id;
 			curr_simp_id = simpler_id;
@@ -89,13 +88,29 @@ $(document).ready(function(){
 			});
 		});
 		
-		$(".checkedhigh").click(function(){
-			var highlight = $(this).val();
-			var simpler_id = $(this).parent().attr('id');
-			var post_id = $(this).parent().attr('data');
-			uri = '/highlight/' + post_id + '/' + simpler_id + '/' + highlight + '/';
-			$(".addhigh").attr('href', uri);
-			$(".addhigh").attr('style', 'color:#0099CC');
+		$(".checkedhigh").on("change", function(){
+			var aHrefVals = [];
+			
+			$('.checkedhigh').filter(":checked").each(function() {
+				aHrefVals.push($(this).val());
+			});
+			if (aHrefVals.length != 0) {
+				var highlight = aHrefVals.join("xhex");
+				var simpler_id = $(this).parent().attr('id');
+				var post_id = $(this).parent().attr('data');
+				uri = '/highlight/' + post_id + '/' + simpler_id + '/' + highlight + '/';
+				$(".addhigh").attr('href', uri);
+				$(".addness").attr('class', "btn btn-success addness");
+			}
+			else {
+				$(".addhigh").removeAttr('href');
+				$(".addness").attr('class', 'btn btn-default addness');
+			}
+		});
+
+		$(".addhigh").click(function(){
+			var uri = $(this).attr('data');
+			window.locaion.href = uri;
 		});
 });
 
