@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
       <script src="{% static 'js/jquery-1.11.1.js' %}"></script>
-  <script src="{% static 'js/scripts.js' %}"></script>
   <script src="{% static 'js/bootstrap.min.js' %}"></script>
   <script src="{% static 'jquery.scrollTo-1.4.12/jquery.scrollTo.js' %}"></script>
   <script src='{% static "ckeditor/ckeditor.js" %}'></script>
@@ -14,7 +13,7 @@
 CKEDITOR.replaceClass = 'ckeditor';
 </script>
   <script src="{% static 'js/jquery.bpopup.min.js' %}"></script>
-
+{% block scripts_block %}{% endblock %}
     <title>{% block title_block %}Simpler.{% endblock %}</title>
 
     <!-- Bootstrap -->
@@ -36,7 +35,6 @@ CKEDITOR.replaceClass = 'ckeditor';
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{user.username}} <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="/">Home</a></li>
-            <li><a href="/requests/">Simpler Requests</a></li>
             <li class="divider"></li>
             <li><a href="/logout/"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
           </ul>

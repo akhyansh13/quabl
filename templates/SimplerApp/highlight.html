@@ -1,4 +1,11 @@
 {% extends 'SimplerApp/base.html' %}
 {% block body_block %}
-	
+	{% for h in higharr %}
+		{% for i in h %}
+		<div class='jumbotron'>
+		<i><h4>{{i.highlight.highlight}}</h4></i>
+			<b>{{i.question}}</b>
+		</div>	
+		{% endfor %}
+	{% endfor %}
 {% endblock %}

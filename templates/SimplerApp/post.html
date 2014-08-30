@@ -1,6 +1,8 @@
 {% extends 'SimplerApp/base.html' %}
+{% load static %}
+{% block scripts_block %} <script src="{% static 'js/scripts.js' %}"></script>
+{% endblock %}
 {% block body_block %}
-
 <div id="post-wrapper" style="padding-bottom:100px;">
 <div id="Post" class="jumbotron">
 	{% autoescape off %}<h4>{{ post.topic.topic }}:</h4><h3>{{ post.post }}</h3>{% endautoescape %}
@@ -31,7 +33,6 @@
 					</div><br/>
 					<!--div align="center">
 						<a href="/admin/SimplerApp/simpler/{{simpler.id}}/"><button type="button" class = "btn-xs btn-default glyphicon glyphicon-pencil"></button></a>
-						<button class="btn-xs btn-default glyphicon glyphicon-align-center" style="color:#808080;"></button>
 						<button class="btn-xs btn-default glyphicon glyphicon-trash" style="color:#808080;"></button>
 						<button class="btn-xs btn-default glyphicon glyphicon-ok remove" style="color:#808080; padding-right:20px; display:none;"></button>
 						<button class="btn-xs btn-default glyphicon glyphicon-remove go-back" style="color:#808080; padding-right:20px; display:none;"></button>
