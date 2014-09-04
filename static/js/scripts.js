@@ -94,19 +94,25 @@ $(document).ready(function(){
 		});
 });
 
-function getSelected() {					//Gets selected text.
-    if(window.getSelection){ 
-    	return window.getSelection(); 
+function getSelected() {
+    var selection = window.getSelection().getRangeAt(0);
+    var selectedText = selection.extractContents();
+    var span = $("<span class='highlight'>" + selectedText.textContent + "</span>");
+    selection.insertNode(span[0]);
+   
+    if (selectedText.childNodes[1] != undefined){
+        console.log(selectedText.childNodes[1]);
+        $(selectedText.childNodes[1]).remove();
     }
-    else if(document.getSelection){ 
-        return document.getSelection(); 
+    
+     clearSelection();
+     return $('#Text').html();
+}
+
+function clearSelection() {
+    if ( document.selection ) {
+        document.selection.empty();
+    } else if ( window.getSelection ) {
+        window.getSelection().removeAllRanges();
     }
-    else{
-        var selection = document.selection && document.selection.createRange();
-        if(selection.text) { 
-        	return selection.text; 
-        }
-        return false;
-    }
-    return false;
 }
