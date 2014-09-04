@@ -162,7 +162,6 @@ def define(request, post_id, simpler_id, highlight):
 
 def highlightt(request, post_id, simpler_id, highlightx):
     context = RequestContext(request)
-    post_id=int(post_id)
     parent_simpler_id=int(simpler_id)
     parent_simpler = Simpler.objects.filter(id=parent_simpler_id)
     highlights = highlightx.split("xhex")
@@ -172,7 +171,7 @@ def highlightt(request, post_id, simpler_id, highlightx):
         highlight_array = highlight_array.filter(highlight=h)     
         for u in highlight_array:
             h_arr.append(u.highlightq_set.all())
-    context_dict = {'higharr':h_arr}
+    context_dict = {'higharr':h_arr,'post_id':post_id}
     return render_to_response('SimplerApp/highlight.html', context_dict, context)
 	
 def deletesimpler(request):

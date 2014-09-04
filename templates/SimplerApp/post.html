@@ -1,6 +1,6 @@
 {% extends 'SimplerApp/base.html' %}
 {% load static %}
-{% block scripts_block %} <script src="{% static 'js/scripts.js' %}"></script>
+{% block scripts_block %} <script src="{% static 'js/post.js' %}"></script>
 {% endblock %}
 {% block body_block %}
 <div id="post-wrapper" style="padding-bottom:100px;">
@@ -37,13 +37,13 @@
 						<button class="btn-xs btn-default glyphicon glyphicon-ok remove" style="color:#808080; padding-right:20px; display:none;"></button>
 						<button class="btn-xs btn-default glyphicon glyphicon-remove go-back" style="color:#808080; padding-right:20px; display:none;"></button>
 					</div-->
-					<div class="simpler-textarea" style='display:none;'>
+					<!--div class="simpler-textarea" style='display:none;'>
 						<div align="center"><textarea class="ckeditor" cols="80" rows="8" id='simp{{simpler.id}}'></textarea>{% csrf_token %}</div>
 						<div align="center" style='padding-top:10px;'>
 							<button type="button" class="btn btn-default glyphicon glyphicon-ok addsimp" id="{{simpler.id}}" data ='{{ post.id }}'></button>
 							<button type="button" class="btn btn-default glyphicon glyphicon-remove close-textarea addsimp-toggle" data ='{{ post.id }}'></button>
 						</div>
-					</div>
+					</div-->
 				</div> <!-- simpler/jumbotron close. -->	
 			</div><!-- simpler-wrapper close. -->				
 			{% endautoescape %}
