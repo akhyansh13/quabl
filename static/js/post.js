@@ -79,12 +79,12 @@ $(document).ready(function(){
 				var simpler_id = $(this).parent().attr('id');
 				var post_id = $(this).parent().attr('data');
 				uri = '/highlight/' + post_id + '/' + simpler_id + '/' + highlight + '/';
-				$(".addhigh").attr('href', uri);
-				$(".addness").attr('class', "btn btn-success addness");
+				$(this).parent().parent().parent().parent().find(".addhigh").attr('href', uri);
+				$(this).parent().parent().parent().parent().find(".addness").attr('class', "btn btn-success addness");
 			}
 			else {
-				$(".addhigh").removeAttr('href');
-				$(".addness").attr('class', 'btn btn-default addness');
+				$(this).parent().parent().parent().parent().find(".addhigh").removeAttr('href');
+				$(this).parent().parent().parent().parent().find(".addness").attr('class', 'btn btn-default addness');
 			}
 		});
 

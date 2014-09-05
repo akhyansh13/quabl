@@ -51,12 +51,10 @@ def makesimpler(request):
         simpler_text = request.GET['simpler_text']
         c = Simpler.objects.get_or_create(post=post, simpler = simpler_text, simpler_original=simpler_text, coeficient=1, author=request.user.username, display=' ', parent_list=' ')[0]
     else: 
-        parent_simpler_id = int(request.GET['simpler_id'])
+        highlight_simpler_id = int(request.GET['simpler_id'])
         simpler_text = request.GET['simpler_text']
-        parent_simpler = Simpler.objects.get(id=parent_simpler_id)
-        parent_simpler.simpler = parent_simpler.simpler + '<br/><br/>' + simpler_text
-        parent_simpler.save()
-    #c = Simpler.objects.get_or_create(post = parent_simpler.post, parent_simpler = parent_simpler,  simpler = parent_simpler.simpler + '<br/><br/>' + simpler_text, coeficient = parent_simpler.coeficient + 1, parent_list = parent_list, author = request.user.username, display=' ')[0]
+        highlight_simpler = Simpler.objects.get(id=highlight_simpler_id)
+        c = Simpler.objects.get_or_create(post = highlight_simpler.post, parent_simpler = highlight_simpler.parent_simpler,  simpler = highlight_simpler.simpler + '<br/><br/>' + simpler_text, simpler_original = highlight_simpler.simpler,coeficient = highlight_simpler.coeficient, parent_list = highlight_simpler.parent_list, author = request.user.username, display=' ')[0]
     return HttpResponse('success')
     
 def register(request):
