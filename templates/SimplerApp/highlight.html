@@ -1,11 +1,25 @@
 {% extends 'SimplerApp/base.html' %}
+{% load static %}
+{% block scripts_block %} <script src="{% static 'js/highlight.js' %}"></script>
+{% endblock %}
 {% block body_block %}
 	{% for h in higharr %}
 		{% for i in h %}
-		<div class='jumbotron'>
-		<i><h4>{{i.highlight.highlight}}</h4></i>
-			<b>{{i.question}}</b>
-		</div>	
+		{% autoescape off %}
+		<div class="simpler-wrapper" style="padding-bottom:10px;">
+			<div class="jumbotron">
+				{{i.highlight.highlight_simpler.author}} <br/><br/>{{i.highlight.highlight_simpler.simpler}}<hr/>
+				<div align='right'><button class="btn btn-success addsimp-toggle">Add Simpler</button></div>
+				<div class="simpler-textarea" style='display:none;'>
+					<div align="center"><textarea class="ckeditor" cols="80" rows="8" id='simp{{i.highlight.highlight_simpler.id}}'></textarea>{% csrf_token %}</div>
+					<div align="center" style='padding-top:10px;'>
+						<button type="button" class="btn btn-default glyphicon glyphicon-ok addsimp" id="{{i.highlight.highlight_simpler.id}}" data ='{{ post_id }}'></button>
+						<button type="button" class="btn btn-default glyphicon glyphicon-remove close-textarea addsimp-toggle" data ='{{ post_id }}'></button>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% endautoescape %}
 		{% endfor %}
 	{% endfor %}
 {% endblock %}

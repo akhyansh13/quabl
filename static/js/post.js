@@ -29,9 +29,21 @@ $(document).ready(function(){
 			}
 		});
 						
-		$(".reqsimp").click(function(){							
+		$(".reqsimp").click(function(){	
+			$reqsimp = $(this);						
 			var simpler_id = $(this).attr('id');
-			var highlight = String(getSelected());
+			var selection = window.getSelection().getRangeAt(0);
+    		var selectedText = selection.extractContents();
+    		var span = $("<span class='highlight'>" + selectedText.textContent + "</span>");
+    		selection.insertNode(span[0]);
+   
+    		if (selectedText.childNodes[1] != undefined){
+        		console.log(selectedText.childNodes[1]);
+        		$(selectedText.childNodes[1]).remove();
+    		}
+    
+     		clearSelection();
+			var highlight = String($reqsimp.parent().parent().find('.postsgalore').html());
 			uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/'+ highlight+'/';
 			window.location.href = uri;
 		});
@@ -94,21 +106,6 @@ $(document).ready(function(){
 		});
 });
 
-function getSelected() {
-    var selection = window.getSelection().getRangeAt(0);
-    var selectedText = selection.extractContents();
-    var span = $("<span class='highlight'>" + selectedText.textContent + "</span>");
-    selection.insertNode(span[0]);
-   
-    if (selectedText.childNodes[1] != undefined){
-        console.log(selectedText.childNodes[1]);
-        $(selectedText.childNodes[1]).remove();
-    }
-    
-     clearSelection();
-     return $('#Text').html();
-}
-
 function clearSelection() {
     if ( document.selection ) {
         document.selection.empty();
@@ -116,3 +113,4 @@ function clearSelection() {
         window.getSelection().removeAllRanges();
     }
 }
+
