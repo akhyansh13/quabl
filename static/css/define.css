@@ -1,0 +1,7 @@
+.curr_highlight{
+  padding: 2px 4px;
+  font-size: 90%;
+  white-space: nowrap;
+  background-color: #fff8dc;
+  border-radius: 4px;
+}

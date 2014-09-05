@@ -119,11 +119,13 @@ def user_logout(request):
 
     return HttpResponseRedirect('/')
 
-def define(request, post_id, simpler_id, highlight):
+def define(request, post_id, simpler_id, new_simpler):
     context = RequestContext(request)
     post_id = int(post_id)
     simpler_id = int(simpler_id)
+    highlight = new_simpler.split('curr_highlight')[1].split('>')[1].split('&nbsp')[0];     #Extracts the highlights.
     context_dict = {'highlight':highlight}
+    context_dict['new_simpler']=new_simpler
     post = Post.objects.get(id=post_id)
     simpler = Simpler.objects.get(id=simpler_id)
     context_dict['post']=post
@@ -134,8 +136,7 @@ def define(request, post_id, simpler_id, highlight):
         if form.is_valid():
             f = form.save(commit=False)
             f.highlight_parent = simpler
-            broken = simpler.simpler.split(highlight)               #Edit the highlighted part.
-            simpler.simpler = ('<span class="highlight" id="'+str(simpler_id)+'" data="'+str(post_id)+'">'+highlight+'&nbsp<input type="checkbox" class="checkedhigh" value="'+highlight.replace(" ","_")+'" name="highlight"/></span>').join(broken)
+            simpler.simpler = (new_simpler.replace('curr_highlight','highlight')).replace('curr_checkedhigh','checkedhigh').replace('style="display: none;"','')        #JS and Python conflict fixed. Brute forced the display:none out.
             simpler.save()
             f.status = 0
             f.highlight = highlight

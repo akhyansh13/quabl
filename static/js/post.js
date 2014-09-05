@@ -5,7 +5,7 @@ $(document).ready(function(){
 	});
 	
 	$(".addsimp-toggle").click(function(){		//toggles simpler addition text area.
-		$(this).parent().parent().parent().find(".simpler-textarea").toggle("slow");
+	$(this).parent().parent().parent().find(".simpler-textarea").toggle("slow");
 	});
 
 		$(".addsimp").click(function(){					//add simpler button code [AJAX].
@@ -29,10 +29,27 @@ $(document).ready(function(){
 			}
 		});
 						
-		$(".reqsimp").click(function(){							
+		$(".reqsimp").click(function(){	
+			$reqsimp = $(this);						
 			var simpler_id = $(this).attr('id');
-			var highlight = String(getSelected());
-			uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/'+ highlight+'/';
+			var post_id = $(".addsimp").attr('data');
+			var selection = window.getSelection().getRangeAt(0);
+    		var selectedText = selection.extractContents();
+    		var highlight = String(selectedText.textContent);
+    		var span = $("<span class='curr_highlight' id='"+simpler_id+"' data='"+post_id+"'>" + highlight +"&nbsp<input type='checkbox' class='curr_checkedhigh' value='"+highlight.replace(" ","_")+"' name='highlight'/></span>");
+    		//The new highlight has class curr_highlight and the new checkbox has class curr_checkedhigh. They have related CSS.
+    		selection.insertNode(span[0]);
+
+   			$(".curr_checkedhigh").hide(); //Fixes the anomaly where the checkbox appears after pressing Ask.
+
+    		if (selectedText.childNodes[1] != undefined){
+        		console.log(selectedText.childNodes[1]);
+        		$(selectedText.childNodes[1]).remove();
+    		}
+    
+     		clearSelection();
+			var new_simpler = String($reqsimp.parent().parent().find('.simpler-html').html());
+			uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/'+ new_simpler+'/';
 			window.location.href = uri;
 		});
 
@@ -93,20 +110,10 @@ $(document).ready(function(){
 			window.locaion.href = uri;
 		});
 });
-
-function getSelected() {					//Gets selected text.
-    if(window.getSelection){ 
-    	return window.getSelection(); 
+function clearSelection() {
+    if ( document.selection ) {
+        document.selection.empty();
+    } else if ( window.getSelection ) {
+        window.getSelection().removeAllRanges();
     }
-    else if(document.getSelection){ 
-        return document.getSelection(); 
-    }
-    else{
-        var selection = document.selection && document.selection.createRange();
-        if(selection.text) { 
-        	return selection.text; 
-        }
-        return false;
-    }
-    return false;
 }
