@@ -3,14 +3,6 @@ body {
   padding-top: 20px;
   padding-bottom: 20px;
 }
-.highlight{
-  padding: 2px 4px;
-  font-size: 90%;
-  white-space: nowrap;
-  background-color: #fff8dc;
-  border-radius: 4px;
-}
-
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,

@@ -32,19 +32,24 @@ $(document).ready(function(){
 		$(".reqsimp").click(function(){	
 			$reqsimp = $(this);						
 			var simpler_id = $(this).attr('id');
+			var post_id = $(".addsimp").attr('data');
 			var selection = window.getSelection().getRangeAt(0);
     		var selectedText = selection.extractContents();
-    		var span = $("<span class='highlight'>" + selectedText.textContent + "</span>");
+    		var highlight = String(selectedText.textContent);
+    		var span = $("<span class='curr_highlight' id='"+simpler_id+"' data='"+post_id+"'>" + highlight +"&nbsp<input type='checkbox' class='curr_checkedhigh' value='"+highlight.replace(" ","_")+"' name='highlight'/></span>");
+    		//The new highlight has class curr_highlight and the new checkbox has class curr_checkedhigh. They have related CSS.
     		selection.insertNode(span[0]);
-   
+
+   			$(".curr_checkedhigh").hide(); //Fixes the anomaly where the checkbox appears after pressing Ask.
+
     		if (selectedText.childNodes[1] != undefined){
         		console.log(selectedText.childNodes[1]);
         		$(selectedText.childNodes[1]).remove();
     		}
     
      		clearSelection();
-			var highlight = String($reqsimp.parent().parent().find('.postsgalore').html());
-			uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/'+ highlight+'/';
+			var new_simpler = String($reqsimp.parent().parent().find('.simpler-html').html());
+			uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/'+ new_simpler+'/';
 			window.location.href = uri;
 		});
 
@@ -113,4 +118,3 @@ function clearSelection() {
         window.getSelection().removeAllRanges();
     }
 }
-

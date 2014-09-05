@@ -6,9 +6,10 @@
 	{% for h in higharr %}
 		{% for i in h %}
 		{% autoescape off %}
-		<div class="simpler-wrapper" style="padding-bottom:10px;">
+		<div class="simpler-wrapper" style="padding-bottom:100px;">
 			<div class="jumbotron">
-				{{i.highlight.highlight_simpler.author}} <br/><br/>{{i.highlight.highlight_simpler.simpler}}<hr/>
+				{{i.highlight.highlight_simpler.simpler}}<hr/>
+				<!--div class='simpler_text' style='display:none'><p></p></div-->
 				<div align='right'><button class="btn btn-success addsimp-toggle">Add Simpler</button></div>
 				<div class="simpler-textarea" style='display:none;'>
 					<div align="center"><textarea class="ckeditor" cols="80" rows="8" id='simp{{i.highlight.highlight_simpler.id}}'></textarea>{% csrf_token %}</div>

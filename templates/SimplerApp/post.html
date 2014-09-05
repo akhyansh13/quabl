@@ -2,6 +2,9 @@
 {% load static %}
 {% block scripts_block %} <script src="{% static 'js/post.js' %}"></script>
 {% endblock %}
+{% block css_block %}
+<link href="{% static 'css/highlight.css' %}" rel="stylesheet">	
+{% endblock %}
 {% block body_block %}
 <div id="post-wrapper" style="padding-bottom:100px;">
 <div id="Post" class="jumbotron">
@@ -12,7 +15,7 @@
 	<div class="simpler-textarea" style='display:none;'>
 	<div align="center"><textarea class="ckeditor" cols="80" rows="8" id='level1-textarea'></textarea></input>{% csrf_token %}</div>
 	<div align="center" style='padding-top:10px;'>
-		<button type="button" class=" btn btn-primary addsimp" id="level1-simp" align="center" data =' {{post.id}} '>Add Answer.</button>
+		<button type="button" class=" btn btn-primary addsimp" id="level1-simp" align="center" data ='{{post.id}}'>Add Answer.</button>
 	</div>
 	</div>
 </div>
@@ -25,9 +28,10 @@
 			{% autoescape off %}
 			<div class='simpler-wrapper' style='padding-bottom:10px;'>
 				<div class="jumbotron {{simpler.parent_simpler.id}} {{simpler.parent_list}} level-{{i}}" id="{{simpler.id}}"style="display:{{simpler.display}};">
-					<div class = "postsgalore">{{simpler.author}} 
+				<div class = "postsgalore">{{simpler.author}} 
 					<br/><br/>
-					{{simpler.simpler}}<hr/></div>
+					<span class="simpler-html">{{simpler.simpler}}</span><hr/>
+				</div>
 					<div class = "btn-group">
 						<button class = "btn btn-default" data=''>Previous.</button>
 						<button type="button" class = "btn btn-default reqsimp" id="{{simpler.id}}" data='{{post.id}}'>Ask.</button>
