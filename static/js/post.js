@@ -85,25 +85,25 @@ $(document).ready(function(){
 			});
 		});
 		
-		$(".checkedhigh").on("change", function(){
-			var aHrefVals = [];
-			
-			$('.checkedhigh').filter(":checked").each(function() {
-				aHrefVals.push($(this).val());
-			});
-			if (aHrefVals.length != 0) {
-				var highlight = aHrefVals.join("xhex");
-				var simpler_id = $(this).parent().attr('id');
-				var post_id = $(this).parent().attr('data');
-				uri = '/highlight/' + post_id + '/' + simpler_id + '/' + highlight + '/';
-				$(this).parent().parent().parent().parent().find(".addhigh").attr('href', uri);
-				$(this).parent().parent().parent().parent().find(".addness").attr('class', "btn btn-success addness");
-			}
-			else {
-				$(this).parent().parent().parent().parent().find(".addhigh").removeAttr('href');
-				$(this).parent().parent().parent().parent().find(".addness").attr('class', 'btn btn-default addness');
-			}
-		});
+ 		$(".checkedhigh").on("change", function(){
+            var aHrefVals = [];
+             
+            $('.checkedhigh').filter(":checked").each(function() {
+                aHrefVals.push($(this).val());
+            });
+            if (aHrefVals.length != 0) {
+                var highlight = aHrefVals.join("xhex");
+                var simpler_id = $(this).parent().attr('id');
+                var post_id = $(this).parent().attr('data');
+                uri = '/highlight/' + post_id + '/' + simpler_id + '/' + highlight + '/';
+                $(this).parent().parent().parent().parent().parent().find(".addhigh").attr('href', uri);
+                $(this).parent().parent().parent().parent().parent().find(".addness").attr('class', "btn btn-success addness");
+            }
+            else {
+                $(this).parent().parent().parent().parent().parent().find(".addhigh").removeAttr('href');
+                $(this).parent().parent().parent().parent().parent().find(".addness").attr('class', 'btn btn-default addness');
+            }
+        });
 
 		$(".addhigh").click(function(){
 			var uri = $(this).attr('data');
