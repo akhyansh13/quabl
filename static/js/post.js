@@ -1,16 +1,28 @@
 $(document).ready(function(){
 	$('.jumbotron').not(".level-1").not('#Post').hide();
+
 	$('.checkedhigh').hide();
+
 	$(".next").hide(function(){
 		$(".level-1").parent().find(".next").show();
 	});
 
+	$(".jumbotron").not("#Post").each(function(){		//Takes care of the bracketed number.
+		id = $(this).attr('id');
+		c = 0;
+		$('.'+id).each(function(){
+			c+=1;
+		});
+		$(this).parent().find('.next').find('#num-child').html(String(c))
+	});
+
 	$(".addsimp-toggle-post").click(function(){		//toggles simpler addition text area.
-		$(this).parent().parent().parent().find(".simpler-textarea").toggle("slow");
+		$(this).parent().parent().parent().find(".simpler-textarea").toggle();
 	});
 	
 	$(".addsimp-toggle").click(function(){		//toggles simpler addition text area.
-	$(this).parent().parent().parent().find(".simpler-textarea").toggle("slow");
+
+	$(this).parent().parent().parent().find(".simpler-textarea").toggle();
 	});
 
 		$(".addsimp").click(function(){					//add simpler button code [AJAX].
@@ -60,14 +72,14 @@ $(document).ready(function(){
 
 		$(".glyphicon-trash").click(function(){
 			var $t = $(this).parent().parent()/*.parent()*/;
-			$(this).toggle("slow",function(){
-				$t.find(".remove, .go-back").show("slow");
+			$(this).toggle(function(){
+				$t.find(".remove, .go-back").show();
 			});			
 		});
 
 		$(".go-back").click(function(){
 			var $t = $(this).parent().parent()/*.parent()*/;
-			$(this).toggle("slow",function(){
+			$(this).toggle(function(){
 				$t.find(".remove, .glyphicon-trash").toggle("200");
 			});			
 		});
@@ -78,9 +90,9 @@ $(document).ready(function(){
 			var parent_class = ".parent"+ simpler_id;
 			curr_simp_id = simpler_id;
 			$.get(('/deletesimpler/'), {curr_simp_id:curr_simp_id}, function(){
-				$(parent_class).hide("slow");
+				$(parent_class).hide();
 				$(parent_class).remove();
-				$t.hide("slow");
+				$t.hide();
 				$t.remove();
 			});
 			$(parent_class).each(function(){
@@ -114,11 +126,13 @@ $(document).ready(function(){
 			var uri = $(this).attr('data');
 			window.locaion.href = uri;
 		});
+
 		$(".next").click(function(){
-			$(this).parent().find(".btn-group").show("slow", function(){
+			$(this).parent().find(".btngrp").show(function(){
 				$(this).parent().find(".checkedhigh").show();
 			});
 		});
+
 		$(".next").click(function(){		
 			var $this = $(this);
 			var $t = $this.parent().find(".jumbotron");
@@ -126,9 +140,10 @@ $(document).ready(function(){
 			var level = this_level.split("level-");
 			level = parseInt(level[(level.length-1)]);
 			curr_level_string = String(level)
-			var curr_jumbotron = "#"+$this.parent().parent().parent().attr("id");
-			var curr_jumbotron_class = "."+$this.parent().parent().parent().attr("id");
-			$this.hide('slow', function(){
+			var curr_jumbotron = "#"+$this.parent().find('.jumbotron').attr("id");
+			var curr_jumbotron_class = "."+$this.parent().find('.jumbotron').attr("id");
+			$(".next").hide(function(){
+					$(curr_jumbotron_class).parent().find('.next').show();
 					$(curr_jumbotron_class).show();
 					$("#Post").hide();
 					$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").hide(function(){
@@ -138,6 +153,7 @@ $(document).ready(function(){
 			
 		});
 });
+
 function clearSelection() {
     if ( document.selection ) {
         document.selection.empty();

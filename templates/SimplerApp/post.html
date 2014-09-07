@@ -30,10 +30,10 @@
 				<div class="jumbotron {{simpler.parent_simpler.id}} {{simpler.parent_list}} level-{{i}}" id="{{simpler.id}}"style="display:{{simpler.display}};">
 				<div class = "postsgalore">
 					<span class="simpler-html">{{simpler.simpler}}</span><br/>
-					<div style="text-align:right;">Written by {{simpler.author}}.</div>
+					<div style="text-align:right;">Written by {{simpler.author}}.</div><br/>
 				</div>
-					<div style="display:none;" class = "btn-group">
-						<hr/>
+					<div style="display:none;" class='btngrp'>
+						<br/>
 						<!--button class = "btn btn-small btn-default" data=''>Previous.</button><!-br/-->
 						<button type="button" class = "btn btn-default reqsimp" id="{{simpler.id}}" data='{{post.id}}'>Ask.</button>
 						<a class="addhigh"><button class = "btn btn-default addness" data=''>Add Simpler.</button></a>
@@ -52,7 +52,7 @@
 						</div>
 					</div-->
 				</div> <!-- simpler/jumbotron close. -->
-				<div style="text-align:right;" class="next"><h4><a>Next</a></h3></div>
+				<div style="text-align:right;" class="next"><h4><a>Next(<span id='num-child'></span>)</a></h3></div>
 			</div><!-- simpler-wrapper close. -->				
 			{% endautoescape %}
 			{% endif %}

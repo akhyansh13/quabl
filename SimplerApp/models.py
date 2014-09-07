@@ -88,7 +88,7 @@ class HighlightDesc(forms.ModelForm):
         fields = ('description',)
 
 
-#Parse functions.
+#Parse functions follow.
 
 def show_less(string):
     str_arr = list(string)
