@@ -3,9 +3,10 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Simpler.settings')
 from django.shortcuts import render_to_response 
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
-from models import Post, Simpler, postBox, SimplerBox, UserForm, UserProfileForm, HighlightDesc, highlightq, highlight
+from models import Post, Simpler, postBox, SimplerBox, UserForm, UserProfileForm, HighlightDesc, highlightq, highlight, Quote
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from functions import getQuotes, first_alpha_toupper, format_author
 
 def index(request):
     context = RequestContext(request)
@@ -180,3 +181,12 @@ def deletesimpler(request):
     required_simpler.display='none'
     required_simpler.save()
     return HttpResponse('success')
+
+def quotes(request, author):
+    context = RequestContext(request)
+    getQuotes(author)
+    quotes = Quote.objects.all()
+    author_formatted = format_author(author)
+    auth_quotes = quotes.filter(author = author_formatted)
+    context_dict = {'quotes':auth_quotes}
+    return render_to_response('SimplerApp/quotes.html', context_dict, context)

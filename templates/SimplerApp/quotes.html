@@ -1,0 +1,6 @@
+{% extends 'SimplerApp/base.html' %}
+{% block body_block %}
+{% for quote in quotes %}
+	<blockquote>{{quote.quote}} - {{quote.author}}</blockquote>
+{% endfor %}
+{% endblock %}

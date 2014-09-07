@@ -1,5 +1,10 @@
 $(document).ready(function(){
 	$('.jumbotron').not(".level-1").not('#Post').hide();
+	$('.checkedhigh').hide();
+	$(".next").hide(function(){
+		$(".level-1").parent().find(".next").show();
+	});
+
 	$(".addsimp-toggle-post").click(function(){		//toggles simpler addition text area.
 		$(this).parent().parent().parent().find(".simpler-textarea").toggle("slow");
 	});
@@ -108,6 +113,29 @@ $(document).ready(function(){
 		$(".addhigh").click(function(){
 			var uri = $(this).attr('data');
 			window.locaion.href = uri;
+		});
+		$(".next").click(function(){
+			$(this).parent().find(".btn-group").show("slow", function(){
+				$(this).parent().find(".checkedhigh").show();
+			});
+		});
+		$(".next").click(function(){		
+			var $this = $(this);
+			var $t = $this.parent().find(".jumbotron");
+			var this_level = $t.attr("class");	//Gets the current level.
+			var level = this_level.split("level-");
+			level = parseInt(level[(level.length-1)]);
+			curr_level_string = String(level)
+			var curr_jumbotron = "#"+$this.parent().parent().parent().attr("id");
+			var curr_jumbotron_class = "."+$this.parent().parent().parent().attr("id");
+			$this.hide('slow', function(){
+					$(curr_jumbotron_class).show();
+					$("#Post").hide();
+					$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").hide(function(){
+					$.scrollTo($t.position().top, 100);
+				});
+			});
+			
 		});
 });
 function clearSelection() {
