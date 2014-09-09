@@ -3,15 +3,14 @@
 {% block scripts_block %} <script src="{% static 'js/highlight.js' %}"></script>
 {% endblock %}
 {% block body_block %}
-	<a href="/simpler/{{post_id}}" style="font-size:15pt; text-decoration:underline">Back to Post</a><br/><br/>
 	<div style="padding-bottom:10px;" id='{{count}}' data='{{current}}' class='elevator' value="/highlight/{{post_id}}/{{pid}}/{{highlightx}}/">
-		<a class="previous" style="font-size:14pt; text-align:left; text-decoration:inline; color:blue;">Previous (<span id='preid'></span>)</a>
-		<a class="next" style="font-size:14pt; text-align:right; float:right; text-decoration:inline; color:blue;">Next (<span id='nextid'></span>)</a>
+		<a class="previous" style='font-size:14pt;'>Previous (<span id='preid'></span>)</a>
+		<a class="next" style='float:right; font-size:14pt;'>Next (<span id='nextid'></span>)</a>
 	</div>
 
 	{% for h in higharr %}
 		{% autoescape off %}
-		<div class="simpler-wrapper" style="padding-bottom:100px;">
+		<div class="simpler-wrapper" style="padding-bottom:10px;padding-top:10px;">
 			<div class="jumbotron">
 				{{h.highlight_simpler.simpler}}<hr/>
 				<div align='right'><button class="btn btn-success addsimp-toggle">Add Simpler</button></div>
@@ -24,6 +23,7 @@
 				</div>
 			</div>
 		</div>
+		<a href="/simpler/{{post_id}}" style="font-size:15pt; text-decoration:underline">Back to Post.</a>
 		{% endautoescape %}
 	{% endfor %}
 {% endblock %}

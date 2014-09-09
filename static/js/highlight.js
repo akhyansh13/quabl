@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	$(".checkedhigh").hide();
 	var count = parseInt($('.elevator').attr('id'));
 	var current = parseInt($('.elevator').attr('data'));
 	var urx = $('.elevator').attr('value');
