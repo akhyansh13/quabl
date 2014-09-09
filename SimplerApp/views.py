@@ -37,11 +37,16 @@ def post(request, post_id):
     context_dict['post']=post
     simplers = post.simpler_set.all()
     maximum = 0
+    highlightqs = []
     for simpler in simplers:
+        simpler_hset = simpler.highlight_set.all()
+        for h in simpler_hset:
+            highlightqs.append(h.highlightq_set.all())
         if simpler.coeficient > maximum:
             maximum = simpler.coeficient
     context_dict['max'] = maximum
     context_dict['loop'] = range(1, maximum+1)
+    context_dict['highlightqs'] = highlightqs               #All the highlighqs related to this question are being passed on.
     return render_to_response('SimplerApp/post.html', context_dict, context) 
     
 def makesimpler(request):
