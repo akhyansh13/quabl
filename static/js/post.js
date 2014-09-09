@@ -112,7 +112,7 @@ $(document).ready(function(){
                 var highlight = aHrefVals.join("xhex");
                 var simpler_id = $(this).parent().attr('id');
                 var post_id = $(this).parent().attr('data');
-                uri = '/highlight/' + post_id + '/' + simpler_id + '/' + highlight + '/';
+                uri = '/highlight/' + post_id + '/' + simpler_id + '/' + highlight + '/' + '0/';
                 $(this).parent().parent().parent().parent().parent().find(".addhigh").attr('href', uri);
                 $(this).parent().parent().parent().parent().parent().find(".addness").attr('class', "btn btn-success addness");
             }

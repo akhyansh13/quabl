@@ -160,18 +160,17 @@ def define(request, post_id, simpler_id, new_simpler):
     context_dict['form']=form
     return render_to_response('SimplerApp/define.html',context_dict,context)
 
-def highlightt(request, post_id, simpler_id, highlightx):
+def highlightt(request, post_id, simpler_id, highlightx, current):
     context = RequestContext(request)
     parent_simpler_id=int(simpler_id)
     parent_simpler = Simpler.objects.filter(id=parent_simpler_id)
+    highlightx = highlightx.replace("_", " ")
     highlights = highlightx.split("xhex")
-    h_arr = []
-    for h in highlights:
-        highlight_array = highlight.objects.filter(highlight_parent=parent_simpler)     #Haven't accounted for two highlight objects having the same highlight attribute having same simpler as the highlight parent.
-        highlight_array = highlight_array.filter(highlight=h)     
-        for u in highlight_array:
-            h_arr.append(u.highlightq_set.all())
-    context_dict = {'higharr':h_arr,'post_id':post_id}
+    count = len(highlights)
+    h = highlights[int(current)]
+    highlight_array = highlight.objects.filter(highlight_parent=parent_simpler)     #Haven't accounted for two highlight objects having the same highlight attribute having same simpler as the highlight parent.
+    highlight_array = highlight_array.filter(highlight=h)
+    context_dict = {'higharr':highlight_array, 'post_id':post_id, 'count':count, 'current':current, 'pid':parent_simpler_id, 'highlightx':highlightx}
     return render_to_response('SimplerApp/highlight.html', context_dict, context)
 	
 def deletesimpler(request):
