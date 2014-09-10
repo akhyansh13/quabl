@@ -133,25 +133,28 @@ $(document).ready(function(){
 			});
 		});
 
-		$(".next").click(function(){		
-			var $this = $(this);
-			var $t = $this.parent().find(".jumbotron");
-			var this_level = $t.attr("class");	//Gets the current level.
-			var level = this_level.split("level-");
-			level = parseInt(level[(level.length-1)]);
-			curr_level_string = String(level)
-			var curr_jumbotron = "#"+$this.parent().find('.jumbotron').attr("id");
-			var curr_jumbotron_class = "."+$this.parent().find('.jumbotron').attr("id");
-			$(".next").hide(function(){
-					$(curr_jumbotron_class).parent().find('.next').show();
-					$(curr_jumbotron_class).show();
-					$("#Post").hide();
-					$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").hide(function(){
-					$.scrollTo($t.position().top, 100);
-				});
-			});
-			
-		});
+		$(".next").click(function(){
+			var scroll_offset = 30;			//Decides the offset between the top of the current n and the top of the screen to which the scroll takes us on pressing next.
+			var $this = $(this); 
+			var $t = $this.parent().find(".jumbotron"); 
+			var this_level = $t.attr("class"); 			//Gets the current level. 
+			var level = this_level.split("level-"); 
+			level = parseInt(level[(level.length-1)]); 
+			curr_level_string = String(level);
+			var curr_jumbotron = "#"+$this.parent().find('.jumbotron').attr("id"); 
+			var curr_jumbotron_class = "."+$this.parent().find('.jumbotron').attr("id"); 
+			$(".next").hide(function(){ 
+				$(curr_jumbotron_class).parent().find('.next').show(); 
+				$(curr_jumbotron_class).show(); 
+				$("#Post").parent().hide(); 
+				$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").parent().parent().removeAttr('style'); 
+				$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").parent().removeAttr('style'); 
+				$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").hide(function(){ 
+					$.scrollTo($t.position().top - scroll_offset, 100);
+			}); 
+		}); 
+		$t.attr('style', "padding-bottom:20px;"); $t.parent().attr('style', "padding-bottom:100px;");
+	});
 });
 
 function clearSelection() {
