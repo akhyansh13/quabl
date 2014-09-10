@@ -134,7 +134,6 @@ $(document).ready(function(){
 		});
 
 		$(".next").click(function(){
-			var scroll_offset = 30;			//Decides the offset between the top of the current n and the top of the screen to which the scroll takes us on pressing next.
 			var $this = $(this); 
 			var $t = $this.parent().find(".jumbotron"); 
 			var this_level = $t.attr("class"); 			//Gets the current level. 
@@ -150,7 +149,7 @@ $(document).ready(function(){
 				$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").parent().parent().removeAttr('style'); 
 				$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").parent().removeAttr('style'); 
 				$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").hide(function(){ 
-					$.scrollTo($t.position().top - scroll_offset, 100);
+					window.scrollTo(0, 0);
 			}); 
 		}); 
 		$t.attr('style', "padding-bottom:20px;"); $t.parent().attr('style', "padding-bottom:100px;");
