@@ -136,13 +136,10 @@ $(document).ready(function(){
 		$(".next").click(function(){
 			var $this = $(this); 
 			var $t = $this.parent().find(".jumbotron"); 
-			var this_level = $t.attr("class"); 			//Gets the current level. 
-			var level = this_level.split("level-"); 
-			level = parseInt(level[(level.length-1)]); 
-			curr_level_string = String(level);
 			var curr_jumbotron = "#"+$this.parent().find('.jumbotron').attr("id"); 
 			var curr_jumbotron_class = "."+$this.parent().find('.jumbotron').attr("id"); 
 			$(".next").hide(function(){ 
+				$this.parent().find(".previous").show();
 				$(curr_jumbotron_class).parent().find('.next').show(); 
 				$(curr_jumbotron_class).show(); 
 				$("#Post").parent().hide(); 
@@ -154,6 +151,25 @@ $(document).ready(function(){
 		}); 
 		$t.attr('style', "padding-bottom:20px;"); $t.parent().attr('style', "padding-bottom:100px;");
 	});
+		
+		$(".previous").click(function(){
+			var $this = $(this); 
+			var $t = $this.parent().find(".jumbotron"); 
+			var parent_id = $this.parent.find(".jumbotron").attr("class").split(' ')[1];
+			var curr_jumbotron_parent = "#"+ parent_id;
+			var curr_jumbotron_parent_class = "."+ parent_id;
+			var this_level = $this.parent().find(".jumbotron").attr("class");
+			var level = this_level.split("level-");
+			level = parseInt(level[(level.length-1)]);
+			var curr_level_string = String(level)		//Stores the current level.
+			
+			if(level==1){						
+				//code for showing the post and level 1 goes here.
+			}
+			$(".previous").hide(function(){ 
+				
+		}); 
+		});
 });
 
 function clearSelection() {

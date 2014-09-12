@@ -12,6 +12,7 @@ class Post(models.Model):
     post = models.CharField(max_length=10000000)
     author = models.CharField(max_length=100000)
     topic = models.ForeignKey(topic, null=True, blank = True)
+    description = models.CharField(max_length=1000000000, null=True, blank=True)
     def __unicode__(self):
         post_less = show_less(self.post)
         return post_less

@@ -8,7 +8,13 @@
 {% block body_block %}
 <div id="post-wrapper" style="padding-bottom:100px;">
 <div id="Post" class="jumbotron">
-	{% autoescape off %}<h4>{{ post.topic.topic }}:</h4><h3>{{ post.post }}</h3>{% endautoescape %}
+	{% autoescape off %}<p>{{ post.topic.topic }}:<p>
+	<b><h3>{{ post.post }}</h3></b>
+	{% if post.description %}
+	<hr/>
+	{{post.description}}
+	{% endif %}
+	{% endautoescape %}
 	<div align="right"><h2>
 		<button class="btn btn-default glyphicon glyphicon-chevron-down addsimp-toggle-post" style='color:#808080'></button></h2></div>
 
@@ -32,7 +38,7 @@
 					<span class="simpler-html">{{simpler.simpler}}</span><br/>
 					<div style="text-align:right;">Written by {{simpler.author}}.</div><br/>
 				</div>
-					<div style="display:none; align:center;" class='btngrp'>
+					<div style="display:none;" class='btngrp'>
 						<br/>
 						<!--button class = "btn btn-small btn-default" data=''>Previous.</button><!-br/-->
 						<button type="button" class = "btn btn-default reqsimp" id="{{simpler.id}}" data='{{post.id}}'>Ask for Simpler.</button>
@@ -45,7 +51,8 @@
 						<button class="btn-xs btn-default glyphicon glyphicon-remove go-back" style="color:#808080; padding-right:20px; display:none;"></button>
 					</div-->
 				</div> <!-- simpler/jumbotron close. -->
-				<div style="text-align:right;" class="next"><h4><a>Next(<span id='num-child'></span>)</a></h3></div>
+				<div class='previous' style='display:none;'><h4><a>Previous</a></h4></div>
+				<div style="text-align:right;" class="next"><h4><a>Next(<span id='num-child'></span>)</a></h4></div>
 			</div><!-- simpler-wrapper close. -->				
 			{% endautoescape %}
 			{% endif %}
