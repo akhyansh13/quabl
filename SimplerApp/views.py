@@ -165,6 +165,48 @@ def define(request, post_id, simpler_id, new_simpler):
     context_dict['form']=form
     return render_to_response('SimplerApp/define.html',context_dict,context)
 
+def defined(request, post_id, simpler_id, highlightx, current):
+    context = RequestContext(request)
+    post_id = int(post_id)
+    parent_simpler_id = int(simpler_id)
+    parent_simpler = Simpler.objects.get(id = parent_simpler_id)
+    highlightx = highlightx.replace("_", " ")
+    highlights = highlightx.split('xhex')
+    count = len(highlights)
+    highlight = highlights[int(current)]
+    del highlights[int(current)]
+    highlighty = 'xhex'.join(highlights)
+    if request.method == 'POST':
+        form = HighlightDesc(request.POST)
+        if form.is_valid():
+            f = form.save(commit=False)
+            f.highlight_parent = parent_simpler
+            f.status = 0
+            f.highlight = highlight
+            f.req_by = request.user
+            highlight_simpler_context = '<h4 style="line-height:1.35em;"><i>' + highlight + '</i></h4>'
+            simpler_content = highlight_simpler_context + '<p style="font-size:14pt;">' + f.description + '</p>'
+            parent_list = 'parent' + str(parent_simpler_id) + ' '
+            curr_simpler = parent_simpler
+            while curr_simpler.parent_simpler != None:
+                parent_list += 'parent' + str(curr_simpler.parent_simpler.id) + " "
+                curr_simpler = curr_simpler.parent_simpler
+            g = Simpler.objects.get_or_create(post = parent_simpler.post, parent_simpler = parent_simpler, simpler = simpler_content, coeficient = parent_simpler.coeficient + 1, parent_list = parent_list, author = request.user.username)[0]
+            f.highlight_simpler = g
+            f.save()
+            question = highlightq.objects.get_or_create(highlight=f, question=f.description)
+            if int(current) == count - 1 and count == 1:
+                return HttpResponseRedirect('/simpler/' + str(f.highlight_parent.post.id))
+            elif int(current) == count - 1:
+                return HttpResponseRedirect('/defined/' + str(post_id) + '/' + str(parent_simpler_id) + '/' + highlighty + '/' + str(int(current) - 1) + '/')
+            else:
+                return HttpResponseRedirect('/defined/' + str(post_id) + '/' + str(parent_simpler_id) + '/' + highlighty + '/' + current + '/')
+    else:
+        form = HighlightDesc()
+    context_dict = {'highlight':highlight, 'highlightx':highlightx, 'post_id': post_id, 'pid': parent_simpler_id, 'count':count, 'current': current}
+    context_dict['form'] = form
+    return render_to_response('SimplerApp/defined.html', context_dict, context)
+
 def highlightt(request, post_id, simpler_id, highlightx, current):
     context = RequestContext(request)
     parent_simpler_id=int(simpler_id)

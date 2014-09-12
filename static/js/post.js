@@ -2,6 +2,7 @@ $(document).ready(function(){
 	$('.jumbotron').not(".level-1").not('#Post').hide();
 
 	$('.checkedhigh').hide();
+	$('.checkedhigh').removeAttr('checked');
 
 	$(".next").hide(function(){
 		$(".level-1").parent().find(".next").show();
@@ -46,28 +47,37 @@ $(document).ready(function(){
 			}
 		});
 						
-		$(".reqsimp").click(function(){	
-			$reqsimp = $(this);						
-			var simpler_id = $(this).attr('id');
-			var post_id = $(".addsimp").attr('data');
-			var selection = window.getSelection().getRangeAt(0);
-    		var selectedText = selection.extractContents();
-    		var highlight = String(selectedText.textContent);
-    		var span = $("<span class='curr_highlight' id='"+simpler_id+"' data='"+post_id+"'>" + highlight +"&nbsp<input type='checkbox' class='curr_checkedhigh' value='"+highlight.replace(" ","_")+"' name='highlight'/></span>");
-    		//The new highlight has class curr_highlight and the new checkbox has class curr_checkedhigh. They have related CSS.
-    		selection.insertNode(span[0]);
+		$(".reqsimp").click(function(){
+			if ((typeof $(this).attr('value')) === "undefined"){
+				$reqsimp = $(this);						
+				var simpler_id = $(this).attr('id');
+				var post_id = $(".addsimp").attr('data');
+				var selection = window.getSelection().getRangeAt(0);
+				var selectedText = selection.extractContents();
+				var highlight = String(selectedText.textContent);
+				var span = $("<span class='curr_highlight' id='"+simpler_id+"' data='"+post_id+"'>" + highlight +"&nbsp<input type='checkbox' class='curr_checkedhigh' value='"+highlight.replace(" ","_")+"' name='highlight'/></span>");
+				//The new highlight has class curr_highlight and the new checkbox has class curr_checkedhigh. They have related CSS.
+				selection.insertNode(span[0]);
 
-   			$(".curr_checkedhigh").hide(); //Fixes the anomaly where the checkbox appears after pressing Ask.
+				$(".curr_checkedhigh").hide(); //Fixes the anomaly where the checkbox appears after pressing Ask.
 
-    		if (selectedText.childNodes[1] != undefined){
-        		console.log(selectedText.childNodes[1]);
-        		$(selectedText.childNodes[1]).remove();
-    		}
-    
-     		clearSelection();
-			var new_simpler = String($reqsimp.parent().parent().find('.simpler-html').html());
-			uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/'+ new_simpler+'/';
-			window.location.href = uri;
+				if (selectedText.childNodes[1] != undefined){
+					console.log(selectedText.childNodes[1]);
+					$(selectedText.childNodes[1]).remove();
+				}
+		
+				clearSelection();
+				var new_simpler = String($reqsimp.parent().parent().find('.simpler-html').html());
+				uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/'+ new_simpler+'/';
+				window.location.href = uri;
+			}
+			else{
+				var simpler_id = $(this).attr('id');
+				var post_id = $(this).attr('data');
+				var highlights = $(this).attr('value');
+				uri = '/defined/'+ post_id + '/' + simpler_id +'/'+ highlights +'/0/';
+				window.location.href = uri;
+			}
 		});
 
 		$(".glyphicon-trash").click(function(){
@@ -115,17 +125,21 @@ $(document).ready(function(){
                 uri = '/highlight/' + post_id + '/' + simpler_id + '/' + highlight + '/' + '0/';
                 $(this).parent().parent().parent().parent().parent().find(".addhigh").attr('href', uri);
                 $(this).parent().parent().parent().parent().parent().find(".addness").attr('class', "btn btn-success addness");
+				$(this).parent().parent().parent().parent().parent().find(".reqsimp").attr('value', highlight);
+				$(this).parent().parent().parent().parent().parent().find(".reqsimp").attr('class', "btn btn-primary reqsimp");
             }
             else {
                 $(this).parent().parent().parent().parent().parent().find(".addhigh").removeAttr('href');
                 $(this).parent().parent().parent().parent().parent().find(".addness").attr('class', 'btn btn-default addness');
+				$(this).parent().parent().parent().parent().parent().find(".reqsimp").removeAttr('value');
+				$(this).parent().parent().parent().parent().parent().find(".reqsimp").attr('class', "btn btn-default reqsimp");
             }
         });
 
-		$(".addhigh").click(function(){
+		/*$(".addhigh").click(function(){
 			var uri = $(this).attr('data');
 			window.locaion.href = uri;
-		});
+		});*/
 
 		$(".next").click(function(){
 			$(this).parent().find(".btngrp").show(function(){
@@ -143,15 +157,36 @@ $(document).ready(function(){
 			var curr_jumbotron = "#"+$this.parent().find('.jumbotron').attr("id");
 			var curr_jumbotron_class = "."+$this.parent().find('.jumbotron').attr("id");
 			$(".next").hide(function(){
-					$(curr_jumbotron_class).parent().find('.next').show();
-					$(curr_jumbotron_class).show();
-					$("#Post").hide();
-					$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").hide(function(){
-					$.scrollTo($t.position().top, 100);
+				$(curr_jumbotron_class).parent().find('.next').show();
+				$(curr_jumbotron_class).show();
+				$("#Post").parent().hide();
+				$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").parent().parent().removeAttr('style');
+				$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").parent().removeAttr('style');
+				$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").hide(function(){
+				$.scrollTo($t.position().top, 100);
 				});
 			});
-			
+			$t.attr('style', "padding-bottom:20px;");
+			$t.parent().attr('style', "padding-bottom:100px;");
 		});
+		
+		/*$(".previous").click(function(){
+            var $this = $(this); 
+            var $t = $this.parent().find(".jumbotron"); 
+            var parent_id = $this.parent.find(".jumbotron").attr("class").split(' ')[1];
+            var curr_jumbotron_parent = "#"+ parent_id;
+            var curr_jumbotron_parent_class = "."+ parent_id;
+            var this_level = $this.parent().find(".jumbotron").attr("class");
+            var level = this_level.split("level-");
+            level = parseInt(level[(level.length-1)]);
+            var curr_level_string = String(level)       //Stores the current level.
+             
+            if(level==1){                       
+                //code for showing the post and level 1 goes here.
+            }
+            $(".previous").hide(function(){ 
+            }); 
+        });*/
 });
 
 function clearSelection() {
@@ -160,4 +195,17 @@ function clearSelection() {
     } else if ( window.getSelection ) {
         window.getSelection().removeAllRanges();
     }
+}
+
+function isTextSelected(input){
+   var startPos = input.selectionStart;
+   var endPos = input.selectionEnd;
+   var doc = document.selection;
+
+   if(doc && doc.createRange().text.length != 0){
+      return true;
+   }else if (!doc && input.value.substring(startPos,endPos).length != 0){
+      return true;
+   }
+   return false;
 }
