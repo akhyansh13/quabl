@@ -3,7 +3,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Simpler.settings')
 from django.shortcuts import render_to_response 
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
-from models import Post, Simpler, postBox, SimplerBox, UserForm, UserProfileForm, HighlightDesc, highlightq, highlight, Quote
+from models import Post, Simpler, postBox, SimplerBox, UserForm, UserProfileForm, HighlightDesc, highlightq, highlight, Quote, topic
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from functions import getQuotes, first_alpha_toupper, format_author
@@ -25,6 +25,7 @@ def addpost(request):
             p = f.post
             f.post = '<p>' + p + '</p>'         #Encloses in <p></p>.
             f.save()
+            topic.objects.get_or_create(topic=f.topic)
     return HttpResponseRedirect('/')
 
 @login_required    

@@ -11,7 +11,7 @@ class topic(models.Model):
 class Post(models.Model):
     post = models.CharField(max_length=10000000)
     author = models.CharField(max_length=100000)
-    topic = models.ForeignKey(topic, null=True, blank = True)
+    topic = models.CharField(max_length=100000, default='Topic Here.')
     description = models.CharField(max_length=1000000000, null=True, blank=True)
     def __unicode__(self):
         post_less = show_less(self.post)
@@ -56,7 +56,7 @@ class postBox(forms.ModelForm):
     post = forms.CharField(max_length=10000000,widget=forms.Textarea(attrs={'rows': 8, 'cols': 80}))
     class Meta:
         model = Post
-        fields = ('post',)
+        fields = ('topic', 'post',)
     
 class SimplerBox(forms.ModelForm):
     simpler = forms.CharField(max_length=10000000,widget=forms.Textarea(attrs={'rows': 8, 'cols': 80}))

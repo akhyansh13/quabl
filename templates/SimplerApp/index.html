@@ -11,7 +11,7 @@
 <div align = "center">
 	{% csrf_token %}
 	{% for f in form.visible_fields %}
-<div>
+<div style='padding-bottom:10px;'>
 	{{ f.errors }}
 	{{ f }}
 </div>
@@ -24,7 +24,7 @@
 		<div>
 			<blockquote>
 				{% autoescape off %}
-			<p> {{ post.topic.topic }}: </p> {{post.post}}
+				{{post.post}}
 				{% endautoescape %}
 		<a href='/simpler/{{post.id}}/'><div align="right"><span class="glyphicon glyphicon-chevron-right"></span></div></a>
 	</blockquote>
