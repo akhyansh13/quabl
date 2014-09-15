@@ -1,20 +1,15 @@
 {% extends 'SimplerApp/base.html' %}
 {% load static %}
-{% block scripts_block %}
-<script>
-$(document).ready(function(){
-    $(".checkedhigh").hide();
-});
-</script>
-{% endblock %}
-{% block css_block %}
-<link href="{% static 'css/define.css' %}" rel="stylesheet"> 
+{% block scripts_block %} <script src="{% static 'js/highlight.js' %}"></script>
 {% endblock %}
 {% block body_block %}
-{% autoescape off %}
+	<div style="padding-bottom:10px;" id='{{count}}' data='{{current}}' class='elevator' value="/defined/{{post_id}}/{{pid}}/{{highlightx}}/">
+		<a class="previous" style='font-size:14pt;'>Previous (<span id='preid'></span>)</a>
+		<a class="next" style='float:right; font-size:14pt;'>Next (<span id='nextid'></span>)</a>
+	</div>
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title">{{new_simpler}}</h3>
+			<h3 class="panel-title">{{highlight}}</h3>
 		</div>
 		<div class="panel-body">
 			<div style='color:#808080;text-align:center;'><i>How do you want the selected text simplified? Describe below.</i></div>
@@ -30,5 +25,6 @@ $(document).ready(function(){
 			</form>
 		</div>
 	</div>
-{% endautoescape %}
+	<br/>
+	<a href="/simpler/{{post_id}}" style="font-size:15pt; text-decoration:underline">Back to Post.</a>
 {% endblock %}
