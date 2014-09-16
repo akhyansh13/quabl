@@ -34,16 +34,11 @@
 			{% autoescape off %}
 			<div class='simpler-wrapper' style='padding-bottom:20px;'>
 				<div class="jumbotron {{simpler.parent_simpler.id}} {{simpler.parent_list}} level-{{i}}" id="{{simpler.id}}"style="display:{{simpler.display}};">
-				<div class = "postsgalore">
-					<span class="simpler-html">{{simpler.simpler}}</span><br/>
-					<div style="text-align:right;">Written by {{simpler.author}}.</div><br/>
-				</div>
-					<div style="display:none;" class='btngrp'>
-						<br/>
-						<!--button class = "btn btn-small btn-default" data=''>Previous.</button><!-br/-->
-						<button type="button" class = "btn btn-default reqsimp" id="{{simpler.id}}" data='{{post.id}}'>Ask for Simpler.</button>
-						<a class="addhigh"><button class = "btn btn-default addness" data=''>Add Simpler.</button></a>
-					</div><!--br/-->
+					<div class = "postsgalore">
+						<span class="simpler-html">{{simpler.simpler}}</span><br/>
+						<div style="text-align:right;">Written by {{simpler.author}}.</div><br/>
+					</div>
+					<!--br/-->
 					<!--div align="center">
 						<a href="/admin/SimplerApp/simpler/{{simpler.id}}/"><button type="button" class = "btn-xs btn-default glyphicon glyphicon-pencil"></button></a>
 						<button class="btn-xs btn-default glyphicon glyphicon-trash" style="color:#808080;"></button>
@@ -51,7 +46,14 @@
 						<button class="btn-xs btn-default glyphicon glyphicon-remove go-back" style="color:#808080; padding-right:20px; display:none;"></button>
 					</div-->
 				</div> <!-- simpler/jumbotron close. -->
-				<div class="previous" style='display:none;'><h4><a>Previous</a></h4></div>
+				<!--div class="previous" style='display:none;'><h4><a>Previous</a></h4></div-->
+				<div style="display:none;" class='btngrp'>
+						<!--br/-->
+						<!--button class = "btn btn-small btn-default" data=''>Previous.</button><!-br/-->
+						<a class="previous" style='float:left; font-size:1.35em;'>Previous</a>
+						<a class="addhigh"><button class = "btn btn-default addness" data='' style='float:right'>Add Simpler.</button></a>
+						<button type="button" class = "btn btn-default reqsimp" id="{{simpler.id}}" data='{{post.id}}' style='float:right'>Ask for Simpler.</button>
+				</div>
 				<div style="text-align:right;" class="next"><h4><a>Next(<span id='num-child'></span>)</a></h4></div>
 			</div><!-- simpler-wrapper close. -->				
 			{% endautoescape %}

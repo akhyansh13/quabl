@@ -123,16 +123,16 @@ $(document).ready(function(){
 			var simpler_id = $(this).parent().attr('id');
 			var post_id = $(this).parent().attr('data');
 			uri = '/highlight/' + post_id + '/' + simpler_id + '/' + highlight + '/' + '0/';
-			$(this).parent().parent().parent().parent().parent().find(".addhigh").attr('href', uri);
-			$(this).parent().parent().parent().parent().parent().find(".addness").attr('class', "btn btn-success addness");
-			$(this).parent().parent().parent().parent().parent().find(".reqsimp").attr('value', highlight);
-			$(this).parent().parent().parent().parent().parent().find(".reqsimp").attr('class', "btn btn-primary reqsimp");
+			$(this).parent().parent().parent().parent().parent().parent().find(".addhigh").attr('href', uri);
+			$(this).parent().parent().parent().parent().parent().parent().find(".addness").attr('class', "btn btn-success addness");
+			$(this).parent().parent().parent().parent().parent().parent().find(".reqsimp").attr('value', highlight);
+			$(this).parent().parent().parent().parent().parent().parent().find(".reqsimp").attr('class', "btn btn-primary reqsimp");
 		}
 		else {
-			$(this).parent().parent().parent().parent().parent().find(".addhigh").removeAttr('href');
-			$(this).parent().parent().parent().parent().parent().find(".addness").attr('class', 'btn btn-default addness');
-			$(this).parent().parent().parent().parent().parent().find(".reqsimp").removeAttr('value');
-			$(this).parent().parent().parent().parent().parent().find(".reqsimp").attr('class', "btn btn-default reqsimp");
+			$(this).parent().parent().parent().parent().parent().parent().find(".addhigh").removeAttr('href');
+			$(this).parent().parent().parent().parent().parent().parent().find(".addness").attr('class', 'btn btn-default addness');
+			$(this).parent().parent().parent().parent().parent().parent().find(".reqsimp").removeAttr('value');
+			$(this).parent().parent().parent().parent().parent().parent().find(".reqsimp").attr('class', "btn btn-default reqsimp");
 		}
 	});
 
@@ -167,7 +167,7 @@ $(document).ready(function(){
 			$("#Post").parent().hide();
 			$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").parent().parent().removeAttr('style');
 			$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").parent().removeAttr('style');
-			$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").hide(function(){
+			$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").parent().hide(function(){
 				window.scrollTo(0, 0);
 			});
 		});
@@ -179,7 +179,7 @@ $(document).ready(function(){
 	
 	$(".previous").click(function(){
 
-		var $this = $(this); 
+		var $this = $(this).parent(); 
 		var $t = $this.parent().find(".jumbotron"); 
 		var parent_id = $this.parent().find(".jumbotron").attr("class").split(' ')[1];
 		var curr_jumbotron_parent = "#"+ parent_id;
