@@ -149,15 +149,17 @@ $(document).ready(function(){
 		var level = this_level.split("level-");
 		level = parseInt(level[(level.length-1)]);
 		curr_level_string = String(level)
-		var curr_jumbotron = "#"+$this.parent().find('.jumbotron').attr("id");
-		var curr_jumbotron_class = "."+$this.parent().find('.jumbotron').attr("id");
+		var curr_jumbotron = "#" + $this.parent().find('.jumbotron').attr("id");
+		var curr_jumbotron_class = "." + $this.parent().find('.jumbotron').attr("id");
 
 		$(this).parent().find(".btngrp").show(function(){
 			$(this).parent().find(".checkedhigh").show();
 		});
 
 		$(".previous").hide(function(){
-			$this.parent().find(".previous").show();
+			$this.parent().find(".previous").show(function(){
+				window.scrollTo(0,0);
+			});
 		});
 
 		$(".next").hide(function(){
@@ -167,9 +169,7 @@ $(document).ready(function(){
 			$("#Post").parent().hide();
 			$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").parent().parent().removeAttr('style');
 			$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").parent().removeAttr('style');
-			$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").hide(function(){
-				window.scrollTo(0, 0);
-			});
+			$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").hide();
 		});
 
 		$t.attr('style', "padding-bottom:20px;");
@@ -178,6 +178,8 @@ $(document).ready(function(){
 	});
 	
 	$(".previous").click(function(){
+
+		window.scrollTo(0, 0);
 
 		var $this = $(this); 
 		var $t = $this.parent().find(".jumbotron"); 
@@ -205,7 +207,6 @@ $(document).ready(function(){
 				$(this).parent().removeAttr('style');
 				$(this).parent().find('.next').show();
 			});
-			window.scrollTo(0, 0);
 		}
 
 		else{
@@ -223,7 +224,6 @@ $(document).ready(function(){
 						$(this).parent().find(".next").show();
 					});
 					$(curr_jumbotron_parent).parent().find(".previous").show();
-					window.scrollTo(0, 0);
 				});
 			});
 			$(curr_jumbotron_parent).parent().find(".checkedhigh, .btngrp").show();
