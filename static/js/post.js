@@ -156,7 +156,7 @@ $(document).ready(function(){
 			$(this).parent().find(".checkedhigh").show();
 		});
 
-		$(".previous").hide(function(){
+		$(".previous").hide(1, function(){
 			$this.parent().find(".previous").show(1, function(){
 				window.scrollTo(0,0);
 			});
