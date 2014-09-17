@@ -40,10 +40,21 @@ $(document).ready(function(){
 		var simpler_id = $(this).attr('id');
 		var post_id = $(this).attr("data");
 		
+		uri = $(this).parent().attr('value');
+		if (current < count - 1){
+			uri = uri + current.toString() + '/';
+		}
+		else if (count > 1) {
+			uri = uri + '0/';
+		}
+		else {
+			uri = '/simpler/' + post_id + '/';
+		}
+		
 		var simpler_textarea_id = 'simp'+ simpler_id;
 		var simpler_text = CKEDITOR.instances[simpler_textarea_id].getData();
-		$.get(('/makesimpler/'),{simpler_id:simpler_id, simpler_text:simpler_text, post_id:post_id,}, function(data){
-			location.reload();
+		$.get(('/makesimpler/'),{simpler_id:simpler_id, simpler_text:simpler_text, post_id:post_id,}, function(){
+			window.location.href = uri;
 		});
 	});
 });
