@@ -175,7 +175,7 @@ $(document).ready(function(){
 		});
 
 		$t.attr('style', "padding-bottom:20px;");
-		$t.parent().attr('style', "padding-bottom:80px;");		//Later the total is 100px and not 120px.
+		$t.parent().attr('style', "padding-bottom:0px;");		//Later the total is 100px and not 120px.
 		$(this).parent().find(".previous").show();
 	});
 	
