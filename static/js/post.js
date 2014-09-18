@@ -143,40 +143,86 @@ $(document).ready(function(){
 
 	$(".next").click(function(){	
 
+		window.scrollTo(0,0);
+
 		var $this = $(this);
 		var $t = $this.parent().find(".jumbotron");
-		var this_level = $t.attr("class");	//Gets the current level.
+		var this_level = $t.attr("class");				//Gets the current level.
 		var level = this_level.split("level-");
 		level = parseInt(level[(level.length-1)]);
 		curr_level_string = String(level)
 		var curr_jumbotron = "#" + $this.parent().find('.jumbotron').attr("id");
 		var curr_jumbotron_class = "." + $this.parent().find('.jumbotron').attr("id");
+		var this_id = parseInt($this.parent().find('.jumbotron').attr('id'));
 
-		$(this).parent().find(".btngrp").show(1, function(){
-			$(this).parent().find(".checkedhigh").show();
-		});
+		$this.parent().find(".next").hide();
+		$this.parent().find(".btngrp").show();
+		$this.parent().find(".checkedhigh").show();
 
-		$(".previous").hide(1, function(){
-			$this.parent().find(".previous").show(1, function(){
-				window.scrollTo(0,0);
-			});
-		});
+		if(level==1){
 
-		$(".next").hide(function(){
-			$(curr_jumbotron_class).parent().find('.next').show();		//Takes care of showing the next for the newly shown children.
-			$(curr_jumbotron_class).show();
-			$(curr_jumbotron_class).parent().show();
-			$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").parent().hide(1, function(){
-				window.scrollTo(0, 0);
-			});
 			$("#Post").parent().hide();
-			$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").parent().parent().removeAttr('style');
-			$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").parent().removeAttr('style');
-		});
+			$("#Post").hide();
 
-		$t.attr('style', "padding-bottom:20px;");
-		$t.parent().attr('style', "padding-bottom:0px;");		//Later the total is 100px and not 120px.
-		$(this).parent().find(".previous").show();
+			$(".level-1").each(function(){
+
+				curr_id = parseInt($(this).attr('id'));
+
+				if(curr_id != this_id){
+					$(this).parent().hide(function(){
+						$(this).hide();
+					});
+				}
+
+				else{
+					$(this).parent().removeAttr("style");
+					$(this).parent().parent().attr("style","padding-bottom:80px;");
+					$(curr_jumbotron_class).each(function(){
+							$j = $(this);
+							$j.parent().show(function(){
+							$j.show();		
+							$j.parent().find(".next").show();
+						});
+					});		
+				}
+			});
+		}
+
+		else{
+			var level_class = ".level-" + curr_level_string;
+			var par_level = ".level-" + String(level-1);
+			var parent_id = "#" + $this.parent().find(".jumbotron").attr("class").split(' ')[1];
+
+			$(par_level).each(function(){
+				$(this).parent().parent().hide();
+				$(this).parent().hide(function(){
+					$(this).hide();
+				});
+			});
+
+			$(level_class).each(function(){
+
+				curr_id = parseInt($(this).attr('id'));
+
+				if(curr_id != this_id){
+					$(this).parent().hide(function(){
+					$(this).hide();
+					});
+				}
+
+				else{
+					$(this).parent().removeAttr("style");
+					$(this).parent().parent().attr("style","padding-bottom:80px;");
+					$(curr_jumbotron_class).each(function(){
+						$j = $(this);
+						$j.parent().show(function(){
+						$j.show();		
+						$j.parent().find(".next").show();
+						});
+					});		
+				}
+			});
+		}
 	});
 	
 	$(".previous").click(function(){
