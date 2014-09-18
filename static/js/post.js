@@ -194,7 +194,7 @@ $(document).ready(function(){
 			var parent_id = "#" + $this.parent().find(".jumbotron").attr("class").split(' ')[1];
 
 			$(par_level).each(function(){
-				$(this).parent().parent().hide();
+				$(this).parent().parent().removeAttr("style");
 				$(this).parent().hide(function(){
 					$(this).hide();
 				});
@@ -216,8 +216,8 @@ $(document).ready(function(){
 					$(curr_jumbotron_class).each(function(){
 						$j = $(this);
 						$j.parent().show(function(){
-						$j.show();		
-						$j.parent().find(".next").show();
+							$j.show();		
+							$j.parent().find(".next").show();
 						});
 					});		
 				}
@@ -269,6 +269,7 @@ $(document).ready(function(){
 					$(curr_jumbotron_parent_class).show();
 					$(".next").hide();
 					$(curr_jumbotron_parent_class).each(function(){
+						$(this).parent().show();
 						$(this).parent().find(".next").show();
 					});
 					$(curr_jumbotron_parent).parent().find(".previous").show();
