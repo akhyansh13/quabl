@@ -11,7 +11,7 @@ class topic(models.Model):
 class Post(models.Model):
     post = models.CharField(max_length=10000000)
     author = models.CharField(max_length=100000)
-    topic = models.CharField(max_length=100000, default='Topic Here.')
+    topic = models.CharField(max_length=100000, default=' ')
     description = models.CharField(max_length=1000000000, null=True, blank=True)
     def __unicode__(self):
         post_less = show_less(self.post)
