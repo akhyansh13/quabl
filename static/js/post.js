@@ -152,12 +152,12 @@ $(document).ready(function(){
 		var curr_jumbotron = "#" + $this.parent().find('.jumbotron').attr("id");
 		var curr_jumbotron_class = "." + $this.parent().find('.jumbotron').attr("id");
 
-		$(this).parent().find(".btngrp").show(function(){
+		$(this).parent().find(".btngrp").show(1, function(){
 			$(this).parent().find(".checkedhigh").show();
 		});
 
-		$(".previous").hide(function(){
-			$this.parent().find(".previous").show(function(){
+		$(".previous").hide(1, function(){
+			$this.parent().find(".previous").show(1, function(){
 				window.scrollTo(0,0);
 			});
 		});
@@ -166,12 +166,12 @@ $(document).ready(function(){
 			$(curr_jumbotron_class).parent().find('.next').show();		//Takes care of showing the next for the newly shown children.
 			$(curr_jumbotron_class).show();
 			$(curr_jumbotron_class).parent().show();
+			$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").parent().hide(1, function(){
+				window.scrollTo(0, 0);
+			});
 			$("#Post").parent().hide();
 			$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").parent().parent().removeAttr('style');
 			$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").parent().removeAttr('style');
-			$(".jumbotron").not(curr_jumbotron).not(curr_jumbotron_class).not("#Post").parent().hide(function(){
-				window.scrollTo(0, 0);
-			});
 		});
 
 		$t.attr('style', "padding-bottom:20px;");
