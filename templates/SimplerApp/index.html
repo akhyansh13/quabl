@@ -1,4 +1,29 @@
 {% extends 'SimplerApp/base.html' %}
+{% block scripts_block %}
+<script type="text/javascript">
+$(document).ready(function(){
+	var color = 1;
+	$(".posttopic").each(function(){
+		if(color%3==1){
+			$(this).css("background-color","LightGreen")
+		}
+		else if(color%3==2){
+			$(this).css("background-color","LightYellow")
+
+		}
+		else{
+			$(this).css("background-color","Orange")
+		}
+		color = color+1
+	});
+	$(".postlink").each(function(){
+		var height = $(this).height();
+		$(this).parent().find(".posttopic").height(height-20);
+	});
+	$("h2").attr("style","position: relative; top: 30%;");
+});
+</script>
+{% endblock %}
 {% block body_block %}
 <div style='padding-bottom:300px;'>
 	{% if user.is_authenticated %}
@@ -21,13 +46,16 @@
 	{% endif %}
 	</form>
 	{% for post in posts %}
-		<div>
+		<div class="exploration" style="padding:10px;">
+			<div style="float:left; width:50%;text-align:center;" class="posttopic"><h2>{{post.topic}}<h2></div>
+			<div style="float:right; width:50%;" class="postlink">
 			<blockquote>
 				{% autoescape off %}
 				{{post.post}}
 				{% endautoescape %}
-		<a href='/simpler/{{post.id}}/'><div align="right"><span class="glyphicon glyphicon-chevron-right"></span></div></a>
-	</blockquote>
+		<a href='/simpler/{{post.id}}/'><div align="right">Explore.</div></a>
+	</blockquote></div>
+	<br style="clear:both;"/>
 	</div>
 	{% endfor %}
 	 </div>
