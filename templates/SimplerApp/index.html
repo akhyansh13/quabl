@@ -21,40 +21,46 @@ $(document).ready(function(){
 		$(this).parent().find(".posttopic").height(height-20);
 	});
 	$("h2").attr("style","position: relative; top: 30%;");
+	$(".hidtopic").each(function(){
+		var topic = $(this).html();
+		$(this).parent().parent().find("h2").html(topic);	
+	});
 });
 </script>
 {% endblock %}
 {% block body_block %}
 <div style='padding-bottom:300px;'>
 	{% if user.is_authenticated %}
-	<br/><br/>
 		{% else %}
 	<div style="text-align:center;"><h1><a href='/register/'>Register Here</a> or <a href="/login/">Login.</a></h1></div>
 	{% endif %}
 	{% if user.is_authenticated %}
 <form method='post' action='/addpost/'>
-<div align = "center">
+<div>
 	{% csrf_token %}
-	{% for f in form.visible_fields %}
-<div style='padding-bottom:10px;'>
-	{{ f.errors }}
-	{{ f }}
+<div style="width=400px;">
+	{{ form.post}}
 </div>
-	{% endfor %}
+<div style='float:left;'>
+	{{form.topic}}
 </div>
-<div align = "center" style="padding-bottom:30px;"><button type="submit" class="btn btn-primary btn-lg">Add Post</button></div>
+<div align = "right" style="padding-bottom:30px;"><button type="submit" class="btn btn-primary btn-lg">Add Post</button></div>
 	{% endif %}
 	</form>
-	{% for post in posts %}
+	{% for topic in topics %}
 		<div class="exploration" style="padding:10px;">
-			<div style="float:left; width:50%;text-align:center;" class="posttopic"><h2>{{post.topic}}<h2></div>
-			<div style="float:right; width:50%;" class="postlink">
-			<blockquote>
+			<div style="float:left; width:40%;text-align:center;" class="posttopic"><h2></h2></div>
+			<div style="float:right; width:60%;" class="postlink">
 				{% autoescape off %}
+				{% for post in topic %}
+				<div class="hidtopic" style="display:none;">{{post.topic}}</div>
+				<blockquote>
 				{{post.post}}
+				<a href='/simpler/{{post.id}}/'><div align="right">Explore.</div></a>
+				</blockquote>
+				{% endfor %}
 				{% endautoescape %}
-		<a href='/simpler/{{post.id}}/'><div align="right">Explore.</div></a>
-	</blockquote></div>
+	</div>
 	<br style="clear:both;"/>
 	</div>
 	{% endfor %}

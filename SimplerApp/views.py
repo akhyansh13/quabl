@@ -10,8 +10,12 @@ from functions import getQuotes, first_alpha_toupper, format_author
 
 def index(request):
     context = RequestContext(request)
-    posts = Post.objects.all()
-    context_dict = {'posts':posts}
+    topics = topic.objects.all()
+    topic_dict = []
+    for t in topics:
+        if Post.objects.all().filter(topic=t):
+            topic_dict.append(Post.objects.all().filter(topic=t))
+    context_dict = {'topics':topic_dict}
     form = postBox()
     context_dict['form'] = form
     return render_to_response('SimplerApp/index.html',context_dict, context)
