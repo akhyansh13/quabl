@@ -1,4 +1,5 @@
 {% extends 'SimplerApp/base.html' %}
+
 {% block scripts_block %}
 <script type="text/javascript">
 $(document).ready(function(){
@@ -29,9 +30,16 @@ $(document).ready(function(){
 	$(".topicbox").width(postbw*0.35);
 	var addpostbtnh = $(".addpostbtn").height();
 	$(".topicbox").height(addpostbtnh);
+	$(".topicbox").attr("placeholder", "Topic here.");
+	$(".postbox").attr("placeholder", "Got a question or anything else that you had trouble understanding?");
+	$(".addpostbtn").attr("disabled", "disabled");
+	$(".postbox, .topicbox").click(function(){
+		$(".addpostbtn").removeAttr("disabled");
+	});
 });
 </script>
 {% endblock %}
+
 {% block css_block %}
 <style>
 
@@ -41,6 +49,7 @@ $(document).ready(function(){
 
 </style>
 {% endblock %}
+
 {% block body_block %}
 <div style='padding-bottom:300px;'>
 	{% if user.is_authenticated %}
@@ -69,7 +78,7 @@ $(document).ready(function(){
 				<div class="hidtopic" style="display:none;">{{post.topic}}</div>
 				<blockquote>
 				{{post.post}}
-				<a href='/simpler/{{post.id}}/'><div align="right">Explore.</div></a>
+				<a href='/simpler/{{post.id}}/'><div align="right">Explore <span class="glyphicon glyphicon-chevron-right"></span></div></a>
 				</blockquote>
 				{% endfor %}
 				{% endautoescape %}
