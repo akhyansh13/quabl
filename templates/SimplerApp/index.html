@@ -76,7 +76,7 @@ $(document).ready(function(){
 				{% autoescape off %}
 				{% for post in topic %}
 				<div class="hidtopic" style="display:none;">{{post.topic}}</div>
-				<blockquote>
+				<blockquote style="font-size:12pt;">
 				{{post.post}}
 				<a href='/simpler/{{post.id}}/'><div align="right">Explore <span class="glyphicon glyphicon-chevron-right"></span></div></a>
 				</blockquote>
@@ -87,4 +87,5 @@ $(document).ready(function(){
 	</div>
 	{% endfor %}
 	 </div>
+	</div>
 {% endblock %}
