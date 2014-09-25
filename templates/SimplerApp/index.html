@@ -5,26 +5,27 @@
 $(document).ready(function(){
 	var color = 1;
 	$(".posttopic").each(function(){
-		if(color%3==1){
-			$(this).css("background-color","LightGreen")
+		if (color%3==1){
+			$(this).css("background-color","LightYellow");
 		}
-		else if(color%3==2){
-			$(this).css("background-color","LightYellow")
-
+		else if (color%3==2){
+			$(this).css("background-color","LightGreen");
 		}
 		else{
-			$(this).css("background-color","Orange")
+			$(this).css("background-color","Orange");			
 		}
-		color = color+1
+		color = color + 1;
 	});
+	$(".posttopic").css("font-size","16pt");
+	$(".posttopic").css("color","#777");
 	$(".postlink").each(function(){
 		var height = $(this).height();
 		$(this).parent().find(".posttopic").height(height-20);
 	});
-	$("h3").attr("style","position: relative; top: 30%;");
+	$(".topicname").attr("style","position: relative; top: 30%;");
 	$(".hidtopic").each(function(){
 		var topic = $(this).html();
-		$(this).parent().parent().find("h3").html(topic);	
+		$(this).parent().parent().find(".topicname").html(topic);	
 	});
 	var postbw = $(".postbox").width();
 	$(".topicbox").width(postbw*0.35);
@@ -71,14 +72,14 @@ $(document).ready(function(){
 	</form>
 	{% for topic in topics %}
 		<div class="exploration" style="padding:10px;">
-			<div style="float:left; width:35%;text-align:center;" class="posttopic"><h3></h3></div>
+			<div style="float:left; width:35%;text-align:center;" class="posttopic"><div class="topicname"></div></div>
 			<div style="float:right; width:65%;" class="postlink">
 				{% autoescape off %}
 				{% for post in topic %}
 				<div class="hidtopic" style="display:none;">{{post.topic}}</div>
 				<blockquote style="font-size:12pt;">
 				{{post.post}}
-				<a href='/simpler/{{post.id}}/'><div align="right">Explore <span class="glyphicon glyphicon-chevron-right"></span></div></a>
+				<a href='/simpler/{{post.id}}/'><div align="right">Explore</div></a>
 				</blockquote>
 				{% endfor %}
 				{% endautoescape %}

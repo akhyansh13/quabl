@@ -40,7 +40,7 @@ def post(request, post_id):
     context_dict ={'post_id':post_id}
     post = Post.objects.get(id=post_id_int)
     context_dict['post']=post
-    simplers = post.simpler_set.all()
+    simplers = Simpler.objects.all().filter(post=post).filter(display =' ')
     maximum = 0
     highlightqs = []
     for simpler in simplers:
@@ -49,6 +49,7 @@ def post(request, post_id):
             highlightqs.append(h.highlightq_set.all())
         if simpler.coeficient > maximum:
             maximum = simpler.coeficient
+    context_dict['simplers']=simplers
     context_dict['max'] = maximum
     context_dict['loop'] = range(1, maximum+1)
     context_dict['highlightqs'] = highlightqs               #All the highlighqs related to this question are being passed on.
@@ -159,7 +160,7 @@ def define(request, post_id, simpler_id, new_simpler):
             while curr_simpler.parent_simpler != None:
                 parent_list += "parent" + str(curr_simpler.parent_simpler.id) + " "
                 curr_simpler = curr_simpler.parent_simpler
-            g = Simpler.objects.get_or_create(post = simpler.post, parent_simpler = simpler, simpler = simpler_content, coeficient=simpler.coeficient+1, parent_list = parent_list, author = request.user.username)[0]
+            g = Simpler.objects.get_or_create(post = simpler.post, parent_simpler = simpler, simpler = simpler_content, coeficient=simpler.coeficient+1, parent_list = parent_list, author = request.user.username, display='none')[0]
             f.highlight_simpler = g
             f.save()
             question = highlightq.objects.get_or_create(highlight=f, question=f.description)
@@ -196,7 +197,7 @@ def defined(request, post_id, simpler_id, highlightx, current):
             while curr_simpler.parent_simpler != None:
                 parent_list += 'parent' + str(curr_simpler.parent_simpler.id) + " "
                 curr_simpler = curr_simpler.parent_simpler
-            g = Simpler.objects.get_or_create(post = parent_simpler.post, parent_simpler = parent_simpler, simpler = simpler_content, coeficient = parent_simpler.coeficient + 1, parent_list = parent_list, author = request.user.username)[0]
+            g = Simpler.objects.get_or_create(post = parent_simpler.post, parent_simpler = parent_simpler, simpler = simpler_content, coeficient = parent_simpler.coeficient + 1, parent_list = parent_list, author = request.user.username, display='none')[0]
             f.highlight_simpler = g
             f.save()
             question = highlightq.objects.get_or_create(highlight=f, question=f.description)

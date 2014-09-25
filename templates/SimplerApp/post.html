@@ -5,6 +5,9 @@
 {% block css_block %}
 <link href="{% static 'css/highlight.css' %}" rel="stylesheet">	
 {% endblock %}
+
+{% block sideblock %}{% endblock %}
+
 {% block body_block %}
 <div id="post-wrapper" style="padding-bottom:100px;">
 <div id="Post" class="jumbotron">
@@ -28,7 +31,7 @@
 </div>
 	{% for i in loop %}
 	<div class="level-wrapper" style='padding-bottom:100px;'>
-	{% for simpler in post.simpler_set.all %}
+	{% for simpler in simplers %}
 		{% if simpler.display != 'none' %}
 			{% if simpler.coeficient == i %}
 			{% autoescape off %}
