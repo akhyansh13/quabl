@@ -17,6 +17,28 @@ $(document).ready(function(){
 		$(this).parent().find('.next').find('#num-child').html(String(c))
 	});
 
+	$(".jumbotron").not("#Post").each(function(){
+		var counter = 1;
+		var string_id = $(this).attr("id");
+		var question_class = "q-" + string_id;
+		var qhtml = "";
+		$("." + question_class).each(function(){
+			if(counter == 1){
+				$cached = $(this);
+				$cached.html("<p>" + $cached.html() + "</p>");
+			}
+			else{
+				$cached.html($cached.html()+ "<p>" + $(this).html() + "</p>");
+				$(this).remove();
+			}
+			counter += 1;
+		});
+
+		var otop = $("#"+string_id).offset().top;
+		$("."+question_class).offset({top:otop});
+
+	});
+
 	$(".addsimp-toggle-post").click(function(){		//toggles simpler addition text area.
 		$(this).parent().parent().parent().find(".simpler-textarea").toggle();
 	});

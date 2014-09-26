@@ -40,19 +40,19 @@ def post(request, post_id):
     context_dict ={'post_id':post_id}
     post = Post.objects.get(id=post_id_int)
     context_dict['post']=post
-    simplers = Simpler.objects.all().filter(post=post).filter(display =' ')
+    simplers = Simpler.objects.all().filter(post=post).filter(display =' ')         #Not so efficient algorithmically.
     maximum = 0
-    highlightqs = []
+    highlightq_set = []
     for simpler in simplers:
-        simpler_hset = simpler.highlight_set.all()
-        for h in simpler_hset:
-            highlightqs.append(h.highlightq_set.all())
+        highlights = highlight.objects.all().filter(highlight_parent=simpler)
+        for hl in highlights:
+            highlightq_set.append(highlightq.objects.all().filter(highlight=hl))
         if simpler.coeficient > maximum:
             maximum = simpler.coeficient
     context_dict['simplers']=simplers
     context_dict['max'] = maximum
     context_dict['loop'] = range(1, maximum+1)
-    context_dict['highlightqs'] = highlightqs               #All the highlighqs related to this question are being passed on.
+    context_dict['highlightqs'] = highlightq_set              #All the highlighqs related to this question are being passed on.
     return render_to_response('SimplerApp/post.html', context_dict, context) 
     
 def makesimpler(request):
