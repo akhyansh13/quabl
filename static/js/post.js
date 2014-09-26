@@ -67,8 +67,9 @@ $(document).ready(function(){
 			}
 	
 			clearSelection();
-			var new_simpler = String($reqsimp.parent().parent().find('.simpler-html').html());
-			uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/'+ new_simpler+'/';
+			var old_simpler = String($reqsimp.parent().parent().find('.simpler-html').find('.question').html());	//the question part of the simpler which won't have the highlight
+			var new_simpler = String($reqsimp.parent().parent().find('.simpler-html').find('.answer').html());		//the answer part of the highlight which will have the highlight
+			uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/'+ new_simpler+'/' + old_simpler + '/';
 			window.location.href = uri;
 		}
 		else{
@@ -123,16 +124,17 @@ $(document).ready(function(){
 			var simpler_id = $(this).parent().attr('id');
 			var post_id = $(this).parent().attr('data');
 			uri = '/highlight/' + post_id + '/' + simpler_id + '/' + highlight + '/' + '0/';
-			$(this).parent().parent().parent().parent().parent().parent().find(".addhigh").attr('href', uri);
-			$(this).parent().parent().parent().parent().parent().parent().find(".addness").attr('class', "btn btn-success addness");
-			$(this).parent().parent().parent().parent().parent().parent().find(".reqsimp").attr('value', highlight);
-			$(this).parent().parent().parent().parent().parent().parent().find(".reqsimp").attr('class', "btn btn-primary reqsimp");
+			
+			$(this).parents(".simpler-wrapper").find(".addhigh").attr('href', uri);
+			$(this).parents(".simpler-wrapper").find(".addness").attr('class', "btn btn-success addness");
+			$(this).parents(".simpler-wrapper").find(".reqsimp").attr('value', highlight);
+			$(this).parents(".simpler-wrapper").find(".reqsimp").attr('class', "btn btn-primary reqsimp");
 		}
-		else {
-			$(this).parent().parent().parent().parent().parent().parent().find(".addhigh").removeAttr('href');
-			$(this).parent().parent().parent().parent().parent().parent().find(".addness").attr('class', 'btn btn-default addness');
-			$(this).parent().parent().parent().parent().parent().parent().find(".reqsimp").removeAttr('value');
-			$(this).parent().parent().parent().parent().parent().parent().find(".reqsimp").attr('class', "btn btn-default reqsimp");
+		else {			
+			$(this).parents(".simpler-wrapper").find(".addhigh").removeAttr('href');
+			$(this).parents(".simpler-wrapper").find(".addness").attr('class', "btn btn-default addness");
+			$(this).parents(".simpler-wrapper").find(".reqsimp").removeAttr('value');
+			$(this).parents(".simpler-wrapper").find(".reqsimp").attr('class', "btn btn-default reqsimp");
 		}
 	});
 
