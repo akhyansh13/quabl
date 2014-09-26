@@ -35,7 +35,7 @@ $(document).ready(function(){
 		});
 
 		var otop = $("#"+string_id).offset().top;
-		$("."+question_class).offset({top:otop});
+		$("."+question_class).offset({top:otop+10});
 
 	});
 
