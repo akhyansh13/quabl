@@ -54,7 +54,7 @@ $(document).ready(function(){
 {% block body_block %}
 <div style='padding-bottom:300px;'>
 	{% if user.is_authenticated %}
-		{% else %}
+	{% else %}
 	<div style="text-align:center;"><h1><a href='/register/'>Register Here</a> or <a href="/login/">Login.</a></h1></div>
 	{% endif %}
 	{% if user.is_authenticated %}
@@ -89,4 +89,5 @@ $(document).ready(function(){
 	{% endfor %}
 	 </div>
 	</div>
+>>>>>>> 69cc3667979943218eaba9f1bb8add1c4dc6e624
 {% endblock %}

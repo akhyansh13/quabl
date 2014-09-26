@@ -61,12 +61,12 @@ def makesimpler(request):
         post_id = int(request.GET['post_id'])
         post = Post.objects.get(id=post_id)
         simpler_text = request.GET['simpler_text']
-        c = Simpler.objects.get_or_create(post=post, simpler = simpler_text, simpler_original=simpler_text, coeficient=1, author=request.user.username, display=' ', parent_list=' ')[0]
+        c = Simpler.objects.get_or_create(post=post, simpler = '<div class ="question"></div><div class ="answer">' + simpler_text + '</div>', simpler_original=simpler_text, coeficient=1, author=request.user.username, display=' ', parent_list=' ')[0]
     else: 
         highlight_simpler_id = int(request.GET['simpler_id'])
         simpler_text = request.GET['simpler_text']
         highlight_simpler = Simpler.objects.get(id=highlight_simpler_id)
-        c = Simpler.objects.get_or_create(post = highlight_simpler.post, parent_simpler = highlight_simpler.parent_simpler,  simpler = highlight_simpler.simpler + '<br/><br/>' + simpler_text, simpler_original = highlight_simpler.simpler,coeficient = highlight_simpler.coeficient, parent_list = highlight_simpler.parent_list, author = request.user.username, display=' ')[0]
+        c = Simpler.objects.get_or_create(post = highlight_simpler.post, parent_simpler = highlight_simpler.parent_simpler,  simpler = highlight_simpler.simpler + '<br/><br/><div class ="answer">'+ simpler_text + '</div>', simpler_original = highlight_simpler.simpler,coeficient = highlight_simpler.coeficient, parent_list = highlight_simpler.parent_list, author = request.user.username, display=' ')[0]
     return HttpResponse('success')
     
 def register(request):
@@ -131,10 +131,16 @@ def user_logout(request):
 
     return HttpResponseRedirect('/')
 
-def define(request, post_id, simpler_id, new_simpler):
+def define(request, post_id, simpler_id, new_simpler, old_simpler):
     context = RequestContext(request)
+    new_simpler = new_simpler.replace("xqmx", "?")
+    old_simpler = old_simpler.replace("xqmx", "?")
     post_id = int(post_id)
     simpler_id = int(simpler_id)
+    flag = False
+    if 'curr_highlight' not in new_simpler:
+        new_simpler, old_simpler = old_simpler, new_simpler
+        flag = True
     highlight = new_simpler.split('curr_highlight')[1].split('>')[1].split('&nbsp')[0];     #Extracts the highlights.
     context_dict = {'highlight':highlight}
     context_dict['new_simpler']=new_simpler
@@ -148,13 +154,17 @@ def define(request, post_id, simpler_id, new_simpler):
         if form.is_valid():
             f = form.save(commit=False)
             f.highlight_parent = simpler
-            simpler.simpler = (new_simpler.replace('curr_highlight','highlight')).replace('curr_checkedhigh','checkedhigh').replace('style="display: none;"','')        #JS and Python conflict fixed. Brute forced the display:none out.
+            if flag:
+                simpler.simpler = '<div class="question">' + (new_simpler.replace('curr_highlight','highlight')).replace('curr_checkedhigh','checkedhigh').replace('style="display: none;"','') + '</div><div class="answer">' + old_simpler + '</div>'        #JS and Python conflict fixed. Brute forced the display:none out.
+            else:
+                simpler.simpler = '<div class="question">' + old_simpler + '</div><div class="answer">' + (new_simpler.replace('curr_highlight','highlight')).replace('curr_checkedhigh','checkedhigh').replace('style="display: none;"','') + '</div>'        #JS and Python conflict fixed. Brute forced the display:none out.
+                
             simpler.save()
             f.status = 0
             f.highlight = highlight
             f.req_by = request.user
-            highlight_simpler_context = '<h4 style="line-height:1.35em;"><i>' + highlight + '</i></h4>'
-            simpler_content = highlight_simpler_context + '<p style="font-size:14pt;">' + f.description + '</p>'
+            highlight_simpler_context = '<div class="question"><h4 style="line-height:1.35em;"><i>' + highlight + '</i></h4>'
+            simpler_content = highlight_simpler_context + '<p style="font-size:14pt;">' + f.description + '</p></div>'
             parent_list = 'parent' + str(simpler.id) + ' '
             curr_simpler = simpler
             while curr_simpler.parent_simpler != None:
