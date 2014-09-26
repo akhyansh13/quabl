@@ -10,8 +10,12 @@ from functions import getQuotes, first_alpha_toupper, format_author
 
 def index(request):
     context = RequestContext(request)
-    posts = Post.objects.all()
-    context_dict = {'posts':posts}
+    topics = topic.objects.all()
+    topic_dict = []
+    for t in topics:
+        if Post.objects.all().filter(topic=t):
+            topic_dict.append(Post.objects.all().filter(topic=t))
+    context_dict = {'topics':topic_dict}
     form = postBox()
     context_dict['form'] = form
     return render_to_response('SimplerApp/index.html',context_dict, context)
@@ -36,18 +40,19 @@ def post(request, post_id):
     context_dict ={'post_id':post_id}
     post = Post.objects.get(id=post_id_int)
     context_dict['post']=post
-    simplers = post.simpler_set.all()
+    simplers = Simpler.objects.all().filter(post=post).filter(display =' ')         #Not so efficient algorithmically.
     maximum = 0
-    highlightqs = []
+    highlightq_set = []
     for simpler in simplers:
-        simpler_hset = simpler.highlight_set.all()
-        for h in simpler_hset:
-            highlightqs.append(h.highlightq_set.all())
+        highlights = highlight.objects.all().filter(highlight_parent=simpler)
+        for hl in highlights:
+            highlightq_set.append(highlightq.objects.all().filter(highlight=hl))
         if simpler.coeficient > maximum:
             maximum = simpler.coeficient
+    context_dict['simplers']=simplers
     context_dict['max'] = maximum
     context_dict['loop'] = range(1, maximum+1)
-    context_dict['highlightqs'] = highlightqs               #All the highlighqs related to this question are being passed on.
+    context_dict['highlightqs'] = highlightq_set              #All the highlighqs related to this question are being passed on.
     return render_to_response('SimplerApp/post.html', context_dict, context) 
     
 def makesimpler(request):
@@ -128,6 +133,8 @@ def user_logout(request):
 
 def define(request, post_id, simpler_id, new_simpler, old_simpler):
     context = RequestContext(request)
+    new_simpler = new_simpler.replace("xqmx", "?")
+    old_simpler = old_simpler.replace("xqmx", "?")
     post_id = int(post_id)
     simpler_id = int(simpler_id)
     flag = False
@@ -151,6 +158,7 @@ def define(request, post_id, simpler_id, new_simpler, old_simpler):
                 simpler.simpler = '<div class="question">' + (new_simpler.replace('curr_highlight','highlight')).replace('curr_checkedhigh','checkedhigh').replace('style="display: none;"','') + '</div><div class="answer">' + old_simpler + '</div>'        #JS and Python conflict fixed. Brute forced the display:none out.
             else:
                 simpler.simpler = '<div class="question">' + old_simpler + '</div><div class="answer">' + (new_simpler.replace('curr_highlight','highlight')).replace('curr_checkedhigh','checkedhigh').replace('style="display: none;"','') + '</div>'        #JS and Python conflict fixed. Brute forced the display:none out.
+                
             simpler.save()
             f.status = 0
             f.highlight = highlight
@@ -162,7 +170,7 @@ def define(request, post_id, simpler_id, new_simpler, old_simpler):
             while curr_simpler.parent_simpler != None:
                 parent_list += "parent" + str(curr_simpler.parent_simpler.id) + " "
                 curr_simpler = curr_simpler.parent_simpler
-            g = Simpler.objects.get_or_create(post = simpler.post, parent_simpler = simpler, simpler = simpler_content, coeficient=simpler.coeficient+1, parent_list = parent_list, author = request.user.username)[0]
+            g = Simpler.objects.get_or_create(post = simpler.post, parent_simpler = simpler, simpler = simpler_content, coeficient=simpler.coeficient+1, parent_list = parent_list, author = request.user.username, display='none')[0]
             f.highlight_simpler = g
             f.save()
             question = highlightq.objects.get_or_create(highlight=f, question=f.description)
@@ -199,7 +207,7 @@ def defined(request, post_id, simpler_id, highlightx, current):
             while curr_simpler.parent_simpler != None:
                 parent_list += 'parent' + str(curr_simpler.parent_simpler.id) + " "
                 curr_simpler = curr_simpler.parent_simpler
-            g = Simpler.objects.get_or_create(post = parent_simpler.post, parent_simpler = parent_simpler, simpler = simpler_content, coeficient = parent_simpler.coeficient + 1, parent_list = parent_list, author = request.user.username)[0]
+            g = Simpler.objects.get_or_create(post = parent_simpler.post, parent_simpler = parent_simpler, simpler = simpler_content, coeficient = parent_simpler.coeficient + 1, parent_list = parent_list, author = request.user.username, display='none')[0]
             f.highlight_simpler = g
             f.save()
             question = highlightq.objects.get_or_create(highlight=f, question=f.description)

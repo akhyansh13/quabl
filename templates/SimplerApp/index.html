@@ -1,34 +1,93 @@
 {% extends 'SimplerApp/base.html' %}
+
+{% block scripts_block %}
+<script type="text/javascript">
+$(document).ready(function(){
+	var color = 1;
+	$(".posttopic").each(function(){
+		if (color%3==1){
+			$(this).css("background-color","LightYellow");
+		}
+		else if (color%3==2){
+			$(this).css("background-color","LightGreen");
+		}
+		else{
+			$(this).css("background-color","Orange");			
+		}
+		color = color + 1;
+	});
+	$(".posttopic").css("font-size","16pt");
+	$(".posttopic").css("color","#777");
+	$(".postlink").each(function(){
+		var height = $(this).height();
+		$(this).parent().find(".posttopic").height(height-20);
+	});
+	$(".topicname").attr("style","position: relative; top: 30%;");
+	$(".hidtopic").each(function(){
+		var topic = $(this).html();
+		$(this).parent().parent().find(".topicname").html(topic);	
+	});
+	var postbw = $(".postbox").width();
+	$(".topicbox").width(postbw*0.35);
+	var addpostbtnh = $(".addpostbtn").height();
+	$(".topicbox").height(addpostbtnh);
+	$(".topicbox").attr("placeholder", "Topic here.");
+	$(".postbox").attr("placeholder", "Got a question or anything else that you had trouble understanding?");
+	$(".addpostbtn").attr("disabled", "disabled");
+	$(".postbox, .topicbox").click(function(){
+		$(".addpostbtn").removeAttr("disabled");
+	});
+});
+</script>
+{% endblock %}
+
+{% block css_block %}
+<style>
+
+.postbox{
+	width:100%;
+}
+
+</style>
+{% endblock %}
+
 {% block body_block %}
 <div style='padding-bottom:300px;'>
 	{% if user.is_authenticated %}
-	<br/><br/>
 	{% else %}
 	<div style="text-align:center;"><h1><a href='/register/'>Register Here</a> or <a href="/login/">Login.</a></h1></div>
 	{% endif %}
 	{% if user.is_authenticated %}
-	<form method='post' action='/addpost/'>
-		<div align = "center">
-			{% csrf_token %}
-			{% for f in form.visible_fields %}
-			<div style='padding-bottom:10px;'>
-				{{ f.errors }}
-				{{ f }}
-			</div>
-			{% endfor %}
-		</div>
-		<div align = "center" style="padding-bottom:30px;"><button type="submit" class="btn btn-primary btn-lg">Add Post</button></div>
-	</form>
+<form method='post' action='/addpost/'>
+<div>
+	{% csrf_token %}
+<div style="width=400px;">
+	{{ form.post}}
+</div>
+<div style='float:left;'>
+	{{form.topic}}
+</div>
+<div align = "right" style="padding-bottom:30px;"><button type="submit" class="btn btn-primary btn-lg addpostbtn">Add Post</button></div>
 	{% endif %}
-	{% for post in posts %}
-	<div>
-		<blockquote>
-			{% autoescape off %}
-			{{post.post}}
-			{% endautoescape %}
-			<a href='/simpler/{{post.id}}/'><div align="right"><span class="glyphicon glyphicon-chevron-right"></span></div></a>
-		</blockquote>
+	</form>
+	{% for topic in topics %}
+		<div class="exploration" style="padding:10px;">
+			<div style="float:left; width:35%;text-align:center;" class="posttopic"><div class="topicname"></div></div>
+			<div style="float:right; width:65%;" class="postlink">
+				{% autoescape off %}
+				{% for post in topic %}
+				<div class="hidtopic" style="display:none;">{{post.topic}}</div>
+				<blockquote style="font-size:12pt;">
+				{{post.post}}
+				<a href='/simpler/{{post.id}}/'><div align="right">Explore</div></a>
+				</blockquote>
+				{% endfor %}
+				{% endautoescape %}
+	</div>
+	<br style="clear:both;"/>
 	</div>
 	{% endfor %}
-</div>
+	 </div>
+	</div>
+>>>>>>> 69cc3667979943218eaba9f1bb8add1c4dc6e624
 {% endblock %}

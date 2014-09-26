@@ -17,6 +17,28 @@ $(document).ready(function(){
 		$(this).parent().find('.next').find('#num-child').html(String(c))
 	});
 
+	$(".jumbotron").not("#Post").each(function(){
+		var counter = 1;
+		var string_id = $(this).attr("id");
+		var question_class = "q-" + string_id;
+		var qhtml = "";
+		$("." + question_class).each(function(){
+			if(counter == 1){
+				$cached = $(this);
+				$cached.html("<p>" + $cached.html() + "</p>");
+			}
+			else{
+				$cached.html($cached.html()+ "<p>" + $(this).html() + "</p>");
+				$(this).remove();
+			}
+			counter += 1;
+		});
+
+		var otop = $("#"+string_id).offset().top;
+		$("."+question_class).offset({top:otop});
+
+	});
+
 	$(".addsimp-toggle-post").click(function(){		//toggles simpler addition text area.
 		$(this).parent().parent().parent().find(".simpler-textarea").toggle();
 	});
@@ -55,6 +77,7 @@ $(document).ready(function(){
 			var selection = window.getSelection().getRangeAt(0);
 			var selectedText = selection.extractContents();
 			var highlight = String(selectedText.textContent);
+			//var span = $("<high>" + highlight + "<high>");
 			var span = $("<span class='curr_highlight' id='"+simpler_id+"' data='"+post_id+"'>" + highlight +"&nbsp<input type='checkbox' class='curr_checkedhigh' value='"+highlight.replace(" ","_")+"' name='highlight'/></span>");
 			//The new highlight has class curr_highlight and the new checkbox has class curr_checkedhigh. They have related CSS.
 			selection.insertNode(span[0]);
@@ -67,9 +90,9 @@ $(document).ready(function(){
 			}
 	
 			clearSelection();
-			var old_simpler = String($reqsimp.parent().parent().find('.simpler-html').find('.question').html());	//the question part of the simpler which won't have the highlight
-			var new_simpler = String($reqsimp.parent().parent().find('.simpler-html').find('.answer').html());		//the answer part of the highlight which will have the highlight
-			uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/'+ new_simpler+'/' + old_simpler + '/';
+			var old_simpler = String($reqsimp.parent().parent().find('.simpler-html').find('.question').html()).split('?').join('xqmx');	//the question part of the simpler which won't have the highlight
+			var new_simpler = String($reqsimp.parent().parent().find('.simpler-html').find('.answer').html()).split('?').join('xqmx');		//the answer part of the highlight which will have the highlight
+			uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/newxhex/'+ new_simpler +'/oldxhex/' + old_simpler + '/';
 			window.location.href = uri;
 		}
 		else{

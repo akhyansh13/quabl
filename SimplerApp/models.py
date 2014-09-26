@@ -53,7 +53,8 @@ class Quote(models.Model):
         return self.quote + ' - ' + self.author 
 
 class postBox(forms.ModelForm):
-    post = forms.CharField(max_length=10000000,widget=forms.Textarea(attrs={'rows': 8, 'cols': 80}))
+    post = forms.CharField(max_length=10000000,widget=forms.Textarea(attrs={'class': 'postbox'}))
+    topic = forms.CharField(max_length=100000,widget=forms.Textarea(attrs={'class': 'topicbox'}))
     class Meta:
         model = Post
         fields = ('topic', 'post',)
