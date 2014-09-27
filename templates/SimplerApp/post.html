@@ -2,12 +2,25 @@
 {% load static %}
 {% block scripts_block %} <script src="{% static 'js/post.js' %}"></script>
 {% endblock %}
+
 {% block css_block %}
+
+<style type="text/css">
+.header{
+	padding-left: 10%;
+	padding-right: 10%;
+}
+</style>
+
 <link href="{% static 'css/highlight.css' %}" rel="stylesheet">	
 {% endblock %}
 
+{% block basiccss %}
+<link href="{% static 'css/post.css' %}" rel="stylesheet">	
+{% endblock %}
+
 {% block sideblock %}
-<div style="float:right; width:20%;">
+<div style="float:right; width:40%;padding-right:10%;">
 {% for h in highlightqs %}
 {% for x in h %}
 	<p align='left' class="q-{{x.highlight.highlight_parent.id}}">{{x.question}}</p>

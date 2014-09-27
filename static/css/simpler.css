@@ -47,6 +47,10 @@ body {
   font-size: 21px;
 }
 
+.jumbotron p, .jumbotron .highlight{
+  font-size:12pt;
+}
+
 .marketing {
   margin: 40px 0;
 }
@@ -71,17 +75,5 @@ body {
     border-bottom: 0;
   }
 }
-.author,
-.btngrp,
-.next,
-.text-muted,
-.dropdown{
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	cursor:default;
-}
+
 

@@ -1,4 +1,7 @@
 $(document).ready(function(){
+	$(".header").css("padding-right", "10%");
+	$(".header").css("padding-left", "10%");
+
 	$('.jumbotron').not(".level-1").not('#Post').hide();
 
 	$('.checkedhigh').hide();
@@ -92,7 +95,8 @@ $(document).ready(function(){
 			clearSelection();
 			var old_simpler = String($reqsimp.parent().parent().find('.simpler-html').find('.question').html()).split('?').join('xqmx');	//the question part of the simpler which won't have the highlight
 			var new_simpler = String($reqsimp.parent().parent().find('.simpler-html').find('.answer').html()).split('?').join('xqmx');		//the answer part of the highlight which will have the highlight
-			uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/newxhex/'+ new_simpler +'/oldxhex/' + old_simpler + '/';
+			if (old_simpler == ' ') uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/newxhex/'+ new_simpler +'/oldxhex/empty/';
+			else uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/newxhex/'+ new_simpler +'/oldxhex/' + old_simpler + '/';
 			window.location.href = uri;
 		}
 		else{
