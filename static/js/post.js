@@ -1,4 +1,7 @@
 $(document).ready(function(){
+	$(".header").css("padding-right", "10%");
+	$(".header").css("padding-left", "10%");
+
 	$('.jumbotron').not(".level-1").not('#Post').hide();
 
 	$('.checkedhigh').hide();
