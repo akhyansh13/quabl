@@ -1,4 +1,16 @@
 $(document).ready(function(){
+
+	$(document).click(function(){
+		if($("#Post").is(":visible")){
+			$("#instruct").show();
+		} 
+		else{
+			$("#instruct").hide();
+		}
+	});
+
+	$(".q-sidebar").hide();		//Not hiding the parent class.
+
 	$(".header").css("padding-right", "10%");
 	$(".header").css("padding-left", "10%");
 
@@ -36,10 +48,6 @@ $(document).ready(function(){
 			}
 			counter += 1;
 		});
-
-		var otop = $("#"+string_id).offset().top;
-		$("."+question_class).offset({top:otop+10});
-
 	});
 
 	$(".addsimp-toggle-post").click(function(){		//toggles simpler addition text area.
@@ -183,7 +191,10 @@ $(document).ready(function(){
 		var curr_jumbotron = "#" + $this.parent().find('.jumbotron').attr("id");
 		var curr_jumbotron_class = "." + $this.parent().find('.jumbotron').attr("id");
 		var this_id = parseInt($this.parent().find('.jumbotron').attr('id'));
+		var question_class = ".q-" + String(this_id);
 
+		$(".q-sidebar").hide();
+		$(question_class).show();
 		$this.parent().find(".next").hide();
 		$this.parent().find(".btngrp").show();
 		$this.parent().find(".checkedhigh").show();
@@ -269,6 +280,7 @@ $(document).ready(function(){
 		var level = this_level.split("level-");
 		level = parseInt(level[(level.length-1)]);
 		var curr_level_string = String(level)       //Stores the current level.
+		var parent_question_class = ".q-" + parent_id;
 
 		$this.hide();
 
@@ -284,6 +296,7 @@ $(document).ready(function(){
 				$(this).parent().removeAttr('style');
 				$(this).parent().find('.next').show();
 			});
+			$(".q-sidebar").hide();
 		}
 
 		else{
@@ -306,6 +319,8 @@ $(document).ready(function(){
 			});
 			$(curr_jumbotron_parent).parent().find(".checkedhigh, .btngrp").show();
 			$(curr_jumbotron_parent_class).parent().find(".checkedhigh, .btngrp").hide();
+			$(".q-sidebar").hide();
+			$(parent_question_class).show();
 		}
 	});
 }); //window.onload function finished.

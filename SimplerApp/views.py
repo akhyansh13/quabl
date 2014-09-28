@@ -165,7 +165,7 @@ def define(request, post_id, simpler_id, new_simpler, old_simpler):
             f.status = 0
             f.highlight = highlight
             f.req_by = request.user
-            highlight_simpler_context = '<div class="question"><i>' + highlight + '</i>'
+            highlight_simpler_context = '<div class="question"><i>' + highlight + '</i><br/><br/>'
             simpler_content = highlight_simpler_context + '<p style="font-size:12pt;">' + f.description + '</p></div>'
             parent_list = 'parent' + str(simpler.id) + ' '
             curr_simpler = simpler
@@ -202,7 +202,7 @@ def defined(request, post_id, simpler_id, highlightx, current):
             f.status = 0
             f.highlight = highlight
             f.req_by = request.user
-            highlight_simpler_context = '<div class="question"><i>' + highlight + '</i>'
+            highlight_simpler_context = '<div class="question"><i>' + highlight + '</i><br/><br/>'
             simpler_content = highlight_simpler_context + '<p style="font-size:12pt;">' + f.description + '</p></div>'
             parent_list = 'parent' + str(parent_simpler_id) + ' '
             curr_simpler = parent_simpler
