@@ -133,6 +133,8 @@ def user_logout(request):
 
 def define(request, post_id, simpler_id, new_simpler, old_simpler):
     context = RequestContext(request)
+    if old_simpler is 'empty':
+        old_simpler = '';
     new_simpler = new_simpler.replace("xqmx", "?")
     old_simpler = old_simpler.replace("xqmx", "?")
     post_id = int(post_id)
