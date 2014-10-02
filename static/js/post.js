@@ -31,6 +31,21 @@ $(document).ready(function(){
 		});
 		$(this).parent().find('.next').find('#num-child').html(String(c))
 	});
+	
+	$("num_answers").each(function(){
+		var ques_class = $(this).parent().find(".q-sidebar").attr('class');
+		var highlight = "<i>" + ques_class.split('h-')[1] + "</i>";									//get the highlight in format
+		var question = ques_class.html().split("<p>").join('<p style="font-size:12pt;">');			//get the qestion in format
+		n = 0;																						//counter of number of answered simplers
+		var curr_jumbotron = [];																	//list to store te simplers with answers
+		$(document).find('.jumbotron').each(function(){
+			if ($(this).find(".question").html() == highlight + question && $(this).find('.answer').html() != ''){			//compare the questions and answer should be non empty
+				n += 1;
+				curr_jumbotron.push($(this).attr(id));																//store the simpler in list for future use
+			}
+		});
+		$(this).html(highlight + question + String(n));																//show the number of answers available
+	});
 
 	$(".jumbotron").not("#Post").each(function(){
 		var counter = 1;
