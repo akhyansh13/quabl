@@ -110,12 +110,16 @@ $(document).ready(function(){
 			var post_id = $(this).parent().attr('data');
 			uri = '/highlight/' + post_id + '/' + simpler_id + '/' + highlight + '/' + '0/';
 			
+			$(this).parents(".simpler-wrapper").find(".addness").removeAttr('disabled');
+			$(this).parents(".simpler-wrapper").find(".reqsimp").removeAttr('disabled');			
 			$(this).parents(".simpler-wrapper").find(".addhigh").attr('href', uri);
 			$(this).parents(".simpler-wrapper").find(".addness").attr('class', "btn btn-success addness");
 			$(this).parents(".simpler-wrapper").find(".reqsimp").attr('value', highlight);
 			$(this).parents(".simpler-wrapper").find(".reqsimp").attr('class', "btn btn-primary reqsimp");
 		}
 		else {			
+			$(this).parents(".simpler-wrapper").find(".addness").attr('disabled', "disabled");
+			$(this).parents(".simpler-wrapper").find(".reqsimp").attr('disabled', "disabled");
 			$(this).parents(".simpler-wrapper").find(".addhigh").removeAttr('href');
 			$(this).parents(".simpler-wrapper").find(".addness").attr('class', "btn btn-default addness");
 			$(this).parents(".simpler-wrapper").find(".reqsimp").removeAttr('value');
