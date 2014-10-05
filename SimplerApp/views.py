@@ -16,6 +16,12 @@ def index(request):
         if Post.objects.all().filter(topic=t):
             topic_dict.append(Post.objects.all().filter(topic=t))
     context_dict = {'topics':topic_dict}
+
+    simpler_num_arr = []
+    for post in Post.objects.all():      #Picking all posts up right now. Gotta fix it later.
+        simpler_num_arr.append([post.id, len(post.simpler_set.all().filter(display=' '))])
+    context_dict['numarr']=simpler_num_arr
+
     form = postBox()
     context_dict['form'] = form
     return render_to_response('SimplerApp/index.html',context_dict, context)
