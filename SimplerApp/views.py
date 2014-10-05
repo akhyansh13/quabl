@@ -166,7 +166,7 @@ def define(request, post_id, simpler_id, new_simpler, old_simpler):
             f.highlight = highlight
             f.req_by = request.user
             highlight_simpler_context = '<div class="question"><i>' + highlight + '</i><br/><br/>'
-            simpler_content = highlight_simpler_context + '<p style="font-size:12pt;">' + f.description + '</p></div>'
+            simpler_content = highlight_simpler_context + '<p style="font-size:12pt;" class="q-text">' + f.description + '</p></div>'
             parent_list = 'parent' + str(simpler.id) + ' '
             curr_simpler = simpler
             while curr_simpler.parent_simpler != None:
@@ -203,7 +203,7 @@ def defined(request, post_id, simpler_id, highlightx, current):
             f.highlight = highlight
             f.req_by = request.user
             highlight_simpler_context = '<div class="question"><i>' + highlight + '</i><br/><br/>'
-            simpler_content = highlight_simpler_context + '<p style="font-size:12pt;">' + f.description + '</p></div>'
+            simpler_content = highlight_simpler_context + '<p style="font-size:12pt;" class="q-text">' + f.description + '</p></div>'
             parent_list = 'parent' + str(parent_simpler_id) + ' '
             curr_simpler = parent_simpler
             while curr_simpler.parent_simpler != None:
@@ -256,3 +256,11 @@ def quotes(request, author):
     auth_quotes = quotes.filter(author = author_formatted)
     context_dict = {'quotes':auth_quotes}
     return render_to_response('SimplerApp/quotes.html', context_dict, context)
+
+def addanswer(request, qid):
+    context = RequestContext(request)
+    q = highlightq.objects.get(id=qid)
+    simpler = q.highlight.highlight_simpler
+    context_dict = {'simpler':simpler}
+    context_dict['post_id'] = simpler.post.id
+    return render_to_response('SimplerApp/addsimpler.html', context_dict, context)

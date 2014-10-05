@@ -47,24 +47,6 @@ $(document).ready(function(){
 		$(this).html(highlight + question + String(n));																//show the number of answers available
 	});
 
-	$(".jumbotron").not("#Post").each(function(){
-		var counter = 1;
-		var string_id = $(this).attr("id");
-		var question_class = "q-" + string_id;
-		var qhtml = "";
-		$("." + question_class).each(function(){
-			if(counter == 1){
-				$cached = $(this);
-				$cached.html("<p>" + $cached.html() + "</p>");
-			}
-			else{
-				$cached.html($cached.html()+ "<p>" + $(this).html() + "</p>");
-				$(this).remove();
-			}
-			counter += 1;
-		});
-	});
-
 	$(".addsimp-toggle-post").click(function(){		//toggles simpler addition text area.
 		$(this).parent().parent().parent().find(".simpler-textarea").toggle();
 	});
@@ -130,38 +112,6 @@ $(document).ready(function(){
 			window.location.href = uri;
 		}
 	});
-
-	$(".glyphicon-trash").click(function(){
-		var $t = $(this).parent().parent()/*.parent()*/;
-		$(this).toggle(function(){
-			$t.find(".remove, .go-back").show();
-		});			
-	});
-
-	$(".go-back").click(function(){
-		var $t = $(this).parent().parent()/*.parent()*/;
-		$(this).toggle(function(){
-			$t.find(".remove, .glyphicon-trash").toggle("200");
-		});			
-	});
-
-	$(".remove").click(function(){				//Deletes the simpler and its children and immediately removes them out of the page [AJAX].
-		var $t = $(this).parent().parent()/*.parent()*/;
-		var simpler_id = $t.attr("id");
-		var parent_class = ".parent"+ simpler_id;
-		curr_simp_id = simpler_id;
-		$.get(('/deletesimpler/'), {curr_simp_id:curr_simp_id}, function(){
-			$(parent_class).hide();
-			$(parent_class).remove();
-			$t.hide();
-			$t.remove();
-		});
-		$(parent_class).each(function(){
-			$s = $(this);
-			curr_simp_id = $s.attr('id');
-			$.get(('/deletesimpler/'), {curr_simp_id:curr_simp_id});
-		});
-	});
 	
 	$(".checkedhigh").on("change", function(){
 		var aHrefVals = [];
@@ -175,23 +125,20 @@ $(document).ready(function(){
 			var post_id = $(this).parent().attr('data');
 			uri = '/highlight/' + post_id + '/' + simpler_id + '/' + highlight + '/' + '0/';
 			
+			$(this).parents(".simpler-wrapper").find(".addness").removeAttr('disabled');
 			$(this).parents(".simpler-wrapper").find(".addhigh").attr('href', uri);
 			$(this).parents(".simpler-wrapper").find(".addness").attr('class', "btn btn-success addness");
 			$(this).parents(".simpler-wrapper").find(".reqsimp").attr('value', highlight);
 			$(this).parents(".simpler-wrapper").find(".reqsimp").attr('class', "btn btn-primary reqsimp");
 		}
 		else {			
+			$(this).parents(".simpler-wrapper").find(".addness").attr('disabled', "disabled");
 			$(this).parents(".simpler-wrapper").find(".addhigh").removeAttr('href');
 			$(this).parents(".simpler-wrapper").find(".addness").attr('class', "btn btn-default addness");
 			$(this).parents(".simpler-wrapper").find(".reqsimp").removeAttr('value');
 			$(this).parents(".simpler-wrapper").find(".reqsimp").attr('class', "btn btn-default reqsimp");
 		}
 	});
-
-	/*$(".addhigh").click(function(){
-		var uri = $(this).attr('data');
-		window.locaion.href = uri;
-	});*/
 
 	$(".next").click(function(){	
 
@@ -337,6 +284,84 @@ $(document).ready(function(){
 			$(".q-sidebar").hide();
 			$(parent_question_class).show();
 		}
+	});
+
+	$(".jumbotron .q-text").each(function(){
+		$qt = $(this);
+		$(".ques").each(function(){
+			if($qt.html()==$(this).html()){
+				$qt.closest(".jumbotron").addClass("ans-"+$(this).attr("data"));
+			}
+		});
+	});
+
+
+	$(".ansnum").each(function(){
+		var cstr = ".ans-" + $(this).attr('data');
+		var num = String($(cstr).length);
+		if(num==1){
+			var linktxt = num + " Simpler";
+		}
+		else{
+			var linktxt = num + " Simplers";
+		}
+
+		$(this).html("<a href = 'javascript:;'>" + linktxt + "</a>");
+
+	});
+
+	$(".jumbotron").not("#Post").each(function(){
+		$this = $(this);
+		var counter = 1;
+		var string_id = $(this).attr("id");
+		var question_class = "q-" + string_id;
+		$("." + question_class).each(function(){
+			if(counter == 1){
+				$cached = $(this);
+				$cached.html("<p>" + $cached.html() + "</p>");
+			}
+			else{
+				$cached.html($cached.html()+ "<p>" + $(this).html() + "</p>");
+				$(this).remove();
+			}
+			counter += 1;
+		});
+	});
+
+	$(".ansnum").click(function(){
+		$this = $(this);
+		var cstr = "ans-" + $(this).attr('data');
+		$(".jumbotron .q-text").each(function(){
+			if(!($(this).closest(".jumbotron").hasClass(cstr))){
+				if($(this).closest(".jumbotron").is(":visible")){
+					$(this).closest(".jumbotron").hide();
+					$(this).closest(".jumbotron").addClass("currhid");
+					$(this).closest(".jumbotron").parent().hide();
+					$(this).closest(".jumbotron").parent().parent().removeAttr("style");
+				}	
+			}
+		});
+		$(".ansnum").each(function(){
+			$(this).parent().hide();
+			$this.parent().show();
+			$(this).parent().parent().find(".qprev").show();
+			$(this).hide();
+		});	
+	});
+
+	$(".qprev").click(function(){
+		$(".currhid").parent().show(function(){
+			$(".currhid").show(function(){
+				$(".currhid").removeClass("currhid");
+			});
+		});
+		$(this).hide();
+		$(this).parent().find(".ansnum").show();
+	});
+
+	$(".ques-add").click(function(){
+		var uri = $(this).attr('data');
+		window.location.href = uri;
 	});
 }); //window.onload function finished.
 

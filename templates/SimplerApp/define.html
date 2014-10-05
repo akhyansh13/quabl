@@ -1,23 +1,31 @@
 {% extends 'SimplerApp/base.html' %}
 {% load static %}
+
 {% block scripts_block %}
+
 <script>
 $(document).ready(function(){
     $(".checkedhigh").hide();
+    $(".DescBox").attr("placeholder","Ask a question related to your highlight here.")
 });
 </script>
+
 {% endblock %}
+
 {% block css_block %}
+
 <link href="{% static 'css/define.css' %}" rel="stylesheet"> 
+
 {% endblock %}
+
 {% block body_block %}
 {% autoescape off %}
+
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title">{{new_simpler}}</h3>
 		</div>
 		<div class="panel-body">
-			<div style='color:#808080;text-align:center;'><i>How do you want the selected text simplified? Describe below.</i></div>
 			<form method='post' action=''>
 				<div align = "center" style="padding:10px;">
 					{% csrf_token %}
@@ -30,5 +38,6 @@ $(document).ready(function(){
 			</form>
 		</div>
 	</div>
+
 {% endautoescape %}
 {% endblock %}

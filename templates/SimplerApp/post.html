@@ -15,13 +15,13 @@
 
 {% block sideblock %}
 <div style="float:right; width:40%;padding-right:10%;">
-	<div align="right"><span style="font-size:13pt;">Q</span>UESTIONS</div><hr style="margin-top:0px;"/>
-	<span id="instruct" style="font-size:9pt; color:#A4A4A4;">QUESTIONS RELATED TO CURRENT SIMPLER APPEAR HERE. CLICK NEXT BELOW EACH SIMPLER TO SEE THE NEXT LEVEL.</span>
-	{% for h in highlightqs %}
-		{% for x in h %}
-			<p align='left' class="q-{{x.highlight.highlight_parent.id}} q-sidebar">{{x.question}}</p>
-		{% endfor %}
-	{% endfor %}
+<div align="right"><span style="font-size:13pt;">Q</span>UESTIONS</div><hr style="margin-top:0px;"/>
+<span id="instruct" style="font-size:9pt; color:#A4A4A4;">QUESTIONS RELATED TO CURRENT SIMPLER APPEAR HERE. CLICK NEXT BELOW EACH SIMPLER TO SEE THE NEXT LEVEL.</span>
+{% for h in highlightqs %}
+{% for x in h %}
+	<p align='left' class="q-{{x.highlight.highlight_parent.id}} q-sidebar hquestion-{{x.id}}"><span class="ques" data='{{x.id}}'>{{x.question}}</span><br/><span class="ansnum" data='{{x.id}}' style="display:inline-block; margin: 0px; margin-right:5px;"></span><button class="btn btn-default ques-add" data='/addsimpler/{{x.id}}' style="display:inline-block; margin: 0px;">Add Simpler.</button><br/><span class="qprev" style="display:none;"><a href="javascript:;">Back to all questions view.</a></span></p>	
+{% endfor %}
+{% endfor %}
 </div>
 {% endblock %}
 
@@ -39,9 +39,9 @@
 		<button class="btn btn-default glyphicon glyphicon-chevron-down addsimp-toggle-post" style='color:#808080'></button></h2></div>
 
 	<div class="simpler-textarea" style='display:none;'>
-	<div align="center"><textarea class="ckeditor" cols="80" rows="8" id='level1-textarea'></textarea></input>{% csrf_token %}</div>
+	<div align="center"><textarea class="ckeditor" id='level1-textarea'></textarea></input>{% csrf_token %}</div>
 	<div align="center" style='padding-top:10px;'>
-		<button type="button" class=" btn btn-primary addsimp" id="level1-simp" align="center" data ='{{post.id}}'>Add Answer.</button>
+		<button type="button" class=" btn btn-primary addsimp" id="level1-simp" align="center" data ='{{post.id}}'>Add Simpler.</button>
 	</div>
 	</div>
 </div>
@@ -53,7 +53,7 @@
 			{% if simpler.coeficient == i %}
 			{% autoescape off %}
 			<div class='simpler-wrapper' style='padding-bottom:20px;'>
-				<div class="jumbotron {{simpler.parent_simpler.id}} {{simpler.parent_list}} level-{{i}}" id="{{simpler.id}}"style="display:{{simpler.display}};">
+				<div class="jumbotron {{simpler.parent_simpler.id}} {{simpler.parent_list}} level-{{i}}" id="{{simpler.id}}" style="display:{{simpler.display}};">
 					<div class = "postsgalore">
 						<span class="simpler-html">{{simpler.simpler}}</span><br/>
 						<div class="author" style="text-align:right;">Written by {{simpler.author}}.</div><br/>
@@ -61,7 +61,7 @@
 				</div> <!-- simpler/jumbotron close. -->
 				<div style="display:none;" class='btngrp'>
 						<a href = 'javascript:;' class="previous" style='float:left; font-size:1.35em;'>Previous</a>
-						<a class="addhigh"><button class = "btn btn-default addness" data='' style='float:right'>Add Simpler.</button></a>
+						<a class="addhigh"><button class = "btn btn-default addness" data='' style='float:right' disabled="disabled">Add Simpler.</button></a>
 						<button type="button" class = "btn btn-default reqsimp" id="{{simpler.id}}" data='{{post.id}}' style='float:right'>Ask for Simpler.</button>
 				</div>
 				<div style="text-align:right;" class="next"><h4><a href='javascript:;'>Next(<span id='num-child'></span>)</a></h4></div>

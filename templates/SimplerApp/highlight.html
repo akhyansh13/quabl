@@ -2,6 +2,7 @@
 {% load static %}
 {% block scripts_block %} <script src="{% static 'js/highlight.js' %}"></script>
 {% endblock %}
+
 {% block body_block %}
 	<div style="padding-bottom:10px;" id='{{count}}' data='{{current}}' class='elevator' value="/highlight/{{post_id}}/{{pid}}/{{highlightx}}/">
 		<a class="previous" style='font-size:14pt;'>Previous (<span id='preid'></span>)</a>
@@ -13,8 +14,8 @@
 		<div class="simpler-wrapper" style="padding-bottom:10px;padding-top:10px;">
 			<div class="jumbotron">
 				{{h.highlight_simpler.simpler}}<hr/>
-				<div align='right'><button class="btn btn-success addsimp-toggle">Add Simpler</button></div>
-				<div class="simpler-textarea" style='display:none;'>
+				<div align='right'><button class="btn btn-success addsimp-toggle" style="display:none;">Add Simpler</button></div>
+				<div class="simpler-textarea">
 					<div align="center"><textarea class="ckeditor" cols="80" rows="8" id='simp{{h.highlight_simpler.id}}'></textarea>{% csrf_token %}</div>
 					<div align="center" style='padding-top:10px;' id='{{count}}' data="{{current}}" value="/highlight/{{post_id}}/{{pid}}/{{highlighty}}/">
 						<button type="button" class="btn btn-default glyphicon glyphicon-ok addsimp" id="{{h.highlight_simpler.id}}" data ='{{ post_id }}'></button>
@@ -22,8 +23,8 @@
 					</div>
 				</div>
 			</div>
+		<a href="/simpler/{{post_id}}" style="font-size:15pt;">Back to Post.</a>	
 		</div>
-		<a href="/simpler/{{post_id}}" style="font-size:15pt; text-decoration:underline">Back to Post.</a>
 		{% endautoescape %}
 	{% endfor %}
 {% endblock %}
