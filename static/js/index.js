@@ -51,12 +51,11 @@ $(document).ready(function(){
 		var id = String(content.split("-")[0]);
 		var number = String(content.split("-")[1]);
 		if(parseInt(number)==1){
-			$("#"+id).html(id + " Simpler | ");
+			$("#"+id).html(number + " Simpler | ");
 		}
 		else{
-			$("#"+id).html(id + " Simplers | ");
+			$("#"+id).html(number + " Simplers | ");
 		}
-		$("#"+id).removeAttr("href");
 	});
 
 });
