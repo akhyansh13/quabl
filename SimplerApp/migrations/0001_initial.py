@@ -1,135 +1,119 @@
 # -*- coding: utf-8 -*-
-from south.utils import datetime_utils as datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+from __future__ import unicode_literals
+
+from django.db import models, migrations
+from django.conf import settings
 
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
-        # Adding model 'Post'
-        db.create_table(u'SimplerApp_post', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('post', self.gf('django.db.models.fields.CharField')(max_length=10000000)),
-            ('levels_simplified', self.gf('django.db.models.fields.IntegerField')(default=0, null=True, blank=True)),
-            ('author', self.gf('django.db.models.fields.CharField')(max_length=100000)),
-        ))
-        db.send_create_signal(u'SimplerApp', ['Post'])
+    dependencies = [
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+    ]
 
-        # Adding model 'Simpler'
-        db.create_table(u'SimplerApp_simpler', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('post', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['SimplerApp.Post'])),
-            ('parent_simpler', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='parent', null=True, to=orm['SimplerApp.Simpler'])),
-            ('simpler', self.gf('django.db.models.fields.CharField')(max_length=10000000)),
-            ('coeficient', self.gf('django.db.models.fields.IntegerField')()),
-            ('parent_list', self.gf('django.db.models.fields.CharField')(max_length=100000)),
-            ('author', self.gf('django.db.models.fields.CharField')(max_length=100000)),
-            ('display', self.gf('django.db.models.fields.CharField')(default=' ', max_length=1000)),
-        ))
-        db.send_create_signal(u'SimplerApp', ['Simpler'])
-
-        # Adding model 'simpler_request'
-        db.create_table(u'SimplerApp_simpler_request', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('simpler', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['SimplerApp.Simpler'])),
-            ('status', self.gf('django.db.models.fields.IntegerField')()),
-            ('req_by', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
-        ))
-        db.send_create_signal(u'SimplerApp', ['simpler_request'])
-
-        # Adding model 'UserProfile'
-        db.create_table(u'SimplerApp_userprofile', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True)),
-            ('picture', self.gf('django.db.models.fields.files.ImageField')(max_length=100, blank=True)),
-        ))
-        db.send_create_signal(u'SimplerApp', ['UserProfile'])
-
-
-    def backwards(self, orm):
-        # Deleting model 'Post'
-        db.delete_table(u'SimplerApp_post')
-
-        # Deleting model 'Simpler'
-        db.delete_table(u'SimplerApp_simpler')
-
-        # Deleting model 'simpler_request'
-        db.delete_table(u'SimplerApp_simpler_request')
-
-        # Deleting model 'UserProfile'
-        db.delete_table(u'SimplerApp_userprofile')
-
-
-    models = {
-        u'SimplerApp.post': {
-            'Meta': {'object_name': 'Post'},
-            'author': ('django.db.models.fields.CharField', [], {'max_length': '100000'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'levels_simplified': ('django.db.models.fields.IntegerField', [], {'default': '0', 'null': 'True', 'blank': 'True'}),
-            'post': ('django.db.models.fields.CharField', [], {'max_length': '10000000'})
-        },
-        u'SimplerApp.simpler': {
-            'Meta': {'object_name': 'Simpler'},
-            'author': ('django.db.models.fields.CharField', [], {'max_length': '100000'}),
-            'coeficient': ('django.db.models.fields.IntegerField', [], {}),
-            'display': ('django.db.models.fields.CharField', [], {'default': "' '", 'max_length': '1000'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'parent_list': ('django.db.models.fields.CharField', [], {'max_length': '100000'}),
-            'parent_simpler': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'parent'", 'null': 'True', 'to': u"orm['SimplerApp.Simpler']"}),
-            'post': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['SimplerApp.Post']"}),
-            'simpler': ('django.db.models.fields.CharField', [], {'max_length': '10000000'})
-        },
-        u'SimplerApp.simpler_request': {
-            'Meta': {'object_name': 'simpler_request'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'req_by': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"}),
-            'simpler': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['SimplerApp.Simpler']"}),
-            'status': ('django.db.models.fields.IntegerField', [], {})
-        },
-        u'SimplerApp.userprofile': {
-            'Meta': {'object_name': 'UserProfile'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'picture': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
-            'user': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['auth.User']", 'unique': 'True'})
-        },
-        u'auth.group': {
-            'Meta': {'object_name': 'Group'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '80'}),
-            'permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'})
-        },
-        u'auth.permission': {
-            'Meta': {'ordering': "(u'content_type__app_label', u'content_type__model', u'codename')", 'unique_together': "((u'content_type', u'codename'),)", 'object_name': 'Permission'},
-            'codename': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['contenttypes.ContentType']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
-        },
-        u'auth.user': {
-            'Meta': {'object_name': 'User'},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
-            'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Group']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Permission']"}),
-            'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
-        },
-        u'contenttypes.contenttype': {
-            'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
-            'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
-        }
-    }
-
-    complete_apps = ['SimplerApp']
+    operations = [
+        migrations.CreateModel(
+            name='highlight',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('highlight', models.CharField(max_length=100000000)),
+                ('status', models.IntegerField()),
+                ('description', models.CharField(max_length=10000000)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='highlightq',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('question', models.CharField(max_length=10000000, null=True, blank=True)),
+                ('highlight', models.ForeignKey(to='SimplerApp.highlight')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Post',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('post', models.CharField(max_length=10000000)),
+                ('author', models.CharField(max_length=100000)),
+                ('topic', models.CharField(default=b' ', max_length=100000)),
+                ('description', models.CharField(max_length=1000000000, null=True, blank=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Quote',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('author', models.CharField(max_length=1000000)),
+                ('quote', models.CharField(max_length=10000000)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Simpler',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('simpler', models.CharField(max_length=10000000)),
+                ('simpler_original', models.CharField(default=b' ', max_length=10000000)),
+                ('coeficient', models.IntegerField()),
+                ('parent_list', models.CharField(max_length=100000)),
+                ('author', models.CharField(max_length=100000)),
+                ('display', models.CharField(default=b' ', max_length=1000)),
+                ('parent_simpler', models.ForeignKey(related_name=b'parent', blank=True, to='SimplerApp.Simpler', null=True)),
+                ('post', models.ForeignKey(to='SimplerApp.Post')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='topic',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('topic', models.CharField(default=b'Uncategorized', max_length=1000000)),
+                ('topic_description', models.CharField(max_length=10000000, null=True, blank=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='UserProfile',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('picture', models.ImageField(upload_to=b'profile_images', blank=True)),
+                ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.AddField(
+            model_name='highlight',
+            name='highlight_parent',
+            field=models.ForeignKey(related_name='highlight_parent', blank=True, to='SimplerApp.Simpler', null=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='highlight',
+            name='highlight_simpler',
+            field=models.ForeignKey(blank=True, to='SimplerApp.Simpler', null=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='highlight',
+            name='req_by',
+            field=models.ForeignKey(to=settings.AUTH_USER_MODEL),
+            preserve_default=True,
+        ),
+    ]
