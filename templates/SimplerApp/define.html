@@ -7,10 +7,6 @@
 $(document).ready(function(){
     $(".checkedhigh").hide();
     $(".DescBox").attr("placeholder","Ask a question related to your highlight here.")
-    $("img").each(function(){		//Correcting the img-src inconsistency using JS. Find a better solution.
-        proper_src = $(this).attr("src").replace("http:/", "http://");
-        $(this).attr("src",proper_src);
-    });
 });
 </script>
 

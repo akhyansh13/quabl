@@ -139,8 +139,8 @@ def user_logout(request):
 
 def define(request, post_id, simpler_id, new_simpler, old_simpler):
     context = RequestContext(request)
-    if old_simpler is 'empty':
-        old_simpler = '';
+    if old_simpler == 'empty':
+        old_simpler = ''
     new_simpler = new_simpler.replace("xqmx", "?")
     old_simpler = old_simpler.replace("xqmx", "?")
     post_id = int(post_id)
@@ -166,7 +166,8 @@ def define(request, post_id, simpler_id, new_simpler, old_simpler):
                 simpler.simpler = '<div class="question">' + (new_simpler.replace('curr_highlight','highlight')).replace('curr_checkedhigh','checkedhigh').replace('style="display: none;"','') + '</div><div class="answer">' + old_simpler + '</div>'        #JS and Python conflict fixed. Brute forced the display:none out.
             else:
                 simpler.simpler = '<div class="question">' + old_simpler + '</div><div class="answer">' + (new_simpler.replace('curr_highlight','highlight')).replace('curr_checkedhigh','checkedhigh').replace('style="display: none;"','') + '</div>'        #JS and Python conflict fixed. Brute forced the display:none out.
-                
+
+
             simpler.save()
             f.status = 0
             f.highlight = highlight
