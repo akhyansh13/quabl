@@ -1,5 +1,14 @@
 $(document).ready(function(){
 
+	$(document).keyup(function(){
+		if (!$(".postbox").val()||!$(".topicbox").val()) {
+	    	$(".addpostbtn").attr("disabled", "disabled");
+		} 
+		else {
+	    $(".addpostbtn").removeAttr("disabled");
+		}		
+	});
+
 	var color = 1;
 	$(".posttopic").each(function(){
 		if (color%3==1){
@@ -40,11 +49,6 @@ $(document).ready(function(){
 
 	$(".topicbox").attr("placeholder", "Topic here.");
 	$(".postbox").attr("placeholder", "Got a question or anything else that you had trouble understanding?");
-	
-	$(".addpostbtn").attr("disabled", "disabled");
-	$(".postbox, .topicbox").click(function(){
-		$(".addpostbtn").removeAttr("disabled");
-	});
 
 	$(".simnum").each(function(){
 		var content = $(this).html();
