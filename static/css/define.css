@@ -8,3 +8,10 @@
 	height:20em;
 	width:80%;
 }
+
+.panel-title{
+	line-height: inherit;
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: normal;
+}

@@ -17,6 +17,7 @@
 <div style="float:right; width:40%;padding-right:10%;">
 <div align="right"><span style="font-size:13pt;">Q</span>UESTIONS</div><hr style="margin-top:0px;"/>
 <span id="instruct" style="font-size:9pt; color:#A4A4A4;">QUESTIONS RELATED TO CURRENT SIMPLER APPEAR HERE. CLICK NEXT BELOW EACH SIMPLER TO SEE THE NEXT LEVEL.</span>
+<span id="instruct-rest" style="font-size:9pt; color:#A4A4A4;display:none;">TO ADD A QUESTION, SELECT THE PART OF A SIMPLER TO WHICH IT CONCERNS, THEN CLICK ON ASK SIMPLER.</span>
 {% for h in highlightqs %}
 {% for x in h %}
 	<p align='left' class="q-{{x.highlight.highlight_parent.id}} q-sidebar hquestion-{{x.id}}"><span class="ques" data='{{x.id}}'>{{x.question}}</span><br/><span class="ansnum" data='{{x.id}}' style="display:inline-block; margin: 0px; margin-right:5px;"></span><button class="btn btn-default ques-add" data='/addsimpler/{{x.id}}' style="display:inline-block; margin: 0px;">Add Simpler.</button><br/><span class="qprev" style="display:none;"><a href="javascript:;">Back to all questions view.</a></span></p>	
@@ -27,7 +28,7 @@
 
 {% block body_block %}
 <div id="post-wrapper" style="padding-bottom:100px;">
-<div id="Post" class="jumbotron">
+<div id="Post" class="jumbotron nthlevel">
 	{% autoescape off %}<p>{{ post.topic }}:<p>
 	<h3>{{ post.post }}</h3>
 	{% if post.description %}

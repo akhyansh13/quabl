@@ -15,7 +15,9 @@
 
     <title>{% block title_block %}Simpler.{% endblock %}</title>
 
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="{% static 'jquery-1.11.1.js' %}"></script>
+    <!--<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script> -->
+
     <script type="text/javascript">
       $("img").each(function(){                //Correcting the img-src inconsistency using JS. Find a better solution.
         proper_src = $(this).attr("src").replace("http:/", "http://");
