@@ -331,6 +331,13 @@ $(document).ready(function(){
 		});
 		$(this).hide();
 		$(this).parent().find(".ansnum").show();
+		var id = $(".nthlevel").attr("id");
+		$(".q-"+id).each(function(){
+			$(this).show();
+			$(this).find(".ansnum").show();
+			$(this).find(".qprev").hide();
+		});
+		$(".q-"+id).find(".qprev").hide();
 	});
 
 	$(".ques-add").click(function(){
