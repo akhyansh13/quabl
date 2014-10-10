@@ -192,9 +192,8 @@ $(document).ready(function(){
 
 			$(par_level).each(function(){
 				$(this).parent().parent().removeAttr("style");
-				$(this).parent().hide(function(){
-					$(this).hide();
-				});
+				$(this).parent().hide();
+				$(this).hide();
 			});
 
 			$(level_class).each(function(){
@@ -202,9 +201,8 @@ $(document).ready(function(){
 				curr_id = parseInt($(this).attr('id'));
 
 				if(curr_id != this_id){
-					$(this).parent().hide(function(){
+					$(this).parent().hide();
 					$(this).hide();
-					});
 				}
 
 				else{
@@ -263,9 +261,9 @@ $(document).ready(function(){
 
 		else{
 			$(curr_jumbotron_parent).addClass("nthlevel");
-			$(".jumbotron").hide(function(){
-					$(curr_jumbotron_parent).parent().show(function(){
+			$(".jumbotron").hide();
 					$(curr_jumbotron_parent).show();
+					$(curr_jumbotron_parent).parent().show();
 					$(curr_jumbotron_parent).removeAttr("style");
 					$(curr_jumbotron_parent).parent().attr("style", "padding-bottom:20px;");
 					$(curr_jumbotron_parent).parent().attr("style", "padding-bottom:80px;");
@@ -278,8 +276,6 @@ $(document).ready(function(){
 						$(this).parent().find(".next").show();
 					});
 					$(curr_jumbotron_parent).parent().find(".previous").show();
-				});
-			});
 			$(curr_jumbotron_parent).parent().find(".checkedhigh, .btngrp").show();
 			$(curr_jumbotron_parent_class).parent().find(".checkedhigh, .btngrp").hide();
 			$(".q-sidebar").hide();
