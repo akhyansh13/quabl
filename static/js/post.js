@@ -75,7 +75,7 @@ $(document).ready(function(){
 			var selectedText = selection.extractContents();
 			var highlight = String(selectedText.textContent);
 			//var span = $("<high>" + highlight + "<high>");
-			var span = $("<span class='curr_highlight' id='"+simpler_id+"' data='"+post_id+"'>" + highlight +"&nbsp<input type='checkbox' class='curr_checkedhigh' value='"+highlight.replace(" ","_")+"' name='highlight'/></span>");
+			var span = $("<span class='curr_highlight' id='"+simpler_id+"' data='"+post_id+"'>" + highlight +"<input type='checkbox' class='curr_checkedhigh' value='"+highlight.replace(" ","_")+"' name='highlight'/></span>");
 			//The new highlight has class curr_highlight and the new checkbox has class curr_checkedhigh. They have related CSS.
 			selection.insertNode(span[0]);
 
