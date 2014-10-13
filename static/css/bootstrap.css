@@ -5782,4 +5782,13 @@ button.close {
     display: none !important;
   }
 }
+
+.question{
+  font-style: italic;
+}
+
+.question .q-text{
+  font-style: normal;
+  padding-top: 1em;
+}
 /*# sourceMappingURL=bootstrap.css.map */
