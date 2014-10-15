@@ -123,12 +123,13 @@ $(document).ready(function(){
 			var highlight = aHrefVals.join("xhex");
 			var simpler_id = $(this).parent().attr('id');
 			var post_id = $(this).parent().attr('data');
-			uri = '/highlight/' + post_id + '/' + simpler_id + '/' + highlight + '/' + '0/';
+			var new_simpler = String($(this).parents('simpler-html').find('answer').html()).split('?').join('xqmx');
+			uri = '/highlight/' + post_id + '/' + simpler_id + '/' + highlight + '/0/';
 			
 			$(this).parents(".simpler-wrapper").find(".addness").removeAttr('disabled');
 			$(this).parents(".simpler-wrapper").find(".addhigh").attr('href', uri);
 			$(this).parents(".simpler-wrapper").find(".addness").attr('class', "btn btn-success addness");
-			$(this).parents(".simpler-wrapper").find(".reqsimp").attr('value', highlight);
+			$(this).parents(".simpler-wrapper").find(".reqsimp").attr('value', String('newxhex/' + new_simpler + '/' + highlight));
 			$(this).parents(".simpler-wrapper").find(".reqsimp").attr('class', "btn btn-primary reqsimp");
 		}
 		else {			

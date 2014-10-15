@@ -1,44 +1,7 @@
 {% extends 'SimplerApp/base.html' %}
-
+{% load static %}
 {% block scripts_block %}
-<script type="text/javascript">
-$(document).ready(function(){
-	var color = 1;
-	$(".posttopic").each(function(){
-		if (color%3==1){
-			$(this).css("background-color","LightYellow");
-		}
-		else if (color%3==2){
-			$(this).css("background-color","LightGreen");
-		}
-		else{
-			$(this).css("background-color","Orange");			
-		}
-		color = color + 1;
-	});
-	$(".posttopic").css("font-size","16pt");
-	$(".posttopic").css("color","#777");
-	$(".postlink").each(function(){
-		var height = $(this).height();
-		$(this).parent().find(".posttopic").height(height-20);
-	});
-	$(".topicname").attr("style","position: relative; top: 30%;");
-	$(".hidtopic").each(function(){
-		var topic = $(this).html();
-		$(this).parent().parent().find(".topicname").html(topic);	
-	});
-	var postbw = $(".postbox").width();
-	$(".topicbox").width(postbw*0.35);
-	var addpostbtnh = $(".addpostbtn").height();
-	$(".topicbox").height(addpostbtnh);
-	$(".topicbox").attr("placeholder", "Topic here.");
-	$(".postbox").attr("placeholder", "Got a question or anything else that you had trouble understanding?");
-	$(".addpostbtn").attr("disabled", "disabled");
-	$(".postbox, .topicbox").click(function(){
-		$(".addpostbtn").removeAttr("disabled");
-	});
-});
-</script>
+<script src="{% static 'js/index.js' %}"></script>
 {% endblock %}
 
 {% block css_block %}
@@ -52,6 +15,11 @@ $(document).ready(function(){
 {% endblock %}
 
 {% block body_block %}
+
+{% for num in numarr %}
+<div style="display:none;" class="simnum">{{num.0}}-{{num.1}}</div>
+{% endfor %}
+
 <div style='padding-bottom:300px;'>
 	{% if user.is_authenticated %}
 	{% else %}
@@ -79,7 +47,7 @@ $(document).ready(function(){
 				<div class="hidtopic" style="display:none;">{{post.topic}}</div>
 				<blockquote style="font-size:12pt;">
 				{{post.post}}
-				<a href='/simpler/{{post.id}}/'><div align="right">Explore</div></a>
+				<div align="right"><span id="{{post.id}}"></span><span><a href='/simpler/{{post.id}}/'>Explore</a></span></div>
 				</blockquote>
 				{% endfor %}
 				{% endautoescape %}
