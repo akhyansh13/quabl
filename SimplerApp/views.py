@@ -64,6 +64,7 @@ def post(request, post_id):
 def postreq(request, post_id, requestid):
     context = RequestContext(request)
     request_id = int(requestid)
+    user_request = ReqByUser.objects.get(id=request_id)
     parent_list_dict = {}
     post_id_int = int(post_id)
     context_dict ={'post_id':post_id}
@@ -78,7 +79,7 @@ def postreq(request, post_id, requestid):
             highlightq_set.append(highlightq.objects.all().filter(highlight=hl))
         if simpler.coeficient > maximum:
             maximum = simpler.coeficient
-    context_dict['requestid']=requestid
+    context_dict['request']=user_request.description.split('simplerid:')[1].split(';')[0]
     context_dict['simplers']=simplers
     context_dict['max'] = maximum
     context_dict['loop'] = range(1, maximum+1)
