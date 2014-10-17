@@ -59,7 +59,32 @@ def post(request, post_id):
     context_dict['max'] = maximum
     context_dict['loop'] = range(1, maximum+1)
     context_dict['highlightqs'] = highlightq_set              #All the highlighqs related to this question are being passed on.
-    return render_to_response('SimplerApp/post.html', context_dict, context) 
+    return render_to_response('SimplerApp/post.html', context_dict, context)
+
+def postreq(request, post_id, requestid):
+    context = RequestContext(request)
+    request_id = int(requestid)
+    parent_list_dict = {}
+    post_id_int = int(post_id)
+    context_dict ={'post_id':post_id}
+    post = Post.objects.get(id=post_id_int)
+    context_dict['post']=post
+    simplers = Simpler.objects.all().filter(post=post).filter(display =' ')         #Not so efficient algorithmically.
+    maximum = 0
+    highlightq_set = []
+    for simpler in simplers:
+        highlights = highlight.objects.all().filter(highlight_parent=simpler)
+        for hl in highlights:
+            highlightq_set.append(highlightq.objects.all().filter(highlight=hl))
+        if simpler.coeficient > maximum:
+            maximum = simpler.coeficient
+    context_dict['requestid']=requestid
+    context_dict['simplers']=simplers
+    context_dict['max'] = maximum
+    context_dict['loop'] = range(1, maximum+1)
+    context_dict['highlightqs'] = highlightq_set              #All the highlighqs related to this question are being passed on.
+    return render_to_response('SimplerApp/post.html', context_dict, context)
+
     
 def makesimpler(request):
     context = RequestContext(request)
@@ -236,7 +261,7 @@ def requestbyuser(request, category, description):
     context = RequestContext(request)
     postid = description.split('postid:')[1].split(';')[0]
     c = ReqByUser.objects.get_or_create(user=request.user, category=category, description=description)
-    return HttpResponseRedirect('/simpler/' + postid)
+    return HttpResponseRedirect('/simpler/' + postid + '/' + str(c[0].id) + '/')
     
 	
 def deletesimpler(request):

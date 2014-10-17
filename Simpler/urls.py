@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from SimplerApp.views import index, post, makesimpler, register, user_login, user_logout, deletesimpler, addpost, define, quotes, defined, addanswer, requestbyuser
+from SimplerApp.views import index, post, makesimpler, register, user_login, user_logout, deletesimpler, addpost, define, quotes, defined, addanswer, requestbyuser, postreq
 from django.contrib import admin
 admin.autodiscover()
 
@@ -10,6 +10,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', index),
+    url(r'^simpler/(?P<post_id>\w+)/(?P<requestid>\w+)/$', postreq),
     url(r'^simpler/(?P<post_id>\w+)/$', post),
     url(r'^makesimpler/$', makesimpler),
     url(r'^register/$', register),
