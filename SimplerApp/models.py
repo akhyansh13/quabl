@@ -71,6 +71,13 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return self.user.username
 
+class ReqByUser(models.Model):
+    user = models.ForeignKey(User)
+    category = models.CharField(max_length=1000)
+    description = models.CharField(max_length=1000)
+    def __unicode__(self):
+        return self.category + ' by ' + str(self.user.username)
+
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
 
@@ -88,7 +95,6 @@ class HighlightDesc(forms.ModelForm):
     class Meta:
         model = highlight
         fields = ('description',)
-
 
 #Parse functions follow.
 

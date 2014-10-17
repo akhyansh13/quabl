@@ -3,7 +3,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Simpler.settings')
 from django.shortcuts import render_to_response 
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
-from models import Post, Simpler, postBox, SimplerBox, UserForm, UserProfileForm, HighlightDesc, highlightq, highlight, Quote, topic
+from models import Post, Simpler, postBox, SimplerBox, UserForm, UserProfileForm, HighlightDesc, highlightq, highlight, Quote, topic, ReqByUser
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from functions import getQuotes, first_alpha_toupper, format_author
@@ -139,8 +139,8 @@ def user_logout(request):
 
 def define(request, post_id, simpler_id, new_simpler, old_simpler):
     context = RequestContext(request)
-    if old_simpler is 'empty':
-        old_simpler = '';
+    if old_simpler == 'empty':
+        old_simpler = ''
     new_simpler = new_simpler.replace("xqmx", "?")
     old_simpler = old_simpler.replace("xqmx", "?")
     post_id = int(post_id)
@@ -166,12 +166,13 @@ def define(request, post_id, simpler_id, new_simpler, old_simpler):
                 simpler.simpler = '<div class="question">' + (new_simpler.replace('curr_highlight','highlight')).replace('curr_checkedhigh','checkedhigh').replace('style="display: none;"','') + '</div><div class="answer">' + old_simpler + '</div>'        #JS and Python conflict fixed. Brute forced the display:none out.
             else:
                 simpler.simpler = '<div class="question">' + old_simpler + '</div><div class="answer">' + (new_simpler.replace('curr_highlight','highlight')).replace('curr_checkedhigh','checkedhigh').replace('style="display: none;"','') + '</div>'        #JS and Python conflict fixed. Brute forced the display:none out.
-                
+
+
             simpler.save()
             f.status = 0
             f.highlight = highlight
             f.req_by = request.user
-            highlight_simpler_context = '<div class="question"><i>' + highlight + '</i><br/><br/>'
+            highlight_simpler_context = '<div class="question">' + highlight + '<br/><br/>'
             simpler_content = highlight_simpler_context + '<p style="font-size:12pt;" class="q-text">' + f.description + '</p></div>'
             parent_list = 'parent' + str(simpler.id) + ' '
             curr_simpler = simpler
@@ -208,7 +209,7 @@ def defined(request, post_id, simpler_id, highlightx, current):
             f.status = 0
             f.highlight = highlight
             f.req_by = request.user
-            highlight_simpler_context = '<div class="question"><i>' + highlight + '</i><br/><br/>'
+            highlight_simpler_context = '<div class="question">' + highlight + '<br/><br/>'
             simpler_content = highlight_simpler_context + '<p style="font-size:12pt;" class="q-text">' + f.description + '</p></div>'
             parent_list = 'parent' + str(parent_simpler_id) + ' '
             curr_simpler = parent_simpler
@@ -231,20 +232,12 @@ def defined(request, post_id, simpler_id, highlightx, current):
     context_dict['form'] = form
     return render_to_response('SimplerApp/defined.html', context_dict, context)
 
-def highlightt(request, post_id, simpler_id, highlightx, current):
+def requestbyuser(request, category, description):
     context = RequestContext(request)
-    parent_simpler_id=int(simpler_id)
-    parent_simpler = Simpler.objects.filter(id=parent_simpler_id)
-    highlightx = highlightx.replace("_", " ")
-    highlights = highlightx.split("xhex")
-    count = len(highlights)
-    h = highlights[int(current)]
-    del highlights[int(current)]
-    highlighty = 'xhex'.join(highlights)
-    highlight_array = highlight.objects.filter(highlight_parent=parent_simpler)     #Haven't accounted for two highlight objects having the same highlight attribute having same simpler as the highlight parent.
-    highlight_array = highlight_array.filter(highlight=h)
-    context_dict = {'higharr':highlight_array, 'post_id':post_id, 'count':count, 'current':current, 'pid':parent_simpler_id, 'highlightx':highlightx, 'highlighty':highlighty}
-    return render_to_response('SimplerApp/highlight.html', context_dict, context)
+    postid = description.split('postid:')[1].split(';')[0]
+    c = ReqByUser.objects.get_or_create(user=request.user, category=category, description=description)
+    return HttpResponseRedirect('/simpler/' + postid)
+    
 	
 def deletesimpler(request):
     context = RequestContext(request)

@@ -1,13 +1,6 @@
 $(document).ready(function(){
 
-	$(document).click(function(){
-		if($("#Post").is(":visible")){
-			$("#instruct").show();
-		} 
-		else{
-			$("#instruct").hide();
-		}
-	});
+	bindvisibility($("#Post"), $("#instruct"))
 
 	$(".q-sidebar").hide();		//Not hiding the parent class.
 
@@ -56,6 +49,17 @@ $(document).ready(function(){
 	$(this).parent().parent().parent().find(".simpler-textarea").toggle();
 	});
 
+	$(".ques").each(function(){
+		var $this = $(this);
+		var thisid = $(this).attr("data");
+		var addclass = "ans-" + thisid;
+		$(".q-text").each(function(){
+			if($(this).text()==$this.text()){
+				$(this).parent().closest(".jumbotron").addClass(addclass);
+			}
+		})
+	});
+
 	$(".addsimp").click(function(){					//add simpler button code [AJAX].
 		var simpler_id = $(this).attr('id');
 		var post_id = $(this).attr("data");
@@ -86,7 +90,7 @@ $(document).ready(function(){
 			var selectedText = selection.extractContents();
 			var highlight = String(selectedText.textContent);
 			//var span = $("<high>" + highlight + "<high>");
-			var span = $("<span class='curr_highlight' id='"+simpler_id+"' data='"+post_id+"'>" + highlight +"&nbsp<input type='checkbox' class='curr_checkedhigh' value='"+highlight.replace(" ","_")+"' name='highlight'/></span>");
+			var span = $("<span class='curr_highlight' id='"+simpler_id+"' data='"+post_id+"'>" + highlight +"<input type='checkbox' class='curr_checkedhigh' value='"+highlight.replace(" ","_")+"' name='highlight'/></span>");
 			//The new highlight has class curr_highlight and the new checkbox has class curr_checkedhigh. They have related CSS.
 			selection.insertNode(span[0]);
 
@@ -100,7 +104,7 @@ $(document).ready(function(){
 			clearSelection();
 			var old_simpler = String($reqsimp.parent().parent().find('.simpler-html').find('.question').html()).split('?').join('xqmx');	//the question part of the simpler which won't have the highlight
 			var new_simpler = String($reqsimp.parent().parent().find('.simpler-html').find('.answer').html()).split('?').join('xqmx');		//the answer part of the highlight which will have the highlight
-			if (old_simpler == ' ') uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/newxhex/'+ new_simpler +'/oldxhex/empty/';
+			if (old_simpler == '') uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/newxhex/'+ new_simpler +'/oldxhex/empty/';
 			else uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/newxhex/'+ new_simpler +'/oldxhex/' + old_simpler + '/';
 			window.location.href = uri;
 		}
@@ -121,21 +125,10 @@ $(document).ready(function(){
 		});
 		if (aHrefVals.length != 0) {
 			var highlight = aHrefVals.join("xhex");
-			var simpler_id = $(this).parent().attr('id');
-			var post_id = $(this).parent().attr('data');
-			var new_simpler = String($(this).parents('simpler-html').find('answer').html()).split('?').join('xqmx');
-			uri = '/highlight/' + post_id + '/' + simpler_id + '/' + highlight + '/0/';
-			
-			$(this).parents(".simpler-wrapper").find(".addness").removeAttr('disabled');
-			$(this).parents(".simpler-wrapper").find(".addhigh").attr('href', uri);
-			$(this).parents(".simpler-wrapper").find(".addness").attr('class', "btn btn-success addness");
-			$(this).parents(".simpler-wrapper").find(".reqsimp").attr('value', String('newxhex/' + new_simpler + '/' + highlight));
-			$(this).parents(".simpler-wrapper").find(".reqsimp").attr('class', "btn btn-primary reqsimp");
+			$(this).parents(".simpler-wrapper").find(".reqsimp").attr('value', highlight);
+			$(this).parents(".simpler-wrapper").find(".reqsimp").attr('class', "btn btn-default reqsimp");
 		}
 		else {			
-			$(this).parents(".simpler-wrapper").find(".addness").attr('disabled', "disabled");
-			$(this).parents(".simpler-wrapper").find(".addhigh").removeAttr('href');
-			$(this).parents(".simpler-wrapper").find(".addness").attr('class', "btn btn-default addness");
 			$(this).parents(".simpler-wrapper").find(".reqsimp").removeAttr('value');
 			$(this).parents(".simpler-wrapper").find(".reqsimp").attr('class', "btn btn-default reqsimp");
 		}
@@ -155,6 +148,12 @@ $(document).ready(function(){
 		var curr_jumbotron_class = "." + $this.parent().find('.jumbotron').attr("id");
 		var this_id = parseInt($this.parent().find('.jumbotron').attr('id'));
 		var question_class = ".q-" + String(this_id);
+
+		$(".nthlevel").each(function(){
+			$(this).removeClass("nthlevel");
+		});
+
+		$(curr_jumbotron).addClass("nthlevel"); 
 
 		$(".q-sidebar").hide();
 		$(question_class).show();
@@ -198,9 +197,8 @@ $(document).ready(function(){
 
 			$(par_level).each(function(){
 				$(this).parent().parent().removeAttr("style");
-				$(this).parent().hide(function(){
-					$(this).hide();
-				});
+				$(this).parent().hide();
+				$(this).hide();
 			});
 
 			$(level_class).each(function(){
@@ -208,9 +206,8 @@ $(document).ready(function(){
 				curr_id = parseInt($(this).attr('id'));
 
 				if(curr_id != this_id){
-					$(this).parent().hide(function(){
+					$(this).parent().hide();
 					$(this).hide();
-					});
 				}
 
 				else{
@@ -245,9 +242,14 @@ $(document).ready(function(){
 		var curr_level_string = String(level)       //Stores the current level.
 		var parent_question_class = ".q-" + parent_id;
 
+		$(".nthlevel").each(function(){
+			$(this).removeClass("nthlevel");
+		});
+
 		$this.hide();
 
-		if(level==1){                       
+		if(level==1){   
+			$("#Post").addClass("nthlevel");                    
 			$("#Post").parent().show();
 			$("#Post").show();
 			$(curr_jumbotron_class).parent().hide();
@@ -263,9 +265,10 @@ $(document).ready(function(){
 		}
 
 		else{
-			$(".jumbotron").hide(function(){
-					$(curr_jumbotron_parent).parent().show(function(){
+			$(curr_jumbotron_parent).addClass("nthlevel");
+			$(".jumbotron").hide();
 					$(curr_jumbotron_parent).show();
+					$(curr_jumbotron_parent).parent().show();
 					$(curr_jumbotron_parent).removeAttr("style");
 					$(curr_jumbotron_parent).parent().attr("style", "padding-bottom:20px;");
 					$(curr_jumbotron_parent).parent().attr("style", "padding-bottom:80px;");
@@ -278,22 +281,11 @@ $(document).ready(function(){
 						$(this).parent().find(".next").show();
 					});
 					$(curr_jumbotron_parent).parent().find(".previous").show();
-				});
-			});
 			$(curr_jumbotron_parent).parent().find(".checkedhigh, .btngrp").show();
 			$(curr_jumbotron_parent_class).parent().find(".checkedhigh, .btngrp").hide();
 			$(".q-sidebar").hide();
 			$(parent_question_class).show();
 		}
-	});
-
-	$(".jumbotron .q-text").each(function(){
-		$qt = $(this);
-		$(".ques").each(function(){
-			if($qt.html()==$(this).html()){
-				$qt.closest(".jumbotron").addClass("ans-"+$(this).attr("data"));
-			}
-		});
 	});
 
 
@@ -309,24 +301,6 @@ $(document).ready(function(){
 
 		$(this).html("<a href = 'javascript:;'>" + linktxt + "</a>");
 
-	});
-
-	$(".jumbotron").not("#Post").each(function(){
-		$this = $(this);
-		var counter = 1;
-		var string_id = $(this).attr("id");
-		var question_class = "q-" + string_id;
-		$("." + question_class).each(function(){
-			if(counter == 1){
-				$cached = $(this);
-				$cached.html("<p>" + $cached.html() + "</p>");
-			}
-			else{
-				$cached.html($cached.html()+ "<p>" + $(this).html() + "</p>");
-				$(this).remove();
-			}
-			counter += 1;
-		});
 	});
 
 	$(".ansnum").click(function(){
@@ -358,11 +332,38 @@ $(document).ready(function(){
 		});
 		$(this).hide();
 		$(this).parent().find(".ansnum").show();
+		var id = $(".nthlevel").attr("id");
+		$(".q-"+id).each(function(){
+			$(this).show();
+			$(this).find(".ansnum").show();
+			$(this).find(".qprev").hide();
+		});
+		$(".q-"+id).find(".qprev").hide();
 	});
 
 	$(".ques-add").click(function(){
 		var uri = $(this).attr('data');
 		window.location.href = uri;
+	});
+
+	$(".jumbotron").not("#Post").each(function(){
+		$this = $(this);
+		var jumid = $(this).attr("id");
+		var qclass = ".q-" + jumid;
+		if(!($(qclass)[0])){
+			$this.addClass("noqs");
+		}
+	});
+
+	$(document).click(function(){
+		$(".noqs").each(function(){
+			if($(this).hasClass("nthlevel")){
+				$("#instruct-rest").show();
+			}
+			else{
+				$("#instruct-rest").hide();
+			}
+		});
 	});
 }); //window.onload function finished.
 
@@ -385,4 +386,15 @@ function isTextSelected(input){
       return true;
    }
    return false;
+}
+
+function bindvisibility(input1, input2){
+	$(document).click(function(){
+		if(input1.is(":visible")){
+			input2.show();
+		} 
+		else{
+			input2.hide();
+		}
+	});
 }
