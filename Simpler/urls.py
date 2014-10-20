@@ -10,8 +10,8 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', index),
-    url(r'^simpler/(?P<post_id>\w+)/(?P<requestid>\w+)/$', postreq),
-    url(r'^simpler/(?P<post_id>\w+)/$', post),
+    url(r'^simpler/(?P<post_id>\w+)/(?P<requestid>\w+)/$', postreq),        #Coming as a result of a HttpResponseRedirect.
+    url(r'^simpler/(?P<post_id>\w+)/$', post),      #Coming from the index page.
     url(r'^makesimpler/$', makesimpler),
     url(r'^register/$', register),
     url(r'^login/$', user_login),
