@@ -71,6 +71,13 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return self.user.username
 
+class UserNotification(models.Model):
+    user = models.CharField(max_length=1000000)
+    notification = models.CharField(max_length=10000000)
+    status = models.CharField(max_length=10)
+    def __unicode__(self):
+        return str(self.user) + '-' + self.notification
+
 class ReqByUser(models.Model):
     user = models.ForeignKey(User)
     category = models.CharField(max_length=1000)
