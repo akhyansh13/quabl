@@ -171,9 +171,8 @@ $(document).ready(function(){
 				curr_id = parseInt($(this).attr('id'));
 
 				if(curr_id != this_id){
-					$(this).parent().hide(function(){
-						$(this).hide();
-					});
+					$(this).parent().hide();
+					$(this).hide();
 				}
 
 				else{
@@ -181,9 +180,9 @@ $(document).ready(function(){
 					$(this).parent().parent().attr("style","padding-bottom:80px;");
 					$(curr_jumbotron_class).each(function(){
 							$j = $(this);
-							$j.parent().show(function(){
 							$j.show();		
-							$j.parent().find(".next").show();
+							$j.parent().show(function(){
+								$j.parent().find(".next").show();
 						});
 					});		
 				}
