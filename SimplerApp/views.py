@@ -3,7 +3,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Simpler.settings')
 from django.shortcuts import render_to_response 
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
-from models import Post, Simpler, postBox, SimplerBox, UserForm, UserProfileForm, HighlightDesc, highlightq, highlight, Quote, topic, ReqByUser
+from models import Post, Simpler, postBox, SimplerBox, UserForm, UserProfileForm, HighlightDesc, highlightq, highlight, Quote, topic, ReqByUser, UserNotification
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from functions import getQuotes, first_alpha_toupper, format_author
@@ -24,6 +24,9 @@ def index(request):
 
     form = postBox()
     context_dict['form'] = form
+    notifs = UserNotification.objects.all().filter(user=request.user.username).filter(status='unread')
+    context_dict['notifs'] = notifs
+    context_dict['notifcount'] = notifs.count()
     return render_to_response('SimplerApp/index.html',context_dict, context)
 
 def addpost(request):
@@ -59,6 +62,9 @@ def post(request, post_id):
     context_dict['max'] = maximum
     context_dict['loop'] = range(1, maximum+1)
     context_dict['highlightqs'] = highlightq_set              #All the highlighqs related to this question are being passed on.
+    notifs = UserNotification.objects.all().filter(user=request.user.username).filter(status='unread')
+    context_dict['notifs'] = notifs
+    context_dict['notifcount'] = notifs.count()
     return render_to_response('SimplerApp/post.html', context_dict, context)
 
 def postreq(request, post_id, requestid):
@@ -84,6 +90,9 @@ def postreq(request, post_id, requestid):
     context_dict['max'] = maximum
     context_dict['loop'] = range(1, maximum+1)
     context_dict['highlightqs'] = highlightq_set              #All the highlighqs related to this question are being passed on.
+    notifs = UserNotification.objects.all().filter(user=request.user.username).filter(status='unread')
+    context_dict['notifs'] = notifs
+    context_dict['notifcount'] = notifs.count()
     return render_to_response('SimplerApp/post.html', context_dict, context)
 
     
@@ -94,11 +103,29 @@ def makesimpler(request):
         post = Post.objects.get(id=post_id)
         simpler_text = request.GET['simpler_text']
         c = Simpler.objects.get_or_create(post=post, simpler = '<div class ="question"></div><div class ="answer">' + simpler_text + '</div>', simpler_original=simpler_text, coeficient=1, author=request.user.username, display=' ', parent_list=' ')[0]
+        authors=[]
+        authors.append(post.author)
+        child_simplers = Simpler.objects.all().filter(post=post)
+        for child_simpler in child_simplers:
+            if child_simpler.author not in authors and child_simpler.author is not request.user.username:
+                authors.append(child_simpler.author)
+        for author in authors:
+            u = UserNotification.objects.create(user=author, notification=str(request.user.username) + ' added an answer to post:' + str(post.id), status='unread')
     else: 
         highlight_simpler_id = int(request.GET['simpler_id'])
         simpler_text = request.GET['simpler_text']
         highlight_simpler = Simpler.objects.get(id=highlight_simpler_id)
         c = Simpler.objects.get_or_create(post = highlight_simpler.post, parent_simpler = highlight_simpler.parent_simpler,  simpler = highlight_simpler.simpler + '<br/><br/><div class ="answer">'+ simpler_text + '</div>', simpler_original = highlight_simpler.simpler,coeficient = highlight_simpler.coeficient, parent_list = highlight_simpler.parent_list, author = request.user.username, display=' ')[0]
+        if highlight_simpler.author is not request.user.username:
+            u = UserNotification.objects.create(user=highlight_simpler.author, notification=str(request.user.username) + ' added an answer to your question', status='unread')
+        authors=[]
+        authors.append(highlight_simpler.post.author)
+        child_simplers = Simpler.objects.all().filter(post=highlight_simpler.post)
+        for child_simpler in child_simplers:
+            if child_simpler.author not in authors and child_simpler.author is not request.user.username:
+                authors.append(child_simpler.author)
+        for author in authors:
+            u = UserNotification.objects.create(user=author, notification=str(request.user.username) + ' added an answer to simpler:' + str(highlight_simpler.id), status='unread')
     return HttpResponse('success')
     
 def register(request):
@@ -209,6 +236,16 @@ def define(request, post_id, simpler_id, new_simpler, old_simpler):
             f.highlight_simpler = g
             f.save()
             question = highlightq.objects.get_or_create(highlight=f, question=f.description)
+            if simpler.author is not request.user.username:
+                u = UserNotification.objects.create(user=simpler.author, notification=str(request.user.username) + ' added a question to your simpler:' + str(simpler_id), status='unread')
+            authors=[]
+            authors.append(post.author)
+            child_simplers = Simpler.objects.all().filter(post=post)
+            for child_simpler in child_simplers:
+                if child_simpler.author not in authors and child_simpler.author is not request.user.username:
+                    authors.append(child_simpler.author)
+            for author in authors:
+                u = UserNotification.objects.create(user=author, notification=str(request.user.username) + ' added a question to post:' + str(post_id), status='unread')
             return HttpResponseRedirect('/simpler/'+str(f.highlight_parent.post.id))
     else:
         form = HighlightDesc()
@@ -246,6 +283,16 @@ def defined(request, post_id, simpler_id, highlightx, current):
             f.highlight_simpler = g
             f.save()
             question = highlightq.objects.get_or_create(highlight=f, question=f.description)
+            if parent_simpler.author is not request.user.username:
+                u = UserNotification.objects.create(user=parent_simpler.author, notification=str(request.user.username) + ' added a question to your simpler:' + str(simpler_id), status='unread')
+            authors=[]
+            authors.append(post.author)
+            child_simplers = Simpler.objects.all().filter(post=post)
+            for child_simpler in child_simplers:
+                if child_simpler.author not in authors and child_simpler.author is not request.user.username:
+                    authors.append(child_simpler.author)
+            for author in authors:
+                u = UserNotification.objects.create(user=author, notification=str(request.user.username) + ' added a question to post:' + str(post_id), status='unread')
             if int(current) == count - 1 and count == 1:
                 return HttpResponseRedirect('/simpler/' + str(f.highlight_parent.post.id))
             elif int(current) == count - 1:

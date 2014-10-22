@@ -2,77 +2,86 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+	<head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="cache-control" content="max-age=0" />
-    <meta http-equiv="cache-control" content="no-cache" />
-    <meta http-equiv="expires" content="0" />
-    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-    <meta http-equiv="pragma" content="no-cache" />
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="cache-control" content="max-age=0" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+		<meta http-equiv="pragma" content="no-cache" />
 
-    <title>{% block title_block %}Simpler.{% endblock %}</title>
+		<title>{% block title_block %}Simpler.{% endblock %}</title>
 
-    <script src="{% static 'js/jquery-1.11.1.js' %}"></script>
-    <!--<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script> -->
+		<script src="{% static 'js/jquery-1.11.1.js' %}"></script>
+		<!--<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script> -->
 
-    <script type="text/javascript">
-      $("img").each(function(){                //Correcting the img-src inconsistency using JS. Find a better solution.
-        proper_src = $(this).attr("src").replace("http:/", "http://");
-        $(this).attr("src",proper_src);
-    });
-    </script>
+		<script type="text/javascript">
+			$("img").each(function(){                //Correcting the img-src inconsistency using JS. Find a better solution.
+				proper_src = $(this).attr("src").replace("http:/", "http://");
+				$(this).attr("src",proper_src);
+			});
+		</script>
 
-    {% block scripts_block %}{% endblock %}
+		{% block scripts_block %}{% endblock %}
 
-    <!-- Bootstrap -->
+		<!-- Bootstrap -->
 
-    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+		<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
 
-{% block css_block %}{% endblock %}
+		{% block css_block %}{% endblock %}
 
-{% block basiccss %}
-<link href="{% static 'css/simpler.css' %}" rel="stylesheet"> 
-{% endblock %}
+		{% block basiccss %}
+			<link href="{% static 'css/simpler.css' %}" rel="stylesheet"> 
+		{% endblock %}
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-      {% block header_block %}
-		      <div class="header" style="padding-left:20%; padding-right:20%;">
-				  {% if user.is_authenticated %}
-				  <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{user.username}} <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="/">Home</a></li>
-            <li class="divider"></li>
-            <li><a href="/logout/"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-          </ul>
-        </li>
-      </ul>
-						  {% endif %}
-		        <h3 class="text-muted">Simpler.</h3>
-		      </div>
-          {% endblock %}
-  </head>
-  <body>
-  {% block sideblock %}{% endblock %}
-    <div class="container">
-	  {% block body_block %}{% endblock %}
-  <div id=class="footer navbar-fixed-bottom" style='text-align:center; padding-top:300px;'>
-          <p class="muted credit"> <!--{{quote.quote}} - {{q_author}}--> <hr/> </p>
-      </div>
-  </div>
-  </body>
-  <script src="{% static 'js/bootstrap.min.js' %}"></script>
-  <script src='{% static "ckeditor/ckeditor.js" %}'></script>
-  <script>               
-CKEDITOR.replaceClass = 'ckeditor';
-</script>
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		{% block header_block %}
+			<div class="header" style="padding-left:20%; padding-right:20%;">
+			{% if user.is_authenticated %}
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{user.username}} <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="/">Home</a></li>
+							<li class="divider"></li>
+							<li><a href="/logout/"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle notifications" data-toggle="dropdown"><span id='notifdisp'>{{notifcount}}&nbsp;&nbsp;</span><b class="glyphicon glyphicon-exclamation-sign"></b></a>
+						<ul class="dropdown-menu" style="max-width:450px; max-width:450px; min-height:550px; min-height:550px; width:450px; height:550px;">
+						{% for notif in notifs %}
+							<li style><p style="padding-top:10px; padding-left:10px; padding-botton:10px; padding-right:10px;">{{notif.notification}}</p></li>
+							<li class="divider" style="width:430px;"></li>
+						{% endfor %}
+						</ul>
+					</li>
+				</ul>
+			{% endif %}
+			<h3 class="text-muted">Simpler.</h3>
+			</div>
+		{% endblock %}
+	</head>
+	<body>
+		{% block sideblock %}{% endblock %}
+			<div class="container">
+			{% block body_block %}{% endblock %}
+				<div id=class="footer navbar-fixed-bottom" style='text-align:center; padding-top:300px;'>
+					<p class="muted credit"> <!--{{quote.quote}} - {{q_author}}--> <hr/> </p>
+				</div>
+			</div>
+	</body>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src='{% static "ckeditor/ckeditor.js" %}'></script>
+	<script>               
+		CKEDITOR.replaceClass = 'ckeditor';
+	</script>
 </html>

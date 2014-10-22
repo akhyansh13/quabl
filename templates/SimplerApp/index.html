@@ -1,42 +1,42 @@
 {% extends 'SimplerApp/base.html' %}
 {% load static %}
 {% block scripts_block %}
-<script src="{% static 'js/index.js' %}"></script>
+	<script src="{% static 'js/index.js' %}"></script>
 {% endblock %}
 
 {% block css_block %}
-<style>
+	<style>
 
-.postbox{
-	width:100%;
-}
+		.postbox{
+			width:100%;
+		}
 
-</style>
+	</style>
 {% endblock %}
 
 {% block body_block %}
 
-{% for num in numarr %}
-<div style="display:none;" class="simnum">{{num.0}}-{{num.1}}</div>
-{% endfor %}
+	{% for num in numarr %}
+		<div style="display:none;" class="simnum">{{num.0}}-{{num.1}}</div>
+	{% endfor %}
 
 <div style='padding-bottom:300px;'>
-	{% if user.is_authenticated %}
-	{% else %}
+{% if user.is_authenticated %}
+{% else %}
 	<div style="text-align:center;"><h1><a href='/register/'>Register Here</a> or <a href="/login/">Login.</a></h1></div>
-	{% endif %}
-	{% if user.is_authenticated %}
-<form method='post' action='/addpost/'>
-<div>
+{% endif %}
+{% if user.is_authenticated %}
+	<form method='post' action='/addpost/'>
+	<div>
 	{% csrf_token %}
-<div style="width=400px;">
-	{{ form.post}}
-</div>
-<div style='float:left;'>
-	{{form.topic}}
-</div>
-<div align = "right" style="padding-bottom:30px;"><button type="submit" class="btn btn-primary btn-lg addpostbtn" disabled="disabled">Add Post</button></div>
-	{% endif %}
+		<div style="width=400px;">
+			{{ form.post}}
+		</div>
+		<div style='float:left;'>
+			{{form.topic}}
+		</div>
+		<div align = "right" style="padding-bottom:30px;"><button type="submit" class="btn btn-primary btn-lg addpostbtn" disabled="disabled">Add Post</button></div>
+{% endif %}
 	</form>
 	{% for topic in topics %}
 		<div class="exploration" style="padding:10px;">
@@ -44,17 +44,17 @@
 			<div style="float:right; width:65%;" class="postlink">
 				{% autoescape off %}
 				{% for post in topic %}
-				<div class="hidtopic" style="display:none;">{{post.topic}}</div>
-				<blockquote style="font-size:12pt;">
-				{{post.post}}
-				<div align="right"><span id="{{post.id}}"></span><span><a href='/simpler/{{post.id}}/'>Explore</a></span></div>
-				</blockquote>
+					<div class="hidtopic" style="display:none;">{{post.topic}}</div>
+					<blockquote style="font-size:12pt;">
+						{{post.post}}
+					<div align="right"><span id="{{post.id}}"></span><span><a href='/simpler/{{post.id}}/'>Explore</a></span></div>
+					</blockquote>
 				{% endfor %}
 				{% endautoescape %}
-	</div>
-	<br style="clear:both;"/>
-	</div>
+			</div>
+		<br style="clear:both;"/>
+		</div>
 	{% endfor %}
-	 </div>
 	</div>
+</div>
 {% endblock %}
