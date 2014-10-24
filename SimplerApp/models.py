@@ -68,6 +68,8 @@ class SimplerBox(forms.ModelForm):
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     picture = models.ImageField(upload_to='profile_images', blank=True)
+    followed_posts = models.CharField(max_length=10000000, default='-1;-1')
+    followed_simplers = models.CharField(max_length=10000000, default='-1;-1')
     def __unicode__(self):
         return self.user.username
 
@@ -75,6 +77,8 @@ class UserNotification(models.Model):
     user = models.CharField(max_length=1000000)
     notification = models.CharField(max_length=10000000)
     status = models.CharField(max_length=10)
+    postid = models.IntegerField(null=False, default=-1)
+    simplerid = models.IntegerField(null=False, default=-1)
     def __unicode__(self):
         return str(self.user) + '-' + self.notification
 

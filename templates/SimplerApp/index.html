@@ -47,7 +47,8 @@
 					<div class="hidtopic" style="display:none;">{{post.topic}}</div>
 					<blockquote style="font-size:12pt;">
 						{{post.post}}
-					<div align="right"><span id="{{post.id}}"></span><span><a href='/simpler/{{post.id}}/'>Explore</a></span></div>
+					<div align="right"><span id="{{post.id}}"></span><span><a href='/simpler/{{post.id}}/'>Explore</a>&nbsp;|</span>
+					<span><a href='/follow/{{post.id}}/'>{% if post.id in followed %}Unfollow{% else %}Follow{% endif %}</a></span></div>
 					</blockquote>
 				{% endfor %}
 				{% endautoescape %}

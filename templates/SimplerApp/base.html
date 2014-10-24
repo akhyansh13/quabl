@@ -59,7 +59,7 @@
 						<a href="#" class="dropdown-toggle notifications" data-toggle="dropdown"><span id='notifdisp'>{{notifcount}}&nbsp;&nbsp;</span><b class="glyphicon glyphicon-exclamation-sign"></b></a>
 						<ul class="dropdown-menu" style="max-width:450px; max-width:450px; min-height:550px; min-height:550px; width:450px; height:550px;">
 						{% for notif in notifs %}
-							<li style><p style="padding-top:10px; padding-left:10px; padding-botton:10px; padding-right:10px;">{{notif.notification}}</p></li>
+							<li style><a href="/request/notifications/{{notif.id}}/" style="padding-top:10px; padding-left:10px; padding-botton:10px; padding-right:10px;">{{notif.notification}}</a></li>
 							<li class="divider" style="width:430px;"></li>
 						{% endfor %}
 						</ul>
