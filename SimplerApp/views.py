@@ -24,9 +24,9 @@ def index(request):
 
     form = postBox()
     context_dict['form'] = form
-    notifs = UserNotification.objects.all().filter(user=request.user.username).filter(status='unread')
-    context_dict['notifs'] = notifs
-    context_dict['notifcount'] = notifs.count()
+    #notifs = UserNotification.objects.all().filter(user=request.user.username).filter(status='unread')
+    #context_dict['notifs'] = notifs
+    #context_dict['notifcount'] = notifs.count()
     if request.user.is_authenticated():
         user_profile = UserProfile.objects.get(user=request.user)
         followedposts = user_profile.followed_posts.split(';')
@@ -81,9 +81,9 @@ def post(request, post_id):
     context_dict['max'] = maximum
     context_dict['loop'] = range(1, maximum+1)
     context_dict['highlightqs'] = highlightq_set              #All the highlighqs related to this question are being passed on.
-    notifs = UserNotification.objects.all().filter(user=request.user.username).filter(status='unread')
-    context_dict['notifs'] = notifs
-    context_dict['notifcount'] = notifs.count()
+    #notifs = UserNotification.objects.all().filter(user=request.user.username).filter(status='unread')
+    #context_dict['notifs'] = notifs
+    #context_dict['notifcount'] = notifs.count()
     return render_to_response('SimplerApp/post.html', context_dict, context)
 
 def postreq(request, post_id, requestid):
@@ -109,9 +109,9 @@ def postreq(request, post_id, requestid):
     context_dict['max'] = maximum
     context_dict['loop'] = range(1, maximum+1)
     context_dict['highlightqs'] = highlightq_set              #All the highlighqs related to this question are being passed on.
-    notifs = UserNotification.objects.all().filter(user=request.user.username).filter(status='unread')
-    context_dict['notifs'] = notifs
-    context_dict['notifcount'] = notifs.count()
+    #notifs = UserNotification.objects.all().filter(user=request.user.username).filter(status='unread')
+    #context_dict['notifs'] = notifs
+    #context_dict['notifcount'] = notifs.count()
     return render_to_response('SimplerApp/post.html', context_dict, context)
 
     
