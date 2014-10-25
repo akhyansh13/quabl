@@ -324,10 +324,9 @@ $(document).ready(function(){
 	});
 
 	$(".qprev").click(function(){
-		$(".currhid").parent().show(function(){
-			$(".currhid").show(function(){
-				$(".currhid").removeClass("currhid");
-			});
+		$(".currhid").parent().show();
+		$(".currhid").show(function(){
+			$(".currhid").removeClass("currhid");
 		});
 		$(this).hide();
 		$(this).parent().find(".ansnum").show();
