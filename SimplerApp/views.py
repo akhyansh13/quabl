@@ -36,8 +36,9 @@ def index(request):
         context_dict['followed'] = followed
     return render_to_response('SimplerApp/index.html',context_dict, context)
 
-def follow(request, post_id):
+def follow(request):
     context = RequestContext(request)
+    post_id = request.GET['post_id']
     user_profile = UserProfile.objects.get(user=request.user)
     followedposts = user_profile.followed_posts.split(';')
     if post_id in followedposts:
@@ -46,7 +47,7 @@ def follow(request, post_id):
         followedposts.insert(-1, post_id)
     user_profile.followed_posts = ';'.join(followedposts)
     user_profile.save()
-    return HttpResponseRedirect('/')
+    return HttpResponse('success')
 
 def addpost(request):
     if request.method == 'POST':

@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     url(r'^$', index),
     url(r'^simpler/(?P<post_id>\w+)/(?P<requestid>\w+)/$', postreq),        #Coming as a result of a HttpResponseRedirect.
     url(r'^simpler/(?P<post_id>\w+)/$', post),      #Coming from the index page.
-    url(r'^follow/(?P<post_id>\w+)/$', follow),
+    url(r'^follow/$', follow),
     url(r'^makesimpler/$', makesimpler),
     url(r'^register/$', register),
     url(r'^login/$', user_login),
