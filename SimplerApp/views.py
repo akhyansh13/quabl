@@ -91,7 +91,10 @@ def post(request, post_id):
 def postreq(request, post_id, requestid):
     context = RequestContext(request)
     request_id = int(requestid)
-    user_request = ReqByUser.objects.get(id=request_id)
+    try:
+        user_request = ReqByUser.objects.get(id=request_id)
+    except:
+        return HttpResponseRedirect('/simpler/' + post_id + '/')
     parent_list_dict = {}
     post_id_int = int(post_id)
     context_dict ={'post_id':post_id}

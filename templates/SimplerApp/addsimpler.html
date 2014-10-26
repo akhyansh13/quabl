@@ -15,7 +15,7 @@
 				<div align='right'><button class="btn btn-success addsimp-toggle" style="display:none;">Add Simpler</button></div>
 				<div class="simpler-textarea" align="center">
 					<div><textarea class="ckeditor" id='simp{{simpler.id}}'></textarea>{% csrf_token %}</div>
-						<button type="button" class="btn btn-default glyphicon glyphicon-ok addsimp" id="{{simpler.id}}" data ='{{ post_id }}'></button>
+						<button type="button" class="btn btn-default glyphicon glyphicon-ok addsimp" id="{{simpler.id}}" data ='{{post_id}}' value='{{simpler.parent_simpler.id}}'></button>
 						<button type="button" class="btn btn-default glyphicon glyphicon-remove back" data="{{post_id}}" id="{{simpler.parent_simpler.id}}"></button>
 					</div>
 				</div>
