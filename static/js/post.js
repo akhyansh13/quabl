@@ -292,10 +292,10 @@ $(document).ready(function(){
 		var cstr = ".ans-" + $(this).attr('data');
 		var num = String($(cstr).length);
 		if(num==1){
-			var linktxt = num + " Simpler";
+			var linktxt = num + " Answer";
 		}
 		else{
-			var linktxt = num + " Simplers";
+			var linktxt = num + " Answers";
 		}
 
 		$(this).html("<a href = 'javascript:;'>" + linktxt + "</a>");

@@ -13,7 +13,7 @@
 		<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
 		<meta http-equiv="pragma" content="no-cache" />
 
-		<title>{% block title_block %}Simpler.{% endblock %}</title>
+		<title>{% block title_block %}Quabl.{% endblock %}</title>
 
 		<script src="{% static 'js/jquery-1.11.1.js' %}"></script>
 		<!--<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script> -->
@@ -62,14 +62,14 @@
 						<p class='text-muted' style='text-align:center;'>You don't have any notifications right now.</p>
 						{% endif %}
 						{% for notif in notifs %}
-							<li style><p style="padding-top:10px; padding-left:10px; padding-botton:10px; padding-right:10px;">{{notif.notification}}</p></li>
+							<li style><a href='/request/notifications/{{notif.id}}/' style="padding-top:10px; padding-left:10px; padding-botton:10px; padding-right:10px;">{{notif.notification}}</a></li>
 							<li class="divider" style="width:430px;"></li>
 						{% endfor %}
 						</ul>
 					</li>
 				</ul>
 			{% endif %}
-			<h3><a href='/' style="color:#A8A8A8; text-decoration:none;">Simpler.</a></h3>
+			<h3><a href='/' style="color:#A8A8A8; text-decoration:none;">Quabl.</a></h3>
 			</div>
 		{% endblock %}
 	</head>
