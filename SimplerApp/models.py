@@ -86,6 +86,7 @@ class ReqByUser(models.Model):
     user = models.ForeignKey(User)
     category = models.CharField(max_length=1000)
     description = models.CharField(max_length=1000)
+    frequency = models.IntegerField(null=False, default=0)
     def __unicode__(self):
         return self.category + ' by ' + str(self.user.username)
 

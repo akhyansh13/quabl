@@ -59,7 +59,7 @@
 						<a href="#" class="dropdown-toggle notifications" data-toggle="dropdown"><span id='notifdisp'>{{notifcount}}&nbsp;&nbsp;</span><b class="glyphicon glyphicon-exclamation-sign"></b></a>
 						<ul class="dropdown-menu" style="max-width:450px; max-width:450px; min-height:550px; min-height:550px; width:450px; height:550px;">
 						{% if notifcount == 0 %}
-						YOU DON'T HAVE ANY NOTIFICATIONS RIGHT NOW.
+						<p class='text-muted' style='text-align:center;'>You don't have any notifications right now.</p>
 						{% endif %}
 						{% for notif in notifs %}
 							<li style><p style="padding-top:10px; padding-left:10px; padding-botton:10px; padding-right:10px;">{{notif.notification}}</p></li>
@@ -69,7 +69,7 @@
 					</li>
 				</ul>
 			{% endif %}
-			<h3 class="text-muted">Simpler.</h3>
+			<h3><a href='/' style="color:#A8A8A8; text-decoration:none;">Simpler.</a></h3>
 			</div>
 		{% endblock %}
 	</head>

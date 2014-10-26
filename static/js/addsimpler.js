@@ -13,7 +13,7 @@ $(document).ready(function(){
 		var simpler_textarea_id = 'simp'+ simpler_id;
 		var simpler_text = CKEDITOR.instances[simpler_textarea_id].getData();
 		$.get(('/makesimpler/'),{simpler_id:simpler_id, simpler_text:simpler_text, post_id:post_id,}, function(){
-			uri = '/request/back_to_post/postid:' + post_id + ';simplerid:'  + backsimplerid + ';/';
+			uri = '/request/adsimpler/postid:' + post_id + ';simplerid:'  + backsimplerid + ';/';
     		window.location.href = uri;
 		});
 	});
