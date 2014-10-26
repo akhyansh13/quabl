@@ -15,4 +15,11 @@ $(document).ready(function(){
     		location.reload();
 		});
 	});
+	
+	$('.back').click(function(){
+		var postid = $(this).attr('data');
+		var simplerid = $(this).attr('id');
+		uri = "/request/back_to_post/postid:" + postid + ";simplerid:"  + simplerid + ";/"
+		window.location.href = uri;
+	});
 });

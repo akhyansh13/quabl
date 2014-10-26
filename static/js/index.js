@@ -62,4 +62,23 @@ $(document).ready(function(){
 		}
 	});
 
+	$(".folbtn").click(function(){		//AJAX request for follow/unfollow button.
+		var post_id = $(this).attr('data');
+		$.get(('/follow/'), {post_id:post_id});	
+	});
+
+	$(".folbtn").click(function(){		//This function inverts between 'Unfollow' or 'Follow'
+		var $this = $(this);
+		var state = $this.attr("class").split(" ")[1];
+		if(state == 'unfollowstate'){
+				$this.html('Follow');
+				$this.removeClass('unfollowstate');
+				$this.addClass('followstate');
+			}
+			else{
+				$this.html('Unfollow');
+				$this.removeClass('followstate');
+				$this.addClass('unfollowstate');
+			}
+	});
 });

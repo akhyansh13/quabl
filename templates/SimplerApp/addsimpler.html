@@ -16,11 +16,11 @@
 				<div class="simpler-textarea" align="center">
 					<div><textarea class="ckeditor" id='simp{{simpler.id}}'></textarea>{% csrf_token %}</div>
 						<button type="button" class="btn btn-default glyphicon glyphicon-ok addsimp" id="{{simpler.id}}" data ='{{ post_id }}'></button>
-						<button type="button" class="btn btn-default glyphicon glyphicon-remove close-textarea addsimp-toggle" data ='{{ post_id }}'></button>
+						<button type="button" class="btn btn-default glyphicon glyphicon-remove back" data="{{post_id}}" id="{{simpler.parent_simpler.id}}"></button>
 					</div>
 				</div>
 			</div>
-			<a href="/request/back_to_post/postid:{{post_id}};simplerid:{{simpler.parent_simpler.id}};/" style="font-size:15pt;">Back to Post.</a>
+			<!--a href="/request/back_to_post/postid:{{post_id}};simplerid:{{simpler.parent_simpler.id}};/" style="font-size:15pt;">Back to Post.</a-->
 		</div>
 		{% endautoescape %}
 {% endblock %}
