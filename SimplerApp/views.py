@@ -60,8 +60,7 @@ def addpost(request):
             f.save()
             topic.objects.get_or_create(topic=f.topic)
     return HttpResponseRedirect('/')
-
-@login_required    
+   
 def post(request, post_id):
     context = RequestContext(request)
     parent_list_dict = {}

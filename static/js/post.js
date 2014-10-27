@@ -1,5 +1,8 @@
 $(document).ready(function(){
 
+	//var toscrollto = $(".scrolltoid").attr("id");
+	//var toscrollto_id = "#" + toscrollto;
+
 	bindvisibility($("#Post"), $("#instruct"))
 
 	$(".q-sidebar").hide();		//Not hiding the parent class.
