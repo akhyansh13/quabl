@@ -41,8 +41,11 @@
 	{{post.description}}
 	{% endif %}
 	{% endautoescape %}
+
+	{% if user.is_authenticated %}
 	<div align="right"><h2>
 		<button class="btn btn-default glyphicon glyphicon-chevron-down addsimp-toggle-post" style='color:#808080'></button></h2></div>
+	{% endif %}
 
 	<div class="simpler-textarea" style='display:none;'>
 	<div align="center"><textarea class="ckeditor" id='level1-textarea'></textarea></input>{% csrf_token %}</div>

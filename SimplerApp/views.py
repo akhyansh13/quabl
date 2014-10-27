@@ -343,33 +343,42 @@ def requestbyuser(request, category, description):
     context = RequestContext(request)
     if category == 'back_to_post' or category == 'askforsimpler' or category == 'addsimpler':
         postid = description.split('postid:')[1].split(';')[0]
-        c = ReqByUser.objects.get_or_create(user=request.user, category=category, description=description)
-        if not c[1]:
-            c[0].frequency = c[0].frequency + 1
-            c[0].save()
-        return HttpResponseRedirect('/simpler/' + postid + '/' + str(c[0].id) + '/')
-    elif category == 'notifications':
-        notif_id = int(description)
-        notification = UserNotification.objects.get(id=notif_id)
-        post_id = notification.postid
-        notification.status = 'read'
-        notification.save()
-        c = ReqByUser.objects.get_or_create(user=request.user, category=category, description=description)
-        simpler_id = notification.simplerid
-        if simpler_id > -1:
-            c = ReqByUser.objects.get_or_create(user=request.user, category='back_to_post', description='postid:' + str(post_id) + ';simplerid:' + str(simpler_id) + ';')
+        if request.user.is_authenticated():    
+            c = ReqByUser.objects.get_or_create(user=request.user, category=category, description=description)
             if not c[1]:
                 c[0].frequency = c[0].frequency + 1
                 c[0].save()
-            return HttpResponseRedirect('/simpler/' + str(post_id) + '/' + str(c[0].id) + '/')
+            return HttpResponseRedirect('/simpler/' + postid + '/' + str(c[0].id) + '/')
+        else:
+            return HttpResponseRedirect('/simpler/' + postid)
+
+    elif category == 'notifications':
+        notif_id = int(description)
+        notification = UserNotification.objects.get(id=notif_id)
+        post_id = notification.postid        
+        if request.user.is_authenticated():
+            notification.status = 'read'
+            notification.save()
+            c = ReqByUser.objects.get_or_create(user=request.user, category=category, description=description)
+            simpler_id = notification.simplerid
+            if simpler_id > -1:
+                c = ReqByUser.objects.get_or_create(user=request.user, category='back_to_post', description='postid:' + str(post_id) + ';simplerid:' + str(simpler_id) + ';')
+                if not c[1]:
+                    c[0].frequency = c[0].frequency + 1
+                    c[0].save()
+                return HttpResponseRedirect('/simpler/' + str(post_id) + '/' + str(c[0].id) + '/')
+            else:
+                return HttpResponseRedirect('/simpler/' + str(post_id) + '/')
         else:
             return HttpResponseRedirect('/simpler/' + str(post_id) + '/')
+
     elif category == 'explore':
         postid = description
-        c = ReqByUser.objects.get_or_create(user=request.user, category=category, description='postid:' + description)
-        if not c[1]:
-            c[0].frequency = c[0].frequency + 1
-            c[0].save()
+        if request.user.is_authenticated():
+            c = ReqByUser.objects.get_or_create(user=request.user, category=category, description='postid:' + description)
+            if not c[1]:
+                c[0].frequency = c[0].frequency + 1
+                c[0].save()
         return HttpResponseRedirect('/simpler/' + postid + '/')
 	
 def deletesimpler(request):
