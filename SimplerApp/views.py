@@ -7,6 +7,7 @@ from models import Post, Simpler, postBox, SimplerBox, UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from functions import getQuotes, first_alpha_toupper, format_author
+from datetime import datetime
 
 def index(request):
     context = RequestContext(request)
@@ -46,6 +47,7 @@ def follow(request):
     else:
         followedposts.insert(-1, post_id)
     user_profile.followed_posts = ';'.join(followedposts)
+    user_profile.modified = datetime.now()
     user_profile.save()
     return HttpResponse('success')
 
@@ -57,6 +59,8 @@ def addpost(request):
             f.author = request.user.username
             p = f.post
             f.post = '<p>' + p + '</p>'         #Encloses in <p></p>.
+            f.created = datetime.now()
+            f.modified = datetime.now()
             f.save()
             topic.objects.get_or_create(topic=f.topic)
     return HttpResponseRedirect('/')
@@ -126,7 +130,7 @@ def makesimpler(request):
         post_id = int(request.GET['post_id'])
         post = Post.objects.get(id=post_id)
         simpler_text = request.GET['simpler_text']
-        c = Simpler.objects.get_or_create(post=post, simpler = '<div class ="question"></div><div class ="answer">' + simpler_text + '</div>', simpler_original=simpler_text, coeficient=1, author=request.user.username, display=' ', parent_list=' ')[0]
+        c = Simpler.objects.get_or_create(post=post, simpler = '<div class ="question"></div><div class ="answer">' + simpler_text + '</div>', simpler_original=simpler_text, coeficient=1, author=request.user.username, display=' ', parent_list=' ', created = datetime.now(), modified = datetime.now())[0]
         #getting all the users who have followed the particular post
         authors = []
         profiles = UserProfile.objects.all()
@@ -136,14 +140,22 @@ def makesimpler(request):
         for author in authors:
             if author != request.user.username:
                 u = UserNotification.objects.get_or_create(user=author, notification=str(request.user.username) + ' added an answer to post:' + str(post.id), status='unread', postid=post.id)
+                if u[1]:
+                    u[0].created = datetime.now()
+                u[0].modified = datetime.now()
+                u[0].save()
     else: 
         highlight_simpler_id = int(request.GET['simpler_id'])
         simpler_text = request.GET['simpler_text']
         highlight_simpler = Simpler.objects.get(id=highlight_simpler_id)
-        c = Simpler.objects.get_or_create(post = highlight_simpler.post, parent_simpler = highlight_simpler.parent_simpler,  simpler = highlight_simpler.simpler + '<br/><br/><div class ="answer">'+ simpler_text + '</div>', simpler_original = highlight_simpler.simpler,coeficient = highlight_simpler.coeficient, parent_list = highlight_simpler.parent_list, author = request.user.username, display=' ')[0]
+        c = Simpler.objects.get_or_create(post = highlight_simpler.post, parent_simpler = highlight_simpler.parent_simpler,  simpler = highlight_simpler.simpler + '<br/><br/><div class ="answer">'+ simpler_text + '</div>', simpler_original = highlight_simpler.simpler,coeficient = highlight_simpler.coeficient, parent_list = highlight_simpler.parent_list, author = request.user.username, display=' ', created = datetime.now(), modified = datetime.now())[0]
         #getting the user who asked the question
         if highlight_simpler.author is not request.user.username:
             u = UserNotification.objects.get_or_create(user=highlight_simpler.author, notification=str(request.user.username) + ' added an answer to your question', status='unread', postid=highlight_simpler.post.id, simplerid=c.id)
+            if u[1]:
+                u[0].created = datetime.now()
+            u[0].modified = datetime.now()
+            u[0].save()
         #getting all the users who have followed the particular post
         authors=[]
         profiles = UserProfile.objects.all()
@@ -153,6 +165,10 @@ def makesimpler(request):
         for author in authors:
             if author != request.user.username:
                 u = UserNotification.objects.get_or_create(user=author, notification=str(request.user.username) + ' added an answer to post:' + str(highlight_simpler.post.id), status='unread', postid=highlight_simpler.post.id, simplerid=c.id)
+                if u[1]:
+                    u[0].created = datetime.now()
+                u[0].modified = datetime.now()
+                u[0].save()
     return HttpResponse('success')
     
 def register(request):
@@ -173,6 +189,8 @@ def register(request):
             profile.user = user
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
+            profile.created = datetime.now()
+            profile.modified = datetime.now()
             profile.save()
 
             registered = True
@@ -245,9 +263,8 @@ def define(request, post_id, simpler_id, new_simpler, old_simpler):
             if flag:
                 simpler.simpler = '<div class="question">' + (new_simpler.replace('curr_highlight','highlight')).replace('curr_checkedhigh','checkedhigh').replace('style="display: none;"','') + '</div><div class="answer">' + old_simpler + '</div>'        #JS and Python conflict fixed. Brute forced the display:none out.
             else:
-                simpler.simpler = '<div class="question">' + old_simpler + '</div><div class="answer">' + (new_simpler.replace('curr_highlight','highlight')).replace('curr_checkedhigh','checkedhigh').replace('style="display: none;"','') + '</div>'        #JS and Python conflict fixed. Brute forced the display:none out.
-
-
+                simpler.simpler = '<div class="question">' + old_simpler + '</div><div class="answer">' + (new_simpler.replace('curr_highlight','highlight')).replace('curr_checkedhigh','checkedhigh').replace('style="display: none;"','') + '</div>'        #JS and Python conflict fixed. Brute forced the display:none out
+            simpler.modified = datetime.now()
             simpler.save()
             f.status = 0
             f.highlight = highlight
@@ -261,11 +278,16 @@ def define(request, post_id, simpler_id, new_simpler, old_simpler):
                 curr_simpler = curr_simpler.parent_simpler
             g = Simpler.objects.get_or_create(post = simpler.post, parent_simpler = simpler, simpler = simpler_content, coeficient=simpler.coeficient+1, parent_list = parent_list, author = request.user.username, display='none')[0]
             f.highlight_simpler = g
+            f.created = datetime.now()
             f.save()
-            question = highlightq.objects.get_or_create(highlight=f, question=f.description)
+            question = highlightq.objects.get_or_create(highlight=f, question=f.description, created = datetime.now())
             #getting the user who wrote the simpler
             if simpler.author is not request.user.username:
                 u = UserNotification.objects.get_or_create(user=simpler.author, notification=str(request.user.username) + ' added a question to your answer:' + str(simpler_id), status='unread', postid=post_id, simplerid=simpler_id)
+                if u[1]:
+                    u[0].created = datetime.now()
+                u[0].modified = datetime.now()
+                u[0].save()
             #getting the users who have followed the post    
             authors = []
             profiles = UserProfile.objects.all()
@@ -275,6 +297,10 @@ def define(request, post_id, simpler_id, new_simpler, old_simpler):
             for author in authors:
                 if author != request.user.username:
                     u = UserNotification.objects.get_or_create(user=author, notification=str(request.user.username) + ' added a question to post:' + str(post_id), status='unread', postid=post_id, simplerid=simpler_id)
+                    if u[1]:
+                        u[0].created = datetime.now()
+                    u[0].modified = datetime.now()
+                    u[0].save()
             return HttpResponseRedirect('/request/askforsimpler/postid:' + str(post_id) + ';simplerid:' + str(simpler_id) + ';')
             #return HttpResponseRedirect('/simpler/'+str(f.highlight_parent.post.id))
     else:
@@ -313,11 +339,16 @@ def defined(request, post_id, simpler_id, highlightx, current):
                 curr_simpler = curr_simpler.parent_simpler
             g = Simpler.objects.get_or_create(post = parent_simpler.post, parent_simpler = parent_simpler, simpler = simpler_content, coeficient = parent_simpler.coeficient + 1, parent_list = parent_list, author = request.user.username, display='none')[0]
             f.highlight_simpler = g
+            f.created = datetime.now()
             f.save()
-            question = highlightq.objects.get_or_create(highlight=f, question=f.description)
+            question = highlightq.objects.get_or_create(highlight=f, question=f.description, created = datetime.datetime.now())
             #getting the user who wrote the simpler
             if parent_simpler.author is not request.user.username:
                 u = UserNotification.objects.get_or_create(user=parent_simpler.author, notification=str(request.user.username) + ' added a question to your answer:' + str(simpler_id), status='unread', postid=post_id, simplerid=simpler_id)
+                if u[1]:
+                    u[0].created = datetime.now()
+                u[0].modified = datetime.now()
+                u[0].save()
             #getting the users who have followed the post    
             authors = []
             profiles = UserProfile.objects.all()
@@ -327,6 +358,10 @@ def defined(request, post_id, simpler_id, highlightx, current):
             for author in authors:
                 if author != request.user.username:
                     u = UserNotification.objects.get_or_create(user=author, notification=str(request.user.username) + ' added a question to post:' + str(post_id), status='unread', postid=post_id, simplerid=simpler_id)
+                    if u[1]:
+                        u[0].created = datetime.now()
+                    u[0].modified = datetime.now()
+                    u[0].save()
             if int(current) == count - 1 and count == 1:
                 return HttpResponseRedirect('/request/askforsimpler/postid:' + str(post_id) + ';simplerid:' + str(simpler_id) + ';')
                 #return HttpResponseRedirect('/simpler/' + str(f.highlight_parent.post.id))
@@ -345,9 +380,11 @@ def requestbyuser(request, category, description):
     if category == 'back_to_post' or category == 'askforsimpler' or category == 'addsimpler':
         postid = description.split('postid:')[1].split(';')[0]
         c = ReqByUser.objects.get_or_create(user=request.user, category=category, description=description)
-        if not c[1]:
-            c[0].frequency = c[0].frequency + 1
-            c[0].save()
+        if c[1]:
+            c[0].created = datetime.now()
+        c[0].modified = datetime.now()
+        c[0].frequency = c[0].frequency + 1
+        c[0].save()
         return HttpResponseRedirect('/simpler/' + postid + '/' + str(c[0].id) + '/')
     elif category == 'notifications':
         notif_id = int(description)
@@ -356,21 +393,30 @@ def requestbyuser(request, category, description):
         notification.status = 'read'
         notification.save()
         c = ReqByUser.objects.get_or_create(user=request.user, category=category, description=description)
+        if c[1]:
+            c[0].created = datetime.now()
+        c[0].modified = datetime.now()
+        c[0].frequency = c[0].frequency + 1
+        c[0].save()
         simpler_id = notification.simplerid
         if simpler_id > -1:
             c = ReqByUser.objects.get_or_create(user=request.user, category='back_to_post', description='postid:' + str(post_id) + ';simplerid:' + str(simpler_id) + ';')
-            if not c[1]:
-                c[0].frequency = c[0].frequency + 1
-                c[0].save()
+            if c[1]:
+                c[0].created = datetime.now()
+            c[0].modified = datetime.now()
+            c[0].frequency = c[0].frequency + 1
+            c[0].save()
             return HttpResponseRedirect('/simpler/' + str(post_id) + '/' + str(c[0].id) + '/')
         else:
             return HttpResponseRedirect('/simpler/' + str(post_id) + '/')
     elif category == 'explore':
         postid = description
         c = ReqByUser.objects.get_or_create(user=request.user, category=category, description='postid:' + description)
-        if not c[1]:
-            c[0].frequency = c[0].frequency + 1
-            c[0].save()
+        if c[1]:
+            c[0].created = datetime.now()
+        c[0].modified = datetime.now()
+        c[0].frequency = c[0].frequency + 1
+        c[0].save()
         return HttpResponseRedirect('/simpler/' + postid + '/')
 	
 def deletesimpler(request):
