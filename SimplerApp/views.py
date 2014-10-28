@@ -246,7 +246,7 @@ def define(request, post_id, simpler_id, new_simpler, old_simpler):
     if 'curr_highlight' not in new_simpler:
         new_simpler, old_simpler = old_simpler, new_simpler
         flag = True
-    highlight = new_simpler.split('curr_highlight')[1].split('>')[1].split('&nbsp')[0];     #Extracts the highlights.
+    highlight = new_simpler.split('curr_highlight')[1].split('>')[1].split('<')[0];     #Extracts the highlights.
     context_dict = {'highlight':highlight}
     context_dict['new_simpler']=new_simpler
     post = Post.objects.get(id=post_id)
