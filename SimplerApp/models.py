@@ -2,6 +2,7 @@ from django.db import models
 from django import forms
 from django.contrib.auth.models import User
 from datetime import datetime
+from functions import show_less
 
 class topic(models.Model):
     topic = models.CharField(max_length=1000000, default='Uncategorized')
@@ -52,12 +53,6 @@ class highlightq(models.Model):
     created = models.DateTimeField(default=datetime.now())
     def __unicode__(self):
         return self.question   
-
-class Quote(models.Model):
-    author = models.CharField(max_length=1000000)
-    quote = models.CharField(max_length=10000000)
-    def __unicode__(self):
-        return self.quote + ' - ' + self.author 
 
 class postBox(forms.ModelForm):
     post = forms.CharField(max_length=10000000,widget=forms.Textarea(attrs={'class': 'postbox'}))
@@ -121,22 +116,4 @@ class HighlightDesc(forms.ModelForm):
         model = highlight
         fields = ('description',)
 
-#Parse functions follow.
 
-def show_less(string):
-    str_arr = list(string)
-    less_arr = []
-    i=0
-    VISIBLE = 0
-    if len(str_arr)>100:
-        VISIBLE = 100
-    else:
-        VISIBLE = len(str_arr)
-    for c in str_arr:
-        if i<VISIBLE:
-            less_arr.append(c)
-        else:
-            break
-        i += 1
-    less_str = ''.join(less_arr)
-    return less_str
