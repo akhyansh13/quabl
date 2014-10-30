@@ -423,9 +423,8 @@ def requestbyuser(request, category, description):
             c[0].modified = datetime.now()
             c[0].frequency = c[0].frequency + 1
             c[0].save()
-            return HttpResponseRedirect('/simpler/' + postid + '/')
-        else:
-            return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/simpler/' + postid + '/')
+        
 	
 def deletesimpler(request):
     context = RequestContext(request)
