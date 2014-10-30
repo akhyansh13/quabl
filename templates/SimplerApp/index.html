@@ -5,13 +5,7 @@
 {% endblock %}
 
 {% block css_block %}
-	<style>
-
-		.postbox{
-			width:100%;
-		}
-
-	</style>
+<link href="{% static 'css/index.css' %}" rel="stylesheet" />	
 {% endblock %}
 
 {% block body_block %}
@@ -20,7 +14,7 @@
 		<div style="display:none;" class="simnum">{{num.0}}-{{num.1}}</div>
 	{% endfor %}
 
-<div style='padding-bottom:300px;'>
+<div style='padding-bottom:30px;'>
 {% if user.is_authenticated %}
 {% else %}
 	<div style="text-align:center;"><h1><!--<a href='/register/'>Register Here</a> or --><a href="/login/">Login.</a></h1></div>
@@ -39,7 +33,7 @@
 	</form>
 	{% for topic in topics %}
 		<div class="exploration" style="padding:10px;">
-			<div style="float:left; width:35%;text-align:center;" class="posttopic"><div class="topicname"></div></div>
+			<div style="float:left; width:35%;text-align:center; font-size:16pt; color:#777;" class="posttopic"><div class="topicname"></div></div>
 			<div style="float:right; width:65%;" class="postlink">
 				{% autoescape off %}
 				{% for post in topic %}

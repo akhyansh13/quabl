@@ -23,10 +23,6 @@ $(document).ready(function(){
 		color = color + 1;
 	});
 
-	$(".posttopic").css("font-size","16pt");
-
-	$(".posttopic").css("color","#777");
-
 	$(".postlink").each(function(){
 		var height = $(this).height();
 		$(this).parent().find(".posttopic").height(height-20);
