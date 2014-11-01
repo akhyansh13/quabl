@@ -241,6 +241,7 @@ def define(request, post_id, simpler_id, new_simpler, old_simpler):
     old_simpler = old_simpler.replace("xqmx", "?")
     post_id = int(post_id)
     simpler_id = int(simpler_id)
+    simpler_author = Simpler.objects.get(id=simpler_id).author
     flag = False
     if 'curr_highlight' not in new_simpler:
         new_simpler, old_simpler = old_simpler, new_simpler
@@ -280,7 +281,7 @@ def define(request, post_id, simpler_id, new_simpler, old_simpler):
             f.save()
             question = highlightq.objects.get_or_create(highlight=f, question=f.description, created = datetime.now())
             #getting the user who wrote the simpler
-            if simpler.author is not request.user.username:
+            if simpler_author is not request.user.username:
                 u = UserNotification.objects.get_or_create(user=simpler.author, notification=str(request.user.username) + ' added a question to your answer:' + str(simpler_id), status='unread', postid=post_id, simplerid=simpler_id)
                 if u[1]:
                     u[0].created = datetime.now()
@@ -314,6 +315,7 @@ def defined(request, post_id, simpler_id, highlightx, current):
     post_id = int(post_id)
     parent_simpler_id = int(simpler_id)
     parent_simpler = Simpler.objects.get(id = parent_simpler_id)
+    parent_simpler_author = parent_simpler.author
     highlightx = highlightx.replace("_", " ")
     highlights = highlightx.split('xhex')
     count = len(highlights)
@@ -341,7 +343,7 @@ def defined(request, post_id, simpler_id, highlightx, current):
             f.save()
             question = highlightq.objects.get_or_create(highlight=f, question=f.description, created = datetime.now())
             #getting the user who wrote the simpler
-            if parent_simpler.author is not request.user.username:
+            if parent_simpler_author is not request.user.username:
                 u = UserNotification.objects.get_or_create(user=parent_simpler.author, notification=str(request.user.username) + ' added a question to your answer:' + str(simpler_id), status='unread', postid=post_id, simplerid=simpler_id)
                 if u[1]:
                     u[0].created = datetime.now()
