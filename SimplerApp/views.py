@@ -3,10 +3,9 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Simpler.settings')
 from django.shortcuts import render_to_response 
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
-from models import Post, Simpler, postBox, SimplerBox, UserForm, UserProfileForm, HighlightDesc, highlightq, highlight, Quote, topic, ReqByUser, UserNotification, UserProfile
+from models import Post, Simpler, postBox, SimplerBox, UserForm, UserProfileForm, HighlightDesc, highlightq, highlight, topic, ReqByUser, UserNotification, UserProfile
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from functions import getQuotes, first_alpha_toupper, format_author
 from datetime import datetime
 
 def index(request):
@@ -246,7 +245,7 @@ def define(request, post_id, simpler_id, new_simpler, old_simpler):
     if 'curr_highlight' not in new_simpler:
         new_simpler, old_simpler = old_simpler, new_simpler
         flag = True
-    highlight = new_simpler.split('curr_highlight')[1].split('>')[1].split('&nbsp')[0];     #Extracts the highlights.
+    highlight = new_simpler.split('curr_highlight')[1].split('>')[1].split('<')[0];     #Extracts the highlights.
     context_dict = {'highlight':highlight}
     context_dict['new_simpler']=new_simpler
     post = Post.objects.get(id=post_id)
@@ -340,7 +339,7 @@ def defined(request, post_id, simpler_id, highlightx, current):
             f.highlight_simpler = g
             f.created = datetime.now()
             f.save()
-            question = highlightq.objects.get_or_create(highlight=f, question=f.description, created = datetime.datetime.now())
+            question = highlightq.objects.get_or_create(highlight=f, question=f.description, created = datetime.now())
             #getting the user who wrote the simpler
             if parent_simpler.author is not request.user.username:
                 u = UserNotification.objects.get_or_create(user=parent_simpler.author, notification=str(request.user.username) + ' added a question to your answer:' + str(simpler_id), status='unread', postid=post_id, simplerid=simpler_id)
@@ -433,15 +432,6 @@ def deletesimpler(request):
     required_simpler.display='none'
     required_simpler.save()
     return HttpResponse('success')
-
-def quotes(request, author):
-    context = RequestContext(request)
-    getQuotes(author)
-    quotes = Quote.objects.all()
-    author_formatted = format_author(author)
-    auth_quotes = quotes.filter(author = author_formatted)
-    context_dict = {'quotes':auth_quotes}
-    return render_to_response('SimplerApp/quotes.html', context_dict, context)
 
 def addanswer(request, qid):
     context = RequestContext(request)

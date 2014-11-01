@@ -44,7 +44,7 @@
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 		{% block header_block %}
-			<div class="header" style="padding-left:20%; padding-right:20%;">
+			<div class="header">
 			{% if user.is_authenticated %}
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
@@ -62,7 +62,7 @@
 						<p class='text-muted' style='text-align:center;'>You don't have any notifications right now.</p>
 						{% endif %}
 						{% for notif in notifs %}
-							<li style><a href='/request/notifications/{{notif.id}}/' style="padding-top:10px; padding-left:10px; padding-botton:10px; padding-right:10px;">{{notif.notification}}</a></li>
+							<li style><a href='/request/notifications/{{notif.id}}/' style="padding-top:10px; padding-left:10px; padding-bottom:10px; padding-right:10px;">{{notif.notification}}</a></li>
 							<li class="divider" style="width:430px;"></li>
 						{% endfor %}
 						</ul>
@@ -77,8 +77,8 @@
 		{% block sideblock %}{% endblock %}
 			<div class="container">
 			{% block body_block %}{% endblock %}
-				<div id=class="footer navbar-fixed-bottom" style='text-align:center; padding-top:300px;'>
-					<p class="muted credit"> <!--{{quote.quote}} - {{q_author}}--> <hr/> </p>
+				<div id=class="footer navbar-fixed-bottom" style='text-align:center; padding-top:10px;'>
+					<p class="muted credit"> <!--Because the people who are crazy enough to think they can change the world are the ones who do.--> <hr/> </p>
 				</div>
 			</div>
 	</body>

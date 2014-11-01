@@ -1,23 +1,15 @@
 $(document).ready(function(){
 
-	//var toscrollto = $(".scrolltoid").attr("id");
-	//var toscrollto_id = "#" + toscrollto;
+	bindvisibility($("#Post"), $("#instruct"));
 
-	bindvisibility($("#Post"), $("#instruct"))
-
-	$(".q-sidebar").hide();		//Not hiding the parent class.
-
-	$(".header").css("padding-right", "10%");
-	$(".header").css("padding-left", "10%");
+	var toscrollto = $("#scrolltoid").text();
 
 	$('.jumbotron').not(".level-1").not('#Post').hide();
 
 	$('.checkedhigh').hide();
 	$('.checkedhigh').removeAttr('checked');
 
-	$(".next").hide(function(){
-		$(".level-1").parent().find(".next").show();
-	});
+	$(".level-1").parent().find(".next").show();
 
 	$(".jumbotron").not("#Post").each(function(){		//Takes care of the bracketed number.
 		id = $(this).attr('id');
@@ -140,91 +132,8 @@ $(document).ready(function(){
 	$(".next").click(function(){	
 
 		window.scrollTo(0,0);
+		next_btn($(this).parent().find(".jumbotron").attr("id"));
 
-		var $this = $(this);
-		var $t = $this.parent().find(".jumbotron");
-		var this_level = $t.attr("class");				//Gets the current level.
-		var level = this_level.split("level-");
-		level = parseInt(level[(level.length-1)]);
-		curr_level_string = String(level)
-		var curr_jumbotron = "#" + $this.parent().find('.jumbotron').attr("id");
-		var curr_jumbotron_class = "." + $this.parent().find('.jumbotron').attr("id");
-		var this_id = parseInt($this.parent().find('.jumbotron').attr('id'));
-		var question_class = ".q-" + String(this_id);
-
-		$(".nthlevel").each(function(){
-			$(this).removeClass("nthlevel");
-		});
-
-		$(curr_jumbotron).addClass("nthlevel"); 
-
-		$(".q-sidebar").hide();
-		$(question_class).show();
-		$this.parent().find(".next").hide();
-		$this.parent().find(".btngrp").show();
-		$this.parent().find(".checkedhigh").show();
-
-		if(level==1){
-
-			$("#Post").parent().hide();
-			$("#Post").hide();
-
-			$(".level-1").each(function(){
-
-				curr_id = parseInt($(this).attr('id'));
-
-				if(curr_id != this_id){
-					$(this).parent().hide();
-					$(this).hide();
-				}
-
-				else{
-					$(this).parent().removeAttr("style");
-					$(this).parent().parent().attr("style","padding-bottom:80px;");
-					$(curr_jumbotron_class).each(function(){
-							$j = $(this);
-							$j.show();		
-							$j.parent().show(function(){
-								$j.parent().find(".next").show();
-						});
-					});		
-				}
-			});
-		}
-
-		else{
-			var level_class = ".level-" + curr_level_string;
-			var par_level = ".level-" + String(level-1);
-			var parent_id = "#" + $this.parent().find(".jumbotron").attr("class").split(' ')[1];
-
-			$(par_level).each(function(){
-				$(this).parent().parent().removeAttr("style");
-				$(this).parent().hide();
-				$(this).hide();
-			});
-
-			$(level_class).each(function(){
-
-				curr_id = parseInt($(this).attr('id'));
-
-				if(curr_id != this_id){
-					$(this).parent().hide();
-					$(this).hide();
-				}
-
-				else{
-					$(this).parent().removeAttr("style");
-					$(this).parent().parent().attr("style","padding-bottom:80px;");
-					$(curr_jumbotron_class).each(function(){
-						$j = $(this);
-						$j.parent().show(function(){
-							$j.show();		
-							$j.parent().find(".next").show();
-						});
-					});		
-				}
-			});
-		}
 	});
 	
 	$(".previous").click(function(){
@@ -366,6 +275,31 @@ $(document).ready(function(){
 			}
 		});
 	});
+
+	if(parseInt(toscrollto)!=-1){
+		var toscrollto_id = "#" + toscrollto;
+		$("#Post").removeClass("nthlevel");
+		$(toscrollto_id).addClass("nthlevel");
+		if($(toscrollto_id).hasClass("level-1")){
+			next_btn(toscrollto);
+		}
+		else{
+			var parent_list = $(toscrollto_id).attr("data");
+			var parent_arr = parent_list.split("parent");
+			var i = 1;
+			while(i<parent_arr.length){
+				var iter_id = parent_arr[parent_arr.length-i].split(" ")[0];
+				next_btn(iter_id);
+				i = i + 1;
+			}
+		}
+	}
+	if($("#Post").is(":visible")){
+		$("#instruct").show();
+	} 
+	else{
+		$("#instruct").hide();
+	}
 }); //window.onload function finished.
 
 function clearSelection() {
@@ -398,4 +332,91 @@ function bindvisibility(input1, input2){
 			input2.hide();
 		}
 	});
+}
+
+function next_btn(module_id){
+	var $this = $("#"+module_id).parent().find(".next");
+	var $t = $this.parent().find(".jumbotron");
+	var this_level = $t.attr("class");				//Gets the current level.
+	var level = this_level.split("level-");
+	level = parseInt(level[(level.length-1)]);
+	curr_level_string = String(level)
+	var curr_jumbotron = "#" + $this.parent().find('.jumbotron').attr("id");
+	var curr_jumbotron_class = "." + $this.parent().find('.jumbotron').attr("id");
+	var this_id = parseInt($this.parent().find('.jumbotron').attr('id'));
+	var question_class = ".q-" + String(this_id);
+
+	$(".nthlevel").each(function(){
+		$(this).removeClass("nthlevel");
+	});
+
+	$(curr_jumbotron).addClass("nthlevel"); 
+
+	$(".q-sidebar").hide();
+	$(question_class).show();
+	$this.parent().find(".next").hide();
+	$this.parent().find(".btngrp").show();
+	$this.parent().find(".checkedhigh").show();
+
+	if(level==1){
+
+		$("#Post").parent().hide();
+		$("#Post").hide();
+
+		$(".level-1").each(function(){
+
+			curr_id = parseInt($(this).attr('id'));
+
+			if(curr_id != this_id){
+				$(this).parent().hide();
+				$(this).hide();
+			}
+
+			else{
+				$(this).parent().removeAttr("style");
+				$(this).parent().parent().attr("style","padding-bottom:80px;");
+				$(curr_jumbotron_class).each(function(){
+						$j = $(this);
+						$j.show();		
+						$j.parent().show(function(){
+							$j.parent().find(".next").show();
+					});
+				});		
+			}
+		});
+	}
+
+	else{
+		var level_class = ".level-" + curr_level_string;
+		var par_level = ".level-" + String(level-1);
+		var parent_id = "#" + $this.parent().find(".jumbotron").attr("class").split(' ')[1];
+
+		$(par_level).each(function(){
+			$(this).parent().parent().removeAttr("style");
+			$(this).parent().hide();
+			$(this).hide();
+		});
+
+		$(level_class).each(function(){
+
+			curr_id = parseInt($(this).attr('id'));
+
+			if(curr_id != this_id){
+				$(this).parent().hide();
+				$(this).hide();
+			}
+
+			else{
+				$(this).parent().removeAttr("style");
+				$(this).parent().parent().attr("style","padding-bottom:80px;");
+				$(curr_jumbotron_class).each(function(){
+					$j = $(this);
+					$j.parent().show(function(){
+						$j.show();		
+						$j.parent().find(".next").show();
+					});
+				});		
+			}
+		});
+	}
 }

@@ -5,7 +5,7 @@
 
 {% block css_block %}
 
-<link href="{% static 'css/highlight.css' %}" rel="stylesheet">	
+<link href="{% static 'css/highlight.css' %}" rel="stylesheet" />	
 
 {% endblock %}
 
@@ -20,7 +20,7 @@
 <span id="instruct-rest" style="font-size:9pt; color:#A4A4A4;display:none;">TO ADD A QUESTION, SELECT THE PART OF A SIMPLER TO WHICH IT CONCERNS, THEN CLICK ON ASK SIMPLER.</span>
 {% for h in highlightqs %}
 {% for x in h %}
-	<p align='left' class="q-{{x.highlight.highlight_parent.id}} q-sidebar hquestion-{{x.id}}">
+	<p align='left' class="q-{{x.highlight.highlight_parent.id}} q-sidebar hquestion-{{x.id}}" style="display:none;">
 		<span class="ques" data='{{x.id}}'>{{x.question}}</span><br/><span class="ansnum" data='{{x.id}}' style="display:inline-block; margin: 0px; margin-right:5px;"></span>
 		{% if user.is_authenticated %}
 		<button class="btn btn-default ques-add" data='/addsimpler/{{x.id}}' style="display:inline-block; margin: 0px;">Add Answer.</button><br/>
@@ -62,7 +62,7 @@
 			{% if simpler.coeficient == i %}
 			{% autoescape off %}
 			<div class='simpler-wrapper' style='padding-bottom:20px;'>
-				<div class="jumbotron {{simpler.parent_simpler.id}} {{simpler.parent_list}} level-{{i}}" id="{{simpler.id}}" style="display:{{simpler.display}};">
+				<div class="jumbotron {{simpler.parent_simpler.id}} level-{{i}}" id="{{simpler.id}}" style="display:{{simpler.display}};" data="{{simpler.parent_list}}">
 					<div class = "postsgalore">
 						<span class="simpler-html">{{simpler.simpler}}</span><br/>
 						<div class="author" style="text-align:right;">Written by {{simpler.author}}.</div><br/>
@@ -74,7 +74,7 @@
 						<button type="button" class = "btn btn-default reqsimp" id="{{simpler.id}}" data='{{post.id}}' style='float:right'>Ask.</button>
 						{% endif %}
 				</div>
-				<div style="text-align:right;" class="next"><h4><a href='javascript:;'>Next(<span id='num-child'></span>)</a></h4></div>
+				<div style="text-align:right; display:none;" class="next"><h4><a href='javascript:;'>Next(<span id='num-child'></span>)</a></h4></div>
 			</div><!-- simpler-wrapper close. -->				
 			{% endautoescape %}
 			{% endif %}
@@ -82,5 +82,5 @@
 	{% endfor %}
 	</div>
 	{% endfor %}
-	<div id="{{request}}" class="scrolltoid"></div>
+	<div id="scrolltoid" style="display:none;">{{request}}</div>
 {% endblock %}
