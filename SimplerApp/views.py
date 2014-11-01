@@ -148,7 +148,7 @@ def makesimpler(request):
         highlight_simpler = Simpler.objects.get(id=highlight_simpler_id)
         c = Simpler.objects.get_or_create(post = highlight_simpler.post, parent_simpler = highlight_simpler.parent_simpler,  simpler = highlight_simpler.simpler + '<br/><br/><div class ="answer">'+ simpler_text + '</div>', simpler_original = highlight_simpler.simpler,coeficient = highlight_simpler.coeficient, parent_list = highlight_simpler.parent_list, author = request.user.username, display=' ', created = datetime.now(), modified = datetime.now())[0]
         #getting the user who asked the question
-        if highlight_simpler.author is not request.user.username:
+        if highlight_simpler.author != request.user.username:
             u = UserNotification.objects.get_or_create(user=highlight_simpler.author, notification=str(request.user.username) + ' added an answer to your question', status='unread', postid=highlight_simpler.post.id, simplerid=c.id)
             if u[1]:
                 u[0].created = datetime.now()
