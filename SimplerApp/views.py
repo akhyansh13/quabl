@@ -7,6 +7,7 @@ from models import Post, Simpler, postBox, SimplerBox, UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
+from functions import show_less_post, show_less_ques, show_less_ans
 
 def index(request):
     context = RequestContext(request)
@@ -137,7 +138,7 @@ def makesimpler(request):
                 authors.append(profile.user.username)
         for author in authors:
             if author != request.user.username:
-                u = UserNotification.objects.get_or_create(user=author, notification=str(request.user.username) + ' added an answer to post:' + str(post.id), status='unread', postid=post.id)
+                u = UserNotification.objects.get_or_create(user=author, notification=str(request.user.username) + ' added an answer to post:' + show_less_post(post.post), status='unread', postid=post.id)
                 if u[1]:
                     u[0].created = datetime.now()
                 u[0].modified = datetime.now()
@@ -149,7 +150,7 @@ def makesimpler(request):
         c = Simpler.objects.get_or_create(post = highlight_simpler.post, parent_simpler = highlight_simpler.parent_simpler,  simpler = highlight_simpler.simpler + '<br/><br/><div class ="answer">'+ simpler_text + '</div>', simpler_original = highlight_simpler.simpler,coeficient = highlight_simpler.coeficient, parent_list = highlight_simpler.parent_list, author = request.user.username, display=' ', created = datetime.now(), modified = datetime.now())[0]
         #getting the user who asked the question
         if highlight_simpler.author != request.user.username:
-            u = UserNotification.objects.get_or_create(user=highlight_simpler.author, notification=str(request.user.username) + ' added an answer to your question', status='unread', postid=highlight_simpler.post.id, simplerid=c.id)
+            u = UserNotification.objects.get_or_create(user=highlight_simpler.author, notification=str(request.user.username) + ' added an answer to your question:' + show_less_ques(highlight_simpler.simpler), status='unread', postid=highlight_simpler.post.id, simplerid=c.id)
             if u[1]:
                 u[0].created = datetime.now()
             u[0].modified = datetime.now()
@@ -162,7 +163,7 @@ def makesimpler(request):
                 authors.append(profile.user.username)
         for author in authors:
             if author != request.user.username:
-                u = UserNotification.objects.get_or_create(user=author, notification=str(request.user.username) + ' added an answer to post:' + str(highlight_simpler.post.id), status='unread', postid=highlight_simpler.post.id, simplerid=c.id)
+                u = UserNotification.objects.get_or_create(user=author, notification=str(request.user.username) + ' added an answer to a question:' + show_less_ques(highlight_simpler.simpler) + 'in the post:' + show_less_post(highlight_simpler.post.post), status='unread', postid=highlight_simpler.post.id, simplerid=c.id)
                 if u[1]:
                     u[0].created = datetime.now()
                 u[0].modified = datetime.now()
@@ -279,9 +280,11 @@ def define(request, post_id, simpler_id, new_simpler, old_simpler):
             f.created = datetime.now()
             f.save()
             question = highlightq.objects.get_or_create(highlight=f, question=f.description, created = datetime.now())
+            notif_ans = show_less_ans(Simpler.objects.get(id=simpler_id).simpler_original)
+            notif_post = show_less_post(Post.objects.get(id=post_id).post)
             #getting the user who wrote the simpler
             if simpler.author != request.user.username:
-                u = UserNotification.objects.get_or_create(user=simpler.author, notification=str(request.user.username) + ' added a question to your answer:' + str(simpler_id), status='unread', postid=post_id, simplerid=simpler_id)
+                u = UserNotification.objects.get_or_create(user=simpler.author, notification=str(request.user.username) + ' added a question to your answer:' + notif_ans, status='unread', postid=post_id, simplerid=simpler_id)
                 if u[1]:
                     u[0].created = datetime.now()
                 u[0].modified = datetime.now()
@@ -294,7 +297,7 @@ def define(request, post_id, simpler_id, new_simpler, old_simpler):
                     authors.append(profile.user.username)
             for author in authors:
                 if author != request.user.username:
-                    u = UserNotification.objects.get_or_create(user=author, notification=str(request.user.username) + ' added a question to post:' + str(post_id), status='unread', postid=post_id, simplerid=simpler_id)
+                    u = UserNotification.objects.get_or_create(user=author, notification=str(request.user.username) + ' added a question to an answer:' + notif_ans + 'in the post:' + notif_post, status='unread', postid=post_id, simplerid=simpler_id)
                     if u[1]:
                         u[0].created = datetime.now()
                     u[0].modified = datetime.now()
