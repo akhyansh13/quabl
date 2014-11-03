@@ -9,20 +9,6 @@ $(document).ready(function(){
 		}		
 	});
 
-	var color = 1;
-	$(".posttopic").each(function(){
-		if (color%3==1){
-			$(this).css("background-color","LightYellow");
-		}
-		else if (color%3==2){
-			$(this).css("background-color","LightGreen");
-		}
-		else{
-			$(this).css("background-color","Orange");			
-		}
-		color = color + 1;
-	});
-
 	$(".postlink").each(function(){
 		var height = $(this).height();
 		$(this).parent().find(".posttopic").height(height-20);
