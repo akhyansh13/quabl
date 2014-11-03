@@ -75,3 +75,17 @@ body {
     border-bottom: 0;
   }
 }
+
+.highlight,
+.next,
+.btngrp,
+.author,
+.quespane,
+.header,
+#Post {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}

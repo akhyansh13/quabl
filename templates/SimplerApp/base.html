@@ -56,16 +56,22 @@
 						</ul>
 					</li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle notifications" data-toggle="dropdown"><span id='notifdisp'>{{notifcount}}&nbsp;&nbsp;</span><b class="glyphicon glyphicon-exclamation-sign"></b></a>
-						<ul class="dropdown-menu" style="max-width:450px; max-width:450px; min-height:550px; min-height:550px; width:450px; height:550px;">
+					{% autoescape off %}
+						<a href="#" class="dropdown-toggle notifications" data-toggle="dropdown"><span id='notifdisp'>{{unotifcount}}&nbsp;&nbsp;</span><b class="glyphicon glyphicon-exclamation-sign"></b></a>
+						<ul class="dropdown-menu" id="dropdown-notifications" style="background-color:blue;">
 						{% if notifcount == 0 %}
 						<p class='text-muted' style='text-align:center;'>You don't have any notifications right now.</p>
 						{% endif %}
-						{% for notif in notifs %}
-							<li style><a href='/request/notifications/{{notif.id}}/' style="padding-top:10px; padding-left:10px; padding-bottom:10px; padding-right:10px;">{{notif.notification}}</a></li>
-							<li class="divider" style="width:430px;"></li>
+						{% for unotif in unreadnotifs %}
+							<li><a href='/request/notifications/{{unotif.id}}/' style="padding:0px 10px 0px 10px; white-space:normal;"><span class="glyphicon glyphicon-exclamation-sign" style="color:blue;"></span>{{unotif.notification}}</a></li>
+							<!--li class="divider"></li-->
+						{% endfor %}
+						{% for rnotif in readnotifs %}
+							<li><a href='/request/notifications/{{rnotif.id}}/' style="padding:10px 10px 10px 10px;">{{rnotif.notification}}</a></li>
+							<!--li class="divider"></li-->
 						{% endfor %}
 						</ul>
+					{% endautoescape %}
 					</li>
 				</ul>
 			{% endif %}

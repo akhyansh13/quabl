@@ -3,5 +3,8 @@
 from models import UserNotification
 
 def notifs_processor(request):
-        notifs = UserNotification.objects.all().filter(user=request.user.username).filter(status='unread')
-        return {'notifs': notifs, 'notifcount': notifs.count()}
+        unreadnotifs = UserNotification.objects.all().filter(user=request.user.username).filter(status='unread')
+        readnotifs = UserNotification.objects.all().filter(user=request.user.username).filter(status='read')
+        rreadnotifs = reversed(readnotifs)
+        runreadnotifs = reversed(unreadnotifs)
+        return {'readnotifs': rreadnotifs, 'unreadnotifs': runreadnotifs, 'unotifcount': unreadnotifs.count(), 'notifcount': unreadnotifs.count() + readnotifs.count()}

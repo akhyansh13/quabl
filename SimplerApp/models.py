@@ -115,5 +115,3 @@ class HighlightDesc(forms.ModelForm):
     class Meta:
         model = highlight
         fields = ('description',)
-
-

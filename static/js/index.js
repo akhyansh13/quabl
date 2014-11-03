@@ -1,5 +1,10 @@
 $(document).ready(function(){
 
+	$('#dropdown-notifications').each(function(){
+		$(this).attr('style', "max-width:450px; min-width:450px; width:450px; min-height:" + screen.height + "px; max-height:" + screen.height + "px; height:450" + screen.height + "px;");
+	});
+
+
 	$(document).keyup(function(){
 		if (!$(".postbox").val()||!$(".topicbox").val()) {
 	    	$(".addpostbtn").attr("disabled", "disabled");
