@@ -34,7 +34,7 @@
 		{% block css_block %}{% endblock %}
 
 		{% block basiccss %}
-			<link href="{% static 'css/simpler.css' %}" rel="stylesheet"> 
+			<link href="{% static 'css/simpler.css' %}" rel="stylesheet">
 		{% endblock %}
 
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -46,18 +46,16 @@
 		{% block header_block %}
 			<div class="header">
 			{% if user.is_authenticated %}
-				<ul class="nav navbar-nav navbar-right">
+				<ul class="nav navbar-nav navbar-right" style="font-weight:bold; font-size:13pt;">
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{user.username}} <b class="caret"></b></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:#444;">{{user.username}} <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="/">Home</a></li>
-							<li class="divider"></li>
 							<li><a href="/logout/"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
 					{% autoescape off %}
-						<a href="#" class="dropdown-toggle notifications" data-toggle="dropdown"><span id='notifdisp'>{{unotifcount}}&nbsp;&nbsp;</span><b class="glyphicon glyphicon-exclamation-sign"></b></a>
+						<a href="#" class="dropdown-toggle notifications" data-toggle="dropdown" style="color:#444;"><span id='notifdisp'>{{unotifcount}}&nbsp;&nbsp;</span><b class="glyphicon glyphicon-exclamation-sign"></b></a>
 						<ul class="dropdown-menu" id="dropdown-notifications" style="background-color:blue;">
 						{% if notifcount == 0 %}
 						<p class='text-muted' style='text-align:center;'>You don't have any notifications right now.</p>
@@ -75,7 +73,7 @@
 					</li>
 				</ul>
 			{% endif %}
-			<h3><a href='/' style="color:#A8A8A8; text-decoration:none;">Quabl.</a></h3>
+			<span style="padding-left:7%;"><a href='/' style="color:#FFFFFF; text-decoration:none; background-color:#FFA500; padding-top:20px; padding-bottom:17px;border-radius:4px;font-size:25pt; font-weight:bold; padding-left:10px; padding-right:10px;border-bottom: 1px solid #DDD;box-shadow: 0px 3px 2px -2px rgba(200, 200, 200, 0.3);">Quabl.</a></span>
 			</div>
 		{% endblock %}
 	</head>
@@ -90,7 +88,7 @@
 	</body>
 	<script src="{% static 'js/bootstrap.min.js' %}"></script>
 	<script src='{% static "ckeditor/ckeditor.js" %}'></script>
-	<script>               
+	<script>
 		CKEDITOR.replaceClass = 'ckeditor';
 	</script>
 </html>
