@@ -7,7 +7,7 @@ from models import Post, Simpler, postBox, SimplerBox, UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from functions import show_less_post, show_less_ques, show_less_ans
+from functions import show_less_post, show_less_ques, show_less_ans, hfilter
 
 def index(request):
     context = RequestContext(request)
@@ -247,6 +247,8 @@ def define(request, post_id, simpler_id, new_simpler, old_simpler):
         new_simpler, old_simpler = old_simpler, new_simpler
         flag = True
     highlight = new_simpler.split('curr_highlight')[1].split('>')[1].split('<')[0];     #Extracts the highlights.
+    if hfilter(new_simpler, highlight) == False:
+        return HttpResponseRedirect('/request/redirected/postid:' + str(post_id) + ';simplerid:' + str(simpler_id) + ';')
     context_dict = {'highlight':highlight}
     context_dict['new_simpler']=new_simpler
     post = Post.objects.get(id=post_id)
@@ -379,7 +381,7 @@ def defined(request, post_id, simpler_id, highlightx, current):
 def requestbyuser(request, category, description):
     context = RequestContext(request)
     
-    if category == 'back_to_post' or category == 'askforsimpler' or category == 'addsimpler':
+    if category == 'back_to_post' or category == 'askforsimpler' or category == 'addsimpler' or category == 'redirected':
         postid = description.split('postid:')[1].split(';')[0]
         if request.user.is_authenticated():
             c = ReqByUser.objects.get_or_create(user=request.user, category=category, description=description)
