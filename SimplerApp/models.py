@@ -64,6 +64,7 @@ class postBox(forms.ModelForm):
         
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
+    full_name = models.CharField(max_length=1000000, default=' ')
     picture = models.ImageField(upload_to='profile_images', blank=True)
     followed_posts = models.CharField(max_length=10000000, default='-1;-1')
     followed_simplers = models.CharField(max_length=10000000, default='-1;-1')
@@ -85,16 +86,19 @@ class UserNotification(models.Model):
         return str(self.user) + '-' + self.notification
 
 class ReqByUser(models.Model):
+
     user = models.ForeignKey(User)
     category = models.CharField(max_length=1000)
     description = models.CharField(max_length=1000)
     frequency = models.IntegerField(null=False, default=0)
     created = models.DateTimeField(default=datetime.now())
     modified = models.DateTimeField(default=datetime.now())
+
     def __unicode__(self):
         return self.category + ' by ' + str(self.user.username)
     
 class UserForm(forms.ModelForm):
+
     password = forms.CharField(widget=forms.PasswordInput())
 
     class Meta:
@@ -104,7 +108,7 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('picture', 'shortbio')
+        fields = ('full_name', 'shortbio', 'picture' )
 
 class HighlightDesc(forms.ModelForm):
     description = forms.CharField(max_length=10000000,widget=forms.Textarea(attrs={'class':'DescBox'}))

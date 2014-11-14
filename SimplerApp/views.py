@@ -187,7 +187,6 @@ def register(request):
             user = user_form.save()
 
             user.set_password(user.password)
-            user.save()
 
             profile = profile_form.save(commit=False)
             profile.user = user
@@ -195,7 +194,20 @@ def register(request):
                 profile.picture = request.FILES['picture']
             profile.created = datetime.now()
             profile.modified = datetime.now()
+            name_arr = profile.full_name.split(' ')
+            count = 0
+            for n in name_arr:      #Looks for first word and filters out '' or ' '
+                if n != '' and n != ' ':
+                    user.first_name = n
+                    break
+            name_arr.reverse()
+            for t in name_arr:
+                if t != '' and t != ' ':
+                    if t != user.first_name:
+                        user.last_name = t
+                        break
             profile.save()
+            user.save()
 
             registered = True
 
