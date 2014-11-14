@@ -211,11 +211,8 @@ def register(request):
 
             registered = True
 
-            img = Image.open(profile.picture.path)
-            basewidth = 300
-            wpercent = (basewidth/float(img.size[0]))
-            hsize = int((float(img.size[1])*float(wpercent)))
-            img = img.resize((basewidth,hsize), PIL.Image.ANTIALIAS)
+            profpic = Image.open(profile.picture.path)  #Primitive image filter.
+            profpic = profpic.resize((300,300), PIL.Image.ANTIALIAS)
             img.save(profile.picture.path)
 
         else:
