@@ -13,6 +13,7 @@ class topic(models.Model):
 class Post(models.Model):
     post = models.CharField(max_length=10000000)
     author = models.CharField(max_length=100000)
+    writer = models.ForeignKey(User, blank=True, null=True)
     topic = models.CharField(max_length=100000, default=' ')
     description = models.CharField(max_length=1000000000, null=True, blank=True)
     created = models.DateTimeField(default=datetime.now())
@@ -29,6 +30,7 @@ class Simpler(models.Model):
     coeficient = models.IntegerField(null = False, blank = False)
     parent_list = models.CharField(max_length=100000)
     author = models.CharField(max_length=100000)
+    writer = models.ForeignKey(User, null=True, blank=True)
     display = models.CharField(max_length=1000, default=' ')
     created = models.DateTimeField(default=datetime.now())
     modified = models.DateTimeField(default=datetime.now())
@@ -40,7 +42,6 @@ class highlight(models.Model):
     highlight = models.CharField(max_length=100000000)
     highlight_parent = models.ForeignKey(Simpler, related_name=u'highlight_parent', blank=True, null=True)
     highlight_simpler = models.ForeignKey(Simpler, blank=True, null=True)
-    status = models.IntegerField(null=False)
     req_by = models.ForeignKey(User)
     description = models.CharField(max_length=10000000)
     created = models.DateTimeField(default=datetime.now())
@@ -60,18 +61,13 @@ class postBox(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('topic', 'post',)
-    
-class SimplerBox(forms.ModelForm):
-    simpler = forms.CharField(max_length=10000000,widget=forms.Textarea(attrs={'rows': 8, 'cols': 80}))
-    class Meta:
-        model = Simpler
-        fields = ('simpler',)
         
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     picture = models.ImageField(upload_to='profile_images', blank=True)
     followed_posts = models.CharField(max_length=10000000, default='-1;-1')
     followed_simplers = models.CharField(max_length=10000000, default='-1;-1')
+    shortbio = models.CharField(max_length=10000000, default="Don't know :(")
     created = models.DateTimeField(default=datetime.now())
     modified = models.DateTimeField(default=datetime.now())
     def __unicode__(self):
@@ -108,7 +104,7 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('picture',)
+        fields = ('picture', 'shortbio')
 
 class HighlightDesc(forms.ModelForm):
     description = forms.CharField(max_length=10000000,widget=forms.Textarea(attrs={'class':'DescBox'}))

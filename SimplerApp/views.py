@@ -3,11 +3,15 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Simpler.settings')
 from django.shortcuts import render_to_response 
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
-from models import Post, Simpler, postBox, SimplerBox, UserForm, UserProfileForm, HighlightDesc, highlightq, highlight, topic, ReqByUser, UserNotification, UserProfile
+from models import Post, Simpler, postBox, UserForm, UserProfileForm, HighlightDesc, highlightq, highlight, topic, ReqByUser, UserNotification, UserProfile
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from functions import show_less_post, show_less_ques, show_less_ans, hfilter
+import json
+from django.contrib.auth.models import User
+import PIL
+from PIL import Image
 
 def index(request):
     context = RequestContext(request)
@@ -57,6 +61,7 @@ def addpost(request):
         if form.is_valid():
             f = form.save(commit=False)
             f.author = request.user.username
+            f.writer = request.user
             p = f.post
             f.post = '<p>' + p + '</p>'         #Encloses in <p></p>.
             f.created = datetime.now()
@@ -129,7 +134,7 @@ def makesimpler(request):
         post_id = int(request.GET['post_id'])
         post = Post.objects.get(id=post_id)
         simpler_text = request.GET['simpler_text']
-        c = Simpler.objects.get_or_create(post=post, simpler = '<div class ="question"></div><div class ="answer">' + simpler_text + '</div>', simpler_original=simpler_text, coeficient=1, author=request.user.username, display=' ', parent_list=' ', created = datetime.now(), modified = datetime.now())[0]
+        c = Simpler.objects.get_or_create(post=post, simpler = '<div class ="question"></div><div class ="answer">' + simpler_text + '</div>', simpler_original=simpler_text, coeficient=1, author=request.user.username, writer=request.user, display=' ', parent_list=' ', created = datetime.now(), modified = datetime.now())[0]
         #getting all the users who have followed the particular post
         authors = []
         profiles = UserProfile.objects.all()
@@ -193,6 +198,13 @@ def register(request):
             profile.save()
 
             registered = True
+
+            img = Image.open(profile.picture.path)
+            basewidth = 300
+            wpercent = (basewidth/float(img.size[0]))
+            hsize = int((float(img.size[1])*float(wpercent)))
+            img = img.resize((basewidth,hsize), PIL.Image.ANTIALIAS)
+            img.save(profile.picture.path)
 
         else:
             print user_form.errors, profile_form.errors
@@ -267,7 +279,6 @@ def define(request, post_id, simpler_id, new_simpler, old_simpler):
                 simpler.simpler = '<div class="question">' + old_simpler + '</div><div class="answer">' + (new_simpler.replace('curr_highlight','highlight')).replace('curr_checkedhigh','checkedhigh').replace('style="display: none;"','') + '</div>'        #JS and Python conflict fixed. Brute forced the display:none out
             simpler.modified = datetime.now()
             simpler.save()
-            f.status = 0
             f.highlight = highlight
             f.req_by = request.user
             highlight_simpler_context = '<div class="question">' + highlight + '<br/><br/>'
@@ -277,7 +288,7 @@ def define(request, post_id, simpler_id, new_simpler, old_simpler):
             while curr_simpler.parent_simpler != None:
                 parent_list += "parent" + str(curr_simpler.parent_simpler.id) + " "
                 curr_simpler = curr_simpler.parent_simpler
-            g = Simpler.objects.get_or_create(post = simpler.post, parent_simpler = simpler, simpler = simpler_content, coeficient=simpler.coeficient+1, parent_list = parent_list, author = request.user.username, display='none')[0]
+            g = Simpler.objects.get_or_create(post = simpler.post, parent_simpler = simpler, simpler = simpler_content, coeficient=simpler.coeficient+1, parent_list = parent_list, author = request.user.username, writer=request.user, display='none')[0]
             f.highlight_simpler = g
             f.created = datetime.now()
             f.save()
@@ -330,7 +341,6 @@ def defined(request, post_id, simpler_id, highlightx, current):
         if form.is_valid():
             f = form.save(commit=False)
             f.highlight_parent = parent_simpler
-            f.status = 0
             f.highlight = highlight
             f.req_by = request.user
             highlight_simpler_context = '<div class="question">' + highlight + '<br/><br/>'
@@ -340,7 +350,7 @@ def defined(request, post_id, simpler_id, highlightx, current):
             while curr_simpler.parent_simpler != None:
                 parent_list += 'parent' + str(curr_simpler.parent_simpler.id) + " "
                 curr_simpler = curr_simpler.parent_simpler
-            g = Simpler.objects.get_or_create(post = parent_simpler.post, parent_simpler = parent_simpler, simpler = simpler_content, coeficient = parent_simpler.coeficient + 1, parent_list = parent_list, author = request.user.username, display='none')[0]
+            g = Simpler.objects.get_or_create(post = parent_simpler.post, parent_simpler = parent_simpler, simpler = simpler_content, coeficient = parent_simpler.coeficient + 1, parent_list = parent_list, author = request.user.username, writer=request.user, display='none')[0]
             f.highlight_simpler = g
             f.created = datetime.now()
             f.save()
@@ -445,3 +455,26 @@ def addanswer(request, qid):
     context_dict = {'simpler':simpler}
     context_dict['post_id'] = simpler.post.id
     return render_to_response('SimplerApp/addsimpler.html', context_dict, context)
+
+def getUserProfile(request, user_id):
+    context = RequestContext(request)
+    request_user_id = request.user.id
+    request_user = request.user
+    user_id_int = int(user_id)
+    if request_user_id == user_id_int:
+        uprof = UserProfile.objects.get(user=request_user)
+        req = {'username':uprof.user.username}
+        req['picurl'] = uprof.picture.url
+        req['fullname'] = request_user.first_name + " " + request_user.last_name
+        req['shortbio'] = uprof.shortbio
+        data = json.dumps(req)
+    else:
+        required_user = User.objects.get(id=user_id_int)
+        required_user_profile = UserProfile.objects.get(user=required_user)
+        req = {'username':required_user.username}
+        req['picurl'] = required_user_profile.picture.url
+        req['fullname'] = required_user.first_name + " " + required_user.last_name
+        req['shortbio'] = required_user_profile.shortbio
+        data = json.dumps(req)
+    return HttpResponse(data)
+

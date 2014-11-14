@@ -26,8 +26,9 @@ TEMPLATE_DIRS = (
 	TEMPLATE_PATH,
 )
 
-MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(PROJECT_PATH, 'quablmedia')
+MEDIA_URL = '/quablmedia/'
+ADMIN_MEDIA_PREFIX = '/quablmedia/admin/'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/

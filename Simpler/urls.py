@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
-from SimplerApp.views import index, post, makesimpler, register, user_login, user_logout, deletesimpler, addpost, define, defined, addanswer, requestbyuser, postreq, follow
+from SimplerApp.views import index, post, makesimpler, register, user_login, user_logout, deletesimpler, addpost, define, defined, addanswer, requestbyuser, postreq, getUserProfile, follow
 from django.contrib import admin
+from django.conf import settings
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -23,4 +24,10 @@ urlpatterns = patterns('',
     url(r'^defined/(?P<post_id>\w+)/(?P<simpler_id>\w+)/(?P<highlightx>[\w|\W]+)/(?P<current>[\w|\W]+)/$', defined),                   
     url(r'^addsimpler/(?P<qid>\w+)/$', addanswer),
     url(r'^request/(?P<category>[\w|\W]+)/(?P<description>[\w|\W]+)/$', requestbyuser),
+    url(r'^userprof/(?P<user_id>\w+)/$', getUserProfile),
 ) 
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        (r'^quablmedia/(?P<path>.*)$', 'django.views.static.serve', {
+        'document_root': settings.MEDIA_ROOT}))
