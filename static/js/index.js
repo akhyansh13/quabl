@@ -41,11 +41,16 @@ $(document).ready(function(){
 		var content = $(this).html();
 		var id = String(content.split("-")[0]);
 		var number = String(content.split("-")[1]);
-		if(parseInt(number)==1){
-			$("#"+id).html(number + " Simpler | ");
+
+		if(parseInt(number)==0){
+			$("#"+id).html("No Answers Yet. | ");
+		}
+
+		else if(parseInt(number)==1){
+			$("#"+id).html("1 Answer | ");
 		}
 		else{
-			$("#"+id).html(number + " Simplers | ");
+			$("#"+id).html(number + " Answers | ");
 		}
 	});
 
