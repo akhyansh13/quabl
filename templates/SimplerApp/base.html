@@ -42,14 +42,14 @@
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
-	<div id="header-wrapper" style="position:fixed; top:0; width:100%;z-index:2;">	
+	<div id="header-wrapper">	
 
-		<div id="profblock" style="padding-left:20%; padding-right:20%; padding-bottom:20px; padding-top:50px; width:100%; min-height:400px; background-color:#F5F5F5; z-index:2;display:none;">
+		<div id="profblock">
 				<div id ='profpic' style='float:right;'><img id='profimg'/></div>
 				<div id = 'uinfo' style='float:left;'>
-					<div id ='fname' style='font-weight:bold; font-size:22pt; padding-bottom:10px;'></div>
-					<div id = 'unamecontainer' style='padding-bottom:10px;'><span class="category" style="font-weight:bold; color:#999;">ALIAS  </span><span id="uname"></span></div>
-					<div id = 'shortbiocontainer' style='padding-bottom:10px;'><span class="category" style="font-weight:bold; color:#999;">SHORT BIO  </span><span id="sbio"></span></div>
+					<div id ='fname'></div>
+					<div id = 'unamecontainer' style='padding-bottom:10px;'><span class="category">ALIAS  </span><span id="uname"></span></div>
+					<div id = 'shortbiocontainer' style='padding-bottom:10px;'><span class="category" style="">SHORT BIO  </span><span id="sbio"></span></div>
 			</div>
 		</div>
 
@@ -84,14 +84,14 @@
 					</li>
 				</ul>
 			{% endif %}
-			<span style="padding-left:7%;"><a href='/' style="color:#FFFFFF; text-decoration:none; background-color:#FFA500; padding-top:15px; padding-bottom:17px;border-radius:4px;font-size:25pt; padding-left:10px; padding-right:10px;">Quabl.</a></span>
+			<span style="padding-left:7%;"><a href='/' id="main-logo">Quabl.</a></span>
 			</div>
 		</div>
 		{% endblock %}
 	</head>
 	<body>
 		{% block sideblock %}{% endblock %}
-			<div class="container" style="padding-bottom:50px;">
+			<div class="container">
 			{% block body_block %}{% endblock %}
 				<div id=class="footer navbar-fixed-bottom" style='text-align:center; padding-top:10px;'>
 					<p class="muted credit"> <!--Because the people who are crazy enough to think they can change the world are the ones who do.--> <hr/> </p>

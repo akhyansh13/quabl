@@ -40,6 +40,7 @@ body {
   .container {
     max-width: 60%;
     padding-top:105px;
+    padding-bottom: 50px;
   }
 }
 .container-narrow > hr {
@@ -76,4 +77,56 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+textarea {
+ overflow: auto;
+   border-radius:3px;
+   border-width:1px;
+   border-style:solid; /* Uniform border across textarea as opposed to the shadowy default design */
+   border-color:lightgray;
+   resize: none;   /*The resize handle is removed */
+   padding: 2px; /* padding for the TEXT that goes into the textarea */
+}
+
+#header-wrapper{
+  position: fixed;
+  top:0;
+  width: 100%;
+  z-index: 2;
+}
+
+#profblock{
+  padding-left: 20%;
+  padding-right: 20%;
+  padding-bottom: 20px;
+  padding-top: 50px;
+  width: 100%;
+  min-height: 400px;
+  background-color:#F5F5F5;
+  z-index: 2;
+  display: none;
+}
+
+#fname{
+  font-weight:bold; 
+  font-size:22pt; 
+  padding-bottom:10px;
+}
+
+.category{
+  font-weight:bold; 
+  color:#999;
+}
+
+#main-logo{
+  color:#FFFFFF; 
+  text-decoration:none; 
+  background-color:#FFA500; 
+  padding-top:15px; 
+  padding-bottom:17px;
+  border-radius:4px;
+  font-size:25pt; 
+  padding-left:10px; 
+  padding-right:10px;
 }

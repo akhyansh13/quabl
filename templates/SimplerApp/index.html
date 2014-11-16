@@ -38,7 +38,7 @@
 				{% autoescape off %}
 				{% for post in topic %}
 					<div class="hidtopic" style="display:none;">{{post.topic}}</div>
-					<blockquote style="font-size:12pt;">
+					<blockquote style="font-size:11pt; color:#444;">
 						{{post.post}}
 					<div align="right"><span id="{{post.id}}"></span><span><a href='/request/explore/{{post.id}}/'>Explore</a></span>
 					{% if user.is_authenticated %}
