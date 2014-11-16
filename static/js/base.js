@@ -1,31 +1,8 @@
-function deferred_up(){
+function deferred_up(){		//Pre-fetching User Profiles.
 
 		var defer = $.Deferred();
 
-		window.scrollTo(0,0);
-
-		setTimeout(function(){
-			defer.resolve();
-		}, 50);
-
-		return defer;
-	}
-
-$(document).ready(function(){
-
-	var upopen_tb_offset = -200;		//Initialising variable with proper scope.
-	var lastst = 0;
-
-	$("img").not("#profimg").each(function(){                //Correcting the img-src inconsistency using JS. Find a better solution.
-		proper_src = $(this).attr("src").replace("http:/", "http://");
-		$(this).attr("src",proper_src);
-	});
-
-	$(".getup").click(function(){
-
-		$this = $(this);
-
-		$.when(deferred_up()).then(function(){
+		$this = $(".getup");
 
 			var geturl = '/userprof/' + $this.attr("data");
 			
@@ -45,44 +22,72 @@ $(document).ready(function(){
 					}
 				});
 			});
+			setTimeout(function(){
+			defer.resolve();
+		}, 100);		//Pre-fetching ETA.
+		return defer;
+	}
 
-			$(".header").css("position", "static");
+$(document).ready(function(){
 
-			$("#profblock").slideDown("slow", function(){
-				upopen_tb_offset = $(".header").offset().top;
-			});
-			
-			$("body").css("padding-top", "0px");
-		})
+	var lastst = 0;
 
-		$("#menubtns").hide();
-
-		$("#scrollinstruct").show();
-
+	$("img").not("#profimg").each(function(){                //Correcting the img-src inconsistency using JS. Find a better solution.
+		proper_src = $(this).attr("src").replace("http:/", "http://");
+		$(this).attr("src",proper_src);
 	});
 
-	$(document).on('scroll', function(){
-        
-        var st = $(document).scrollTop();
-        
-        if($(document).scrollTop() > upopen_tb_offset){
+	$(".getup").click(function(){
 
-            $(".header").css({position: "fixed", top:0});   
-            $("#menubtns").show();
-			$("#scrollinstruct").hide();
+		var stl = $(document).scrollTop();
 
-        }
+		$.when(deferred_up()).then(function(){
 
-        else if($(document).scrollTop() <= upopen_tb_offset && lastst >= upopen_tb_offset){
-            
-            $("#profblock").hide();
-            window.scrollTo(0,0); 
-            $(".header").css({position: "fixed", top: 0}); 
-            $("body").css("padding-top", "100px");
+			$("#profblock").slideDown();
+			$("#header-wrapper").css("position", "relative");
+			$("#profblock").css({position: "absolute", top:stl});
+			$(".header").css({position:"absolute", top:stl+400});
 
-        } 
+			$("#menubtns").hide();
 
-        lastst = st;   
+			$("#scrollinstruct").show();
 
-    });    
+		});
+	});
+
+	 $(document).on('scroll', function(){
+
+	 	upopen_tb_offset = $(".header").offset().top;
+
+        if($("#profblock").is(":visible")){
+
+	        var st = $(document).scrollTop();
+	        
+	        if(st > upopen_tb_offset){  //Scrolling lower than topbar.
+
+	            $(".header").css({position: "fixed", top:0});   
+	            $("#menubtns").show();
+				$("#scrollinstruct").hide();
+				$("#profblock").hide();
+				$("#profblock").css({position: "fixed", top:0});
+				$("#header-wrapper").css({position:"fixed", top:0});
+
+	        }
+
+	        else if(lastst>st){		//Scrolling upwards.
+	            
+	            var stl = $(document).scrollTop();
+
+				upopen_tb_offset = $(".header").offset().top;
+				$("#header-wrapper").css("position", "relative");
+				$("#profblock").css({position: "absolute", top:stl});
+				$(".header").css({position:"absolute", top:stl+400});   
+
+	        } 
+
+	        lastst = st;
+
+	    }
+    });   
 });
+

@@ -41,7 +41,9 @@
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
-		<div id="profblock" style="padding-left:20%; padding-right:20%; padding-bottom:20px; padding-top:50px; width:100%; min-height:400px; display:none; background-color:#F5F5F5">
+	<div id="header-wrapper" style="position:fixed; top:0; width:100%;z-index:2;">	
+
+		<div id="profblock" style="padding-left:20%; padding-right:20%; padding-bottom:20px; padding-top:50px; width:100%; min-height:400px; background-color:#F5F5F5; z-index:2;display:none;">
 				<div id ='profpic' style='float:right;'><img id='profimg'/></div>
 				<div id = 'uinfo' style='float:left;'>
 					<div id ='fname' style='font-weight:bold; font-size:22pt; padding-bottom:10px;'></div>
@@ -56,7 +58,7 @@
 				<ul class="nav navbar-nav navbar-right" id="scrollinstruct" style="font-weight:bold; font-size:13pt; display:none; padding-top:12px;">Scroll down to dismiss.</ul>
 				<ul class="nav navbar-nav navbar-right" id="menubtns" style="font-weight:bold; font-size:13pt;">
 					<li class="active getup" data="{{user.id}}">
-						<a href="#" style="color:#444;">{{user.username}}</a>
+						<a href="javascript:;" style="color:#444;">{{user.username}}</a>
 					</li>
 					<li class="active">
 						<a href="/logout/" style="color:#444;"><span class="glyphicon glyphicon-log-out"></span></a>
@@ -81,8 +83,9 @@
 					</li>
 				</ul>
 			{% endif %}
-			<span style="padding-left:7%;"><a href='/' style="color:#FFFFFF; text-decoration:none; background-color:#FFA500; padding-top:15px; padding-bottom:17px;border-radius:4px;font-size:25pt; font-weight:bold; padding-left:10px; padding-right:10px;">Quabl.</a></span>
+			<span style="padding-left:7%;"><a href='/' style="color:#FFFFFF; text-decoration:none; background-color:#FFA500; padding-top:15px; padding-bottom:17px;border-radius:4px;font-size:25pt; padding-left:10px; padding-right:10px;">Quabl.</a></span>
 			</div>
+		</div>
 		{% endblock %}
 	</head>
 	<body>
