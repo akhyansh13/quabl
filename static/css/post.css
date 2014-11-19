@@ -159,3 +159,20 @@ body {
   margin: 0px; 
   margin-right:5px;
 }
+
+.ql-container{
+  background-color: #FFFFFF;
+  border:solid;
+}
+
+.ql-toolbar{
+  padding-bottom:5px;
+}
+
+.ql-editor{
+  height: 300px;
+}
+
+.preview{
+  display: none;
+}

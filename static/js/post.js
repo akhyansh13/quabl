@@ -62,22 +62,11 @@ $(document).ready(function(){
 	$(".addsimp").click(function(){					//add simpler button code [AJAX].
 		var simpler_id = $(this).attr('id');
 		var post_id = $(this).attr("data");
-		
-		if(simpler_id == 'level1-simp'){			//handles level1 simplers.
-
 		var simpler_textarea_id = 'level1-textarea';
-		var simpler_text = CKEDITOR.instances[simpler_textarea_id].getData();
+		var simpler_text = editor.getHTML();
 			$.get(('/makesimpler/'),{simpler_id:simpler_id, simpler_text:simpler_text, post_id:post_id,}, function(data){
 				location.reload();
 			});
-		}
-		else{											//handles simplers of level greater than or equal to 2.											
-			var simpler_textarea_id = 'simp'+ simpler_id;
-			var simpler_text = CKEDITOR.instances[simpler_textarea_id].getData();
-			$.get(('/makesimpler/'),{simpler_id:simpler_id, simpler_text:simpler_text, post_id:post_id,}, function(data){
-				location.reload();
-			});
-		}
 	});
 					
 	$(".reqsimp").click(function(){

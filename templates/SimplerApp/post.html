@@ -50,7 +50,16 @@
 	{% endif %}
 
 	<div class="simpler-textarea" style='display:none;'>
-	<div align="center"><textarea class="ckeditor" id='level1-textarea'></textarea></input>{% csrf_token %}</div>
+	<div>
+		<div id="toolbar">
+		  <button class="ql-bold btn btn-default" style="font-size:13pt; padding: 5px 10px; margin:5px;">B</button>
+		  <button class="ql-italic btn btn-default" style="font-size:13pt; padding: 5px 13px; margin:5px;">I</button>
+		  <button class="ql-underline btn btn-default" style="font-size:13pt; padding: 5px 10px; margin:5px;"><u>U</u></button>
+  		  <button class="ql-image btn btn-default" style="font-size:13pt; padding: 5px 10px;margin:5px;">Insert Image</button>
+		</div>
+		<div id='editor'></div>
+		{% csrf_token %}
+	</div>
 	<div align="center" style='padding-top:10px;'>
 		<button type="button" class=" btn btn-primary addsimp" id="level1-simp" align="center" data ='{{post.id}}'>Add Answer.</button>
 	</div>

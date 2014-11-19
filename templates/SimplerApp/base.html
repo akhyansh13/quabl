@@ -99,8 +99,31 @@
 			</div>
 	</body>
 	<script src="{% static 'js/bootstrap.min.js' %}"></script>
-	<script src='{% static "ckeditor/ckeditor.js" %}'></script>
-	<script>
-		CKEDITOR.replaceClass = 'ckeditor';
-	</script>
+	<script src="{% static 'quill/quill.js' %}"></script>
+
+<script>
+    var editor = new Quill('#editor', {
+    modules: {
+      'toolbar': { container: '#toolbar' },
+      'image-tooltip': true,
+      'link-tooltip': true
+    },
+    theme: 'snow'
+  });
+
+  $('.quill-wrapper').tooltip({ trigger: 'manual' });
+  var tooltipTimer = setTimeout(function() {
+    $('.quill-wrapper').tooltip('show');
+  }, 2500);
+
+  quill.once('selection-change', function(hasFocus) {
+    $('#editor').toggleClass('focus', hasFocus);
+    // Hack for inability to scroll on mobile
+    if (/mobile/i.test(navigator.userAgent)) {
+      $('#editor').css('height', quill.root.scrollHeight + 30)   // 30 for padding
+    }
+    $('.quill-wrapper').tooltip('destroy');
+    clearTimeout(tooltipTimer);
+  });
+</script>
 </html>
