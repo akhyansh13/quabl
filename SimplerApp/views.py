@@ -12,6 +12,7 @@ import json
 from django.contrib.auth.models import User
 import PIL
 from PIL import Image
+import string
 
 def index(request):
     context = RequestContext(request)
@@ -271,6 +272,12 @@ def define(request, post_id, simpler_id, new_simpler, old_simpler):
     #if hfilter(new_simpler, highlight) == False:
         #return HttpResponseRedirect('/request/redirected/postid:' + str(post_id) + ';simplerid:' + str(simpler_id) + ';')
     context_dict = {'highlight':highlight}
+
+    new_simpler = string.replace(new_simpler, '<span id="blankspace"></span></span>', " ")
+    new_simpler = string.replace(new_simpler, '<span id="noblankspace"></span></span>', "")
+    new_simpler = string.replace(new_simpler, '<span class="highlight-wrapper">&nbsp;', " ")
+    new_simpler = string.replace(new_simpler, '<span class="highlight-wrapper">', "")
+
     context_dict['new_simpler']=new_simpler
     post = Post.objects.get(id=post_id)
     simpler = Simpler.objects.get(id=simpler_id)

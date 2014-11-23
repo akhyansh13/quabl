@@ -1,8 +1,9 @@
 .highlight{
-  padding: 2px 4px;
-  font-size: 90%;
+  padding-left:2px;
+  padding-right: 2px;
   background-color: #fff8dc;
   border-radius: 4px;
+  margin-right: 2px;
 }
 
 .highlight,
