@@ -24,7 +24,7 @@ function deferred_up(getupinstance){		//Pre-fetching User Profiles.
 			});
 			setTimeout(function(){
 			defer.resolve();
-		}, 1000);		//Pre-fetching ETA.
+		}, 100);		//Pre-fetching ETA.
 		return defer;
 	}
 
