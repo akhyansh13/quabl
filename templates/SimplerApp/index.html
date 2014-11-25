@@ -31,27 +31,58 @@
 		</div>
 		<div align = "right" style="padding-bottom:30px;"><button type="submit" class="btn btn-primary btn-lg addpostbtn" disabled="disabled">Add Post</button></div>
 	</form>
-	{% for topic in topics %}
-		<div class="exploration" style="padding:10px;">
-			<div style="float:left; width:35%;text-align:center; font-size:16pt; color:#777;" class="posttopic"><div class="topicname"></div></div>
-			<div style="float:right; width:65%;" class="postlink">
-				{% autoescape off %}
-				{% for post in topic %}
-					<div class="hidtopic" style="display:none;">{{post.topic}}</div>
-					<blockquote style="font-size:11pt; color:#444;">
-						{{post.post}}
-					<div align="right"><span id="{{post.id}}"></span><span><a href='/request/explore/{{post.id}}/'>Explore</a></span>
-					{% if user.is_authenticated %}
-						<span>|&nbsp;<a class="folbtn {% if post.id in followed %}unfollowstate{% else %}followstate{% endif %}" href='javascript:;' data='{{post.id}}'>{% if post.id in followed %}Unfollow{% else %}Follow{% endif %}</a></span>
-					{% endif %}
+		<ul class="nav nav-pills">
+			<li role="presentation" class="active"><a href="#expl1" aria-controls="expl1" role="tab" data-toggle="tab">Browse by Topics</a></li>
+			<li role="presentation"><a href="#expl2" aria-controls="expl2" role="tab" data-toggle="tab">Browse Popular Questions</a></li>
+		</ul>
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane fade in active" id="expl1">
+			{% for topic in topics %}
+				<div class="exploration" style="padding:10px;">
+					<div style="float:left; width:35%;text-align:center; font-size:16pt; color:#777;" class="posttopic"><div class="topicname"></div></div>
+					<div style="float:right; width:65%;" class="postlink">
+						{% autoescape off %}
+						{% for post in topic %}
+							<div class="hidtopic" style="display:none;">{{post.topic}}</div>
+							<blockquote style="font-size:11pt; color:#444;">
+								{{post.post}}
+							<div align="right"><span id="{{post.id}}"></span><span><a href='/request/explore/{{post.id}}/'>Explore</a></span>
+							{% if user.is_authenticated %}
+								<span>|&nbsp;<a class="folbtn {% if post.id in followed %}unfollowstate{% else %}followstate{% endif %}" href='javascript:;' data='{{post.id}}'>{% if post.id in followed %}Unfollow{% else %}Follow{% endif %}</a></span>
+							{% endif %}
+							</div>
+							</blockquote>
+						{% endfor %}
+						{% endautoescape %}
 					</div>
-					</blockquote>
-				{% endfor %}
-				{% endautoescape %}
+				<br style="clear:both;"/>
+				</div>
+			{% endfor %}
 			</div>
-		<br style="clear:both;"/>
+			<div role="tabpanel" class="tab-pane fade" id="expl2">
+			{% for topic in topics %}
+				<div class="exploration" style="padding:10px;">
+					<div style="float:left; width:35%;text-align:center; font-size:16pt; color:#777;" class="posttopic"><div class="topicname"></div></div>
+					<div style="float:right; width:65%;" class="postlink">
+						{% autoescape off %}
+						{% for post in topic %}
+							<div class="hidtopic" style="display:none;">{{post.topic}}</div>
+							<blockquote style="font-size:11pt; color:#444;">
+								{{post.post}}
+							<div align="right"><span id="{{post.id}}"></span><span><a href='/request/explore/{{post.id}}/'>Explore</a></span>
+							{% if user.is_authenticated %}
+								<span>|&nbsp;<a class="folbtn {% if post.id in followed %}unfollowstate{% else %}followstate{% endif %}" href='javascript:;' data='{{post.id}}'>{% if post.id in followed %}Unfollow{% else %}Follow{% endif %}</a></span>
+							{% endif %}
+							</div>
+							</blockquote>
+						{% endfor %}
+						{% endautoescape %}
+					</div>
+				<br style="clear:both;"/>
+				</div>
+			{% endfor %}
+			</div>
 		</div>
-	{% endfor %}
 	</div>
 </div>
 {% endif %}
