@@ -213,7 +213,7 @@ def register(request):
 
             profpic = Image.open(profile.picture.path)  #Primitive image filter.
             profpic = profpic.resize((300,300), PIL.Image.ANTIALIAS)
-            img.save(profile.picture.path)
+            profpic.save(profile.picture.path)
 
         else:
             print user_form.errors, profile_form.errors
