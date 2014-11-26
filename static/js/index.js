@@ -19,12 +19,16 @@ $(document).ready(function(){
 		$(this).parent().find(".posttopic").height(height-20);
 	});
 
-	$(".topicname").attr("style","position: relative; top: 30%;");
+	//$(".topicname").attr("style","position: relative; top: 30%; font-size:16pt; color:#777;");
 
-	$(".hidtopic").each(function(){
+	/*$(".hidtopic").each(function(){
+		var topic = $(this).html();
+		$(this).parent().parent().find(".topicname").html('<i>' + topic + '</i><span style="font-size:12pt;">&nbsp;TOPIC</span>');	
+	});
+	$(".hidtopic2").each(function(){
 		var topic = $(this).html();
 		$(this).parent().parent().find(".topicname").html(topic);	
-	});
+	});*/
 
 	var postbw = $(".postbox").width();
 
@@ -43,14 +47,14 @@ $(document).ready(function(){
 		var number = String(content.split("-")[1]);
 
 		if(parseInt(number)==0){
-			$("#"+id).html("No Answers Yet. | ");
+			$("#"+id).html("No Answers Yet.");			
 		}
 
 		else if(parseInt(number)==1){
-			$("#"+id).html("1 Answer | ");
+			$("#"+id).html("1 Answer.");
 		}
 		else{
-			$("#"+id).html(number + " Answers | ");
+			$("#"+id).html(number + " Answers.");
 		}
 	});
 

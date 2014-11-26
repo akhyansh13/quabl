@@ -29,6 +29,17 @@ def index(request):
 
     form = postBox()
     context_dict['form'] = form
+    posts = Post.objects.order_by('-explores')
+    aposts = []
+    uposts = []
+    simplers = Simpler.objects.all()
+    for post in posts:
+        if simplers.filter(post=post).count() == 0:
+            uposts.append(post)
+        else:
+            aposts.append(post)
+    context_dict['aposts'] = aposts
+    context_dict['uposts'] = uposts
     #notifs = UserNotification.objects.all().filter(user=request.user.username).filter(status='unread')
     #context_dict['notifs'] = notifs
     #context_dict['notifcount'] = notifs.count()
@@ -439,6 +450,9 @@ def requestbyuser(request, category, description):
             
     elif category == 'explore':
         postid = description
+        post = Post.objects.get(id=int(postid))
+        post.explores = post.explores + 1
+        post.save()
         if request.user.is_authenticated():
             c = ReqByUser.objects.get_or_create(user=request.user, category=category, description='postid:' + description)
             if c[1]:

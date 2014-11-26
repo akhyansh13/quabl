@@ -15,6 +15,7 @@ class Post(models.Model):
     author = models.CharField(max_length=100000)
     writer = models.ForeignKey(User, blank=True, null=True)
     topic = models.CharField(max_length=100000, default=' ')
+    explores = models.IntegerField(null = False, blank = False, default = 0)
     description = models.CharField(max_length=1000000000, null=True, blank=True)
     created = models.DateTimeField(default=datetime.now())
     modified = models.DateTimeField(default=datetime.now())
