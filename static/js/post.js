@@ -71,14 +71,31 @@ $(document).ready(function(){
 					
 	$(".reqsimp").click(function(){
 		if ((typeof $(this).attr('value')) === "undefined"){
-			$reqsimp = $(this);						
+			$reqsimp = $(this);
+			var final_span = " ";						
 			var simpler_id = $(this).attr('id');
 			var post_id = $(".addsimp").attr('data');
 			var selection = window.getSelection().getRangeAt(0);
 			var selectedText = selection.extractContents();
 			var highlight = String(selectedText.textContent);
-			//var span = $("<high>" + highlight + "<high>");
-			var span = $("<span class='curr_highlight' id='"+simpler_id+"' data='"+post_id+"'>" + highlight +"<input type='checkbox' class='curr_checkedhigh' value='"+highlight.replace(" ","_")+"' name='highlight'/></span>");
+			var highlight_arr = highlight.split("");
+			var firstel = highlight_arr[0];
+			var lastel = highlight_arr[highlight_arr.length-1];
+			highlight = highlight.trim();
+			var req_span = '<span class="curr_highlight" id="'+simpler_id+'" data="'+post_id+'">' + highlight +' <input type="checkbox" class="curr_checkedhigh" value="'+highlight.replace(' ','_')+'" name="highlight"/></span>'
+			if(firstel==" "){
+				final_span = '<span class="highlight-wrapper">&nbsp;' + req_span;
+			}
+			else{
+				final_span = '<span class="highlight-wrapper">' + req_span;
+			}
+			if(lastel==" "){
+				final_span = final_span + '<span id="blankspace"></span></span>';
+			}
+			else{
+				final_span = final_span + '<span id="noblankspace"></span></span>';
+			}
+			var span = $(final_span);
 			//The new highlight has class curr_highlight and the new checkbox has class curr_checkedhigh. They have related CSS.
 			selection.insertNode(span[0]);
 
@@ -90,6 +107,7 @@ $(document).ready(function(){
 			}
 	
 			clearSelection();
+
 			var old_simpler = String($reqsimp.parent().parent().find('.simpler-html').find('.question').html()).split('?').join('xqmx');	//the question part of the simpler which won't have the highlight
 			var new_simpler = String($reqsimp.parent().parent().find('.simpler-html').find('.answer').html()).split('?').join('xqmx');		//the answer part of the highlight which will have the highlight
 			if (old_simpler == '') uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/newxhex/'+ new_simpler +'/oldxhex/empty/';

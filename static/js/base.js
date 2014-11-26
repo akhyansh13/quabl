@@ -1,8 +1,8 @@
-function deferred_up(){		//Pre-fetching User Profiles.
+function deferred_up(getupinstance){		//Pre-fetching User Profiles.
 
 		var defer = $.Deferred();
 
-		$this = $(".getup");
+		$this = getupinstance;
 
 			var geturl = '/userprof/' + $this.attr("data");
 			
@@ -38,10 +38,10 @@ $(document).ready(function(){
 	});
 
 	$(".getup").click(function(){
+		$thisgetup = $(this);
+		$.when(deferred_up($thisgetup)).then(function(){
 
-		var stl = $(document).scrollTop();
-
-		$.when(deferred_up()).then(function(){
+			var stl = $(document).scrollTop();
 
 			$("#profblock").slideDown();
 			$("#header-wrapper").css("position", "relative");

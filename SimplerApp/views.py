@@ -224,7 +224,7 @@ def register(request):
 
             profpic = Image.open(profile.picture.path)  #Primitive image filter.
             profpic = profpic.resize((300,300), PIL.Image.ANTIALIAS)
-            img.save(profile.picture.path)
+            profpic.save(profile.picture.path)
 
         else:
             print user_form.errors, profile_form.errors
@@ -282,6 +282,12 @@ def define(request, post_id, simpler_id, new_simpler, old_simpler):
     #if hfilter(new_simpler, highlight) == False:
         #return HttpResponseRedirect('/request/redirected/postid:' + str(post_id) + ';simplerid:' + str(simpler_id) + ';')
     context_dict = {'highlight':highlight}
+
+    new_simpler = new_simpler.replace('<span id="blankspace"></span></span>', " ")
+    new_simpler = new_simpler.replace('<span id="noblankspace"></span></span>', "")
+    new_simpler = new_simpler.replace('<span class="highlight-wrapper">&nbsp;', " ")
+    new_simpler = new_simpler.replace('<span class="highlight-wrapper">', "")
+
     context_dict['new_simpler']=new_simpler
     post = Post.objects.get(id=post_id)
     simpler = Simpler.objects.get(id=simpler_id)
