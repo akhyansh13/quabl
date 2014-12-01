@@ -8,7 +8,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$("#"+contsimpid).parent().find(".previous").hide();
+	$("#"+contsimpid).parent().find(".previous").remove();
 
 	$('#dropdown-notifications').each(function(){
 		$(this).attr('style', "max-width:450px; min-width:450px; width:450px; min-height:" + screen.height + "px; max-height:" + screen.height + "px; height:450" + screen.height + "px;");
@@ -315,13 +315,16 @@ $(document).ready(function(){
 			}
 		}
 	}
+
+	next_btn(contsimpid);
+	
 	if($("#Post").is(":visible")){
 		$("#instruct").show();
 	} 
 	else{
 		$("#instruct").hide();
 	}
-		next_btn(contsimpid);
+		
 
 }); //window.onload function finished.
 
