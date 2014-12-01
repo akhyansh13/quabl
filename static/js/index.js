@@ -40,22 +40,22 @@ $(document).ready(function(){
 
 	$(".contextbox").attr("placeholder", "Post something adequately complex here.");
 
-	$(".simnum").each(function(){
-		var content = $(this).html();
-		var id = String(content.split("-")[0]);
-		var number = String(content.split("-")[1]);
+	//$(".simnum").each(function(){
+	//	var content = $(this).html();
+	//	var id = String(content.split("-")[0]);
+	//	var number = String(content.split("-")[1]);
 
-		if(parseInt(number)==0){
-			$("#"+id).html("No Answers Yet.");			
-		}
+	//	if(parseInt(number)==0){
+	//		$("#"+id).html("No Answers Yet.");			
+	//	}
 
-		else if(parseInt(number)==1){
-			$("#"+id).html("1 Answer.");
-		}
-		else{
-			$("#"+id).html(number + " Answers.");
-		}
-	});
+	//	else if(parseInt(number)==1){
+	//		$("#"+id).html("1 Answer.");
+	//	}
+	//	else{
+	//		$("#"+id).html(number + " Answers.");
+	//	}
+	//});
 
 	$(".folbtn").click(function(){		//AJAX request for follow/unfollow button.
 		var post_id = $(this).attr('data');
