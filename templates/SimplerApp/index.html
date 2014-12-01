@@ -22,19 +22,14 @@
 {% if user.is_authenticated %}
 	
 	<div>
-	<form method='post' action='/addpost/'>
 	{% csrf_token %}
-		<div style="width=400px;">
-			{{ form.post}}
+		<div style="width:100%;">
+			<textarea class="contextbox" style="height:300px;"></textarea>
 		</div>
-		<div style='float:left;'>
-			{{form.topic}}
-		</div>
-		<div align = "right" style="padding-bottom:30px;"><button type="submit" class="btn btn-primary btn-lg addpostbtn" disabled="disabled">Add Post</button></div>
-	</form>
+		<div align = "center" style="padding-bottom:30px;"><button type="submit" class="btn btn-primary btn-lg addpostbtn" disabled="disabled">Add</button></div>
 		<ul class="nav nav-tabs">
-			<li role="presentation" class="active"><a href="#expl1" aria-controls="expl1" role="tab" data-toggle="tab">Browse Answered Questions</a></li>
-			<li role="presentation"><a href="#expl2" aria-controls="expl2" role="tab" data-toggle="tab">Browse Unanswered Questions</a></li>
+			<li role="presentation" class="active"><a href="#expl1" aria-controls="expl1" role="tab" data-toggle="tab">Trending reads</a></li>
+			<li role="presentation"><a href="#expl2" aria-controls="expl2" role="tab" data-toggle="tab">New reads</a></li>
 		</ul>
 		<div class="tab-content">
 			<div role="tabpanel" class="tab-pane fade in active" id="expl1">

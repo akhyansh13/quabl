@@ -1,12 +1,19 @@
 $(document).ready(function(){
 
+	$(".addpostbtn").click(function(){
+		var txt = $(".contextbox").val();
+		$.get(('/addpost/'), {txt:txt}, function(data){
+			window.location = '/simpler/' + data + '/';
+		});
+	});
+
 	$('#dropdown-notifications').each(function(){
 		$(this).attr('style', "max-width:450px; min-width:450px; width:450px; min-height:" + screen.height + "px; max-height:" + screen.height + "px; height:450" + screen.height + "px;");
 	});
 
 
 	$(document).keyup(function(){
-		if (!$(".postbox").val()||!$(".topicbox").val()) {
+		if (!$(".contextbox").val()) {
 	    	$(".addpostbtn").attr("disabled", "disabled");
 		} 
 		else {
@@ -30,16 +37,8 @@ $(document).ready(function(){
 		$(this).parent().parent().find(".topicname").html(topic);	
 	});*/
 
-	var postbw = $(".postbox").width();
 
-	$(".topicbox").width(postbw*0.35);
-
-	var addpostbtnh = $(".addpostbtn").height();
-
-	$(".topicbox").height(addpostbtnh);
-
-	$(".topicbox").attr("placeholder", "Topic here.");
-	$(".postbox").attr("placeholder", "Got a question or anything else that you had trouble understanding?");
+	$(".contextbox").attr("placeholder", "Post something adequately complex here.");
 
 	$(".simnum").each(function(){
 		var content = $(this).html();

@@ -1,5 +1,15 @@
 $(document).ready(function(){
 
+	var contsimpid = ' ';
+
+	$(".jumbotron").each(function(){
+		if($(this).attr("data") == 'contextsimpler'){
+			contsimpid = $(this).attr("id");		
+		}
+	});
+
+	$("#"+contsimpid).parent().find(".previous").hide();
+
 	$('#dropdown-notifications').each(function(){
 		$(this).attr('style', "max-width:450px; min-width:450px; width:450px; min-height:" + screen.height + "px; max-height:" + screen.height + "px; height:450" + screen.height + "px;");
 	});
@@ -311,6 +321,8 @@ $(document).ready(function(){
 	else{
 		$("#instruct").hide();
 	}
+		next_btn(contsimpid);
+
 }); //window.onload function finished.
 
 function clearSelection() {

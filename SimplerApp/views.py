@@ -3,7 +3,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Simpler.settings')
 from django.shortcuts import render_to_response 
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
-from models import Post, Simpler, postBox, UserForm, UserProfileForm, HighlightDesc, highlightq, highlight, topic, ReqByUser, UserNotification, UserProfile
+from models import Post, Simpler, UserForm, UserProfileForm, HighlightDesc, highlightq, highlight, topic, ReqByUser, UserNotification, UserProfile
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
@@ -27,16 +27,14 @@ def index(request):
         simpler_num_arr.append([post.id, len(post.simpler_set.all().filter(display=' '))])
     context_dict['numarr']=simpler_num_arr
 
-    form = postBox()
-    context_dict['form'] = form
     posts = Post.objects.order_by('-explores')
     aposts = []
     uposts = []
     simplers = Simpler.objects.all()
     for post in posts:
-        if simplers.filter(post=post).count() == 0:
+        if simplers.filter(post=post).count() == 1:
             uposts.append(post)
-        else:
+        elif simplers.filter(post=post).count() >= 2:
             aposts.append(post)
     context_dict['aposts'] = aposts
     context_dict['uposts'] = uposts
@@ -67,19 +65,11 @@ def follow(request):
     return HttpResponse('success')
 
 def addpost(request):
-    if request.method == 'POST':
-        form = postBox(request.POST)
-        if form.is_valid():
-            f = form.save(commit=False)
-            f.author = request.user.username
-            f.writer = request.user
-            p = f.post
-            f.post = '<p>' + p + '</p>'         #Encloses in <p></p>.
-            f.created = datetime.now()
-            f.modified = datetime.now()
-            f.save()
-            topic.objects.get_or_create(topic=f.topic)
-    return HttpResponseRedirect('/')
+    context = RequestContext(request)
+    context_text = '<div class ="question"></div><div class ="answer"><div>'+request.GET['txt']+'</div><div><br></div></div>'
+    p = Post.objects.get_or_create(post=context_text ,author=request.user.username, writer=request.user, context=context_text)[0]
+    s = Simpler.objects.get_or_create(post=p,simpler=p.context, simpler_original=p.context, coeficient=1, parent_list='contextsimpler', author=request.user.username, writer=request.user, display=' ')[0]
+    return HttpResponse(str(p.id))
    
 def post(request, post_id):
     context = RequestContext(request)
@@ -467,15 +457,6 @@ def requestbyuser(request, category, description):
             c[0].frequency = c[0].frequency + 1
             c[0].save()
         return HttpResponseRedirect('/simpler/' + postid + '/')
-        
-	
-def deletesimpler(request):
-    context = RequestContext(request)
-    deleted_simp = request.GET['curr_simp_id']
-    required_simpler = Simpler.objects.get(id=int(deleted_simp))
-    required_simpler.display='none'
-    required_simpler.save()
-    return HttpResponse('success')
 
 def addanswer(request, qid):
     context = RequestContext(request)

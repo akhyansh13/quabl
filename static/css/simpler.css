@@ -119,6 +119,10 @@ textarea {
   color:#999;
 }
 
+.contextbox{
+  width: 100%;
+}
+
 #main-logo{
   color:#FFFFFF; 
   text-decoration:none; 

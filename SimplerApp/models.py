@@ -11,12 +11,12 @@ class topic(models.Model):
         return self.topic
 
 class Post(models.Model):
-    post = models.CharField(max_length=10000000)
-    author = models.CharField(max_length=100000)
-    writer = models.ForeignKey(User, blank=True, null=True)
+    post = models.CharField(max_length=10000000, default=' ')
+    author = models.CharField(max_length=100000, default=' ')
+    writer = models.ForeignKey(User)
     topic = models.CharField(max_length=100000, default=' ')
     explores = models.IntegerField(null = False, blank = False, default = 0)
-    description = models.CharField(max_length=1000000000, null=True, blank=True)
+    context = models.CharField(max_length=10000000000, null = False, blank=False, default=' ')
     created = models.DateTimeField(default=datetime.now())
     modified = models.DateTimeField(default=datetime.now())
     def __unicode__(self):
@@ -55,13 +55,6 @@ class highlightq(models.Model):
     created = models.DateTimeField(default=datetime.now())
     def __unicode__(self):
         return self.question   
-
-class postBox(forms.ModelForm):
-    post = forms.CharField(max_length=10000000,widget=forms.Textarea(attrs={'class': 'postbox'}))
-    topic = forms.CharField(max_length=100000,widget=forms.Textarea(attrs={'class': 'topicbox'}))
-    class Meta:
-        model = Post
-        fields = ('topic', 'post',)
         
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
