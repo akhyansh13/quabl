@@ -8,6 +8,8 @@ $(document).ready(function(){
 		}
 	});
 
+	$('#'+contsimpid).find(".author").hide();
+
 	$("#"+contsimpid).parent().find(".previous").remove();
 
 	$('#dropdown-notifications').each(function(){
@@ -286,16 +288,11 @@ $(document).ready(function(){
 		}
 	});
 
-	$(document).click(function(){
-		$(".noqs").each(function(){
-			if($(this).hasClass("nthlevel")){
-				$("#instruct-rest").show();
-			}
-			else{
-				$("#instruct-rest").hide();
-			}
-		});
+	$(document).click(function(){		//Everytime the document is clicked, this part checks for elements with the noqs class and shows instruct-rest by calling the instructrest_visibility function.
+		instructrest_visibility();
 	});
+
+	instructrest_visibility();			//Also call the instructrest_visibility onload.
 
 	if(parseInt(toscrollto)!=-1){
 		var toscrollto_id = "#" + toscrollto;
@@ -315,16 +312,16 @@ $(document).ready(function(){
 			}
 		}
 	}
-
-	next_btn(contsimpid);
 	
+	next_btn(contsimpid);
+
 	if($("#Post").is(":visible")){
 		$("#instruct").show();
 	} 
 	else{
 		$("#instruct").hide();
 	}
-		
+	
 
 }); //window.onload function finished.
 
@@ -445,4 +442,15 @@ function next_btn(module_id){
 			}
 		});
 	}
+}
+
+function instructrest_visibility(){
+	$(".noqs").each(function(){
+			if($(this).hasClass("nthlevel")){
+				$("#instruct-rest").show();
+			}
+			else{
+				$("#instruct-rest").hide();
+			}
+		});
 }

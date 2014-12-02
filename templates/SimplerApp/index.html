@@ -49,11 +49,11 @@
 						</blockquote>
 					</div>
 					<br style="clear:both;"/>
-					<div style="float:center">
+					<div style="float:right">
 						<span style="float:right;" id="{{post.id}}"></span>
 						<span style="float:left"><a href='/request/explore/{{post.id}}/'><i>Explore</i></a></span>
 						{% if user.is_authenticated %}
-							<span style="float:left">&nbsp;.&nbsp;<a class="folbtn {% if post.id in followed %}unfollowstate{% else %}followstate{% endif %}" href='javascript:;' data='{{post.id}}'><i>{% if post.id in followed %}Unfollow{% else %}Follow{% endif %}</i></a></span>
+							<span style="float:left">&nbsp;|&nbsp;<a class="folbtn {% if post.id in followed %}unfollowstate{% else %}followstate{% endif %}" href='javascript:;' data='{{post.id}}'><i>{% if post.id in followed %}Unfollow{% else %}Follow{% endif %}</i></a></span>
 						{% endif %}
 					</div>
 					<br style="clear:both;"/>
@@ -78,11 +78,11 @@
 						</blockquote>
 					</div>
 					<br style="clear:both;"/>
-					<div style="float:center">
+					<div style="float:right">
 						<!--span style="float:right;" id="{{post.id}}"></span-->
 						<span style="float:left"><a href='/request/explore/{{post.id}}/'><i>Explore</i></a></span>
 						{% if user.is_authenticated %}
-							<span style="float:left">&nbsp;.&nbsp;<a class="folbtn {% if post.id in followed %}unfollowstate{% else %}followstate{% endif %}" href='javascript:;' data='{{post.id}}'><i>{% if post.id in followed %}Unfollow{% else %}Follow{% endif %}</i></a></span>
+							<span style="float:left">&nbsp;|&nbsp;<a class="folbtn {% if post.id in followed %}unfollowstate{% else %}followstate{% endif %}" href='javascript:;' data='{{post.id}}'><i>{% if post.id in followed %}Unfollow{% else %}Follow{% endif %}</i></a></span>
 						{% endif %}
 					</div>
 					<br style="clear:both;"/>

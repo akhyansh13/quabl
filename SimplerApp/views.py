@@ -131,49 +131,30 @@ def postreq(request, post_id, requestid):
     
 def makesimpler(request):
     context = RequestContext(request)
-    if request.GET['simpler_id']=='level1-simp':
-        post_id = int(request.GET['post_id'])
-        post = Post.objects.get(id=post_id)
-        simpler_text = request.GET['simpler_text']
-        c = Simpler.objects.get_or_create(post=post, simpler = '<div class ="question"></div><div class ="answer">' + simpler_text + '</div>', simpler_original=simpler_text, coeficient=1, author=request.user.username, writer=request.user, display=' ', parent_list=' ', created = datetime.now(), modified = datetime.now())[0]
-        #getting all the users who have followed the particular post
-        authors = []
-        profiles = UserProfile.objects.all()
-        for profile in profiles:
-            if (';' + str(post_id) + ';') in profile.followed_posts:
-                authors.append(profile.user.username)
-        for author in authors:
-            if author != request.user.username:
-                u = UserNotification.objects.get_or_create(user=author, notification=str(request.user.username) + ' added an answer to post:' + show_less_post(post.post), status='unread', postid=post.id)
-                if u[1]:
-                    u[0].created = datetime.now()
-                u[0].modified = datetime.now()
-                u[0].save()
-    else: 
-        highlight_simpler_id = int(request.GET['simpler_id'])
-        simpler_text = request.GET['simpler_text']
-        highlight_simpler = Simpler.objects.get(id=highlight_simpler_id)
-        c = Simpler.objects.get_or_create(post = highlight_simpler.post, parent_simpler = highlight_simpler.parent_simpler,  simpler = highlight_simpler.simpler + '<br/><br/><div class ="answer">'+ simpler_text + '</div>', simpler_original = highlight_simpler.simpler,coeficient = highlight_simpler.coeficient, parent_list = highlight_simpler.parent_list, author = request.user.username, writer=request.user, display=' ', created = datetime.now(), modified = datetime.now())[0]
-        #getting the user who asked the question
-        if highlight_simpler.author != request.user.username:
-            u = UserNotification.objects.get_or_create(user=highlight_simpler.author, notification=str(request.user.username) + ' added an answer to your question:' + show_less_ques(highlight_simpler.simpler), status='unread', postid=highlight_simpler.post.id, simplerid=c.id)
+    highlight_simpler_id = int(request.GET['simpler_id'])
+    simpler_text = request.GET['simpler_text']
+    highlight_simpler = Simpler.objects.get(id=highlight_simpler_id)
+    c = Simpler.objects.get_or_create(post = highlight_simpler.post, parent_simpler = highlight_simpler.parent_simpler,  simpler = highlight_simpler.simpler + '<br/><br/><div class ="answer">'+ simpler_text + '</div>', simpler_original = highlight_simpler.simpler,coeficient = highlight_simpler.coeficient, parent_list = highlight_simpler.parent_list, author = request.user.username, writer=request.user, display=' ', created = datetime.now(), modified = datetime.now())[0]
+    #getting the user who asked the question
+    if highlight_simpler.author != request.user.username:
+        u = UserNotification.objects.get_or_create(user=highlight_simpler.author, notification=str(request.user.username) + ' added an answer to your question:' + show_less_ques(highlight_simpler.simpler), status='unread', postid=highlight_simpler.post.id, simplerid=c.id)
+        if u[1]:
+            u[0].created = datetime.now()
+        u[0].modified = datetime.now()
+        u[0].save()
+    #getting all the users who have followed the particular post
+    authors=[]
+    profiles = UserProfile.objects.all()
+    for profile in profiles:
+        if (';' + str(highlight_simpler.post.id) + ';') in profile.followed_posts:
+            authors.append(profile.user.username)
+    for author in authors:
+        if author != request.user.username:
+            u = UserNotification.objects.get_or_create(user=author, notification=str(request.user.username) + ' added an answer to a question:' + show_less_ques(highlight_simpler.simpler) + 'in the post:' + show_less_post(highlight_simpler.post.post), status='unread', postid=highlight_simpler.post.id, simplerid=c.id)
             if u[1]:
                 u[0].created = datetime.now()
             u[0].modified = datetime.now()
             u[0].save()
-        #getting all the users who have followed the particular post
-        authors=[]
-        profiles = UserProfile.objects.all()
-        for profile in profiles:
-            if (';' + str(highlight_simpler.post.id) + ';') in profile.followed_posts:
-                authors.append(profile.user.username)
-        for author in authors:
-            if author != request.user.username:
-                u = UserNotification.objects.get_or_create(user=author, notification=str(request.user.username) + ' added an answer to a question:' + show_less_ques(highlight_simpler.simpler) + 'in the post:' + show_less_post(highlight_simpler.post.post), status='unread', postid=highlight_simpler.post.id, simplerid=c.id)
-                if u[1]:
-                    u[0].created = datetime.now()
-                u[0].modified = datetime.now()
-                u[0].save()
     return HttpResponse('success')
     
 def register(request):
@@ -297,8 +278,7 @@ def define(request, post_id, simpler_id, new_simpler, old_simpler):
             simpler.save()
             f.highlight = highlight
             f.req_by = request.user
-            highlight_simpler_context = '<div class="question">' + highlight + '<br/><br/>'
-            simpler_content = highlight_simpler_context + '<p style="font-size:12pt;" class="q-text">' + f.description + '</p></div>'
+            simpler_content = '<p style="font-size:12pt;" class="q-text">' + f.description + '</p>'
             parent_list = 'parent' + str(simpler.id) + ' '
             curr_simpler = simpler
             while curr_simpler.parent_simpler != None:

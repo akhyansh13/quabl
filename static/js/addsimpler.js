@@ -11,7 +11,7 @@ $(document).ready(function(){
 		var post_id = $(this).attr("data");
 		var backsimplerid = $(this).attr('value');
 		var simpler_textarea_id = 'simp'+ simpler_id;
-		var simpler_text = editor.getHTML();
+		var simpler_text = editor.getHTML().replace("<div>", "<p>").replace("</div>","</p>");
 		$.get(('/makesimpler/'),{simpler_id:simpler_id, simpler_text:simpler_text, post_id:post_id,}, function(){
 			uri = '/request/addsimpler/postid:' + post_id + ';simplerid:'  + backsimplerid + ';/';
     		window.location.href = uri;

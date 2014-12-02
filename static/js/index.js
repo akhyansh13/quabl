@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 	$(".addpostbtn").click(function(){
-		var txt = $(".contextbox").val();
+		var txt = '<p>' + $(".contextbox").val() + '</p>';
 		$.get(('/addpost/'), {txt:txt}, function(data){
 			window.location = '/simpler/' + data + '/';
 		});
