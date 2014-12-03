@@ -15,10 +15,10 @@ $(document).ready(function(){
 	$(document).keyup(function(){
 		if (!$(".contextbox").val()) {
 	    	$(".addpostbtn").attr("disabled", "disabled");
-		} 
+		}
 		else {
 	    $(".addpostbtn").removeAttr("disabled");
-		}		
+		}
 	});
 
 	$(".postlink").each(function(){
@@ -30,15 +30,15 @@ $(document).ready(function(){
 
 	/*$(".hidtopic").each(function(){
 		var topic = $(this).html();
-		$(this).parent().parent().find(".topicname").html('<i>' + topic + '</i><span style="font-size:12pt;">&nbsp;TOPIC</span>');	
+		$(this).parent().parent().find(".topicname").html('<i>' + topic + '</i><span style="font-size:12pt;">&nbsp;TOPIC</span>');
 	});
 	$(".hidtopic2").each(function(){
 		var topic = $(this).html();
-		$(this).parent().parent().find(".topicname").html(topic);	
+		$(this).parent().parent().find(".topicname").html(topic);
 	});*/
 
 
-	$(".contextbox").attr("placeholder", "Post something adequately complex here.");
+	$(".contextbox").attr("placeholder", "Read something too complex to understand? Post it here!");
 
 	//$(".simnum").each(function(){
 	//	var content = $(this).html();
@@ -46,7 +46,7 @@ $(document).ready(function(){
 	//	var number = String(content.split("-")[1]);
 
 	//	if(parseInt(number)==0){
-	//		$("#"+id).html("No Answers Yet.");			
+	//		$("#"+id).html("No Answers Yet.");
 	//	}
 
 	//	else if(parseInt(number)==1){
@@ -59,7 +59,7 @@ $(document).ready(function(){
 
 	$(".folbtn").click(function(){		//AJAX request for follow/unfollow button.
 		var post_id = $(this).attr('data');
-		$.get(('/follow/'), {post_id:post_id});	
+		$.get(('/follow/'), {post_id:post_id});
 	});
 
 	$(".folbtn").click(function(){		//This function inverts between 'Unfollow' or 'Follow'
