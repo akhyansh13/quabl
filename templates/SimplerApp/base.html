@@ -67,18 +67,19 @@
 					<li class="dropdown">
 					{% autoescape off %}
 						<a href="#" class="dropdown-toggle notifications" data-toggle="dropdown" style="color:#444;"><span id='notifdisp'>{{unotifcount}}&nbsp;&nbsp;</span><b class="glyphicon glyphicon-exclamation-sign"></b></a>
-						<ul class="dropdown-menu" id="dropdown-notifications" style="background-color:blue;">
-						{% if notifcount == 0 %}
-						<p class='text-muted' style='text-align:center;'>You don't have any notifications right now.</p>
-						{% endif %}
-						{% for unotif in unreadnotifs %}
-							<li><a href='/request/notifications/{{unotif.id}}/' style="padding:0px 10px 0px 10px; white-space:normal;"><span class="glyphicon glyphicon-exclamation-sign" style="color:blue;"></span>{{unotif.notification}}</a></li>
-							<!--li class="divider"></li-->
-						{% endfor %}
-						{% for rnotif in readnotifs %}
-							<li><a href='/request/notifications/{{rnotif.id}}/' style="padding:10px 10px 10px 10px; white-space:normal;">{{rnotif.notification}}</a></li>
-							<!--li class="divider"></li-->
-						{% endfor %}
+						<ul class="dropdown-menu" id="dropdown-notifications">
+							{% if notifcount == 0 %}
+								<p class='text-muted' style='text-align:center;'>You don't have any notifications right now.</p>
+							{% else %}							
+								<a href="javascript:;" class="vrn" style="float:right; text-align:right;">View Read Notifications</a>
+								{% for unotif in unreadnotifs %}
+									<li><a href='/request/notifications/{{unotif.id}}/' class="unotif" style="white-space:normal; background-color:#F8F8F8;">{{unotif.notification}}</a></li>
+								{% endfor %}
+								
+								{% for rnotif in readnotifs %}
+									<li><a href='/request/notifications/{{rnotif.id}}/' class="rnotif" style="white-space:normal; display:none;">{{rnotif.notification}}</a></li>
+								{% endfor %}
+							{% endif %}
 						</ul>
 					{% endautoescape %}
 					</li>

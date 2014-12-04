@@ -40,7 +40,7 @@ def show_less_post(post):
     return less_str
 
 def show_less_ques(question):
-    question = question.split('<br/>')[2].split('</div>')[0]
+    #question = question.split('<br/>')[2].split('</div>')[0]
     str_arr = list(question)
     less_arr = []
     i=0
@@ -84,6 +84,8 @@ def show_less_ans(answer):
         i += 1
     less_str = ''.join(less_arr)
     less_str = less_str.replace('<p>', '<p style="color:#428bca;">')
+    less_str = less_str.replace('padding:0px 10px 0px 10px;', '')
+    less_str = less_str.replace('<div class ="question"></div><div class ="answer"><div>', '')
     #answer = answer.replace('<p>', '<p style="color:blue">')
     return less_str
     #return answer

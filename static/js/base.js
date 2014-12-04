@@ -88,6 +88,20 @@ $(document).ready(function(){
 	        lastst = st;
 
 	    }
-    });   
+    });
+
+	$('.vrn').click(function(){
+		var text = $(this).html();
+		if (text == "View Read Notifications") {
+			$(this).html("View Unread Notifications");
+			$('.rnotif').show();
+			$('.unotif').hide();
+		}
+		else {
+			$(this).html("View Read Notifications");
+			$('.unotif').show();
+			$('.rnotif').hide();
+		}
+	});
 });
 
