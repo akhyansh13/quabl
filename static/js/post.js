@@ -120,7 +120,10 @@ $(document).ready(function(){
 	
 			clearSelection();
 
-			var old_simpler = String($reqsimp.parent().parent().find('.simpler-html').find('.q-text').html()).split('?').join('xqmx');	//the question part of the simpler which won't have the highlight
+			var old_simpler = String($reqsimp.parent().parent().find('.simpler-html').find('.q-text').html()).split('?').join('xqmx');
+			if (old_simpler == 'undefined') {
+				old_simpler = String($reqsimp.parent().parent().find('.simpler-html').find('.q-text').html()).split('?').join('xqmx');
+			}//the question part of the simpler which won't have the highlight
 			var new_simpler = String($reqsimp.parent().parent().find('.simpler-html').find('.answer').html()).split('?').join('xqmx');		//the answer part of the highlight which will have the highlight
 			if (old_simpler == '') uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/newxhex/'+ new_simpler +'/oldxhex/empty/';
 			else uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/newxhex/'+ new_simpler +'/oldxhex/' + old_simpler + '/';

@@ -246,6 +246,10 @@ def define(request, post_id, simpler_id, new_simpler, old_simpler):
     post_id = int(post_id)
     simpler_id = int(simpler_id)
     flag = False
+    if old_simpler == 'undefined':
+        old_simpler = ''
+    elif new_simpler == 'undefined':
+        new_simpler = ''
     if 'curr_highlight' not in new_simpler:
         new_simpler, old_simpler = old_simpler, new_simpler
         flag = True
