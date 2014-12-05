@@ -66,7 +66,7 @@ def follow(request):
 
 def addpost(request):
     context = RequestContext(request)
-    context_text = '<div class ="question"></div><div class ="answer"><div>'+request.GET['txt']+'</div><div><br></div></div>'
+    context_text = '<div class ="q-text"></div><div class ="answer"><div>'+request.GET['txt']+'</div><div><br></div></div>'
     p = Post.objects.get_or_create(post=context_text ,author=request.user.username, writer=request.user, context=context_text)[0]
     s = Simpler.objects.get_or_create(post=p,simpler=p.context, simpler_original=p.context, coeficient=1, parent_list='contextsimpler', author=request.user.username, writer=request.user, display=' ')[0]
     return HttpResponse(str(p.id))
@@ -275,9 +275,9 @@ def define(request, post_id, simpler_id, new_simpler, old_simpler):
             f = form.save(commit=False)
             f.highlight_parent = simpler
             if flag:
-                simpler.simpler = '<div class="question">' + (new_simpler.replace('curr_highlight','highlight')).replace('curr_checkedhigh','checkedhigh').replace('style="display: none;"','') + '</div><div class="answer">' + old_simpler + '</div>'        #JS and Python conflict fixed. Brute forced the display:none out.
+                simpler.simpler = '<div class="q-text">' + (new_simpler.replace('curr_highlight','highlight')).replace('curr_checkedhigh','checkedhigh').replace('style="display: none;"','') + '</div><div class="answer">' + old_simpler + '</div>'        #JS and Python conflict fixed. Brute forced the display:none out.
             else:
-                simpler.simpler = '<div class="question">' + old_simpler + '</div><div class="answer">' + (new_simpler.replace('curr_highlight','highlight')).replace('curr_checkedhigh','checkedhigh').replace('style="display: none;"','') + '</div>'        #JS and Python conflict fixed. Brute forced the display:none out
+                simpler.simpler = '<div class="q-text">' + old_simpler + '</div><div class="answer">' + (new_simpler.replace('curr_highlight','highlight')).replace('curr_checkedhigh','checkedhigh').replace('style="display: none;"','') + '</div>'        #JS and Python conflict fixed. Brute forced the display:none out
             simpler.modified = datetime.now()
             simpler.save()
             f.highlight = highlight
@@ -343,7 +343,7 @@ def defined(request, post_id, simpler_id, highlightx, current):
             f.highlight_parent = parent_simpler
             f.highlight = highlight
             f.req_by = request.user
-            highlight_simpler_context = '<div class="question">' + highlight + '<br/><br/>'
+            highlight_simpler_context = '<div class="q-text">' + highlight + '<br/><br/>'
             simpler_content = highlight_simpler_context + '<p style="font-size:12pt;" class="q-text">' + f.description + '</p></div>'
             parent_list = 'parent' + str(parent_simpler_id) + ' '
             curr_simpler = parent_simpler

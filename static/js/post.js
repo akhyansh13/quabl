@@ -36,19 +36,27 @@ $(document).ready(function(){
 		$(this).parent().find('.next').find('#num-child').html(String(c))
 	});
 	
-	$("num_answers").each(function(){
+	/*$("num_answers").each(function(){
 		var ques_class = $(this).parent().find(".q-sidebar").attr('class');
-		var highlight = "<i>" + ques_class.split('h-')[1] + "</i>";									//get the highlight in format
-		var question = ques_class.html().split("<p>").join('<p style="font-size:12pt;">');			//get the qestion in format
+		var highlight = "<p>" + ques_class.split('hquestion-')[1] + "</p>";									//get the highlight in format
+		var question = ques_class.html().split("<p>").join('<p style="font-size:12pt;" class="q-text">');			//get the qestion in format
 		n = 0;																						//counter of number of answered simplers
 		var curr_jumbotron = [];																	//list to store te simplers with answers
 		$(document).find('.jumbotron').each(function(){
-			if ($(this).find(".question").html() == highlight + question && $(this).find('.answer').html() != ''){			//compare the questions and answer should be non empty
+			/*if ($(this).find(".question").html() == highlight + question && $(this).find('.answer').html() != ''){			//compare the questions and answer should be non empty
+				n += 1;
+				curr_jumbotron.push($(this).attr(id));																//store the simpler in list for future use
+			}*/
+	/*		if ($(this).find(".q-text").html() == highlight + question && $(this).find('.answer').html() != ''){			//compare the questions and answer should be non empty
 				n += 1;
 				curr_jumbotron.push($(this).attr(id));																//store the simpler in list for future use
 			}
 		});
 		$(this).html(highlight + question + String(n));																//show the number of answers available
+	});*/
+	$('.q-text').each(function(){
+		var queue = $(this).html();
+		$(this).html('<p>' + queue + '</p>');
 	});
 
 	$(".addsimp-toggle-post").click(function(){		//toggles simpler addition text area.
@@ -69,6 +77,11 @@ $(document).ready(function(){
 				$(this).parent().closest(".jumbotron").addClass(addclass);
 			}
 		})
+		/*$(".question").each(function(){
+			if($(this).text()==$this.text()){
+				$(this).parent().closest(".jumbotron").addClass(addclass);
+			}
+		})*/
 	});
 
 	$(".addsimp").click(function(){					//add simpler button code [AJAX].
@@ -121,9 +134,9 @@ $(document).ready(function(){
 			clearSelection();
 
 			var old_simpler = String($reqsimp.parent().parent().find('.simpler-html').find('.q-text').html()).split('?').join('xqmx');
-			if (old_simpler == 'undefined') {
+			/*if (old_simpler == 'undefined') {
 				old_simpler = String($reqsimp.parent().parent().find('.simpler-html').find('.q-text').html()).split('?').join('xqmx');
-			}//the question part of the simpler which won't have the highlight
+			}*///the question part of the simpler which won't have the highlight
 			var new_simpler = String($reqsimp.parent().parent().find('.simpler-html').find('.answer').html()).split('?').join('xqmx');		//the answer part of the highlight which will have the highlight
 			if (old_simpler == '') uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/newxhex/'+ new_simpler +'/oldxhex/empty/';
 			else uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/newxhex/'+ new_simpler +'/oldxhex/' + old_simpler + '/';

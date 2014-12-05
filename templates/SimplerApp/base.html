@@ -70,8 +70,10 @@
 						<ul class="dropdown-menu" id="dropdown-notifications">
 							{% if notifcount == 0 %}
 								<p class='text-muted' style='text-align:center;'>You don't have any notifications right now.</p>
-							{% else %}							
+							{% else %}
+								{% if notifcount != unotifcount %}
 								<a href="javascript:;" class="vrn" style="float:right; text-align:right;">View Read Notifications</a>
+								{% endif %}
 								{% for unotif in unreadnotifs %}
 									<li><a href='/request/notifications/{{unotif.id}}/' class="unotif" style="white-space:normal; background-color:#F8F8F8;">{{unotif.notification}}</a></li>
 								{% endfor %}
