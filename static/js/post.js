@@ -83,6 +83,14 @@ $(document).ready(function(){
 			}
 		})*/
 	});
+	
+	$(".ques").click(function(){
+		var thisid = $(this).attr("data");
+		var thisclass = ".ans-" + thisid;;
+		var jumboid = $(document).find(thisclass).attr('id');
+		window.scrollTo(0,0);
+		next_btn(jumboid);
+	});
 
 	$(".addsimp").click(function(){					//add simpler button code [AJAX].
 		var simpler_id = $(this).attr('id');
