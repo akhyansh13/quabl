@@ -38,21 +38,21 @@ $(document).ready(function(){
 	
 	/*$("num_answers").each(function(){
 		var ques_class = $(this).parent().find(".q-sidebar").attr('class');
-		var highlight = "<p>" + ques_class.split('hquestion-')[1] + "</p>";									//get the highlight in format
-		var question = ques_class.html().split("<p>").join('<p style="font-size:12pt;" class="q-text">');			//get the qestion in format
+		//var highlight = "<p>" + ques_class.split('hquestion-')[1] + "</p>";									//get the highlight in format
+		var question = ques_class.html().split("<p>").join('<p style="font-size:12pt;" class="q-text">''<p>');			//get the qestion in format
 		n = 0;																						//counter of number of answered simplers
 		var curr_jumbotron = [];																	//list to store te simplers with answers
 		$(document).find('.jumbotron').each(function(){
-			/*if ($(this).find(".question").html() == highlight + question && $(this).find('.answer').html() != ''){			//compare the questions and answer should be non empty
+			if ($(this).find(".question").html() == highlight + question && $(this).find('.answer').html() != ''){			//compare the questions and answer should be non empty
 				n += 1;
 				curr_jumbotron.push($(this).attr(id));																//store the simpler in list for future use
-			}*/
-	/*		if ($(this).find(".q-text").html() == highlight + question && $(this).find('.answer').html() != ''){			//compare the questions and answer should be non empty
+			}
+			if ($(this).find(".q-text").html() == question && $(this).find('.answer').html() != ''){			//compare the questions and answer should be non empty
 				n += 1;
 				curr_jumbotron.push($(this).attr(id));																//store the simpler in list for future use
 			}
 		});
-		$(this).html(highlight + question + String(n));																//show the number of answers available
+		$(this).html(question + String(n));																//show the number of answers available
 	});*/
 	$('.q-text').each(function(){
 		var queue = $(this).html();
@@ -86,10 +86,21 @@ $(document).ready(function(){
 	
 	$(".ques").click(function(){
 		var thisid = $(this).attr("data");
-		var thisclass = ".ans-" + thisid;;
-		var jumboid = $(document).find(thisclass).attr('id');
-		window.scrollTo(0,0);
-		next_btn(jumboid);
+		var thisclass = ".ans-" + thisid;
+		$('.simpler-wrapper').hide();
+		$('.q-sidebar').hide();
+		$(thisclass).each(function(){
+			$(this).parent().show();
+			$(this).show();
+			var offset = $(this).offset();
+			
+			var jumboid = $(this).attr("id");
+			$('.q-' + jumboid).show();
+			$('.q-' + jumboid).offset({top:(offset.top + 50)});
+		});
+		
+		//window.scrollTo(0,0);
+		//next_btn(jumboid);
 	});
 
 	$(".addsimp").click(function(){					//add simpler button code [AJAX].
