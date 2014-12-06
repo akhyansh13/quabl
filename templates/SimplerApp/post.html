@@ -35,7 +35,7 @@
 
 {% block body_block %}
 <div id="post-wrapper" style="padding-bottom:100px;">
-<div id="Post" class="jumbotron nthlevel">
+<div id="Post" class="jumbotron nthlevel" style="display:none;">
 	{% autoescape off %}<p>{{ post.topic }}:<p>
 	<h3>{{ post.post }}</h3>
 	{% if post.description %}

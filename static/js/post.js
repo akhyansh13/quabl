@@ -20,12 +20,12 @@ $(document).ready(function(){
 
 	var toscrollto = $("#scrolltoid").text();
 
-	$('.jumbotron').not(".level-1").not('#Post').hide();
+	$('.jumbotron').not(".level-1").hide();
 
 	$('.checkedhigh').hide();
 	$('.checkedhigh').removeAttr('checked');
 
-	$(".level-1").parent().find(".next").show();
+	//$(".level-1").parent().find(".next").show();
 
 	$(".jumbotron").not("#Post").each(function(){		//Takes care of the bracketed number.
 		id = $(this).attr('id');
@@ -72,35 +72,38 @@ $(document).ready(function(){
 		var $this = $(this);
 		var thisid = $(this).attr("data");
 		var addclass = "ans-" + thisid;
+		
 		$(".q-text").each(function(){
 			if($(this).text()==$this.text()){
 				$(this).parent().closest(".jumbotron").addClass(addclass);
 			}
-		})
-		/*$(".question").each(function(){
-			if($(this).text()==$this.text()){
-				$(this).parent().closest(".jumbotron").addClass(addclass);
-			}
-		})*/
+		});
+		
+		var answers = $(this).parent().find(".ansnum").html();
+		var thishtml = $(this).html();
+		if (answers != '0 Answers') {
+			$(this).html('<a href="javascript:;">' + thishtml + '</a>');
+		}
 	});
 	
 	$(".ques").click(function(){
-		var thisid = $(this).attr("data");
-		var thisclass = ".ans-" + thisid;
-		$('.simpler-wrapper').hide();
-		$('.q-sidebar').hide();
-		$(thisclass).each(function(){
-			$(this).parent().show();
-			$(this).show();
-			var offset = $(this).offset();
+		if ($(this).parent().find(".ansnum").html() != "0 Answers") {
+			var thisid = $(this).attr("data");
+			var thisclass = ".ans-" + thisid;
+			$('.level-wrapper').hide();
+			$('.q-sidebar').hide();
+			$(thisclass).each(function(){
+				$(this).parent().parent().show();
+				$(this).show();
+				var offset = $(this).offset();
+				
+				var jumboid = $(this).attr("id");
+				$('.q-' + jumboid).show();
+				$('.q-' + jumboid).offset({top:(offset.top + 50)});
+			});
 			
-			var jumboid = $(this).attr("id");
-			$('.q-' + jumboid).show();
-			$('.q-' + jumboid).offset({top:(offset.top + 50)});
-		});
-		
-		//window.scrollTo(0,0);
-		//next_btn(jumboid);
+			window.scrollTo(0,0);
+		}
 	});
 
 	$(".addsimp").click(function(){					//add simpler button code [AJAX].
@@ -186,7 +189,9 @@ $(document).ready(function(){
 			$(this).parents(".simpler-wrapper").find(".reqsimp").attr('class', "btn btn-default reqsimp");
 		}
 	});
-
+	
+	$('.next').hide();
+	
 	$(".next").click(function(){	
 
 		window.scrollTo(0,0);
@@ -268,7 +273,7 @@ $(document).ready(function(){
 			var linktxt = num + " Answers";
 		}
 
-		$(this).html("<a href = 'javascript:;'>" + linktxt + "</a>");
+		$(this).html(linktxt);
 
 	});
 
@@ -345,6 +350,8 @@ $(document).ready(function(){
 	next_btn(contsimpid);
 
 	$("#"+contsimpid).addClass("nthlevel");
+	$('.next').hide();
+	$('.jumbotron').not(".level-1").hide();
 
 	if($("#Post").is(":visible")){
 		$("#instruct").show();
