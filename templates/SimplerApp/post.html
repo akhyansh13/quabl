@@ -16,17 +16,14 @@
 {% block sideblock %}
 <div class='quespane'>
 	<div align="right"><span style="font-size:13pt;">Q</span>UESTIONS</div><hr style="margin-top:0px;"/>
-	<span id="instruct">QUESTIONS RELATED TO CURRENT ANSWER APPEAR HERE. CLICK NEXT BELOW EACH SIMPLER TO SEE THE NEXT LEVEL.</span>
-	<span id="instruct-rest">TO ADD A QUESTION, SELECT THE PART OF A SIMPLER TO WHICH IT CONCERNS, THEN CLICK ON ASK SIMPLER.</span>
 	{% for h in highlightqs %}
 		{% for x in h %}
-			<p align='left' class="q-{{x.highlight.highlight_parent.id}} q-sidebar hquestion-{{x.id}}" style="display:none;">
+			<p align='left' class="q-{{x.highlight.highlight_parent.id}} q-sidebar hquestion-{{x.id}}">
 				<span class="ques" data='{{x.id}}'>{{x.question}}</span><br/>
 				<span class="ansnum" data='{{x.id}}'></span>
 				{% if user.is_authenticated %}
 					<button class="btn btn-default ques-add" data='/addsimpler/{{x.id}}' style="display:inline-block; margin: 0px;">Add Answer.</button><br/>
 				{% endif %}
-				<span class="qprev" style="display:none;"><a href="javascript:;">Back to all questions view.</a></span>
 			</p>	
 {% endfor %}
 {% endfor %}
@@ -34,8 +31,8 @@
 {% endblock %}
 
 {% block body_block %}
-<div id="post-wrapper" style="padding-bottom:100px;">
-<div id="Post" class="jumbotron nthlevel" style="display:none;">
+<div id="post-wrapper" style="display:none;">
+<div id="Post" class="jumbotron" style="display:none;">
 	{% autoescape off %}<p>{{ post.topic }}:<p>
 	<h3>{{ post.post }}</h3>
 	{% if post.description %}
@@ -48,22 +45,6 @@
 	<div align="right"><h2>
 		<button class="btn btn-default glyphicon glyphicon-chevron-down addsimp-toggle-post" style='color:#808080'></button></h2></div>
 	{% endif %}
-
-	<div class="simpler-textarea" style='display:none;'>
-	<div>
-		<div id="toolbar">
-		  <button class="ql-bold btn btn-default" style="font-size:13pt; padding: 5px 10px; margin:5px;">B</button>
-		  <button class="ql-italic btn btn-default" style="font-size:13pt; padding: 5px 13px; margin:5px;">I</button>
-		  <button class="ql-underline btn btn-default" style="font-size:13pt; padding: 5px 10px; margin:5px;"><u>U</u></button>
-  		  <button class="ql-image btn btn-default" style="font-size:13pt; padding: 5px 10px;margin:5px;">Insert Image</button>
-		</div>
-		<div id='editor'></div>
-		{% csrf_token %}
-	</div>
-	<div align="center" style='padding-top:10px;'>
-		<button type="button" class=" btn btn-primary addsimp" id="level1-simp" align="center" data ='{{post.id}}'>Add Answer.</button>
-	</div>
-	</div>
 </div>
 </div>
 	{% for i in loop %}
@@ -79,13 +60,11 @@
 						<div class="author" style="text-align:right;">Written by <a href="javascript:;" class="getup" data="{{simpler.writer.id}}">{{simpler.writer.username}}</a>.</div><br/>
 					</div>
 				</div> <!-- simpler/jumbotron close. -->
-				<div style="display:none;" class='btngrp'>
-						<a href = 'javascript:;' class="previous" style='float:left; font-size:1.35em;'>Previous</a>
+				<div class='btngrp'>
 						{% if user.is_authenticated %}
 						<button type="button" class = "btn btn-default reqsimp" id="{{simpler.id}}" data='{{post.id}}' style='float:right'>Ask.</button>
 						{% endif %}
 				</div>
-				<div style="text-align:right; display:none;" class="next"><h4><a href='javascript:;'>Next(<span id='num-child'></span>)</a></h4></div>
 			</div><!-- simpler-wrapper close. -->				
 			{% endautoescape %}
 			{% endif %}
