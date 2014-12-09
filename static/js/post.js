@@ -1,5 +1,37 @@
 $(document).ready(function(){
 
+	var onehview = false;
+	var highlight_parent = ' ';
+
+	$(document).on("click",".highlight", function(){
+
+		$this = $(this);
+
+		$.when(simpler_cache($this.closest(".answer"))).then(function(){
+
+			highlight_parent = $this.closest(".answer");
+			var quabl_text = $this.data('text');
+			$this.closest(".answer").find(".highlight").not($this).remove();
+			var simpler_html = $this.closest(".answer").html();
+			var h_html = $('<div>').append($this.clone()).html();
+			var new_simpler_html = simpler_html.replace(h_html + quabl_text, '<span class="quabl_full">' + h_html + quabl_text + '</span>');
+			$this.closest(".answer").empty().append(new_simpler_html);
+
+			setTimeout(function(){
+				onehview = true;
+			},10);
+
+		});
+
+	});
+
+	$(document).on("click", function(){
+				if(onehview){
+					highlight_parent.empty().append(simpler_html_cache);
+					onehview = false;
+				}
+			});
+
 	var contsimpid = getcontsimpid();
 
 	$('#'+contsimpid).find(".author").hide();
@@ -7,25 +39,25 @@ $(document).ready(function(){
 	$('#dropdown-notifications').each(function(){
 		$(this).attr('style', "max-width:450px; min-width:450px; width:450px; min-height:" + screen.height + "px; max-height:" + screen.height + "px; height:450" + screen.height + "px;");
 	});
-	
-	$(".ques").each(function(){				//Iterates through the questions, finds answers to those questions and assigns the class 'ans-<question-id>' to those answers.	
+
+	$(".ques").each(function(){				//Iterates through the questions, finds answers to those questions and assigns the class 'ans-<question-id>' to those answers.
 		var $this = $(this);
 		var thisid = $(this).attr("data");
 		var addclass = "ans-" + thisid;
-		
+
 		$(".q-text").each(function(){
 			if($(this).text()==$this.text()){
 				$(this).parent().closest(".jumbotron").addClass(addclass);
 			}
 		});
-		
+
 		var answers = $(this).parent().find(".ansnum").html();		//Converts the answers into links.
 		var thishtml = $(this).html();
 		if (answers != '0 Answers') {
 			$(this).html('<a href="javascript:;">' + thishtml + '</a>');
 		}
 	});
-	
+
 	$(".ques").click(function(){
 		if ($(this).parent().find(".ansnum").html() != "0 Answers") {
 			var thisid = $(this).attr("data");
@@ -36,20 +68,20 @@ $(document).ready(function(){
 				$(this).parent().parent().show();
 				$(this).show();
 				var offset = $(this).offset();
-				
+
 				var jumboid = $(this).attr("id");
 				$('.q-' + jumboid).show();
 				$('.q-' + jumboid).offset({top:(offset.top + 50)});
 			});
-			
+
 			window.scrollTo(0,0);
 		}
 	});
-					
+
 	$(".reqsimp").click(function(){
-		if ((typeof $(this).attr('value')) === "undefined"){
 			$reqsimp = $(this);
-			var final_span = " ";						
+			var quabl_html = getSelectionHtml();
+			var final_span = " ";
 			var simpler_id = $(this).attr('id');
 			var post_id = $(".addsimp").attr('data');
 			var selection = window.getSelection().getRangeAt(0);
@@ -59,7 +91,8 @@ $(document).ready(function(){
 			var firstel = highlight_arr[0];
 			var lastel = highlight_arr[highlight_arr.length-1];
 			highlight = highlight.trim();
-			var req_span = '<span class="curr_highlight" id="'+simpler_id+'" data="'+post_id+'">' + highlight +'</span>'
+			trimmed_highlight_arr = highlight.split("");
+			var req_span = '<span class="quabl"><span class="curr_highlight" data-text="'+ highlight +'"></span>' + highlight + '</span>';
 			if(firstel==" "){				//Fixing the Quabl-spacing problem.
 				final_span = '<span class="highlight-wrapper">&nbsp;' + req_span;
 			}
@@ -76,31 +109,21 @@ $(document).ready(function(){
 			//The new highlight has class curr_highlight and the new checkbox has class curr_checkedhigh. They have related CSS.
 			selection.insertNode(span[0]);
 
-			$(".curr_checkedhigh").hide(); //Fixes the anomaly where the checkbox appears after pressing Ask.
-
 			if (selectedText.childNodes[1] != undefined){
 				console.log(selectedText.childNodes[1]);
 				$(selectedText.childNodes[1]).remove();
 			}
-	
+
 			clearSelection();
 
-			var old_simpler = String($reqsimp.parent().parent().find('.simpler-html').find('.q-text').html()).split('?').join('xqmx');
+			var question_part = String($reqsimp.parent().parent().find('.simpler-html').find('.q-text').html()).split('?').join('xqmx');
 			/*if (old_simpler == 'undefined') {
 				old_simpler = String($reqsimp.parent().parent().find('.simpler-html').find('.q-text').html()).split('?').join('xqmx');
 			}*///the question part of the simpler which won't have the highlight
-			var new_simpler = String($reqsimp.parent().parent().find('.simpler-html').find('.answer').html()).split('?').join('xqmx');		//the answer part of the highlight which will have the highlight
-			if (old_simpler == '') uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/newxhex/'+ new_simpler +'/oldxhex/empty/';
-			else uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/newxhex/'+ new_simpler +'/oldxhex/' + old_simpler + '/';
-			window.location.href = uri;
-		}
-		else{
-			var simpler_id = $(this).attr('id');
-			var post_id = $(this).attr('data');
-			var highlights = $(this).attr('value');
-			uri = '/defined/'+ post_id + '/' + simpler_id +'/'+ highlights +'/0/';
-			window.location.href = uri;
-		}
+			var answer_part = String($reqsimp.parent().parent().find('.simpler-html').find('.answer').html()).split('?').join('xqmx');		//the answer part of the highlight which will have the highlight
+			if (question_part == '') uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/ans/'+ answer_part +'/ques/empty/quabl/' + quabl_html + '/';
+			else uri = '/define/'+ $(this).attr('data') + '/' + simpler_id +'/ans/'+ answer_part +'/ques/' + question_part + '/quabl/' + quabl_html + '/';
+			window.location = uri;
 	});
 
 	$(".ansnum").each(function(){
@@ -151,6 +174,25 @@ $(document).ready(function(){
 	}*/
 }); //window.onload function finished.
 
+function getSelectionHtml() {
+    var html = "";
+    if (typeof window.getSelection != "undefined") {
+        var sel = window.getSelection();
+        if (sel.rangeCount) {
+            var container = document.createElement("div");
+            for (var i = 0, len = sel.rangeCount; i < len; ++i) {
+                container.appendChild(sel.getRangeAt(i).cloneContents());
+            }
+            html = container.innerHTML;
+        }
+    } else if (typeof document.selection != "undefined") {
+        if (document.selection.type == "Text") {
+            html = document.selection.createRange().htmlText;
+        }
+    }
+    return html;
+}
+
 function clearSelection() {
     if ( document.selection ) {
         document.selection.empty();
@@ -159,28 +201,23 @@ function clearSelection() {
     }
 }
 
-function isTextSelected(input){
-   var startPos = input.selectionStart;
-   var endPos = input.selectionEnd;
-   var doc = document.selection;
-
-   if(doc && doc.createRange().text.length != 0){
-      return true;
-   }else if (!doc && input.value.substring(startPos,endPos).length != 0){
-      return true;
-   }
-   return false;
-}
-
 function getcontsimpid(){
 	var contsimpid = ' ';
 
 	$(".jumbotron").each(function(){
 		if($(this).attr("data") == 'contextsimpler'){
-			contsimpid = $(this).attr("id");		
+			contsimpid = $(this).attr("id");
 		}
 	});
 
 	return contsimpid;
 }
 
+function simpler_cache(input){
+	var cache_defer = $.Deferred();
+	simpler_html_cache = input.html();
+	setTimeout(function(){
+		cache_defer.resolve();
+	},10);
+	return cache_defer;
+}

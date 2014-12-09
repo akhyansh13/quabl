@@ -116,37 +116,37 @@ body {
 }
 
 #fname{
-  font-weight:bold; 
-  font-size:22pt; 
+  font-weight:bold;
+  font-size:22pt;
   padding-bottom:10px;
 }
 
 .category{
-  font-weight:bold; 
+  font-weight:bold;
   color:#999;
 }
 
 #main-logo{
-  color:#FFFFFF; 
-  text-decoration:none; 
-  background-color:#FFA500; 
-  padding-top:11.45px; 
+  color:#FFFFFF;
+  text-decoration:none;
+  background-color:#FFA500;
+  padding-top:11.45px;
   padding-bottom:17px;
   border-radius:5px;
-  font-size:25pt; 
-  padding-left:10px; 
+  font-size:25pt;
+  padding-left:10px;
   padding-right:10px;
 }
 
 .quespane{
   float:right;
   width:40%;
-  padding-right:10%; 
+  padding-right:10%;
   padding-top:105px;
 }
 
 #instruct-rest, #instruct{
-  font-size:9pt; 
+  font-size:9pt;
   color:#A4A4A4;
 }
 
@@ -155,8 +155,8 @@ body {
 }
 
 .ansnum{
-  display:inline-block; 
-  margin: 0px; 
+  display:inline-block;
+  margin: 0px;
   margin-right:5px;
 }
 
@@ -175,4 +175,12 @@ body {
 
 .preview{
   display: none;
+}
+
+.quabl_full{
+  border-radius:12px;
+  background-color: #FFA500;
+  padding-right:6px;
+  color:#FFFFFF;
+  padding-left:6px;
 }

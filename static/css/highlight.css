@@ -1,9 +1,12 @@
 .highlight{
-  padding-left:2px;
-  padding-right: 2px;
-  background-color: #fff8dc;
-  border-radius: 4px;
-  margin-right: 2px;
+  display: inline-block;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  background-color: #FFA500;
+  margin-right: 3px;
+  cursor: hand;
+  cursor: pointer;
 }
 
 .highlight,

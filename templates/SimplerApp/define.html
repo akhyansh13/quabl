@@ -5,8 +5,17 @@
 
 <script>
 $(document).ready(function(){
-    $(".checkedhigh").hide();
-    $(".DescBox").attr("placeholder","Ask a question related to your highlight here.")
+    $(".DescBox").attr("placeholder","Ask a question related to your highlight here.");
+
+$(".curr_highlight").click(function(){
+	$(this).parent().css({
+		"border-radius":'12px',
+		"background-color": "#FFA500",
+		"padding-right":"6px",
+		"color":"#FFFFFF",
+	});
+});
+
 });
 </script>
 
@@ -23,7 +32,7 @@ $(document).ready(function(){
 
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title">{{new_simpler}}</h3>
+			<h3 class="panel-title">{{answer_part}}</h3><br/>
 		</div>
 		<div class="panel-body">
 			<form method='post' action=''>
