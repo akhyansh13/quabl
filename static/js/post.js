@@ -6,12 +6,12 @@ $(document).ready(function(){
 
 	$(document).mouseup(function(){
 		if(getSelectionHtml() != ''){
-			$(".highlight").css('visibility', 'hidden');
+			$(".highlight").hide('slow');
 			selectmode = true;
 		}
 		else if(selectmode && getSelectionHtml()==''){
 			selectmode = false;
-			$(".highlight").css('visibility', 'visible');
+			$(".highlight").show('slow');
 		}
 	});
 
