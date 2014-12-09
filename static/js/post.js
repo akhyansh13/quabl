@@ -14,7 +14,8 @@ $(document).ready(function(){
 			$this.closest(".answer").find(".highlight").not($this).remove();
 			var simpler_html = $this.closest(".answer").html();
 			var h_html = $('<div>').append($this.clone()).html();
-			var new_simpler_html = simpler_html.replace(h_html + quabl_text, '<span class="quabl_full">' + h_html + quabl_text + '</span>');
+			var h_html_dummy = h_html.replace('class="highlight"', 'class="highlight_dummy"');
+			var new_simpler_html = simpler_html.replace(h_html + quabl_text, '<span class="quabl_full">' + h_html_dummy + quabl_text + '</span>');
 			$this.closest(".answer").empty().append(new_simpler_html);
 
 			setTimeout(function(){
