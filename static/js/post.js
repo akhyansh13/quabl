@@ -1,7 +1,19 @@
 $(document).ready(function(){
 
 	var onehview = false;
+	var selectmode = false;
 	var highlight_parent = ' ';
+
+	$(document).mouseup(function(){
+		if(getSelectionHtml() != ''){
+			$(".highlight").css('visibility', 'hidden');
+			selectmode = true;
+		}
+		else if(selectmode && getSelectionHtml()==''){
+			selectmode = false;
+			$(".highlight").css('visibility', 'visible');
+		}
+	});
 
 	$(document).on("click",".highlight", function(){
 
