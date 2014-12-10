@@ -18,15 +18,16 @@
 	<div align="right"><span style="font-size:13pt;">Q</span>UESTIONS</div><hr style="margin-top:0px;"/>
 	{% for h in highlightqs %}
 		{% for x in h %}
-			<p align='left' class="q-{{x.highlight.highlight_parent.id}} q-sidebar hquestion-{{x.id}}">
+			<p align='left' class="q-{{x.highlight.highlight_parent.id}} q-sidebar hid-{{x.highlight.id}}" style="display:none;">
 				<span class="ques" data='{{x.id}}'>{{x.question}}</span><br/>
 				<span class="ansnum" data='{{x.id}}'></span>
 				{% if user.is_authenticated %}
 					<button class="btn btn-default ques-add" data='/addsimpler/{{x.id}}' style="display:inline-block; margin: 0px;">Add Answer.</button><br/>
 				{% endif %}
-			</p>	
-{% endfor %}
-{% endfor %}
+			</p>
+		{% endfor %}
+	{% endfor %}
+	<button align="right" class="btn btn-default addques" data="" style="display:none;">Ask Another Question</button>
 </div>
 {% endblock %}
 

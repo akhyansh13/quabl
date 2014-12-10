@@ -55,7 +55,7 @@ $(document).ready(function(){
 		});
 	});
 
-	 $(document).on('scroll', function(){
+	$(document).on('scroll', function(){
 
 	 	upopen_tb_offset = $(".header").offset().top;
 
@@ -104,4 +104,3 @@ $(document).ready(function(){
 		}
 	});
 });
-

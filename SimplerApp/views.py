@@ -15,29 +15,54 @@ from PIL import Image
 
 def index(request):
     context = RequestContext(request)
-    topics = topic.objects.all()
-    topic_dict = []
-    for t in topics:
-        if Post.objects.all().filter(topic=t):
-            topic_dict.append(Post.objects.all().filter(topic=t))
-    context_dict = {'topics':topic_dict}
+    #topics = topic.objects.all()
+    #topic_dict = []
+    #for t in topics:
+    #   if Post.objects.all().filter(topic=t):
+    #        topic_dict.append(Post.objects.all().filter(topic=t))
+    #context_dict = {'topics':topic_dict}
+
+    contextsimplers = Simpler.objects.all().filter(parent_list='contextsimpler')
+    context_dict = {'contexts':contextsimplers}
+
+    questions = highlightq.objects.all()
+    ques = []
+
+    for question in questions:
+        if question.highlight.highlight_parent in contextsimplers:
+            ques.append(question)
+
+    context_dict['ques'] = ques
+
+    quests = ques[:]
+
+    highlights = highlight.objects.all()
 
     simpler_num_arr = []
-    for post in Post.objects.all():      #Picking all posts up right now. Gotta fix it later.
-        simpler_num_arr.append([post.id, len(post.simpler_set.all().filter(display=' '))])
+    for simpler in contextsimplers:
+        qcount = 0
+        hsimplers = highlights.filter(highlight_parent=simpler)
+        for quest in quests:
+            if quest.highlight.highlight_parent.id == simpler.id:
+                qcount += 1
+                del quests[quests.index(quest)]
+        simpler_num_arr.append([simpler.id, len(hsimplers), qcount])
+    #simpler_num_arr = []
+    #for post in Post.objects.all():      #Picking all posts up right now. Gotta fix it later.
+    #    simpler_num_arr.append([post.id, len(post.simpler_set.all().filter(display=' '))])
     context_dict['numarr']=simpler_num_arr
 
-    posts = Post.objects.order_by('-explores')
-    aposts = []
-    uposts = []
-    simplers = Simpler.objects.all()
-    for post in posts:
-        if simplers.filter(post=post).count() == 1:
-            uposts.append(post)
-        elif simplers.filter(post=post).count() >= 2:
-            aposts.append(post)
-    context_dict['aposts'] = aposts
-    context_dict['uposts'] = uposts
+    #posts = Post.objects.order_by('-explores')
+    #aposts = []
+    #uposts = []
+    #simplers = Simpler.objects.all()
+    #for post in posts:
+    #    if simplers.filter(post=post).count() == 1:
+    #        uposts.append(post)
+    #    elif simplers.filter(post=post).count() >= 2:
+    #        aposts.append(post)
+    #context_dict['aposts'] = aposts
+    #context_dict['uposts'] = uposts
     #notifs = UserNotification.objects.all().filter(user=request.user.username).filter(status='unread')
     #context_dict['notifs'] = notifs
     #context_dict['notifcount'] = notifs.count()
@@ -70,6 +95,36 @@ def addpost(request):
     p = Post.objects.get_or_create(post=context_text ,author=request.user.username, writer=request.user, context=context_text)[0]
     s = Simpler.objects.get_or_create(post=p,simpler=p.context, simpler_original=p.context, coeficient=1, parent_list='contextsimpler', author=request.user.username, writer=request.user, display=' ')[0]
     return HttpResponse(str(p.id))
+
+def question(request, question_id):
+    context = RequestContext(request)
+    ques = highlightq.objects.get(id=int(question_id))
+    context_dict = {'ques':ques}
+
+    contextsimpler = Simpler.objects.get(id=ques.highlight.highlight_parent.id)
+    context_dict['contextsimpler'] = contextsimpler
+
+    answers = Simpler.objects.all().filter(question=question_id)
+    context_dict['anscount'] = len(answers)
+
+    highlights = highlight.objects.all()
+    questions = highlightq.objects.all()
+    cquestions = []
+    highs = highlights.filter(highlight_parent=contextsimpler)
+    for high in highs:
+            cquestions.extend(questions.filter(highlight=high))
+    rquestions = []
+
+    for answer in answers:
+        highs = highlights.filter(highlight_parent=answer)
+        for high in highs:
+            rquestions.extend(questions.filter(highlight=high))
+
+    context_dict['cquestions'] = cquestions
+    context_dict['rquestions'] = rquestions
+    context_dict['answers'] = answers
+        
+    return render_to_response('SimplerApp/question.html', context_dict, context)
 
 def post(request, post_id):
     context = RequestContext(request)

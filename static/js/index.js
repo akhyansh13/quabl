@@ -1,4 +1,7 @@
 $(document).ready(function(){
+	$(".footer").hide();
+
+	var onehview = false;
 
 	$(".addpostbtn").click(function(){
 		var txt = '<p>' + $(".contextbox").val() + '</p>';
@@ -40,22 +43,25 @@ $(document).ready(function(){
 
 	$(".contextbox").attr("placeholder", "Read something too complex to understand? Post it here!");
 
-	//$(".simnum").each(function(){
-	//	var content = $(this).html();
-	//	var id = String(content.split("-")[0]);
-	//	var number = String(content.split("-")[1]);
+	$(".simnum").each(function(){
+		var content = $(this).html();
+		var id = String(content.split("-")[0]);
+		var nquabls = String(content.split("-")[1]);
+		var nques = String(content.split("-")[2]);
+		
+		$(".contextstats").html(nquabls + " QUABLS & " + nques + " QUESTIONS.");
 
-	//	if(parseInt(number)==0){
-	//		$("#"+id).html("No Answers Yet.");
-	//	}
+		/*if(parseInt(number)==0){
+			$("#"+id).html("No Answers Yet.");
+		}
 
-	//	else if(parseInt(number)==1){
-	//		$("#"+id).html("1 Answer.");
-	//	}
-	//	else{
-	//		$("#"+id).html(number + " Answers.");
-	//	}
-	//});
+		else if(parseInt(number)==1){
+			$("#"+id).html("1 Answer.");
+		}
+		else{
+			$("#"+id).html(number + " Answers.");
+		}*/
+	});
 
 	$(".folbtn").click(function(){		//AJAX request for follow/unfollow button.
 		var post_id = $(this).attr('data');
@@ -66,14 +72,60 @@ $(document).ready(function(){
 		var $this = $(this);
 		var state = $this.attr("class").split(" ")[1];
 		if(state == 'unfollowstate'){
-				$this.html('Follow');
+				$this.html('PIN THIS CONTEXT');
 				$this.removeClass('unfollowstate');
 				$this.addClass('followstate');
 			}
 			else{
-				$this.html('Unfollow');
+				$this.html('UNPIN THIS CONTEXT');
 				$this.removeClass('followstate');
 				$this.addClass('unfollowstate');
 			}
 	});
+	
+	$(document).on("click",".highlight", function(){
+
+		$this = $(this);
+
+		$.when(simpler_cache($this.closest(".context"))).then(function(){
+
+			highlight_parent = $this.closest(".context");
+			var quabl_text = $this.data('text');
+			var h_id = $this.data('id');
+			$this.closest(".context").find(".highlight").not($this).remove();
+			var simpler_html = $this.closest(".context").html();
+			var h_html = $('<div>').append($this.clone()).html();
+			var h_html_dummy = h_html.replace('class="highlight"', 'class="highlight_dummy"');
+			var new_simpler_html = simpler_html.replace(h_html + quabl_text, '<span class="quabl_full">' + h_html_dummy + quabl_text + '</span>');
+			$this.closest(".context").empty().append(new_simpler_html);
+			
+			$(".ques").each(function() {
+				highlightid = $(this).attr('class').split('hid-')[1];
+				if (highlightid == h_id) $(this).show();
+			});
+
+			setTimeout(function(){
+				onehview = true;
+			},10);
+
+		});
+
+	});
+	
+	$(document).on("click", function(){
+		if(onehview){
+			highlight_parent.empty().append(simpler_html_cache);		
+			onehview = false;
+			$('.ques').hide();
+		}
+	});
 });
+
+function simpler_cache(input){
+	var cache_defer = $.Deferred();
+	simpler_html_cache = input.html();
+	setTimeout(function(){
+		cache_defer.resolve();
+	},10);
+	return cache_defer;
+}

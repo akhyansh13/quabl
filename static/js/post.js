@@ -23,12 +23,21 @@ $(document).ready(function(){
 
 			highlight_parent = $this.closest(".answer");
 			var quabl_text = $this.data('text');
+			var h_id = $this.data('id');
 			$this.closest(".answer").find(".highlight").not($this).remove();
 			var simpler_html = $this.closest(".answer").html();
 			var h_html = $('<div>').append($this.clone()).html();
 			var h_html_dummy = h_html.replace('class="highlight"', 'class="highlight_dummy"');
 			var new_simpler_html = simpler_html.replace(h_html + quabl_text, '<span class="quabl_full">' + h_html_dummy + quabl_text + '</span>');
 			$this.closest(".answer").empty().append(new_simpler_html);
+			
+			$(".q-sidebar").each(function() {
+				highlightid = $(this).attr('class').split('hid-')[1];
+				if (highlightid == h_id) $(this).show();
+				
+				$('.addques').attr('data', h_id);
+				$('.addques').show();
+			});
 
 			setTimeout(function(){
 				onehview = true;
@@ -42,6 +51,9 @@ $(document).ready(function(){
 				if(onehview){
 					highlight_parent.empty().append(simpler_html_cache);
 					onehview = false;
+					$('.q-sidebar').hide();
+					$('.addques').hide();
+					$('.addques').removeAttr('data');
 				}
 			});
 

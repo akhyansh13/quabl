@@ -1,0 +1,50 @@
+.mainquespane{
+	padding:0px 60px 0px 0px;
+}
+.mainques{
+	font-size:30pt;
+	font-weight:bold;
+}
+.viewcontext,
+.numanswers,
+.author{
+	font-size:20pt;
+}
+.jumptotext{
+	font-size:15pt;
+	text-align:right;
+}
+.shortquespane{
+	font-size:15pt;
+	font-weight:bold;
+	position:fixed;
+}
+.answer{
+	padding:0px 60px 0px 0px;
+}
+.prev{
+	float:left;
+	bottom: 0px;
+	font-size:15pt;
+}
+.next{
+	float:right;
+	bottom: 0px;
+	font-size:15pt;
+}
+.quabl_full{
+  border-radius:12px;
+  background-color: #FFA500;
+  padding-right:6px;
+  color:#FFFFFF;
+  padding-left:6px;
+}
+
+.highlight_dummy{
+  display: inline-block;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  background-color: #FFA500;
+  margin-right: 3px;
+}

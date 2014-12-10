@@ -1,0 +1,43 @@
+{% extends 'SimplerApp/base.html' %}
+{% load static %}
+{% block scripts_block %}
+	<script src="{% static 'js/question.js' %}"></script>
+{% endblock %}
+
+{% block css_block %}
+	<link href="{% static 'css/question.css' %}" rel="stylesheet" />	
+	<link href="{% static 'css/highlight.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block body_block %}
+	{% autoescape off %}
+	<div class="context answer" style="float:left; width:70%; display:none;">{{contextsimpler.answer}}</div>
+	<div class="mainquespane" style="float:left; width:70%;">
+		<div class="mainques">{{ques}}</div><br/>		
+		<div class="viewcontext" data-id="{{ques.highlight.highlight_parent.question}}">VIEW CONTEXT</div><br/>
+		<div class="numanswers">{{anscount}} Answers</div><br/>
+		<div class="author">Question By {{ques.req_by}}</div>
+	</div>
+	{% endautoescape %}
+	<div class="sidequespane" style="float:right; width:30%;">
+		<div class="jumptotext"><u>JUMP TO...</u></div>
+		{% autoescape off %}
+			{% for rques in rquestions %}
+				<div class="rques hid-{{rques.highlight.id}}"><a href="/question/{{rques.id}}">{{rques.question}}</a></div>
+			{% endfor %}
+			{% for cques in cquestions %}
+				<div class="cques hid-{{cques.highlight.id}}" style="display:none;"><a href="/question/{{cques.id}}">{{cques.question}}</a></div>
+			{% endfor %}
+		{% endautoescape %}
+	</div>
+	<div class="shortquespane" style="display:none;">{{ques}}</div>
+	<div class="answer-area" style="float:left; width:70%;">
+		{% autoescape off %}
+			{% for answer in answers %}
+				<div class="answer" style="display:none;">{{answer.answer}}</div>
+			{% endfor %}
+		{% endautoescape %}
+	</div>
+	<div class="prev"><a href="javascript:;">Click to see Previous Answer</a></div>
+	<div class="next"><a href="javascript:;">Click to see Next Answer</a></div>
+{% endblock %}

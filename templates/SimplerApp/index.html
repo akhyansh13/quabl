@@ -5,13 +5,14 @@
 {% endblock %}
 
 {% block css_block %}
-<link href="{% static 'css/index.css' %}" rel="stylesheet" />	
+	<link href="{% static 'css/index.css' %}" rel="stylesheet" />
+	<link href="{% static 'css/highlight.css' %}" rel="stylesheet" />
 {% endblock %}
 
 {% block body_block %}
 
 	{% for num in numarr %}
-		<div style="display:none;" class="simnum">{{num.0}}-{{num.1}}</div>
+		<div style="display:none;" class="simnum">{{num.0}}-{{num.1}}-{{num.2}}</div>
 	{% endfor %}
 
 <div style='padding-bottom:30px;'>
@@ -27,70 +28,38 @@
 			<textarea class="contextbox" style="height:300px;"></textarea>
 		</div>
 		<div align = "center" style="padding-bottom:30px;"><button type="submit" class="btn btn-primary btn-lg addpostbtn" disabled="disabled">Add</button></div>
-		<ul class="nav nav-tabs">
-			<li role="presentation" class="active"><a href="#expl1" aria-controls="expl1" role="tab" data-toggle="tab">Trending reads</a></li>
-			<li role="presentation"><a href="#expl2" aria-controls="expl2" role="tab" data-toggle="tab">New reads</a></li>
-		</ul>
-		<div class="tab-content">
-			<div role="tabpanel" class="tab-pane fade in active" id="expl1">
-						
-			{% for post in aposts %}
-				{% autoescape off %}
-				<div class="exploration" style="padding:10px;">
-			
-					<div class="topicname" style="position: relative; top: 30%; font-size:16pt; color:#777;"><i>{{post.topic}}</i><span style="font-size:12pt;">&nbsp;TOPIC</span></div>
-					<br style="clear:both;"/>					
-			
-					<br style="clear:both;"/>
-					<div style="float:right; width:90%;" class="postlink">
-			
-						<blockquote style="font-size:11pt; color:#444;">
-							{{post.post}}
-						</blockquote>
-					</div>
-					<br style="clear:both;"/>
-					<div style="float:right">
-						<span style="float:right;" id="{{post.id}}"></span>
-						<span style="float:left"><a href='/request/explore/{{post.id}}/'><i>Explore</i></a></span>
-						{% if user.is_authenticated %}
-							<span style="float:left">&nbsp;|&nbsp;<a class="folbtn {% if post.id in followed %}unfollowstate{% else %}followstate{% endif %}" href='javascript:;' data='{{post.id}}'><i>{% if post.id in followed %}Unfollow{% else %}Follow{% endif %}</i></a></span>
-						{% endif %}
-					</div>
-					<br style="clear:both;"/>
-			
-				</div>
-				{% endautoescape %}
-			{% endfor %}	
-			</div>
-			<div role="tabpanel" class="tab-pane fade" id="expl2">
-			{% for post in uposts %}
-				{% autoescape off %}
-				<div class="exploration" style="padding:10px;">
-			
-					<div class="topicname" style="position: relative; top: 30%; font-size:16pt; color:#777;"><i>{{post.topic}}</i><span style="font-size:12pt;">&nbsp;TOPIC</span></div>
-					<br style="clear:both;"/>					
-			
-					<br style="clear:both;"/>
-					<div style="float:right; width:90%;" class="postlink">
-			
-						<blockquote style="font-size:11pt; color:#444;">
-							{{post.post}}
-						</blockquote>
-					</div>
-					<br style="clear:both;"/>
-					<div style="float:right">
-						<!--span style="float:right;" id="{{post.id}}"></span-->
-						<span style="float:left"><a href='/request/explore/{{post.id}}/'><i>Explore</i></a></span>
-						{% if user.is_authenticated %}
-							<span style="float:left">&nbsp;|&nbsp;<a class="folbtn {% if post.id in followed %}unfollowstate{% else %}followstate{% endif %}" href='javascript:;' data='{{post.id}}'><i>{% if post.id in followed %}Unfollow{% else %}Follow{% endif %}</i></a></span>
-						{% endif %}
-					</div>
-					<br style="clear:both;"/>
-			
-				</div>
-				{% endautoescape %}
-			{% endfor %}	
-			</div>
+		<hr/>
+		<div class="dropdown" style="float:right;">
+			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+				Options<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+				<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sort by Topic</a></li>
+				<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sort by Data Added</a></li>
+				<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sort by Popularity</a></li>
+			</ul>
+		</div>
+		<br/>
+		<div class="context-area" style="float:left; width:70%;">
+			{% autoescape off %}
+				{% for context in contexts %}
+					<div class="topicname" style="font-size:16pt;">#{{context.post.topic}}</div>
+					<div class="context">{{context.answer}}</div>
+					<span style="float:left"><a class="folbtn {% if context.id in followed %}unfollowstate{% else %}followstate{% endif %}" href='javascript:;' data='{{context.id}}'>{% if context.id in followed %}UNPIN THIS CONTEXT{% else %}PIN THIS CONTEXT{% endif %}</a></span>
+				{% endfor %}
+			{% endautoescape %}
+		</div>
+		<div class="question-area" style="float:right; width:30%">
+			{% autoescape off %}
+			{% for context in contexts %}
+				<div class="contextstats" id="{{context.id}}"></div>
+				{% for que in ques %}
+					{% if que.highlight.highlight_parent.id == context.id %}
+						<div class="q-{{que.highlight.highlight_parent.id}} ques hid-{{que.highlight.id}}" style="display:none;"><a href="/question/{{que.id}}">{{que.question}}</a></div>
+					{% endif %}
+				{% endfor %}
+			{% endfor %}
+			{% endautoescape %}
 		</div>
 	</div>
 </div>

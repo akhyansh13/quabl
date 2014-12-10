@@ -26,7 +26,8 @@ class Post(models.Model):
 class Simpler(models.Model):
     post = models.ForeignKey(Post)
     parent_simpler = models.ForeignKey('self', related_name="parent", blank= True, null= True)
-    simpler = models.CharField(max_length=10000000)
+    question = models.IntegerField(null=False, blank=False, default=-1)
+    answer = models.CharField(max_length=10000000)
     simpler_original = models.CharField(max_length=10000000, default=' ')
     coeficient = models.IntegerField(null = False, blank = False)
     parent_list = models.CharField(max_length=100000)
@@ -36,15 +37,12 @@ class Simpler(models.Model):
     created = models.DateTimeField(default=datetime.now())
     modified = models.DateTimeField(default=datetime.now())
     def __unicode__(self):
-        simpler_less = show_less(self.simpler)
+        simpler_less = show_less(self.answer)
         return simpler_less
 
 class highlight(models.Model):
     highlight = models.CharField(max_length=100000000)
     highlight_parent = models.ForeignKey(Simpler, related_name=u'highlight_parent', blank=True, null=True)
-    highlight_simpler = models.ForeignKey(Simpler, blank=True, null=True)
-    req_by = models.ForeignKey(User)
-    description = models.CharField(max_length=10000000)
     created = models.DateTimeField(default=datetime.now())
     def __unicode__(self):
         return self.highlight
@@ -52,6 +50,7 @@ class highlight(models.Model):
 class highlightq(models.Model):
     highlight = models.ForeignKey(highlight)
     question = models.CharField(max_length=10000000, blank=True, null=True)
+    req_by = models.ForeignKey(User, null=True, blank=True)
     created = models.DateTimeField(default=datetime.now())
     def __unicode__(self):
         return self.question   
