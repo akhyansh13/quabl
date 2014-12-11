@@ -192,30 +192,39 @@ def postreq(request, post_id, requestid):
 
 def makesimpler(request):
     context = RequestContext(request)
-    highlight_simpler_id = int(request.GET['simpler_id'])
-    simpler_text = request.GET['simpler_text']
-    highlight_simpler = Simpler.objects.get(id=highlight_simpler_id)
-    c = Simpler.objects.get_or_create(post = highlight_simpler.post, parent_simpler = highlight_simpler.parent_simpler,  simpler = highlight_simpler.simpler + '<div class ="answer">'+ simpler_text + '</div>', simpler_original = highlight_simpler.simpler,coeficient = highlight_simpler.coeficient, parent_list = highlight_simpler.parent_list, author = request.user.username, writer=request.user, display=' ', created = datetime.now(), modified = datetime.now())[0]
+    #highlight_simpler_id = int(request.GET['simpler_id'])
+    #simpler_text = request.GET['simpler_text']
+    #highlight_simpler = Simpler.objects.get(id=highlight_simpler_id)
+    #c = Simpler.objects.get_or_create(post = highlight_simpler.post, parent_simpler = highlight_simpler.parent_simpler,  simpler = highlight_simpler.simpler + '<div class ="answer">'+ simpler_text + '</div>', simpler_original = highlight_simpler.simpler,coeficient = highlight_simpler.coeficient, parent_list = highlight_simpler.parent_list, author = request.user.username, writer=request.user, display=' ', created = datetime.now(), modified = datetime.now())[0]
     #getting the user who asked the question
-    if highlight_simpler.author != request.user.username:
-        u = UserNotification.objects.get_or_create(user=highlight_simpler.author, notification=str(request.user.username) + ' added answer to your question:' + show_less_ques(highlight_simpler.simpler), status='unread', postid=highlight_simpler.post.id, simplerid=c.id)
-        if u[1]:
-            u[0].created = datetime.now()
-        u[0].modified = datetime.now()
-        u[0].save()
+    #if highlight_simpler.author != request.user.username:
+    #    u = UserNotification.objects.get_or_create(user=highlight_simpler.author, notification=str(request.user.username) + ' added answer to your question:' + show_less_ques(highlight_simpler.simpler), status='unread', postid=highlight_simpler.post.id, simplerid=c.id)
+    #    if u[1]:
+    #        u[0].created = datetime.now()
+    #    u[0].modified = datetime.now()
+    #    u[0].save()
     #getting all the users who have followed the particular post
-    authors=[]
-    profiles = UserProfile.objects.all()
-    for profile in profiles:
-        if (';' + str(highlight_simpler.post.id) + ';') in profile.followed_posts:
-            authors.append(profile.user.username)
-    for author in authors:
-        if author != request.user.username:
-            u = UserNotification.objects.get_or_create(user=author, notification=str(request.user.username) + ' added answer to a question:' + show_less_ques(highlight_simpler.simpler), status='unread', postid=highlight_simpler.post.id, simplerid=c.id)
-            if u[1]:
-                u[0].created = datetime.now()
-            u[0].modified = datetime.now()
-            u[0].save()
+    #authors=[]
+    #profiles = UserProfile.objects.all()
+    #for profile in profiles:
+    #    if (';' + str(highlight_simpler.post.id) + ';') in profile.followed_posts:
+    #        authors.append(profile.user.username)
+    #for author in authors:
+    #    if author != request.user.username:
+    #        u = UserNotification.objects.get_or_create(user=author, notification=str(request.user.username) + ' added answer to a question:' + show_less_ques(highlight_simpler.simpler), status='unread', postid=highlight_simpler.post.id, simplerid=c.id)
+    #        if u[1]:
+    #            u[0].created = datetime.now()
+    #        u[0].modified = datetime.now()
+    #        u[0].save()
+    questionid = int(request.GET['qid'])
+    simpler_text = request.GET['simpler_text']
+    
+    ques = highlightq.objects.get(id=questionid)
+    post = ques.highlight.highlight_parent.post
+    coefficient = ques.highlight.highlight_parent.coeficient + 1
+    parent_list = 'parent' + str(ques.highlight.highlight_parent.id) + ques.highlight.highlight_parent.parent_list
+    
+    c = Simpler.objects.get_or_create(post=post, question=questionid, answer=simpler_text, simpler_original=simpler_text, coeficient=coefficient, parent_list=parent_list, author=request.user.username, writer=request.user, display=' ')[0]
     return HttpResponse('success')
 
 def register(request):
@@ -444,9 +453,9 @@ def requestbyuser(request, category, description):
 def addanswer(request, qid):
     context = RequestContext(request)
     q = highlightq.objects.get(id=qid)
-    simpler = q.highlight.highlight_simpler
-    context_dict = {'simpler':simpler}
-    context_dict['post_id'] = simpler.post.id
+    #simpler = '<p>' + q.question + '</p>'
+    context_dict = {'q':q}
+    context_dict['post_id'] = q.highlight.highlight_parent.post.id
     return render_to_response('SimplerApp/addsimpler.html', context_dict, context)
 
 def getUserProfile(request, user_id):

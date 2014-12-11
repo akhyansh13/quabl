@@ -5,21 +5,21 @@ $(document).ready(function(){
 	});
 
 	$(".addsimp").click(function(){					//add simpler button code [AJAX].
-		var simpler_id = $(this).attr('id');
-		var post_id = $(this).attr("data");
-		var backsimplerid = $(this).attr('value');
-		var simpler_textarea_id = 'simp'+ simpler_id;
+		//var simpler_id = $(this).attr('id');
+		//var post_id = $(this).attr("data");
+		//var backsimplerid = $(this).attr('value');
+		//var simpler_textarea_id = 'simp'+ simpler_id;
+		var qid = $(this).attr('id');
 		var simpler_text = editor.getHTML();
-		$.get(('/makesimpler/'),{simpler_id:simpler_id, simpler_text:simpler_text, post_id:post_id,}, function(){
-			uri = '/request/addsimpler/postid:' + post_id + ';simplerid:'  + backsimplerid + ';/';
+		$.get(('/makesimpler/'),{qid:qid, simpler_text:simpler_text,}, function(){
+			uri = '/question/' + qid;
     		window.location.href = uri;
 		});
 	});
 	
 	$('.back').click(function(){
-		var postid = $(this).attr('data');
-		var simplerid = $(this).attr('id');
-		uri = "/request/back_to_post/postid:" + postid + ";simplerid:"  + simplerid + ";/";
+		var qid = $(this).attr('data');
+		uri = "/question/" + qid;
 		window.location.href = uri;
 	});
 });

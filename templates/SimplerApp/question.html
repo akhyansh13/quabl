@@ -19,14 +19,20 @@
 		<div class="author">Question By {{ques.req_by}}</div>
 	</div>
 	{% endautoescape %}
-	<div class="sidequespane" style="float:right; width:30%;">
+	<div class="sidequespane" style="float:right; width:30%; text-align:right;">
 		<div class="jumptotext"><u>JUMP TO...</u></div>
 		{% autoescape off %}
 			{% for rques in rquestions %}
+			<div class="rquesheader">
 				<div class="rques hid-{{rques.highlight.id}}"><a href="/question/{{rques.id}}">{{rques.question}}</a></div>
+				<button class="btn btn-defualt addanswer"><a href="/addsimpler/{{rques.id}}">Add Answer.</a></button>
+			</div>	
 			{% endfor %}
 			{% for cques in cquestions %}
-				<div class="cques hid-{{cques.highlight.id}}" style="display:none;"><a href="/question/{{cques.id}}">{{cques.question}}</a></div>
+			<div class="cquesheader" style="display:none;">
+				<div class="cques hid-{{cques.highlight.id}}"><a href="/question/{{cques.id}}">{{cques.question}}</a></div>
+				<button class="btn btn-defualt addanswer"><a href="/addsimpler/{{cques.id}}">Add Answer.</a></button>
+			</div>
 			{% endfor %}
 		{% endautoescape %}
 	</div>

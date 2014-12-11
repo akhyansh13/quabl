@@ -67,12 +67,12 @@ $(document).ready(function(){
 			
 			$(".rques").each(function() {
 				highlightid = $(this).attr('class').split('hid-')[1];
-				if (highlightid == h_id) $(this).show();
+				if (highlightid == h_id) $(this).parent().show();
 			});
 
 			$(".cques").each(function() {
 				highlightid = $(this).attr('class').split('hid-')[1];
-				if (highlightid == h_id) $(this).show();
+				if (highlightid == h_id) $(this).parent().show();
 			});
 			
 			setTimeout(function(){
@@ -87,8 +87,8 @@ $(document).ready(function(){
 		if(onehview){
 			highlight_parent.empty().append(simpler_html_cache);		
 			onehview = false;
-			$('.rques').hide();
-			$('.cques').hide();
+			$('.rques').parent().hide();
+			$('.cques').parent().hide();
 		}
 	});
 	

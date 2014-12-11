@@ -11,7 +11,7 @@
 {% autoescape off %}
 		<div class="simpler-wrapper" style="padding-bottom:10px;padding-top:10px;">
 			<div class="jumbotron">
-				{{simpler.simpler}}<hr/>
+				{{q.question}}<hr/>
 					<div class="simpler-textarea">
 					<div>
 						<div id="toolbar">
@@ -24,8 +24,8 @@
 						{% csrf_token %}
 					</div>
 					<div align="center">
-						<button type="button" class="btn btn-default glyphicon glyphicon-ok addsimp" id="{{simpler.id}}" data ='{{post_id}}' value='{{simpler.parent_simpler.id}}'></button>
-						<button type="button" class="btn btn-default glyphicon glyphicon-remove back" data="{{post_id}}" id="{{simpler.parent_simpler.id}}"></button>
+						<button type="button" class="btn btn-default glyphicon glyphicon-ok addsimp" id="{{q.id}}"></button>
+						<button type="button" class="btn btn-default glyphicon glyphicon-remove back" data="{{q.id}}" id="{{simpler.parent_simpler.id}}"></button>
 					</div>
 					</div>
 					</div>
