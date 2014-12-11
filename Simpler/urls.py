@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from SimplerApp.views import index, question, post, makesimpler, register, user_login, user_logout, addpost, define, addanswer, requestbyuser, postreq, getUserProfile, follow
+from SimplerApp.views import index, csimpler, question, post, makesimpler, register, user_login, user_logout, addpost, define, addanswer, requestbyuser, postreq, getUserProfile, follow
 from django.contrib import admin
 from django.conf import settings
 admin.autodiscover()
@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', index),
     url(r'^question/(?P<question_id>\w+)/$', question),
+    url(r'^context/(?P<simpler_id>\w+)/$', csimpler),
     url(r'^simpler/(?P<post_id>\w+)/(?P<requestid>\w+)/$', postreq),        #Coming as a result of a HttpResponseRedirect.
     url(r'^simpler/(?P<post_id>\w+)/$', post),      #Coming from the index page.
     url(r'^follow/$', follow),

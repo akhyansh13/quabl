@@ -6,7 +6,7 @@ $(document).ready(function(){
 	$(".addpostbtn").click(function(){
 		var txt = '<p>' + $(".contextbox").val() + '</p>';
 		$.get(('/addpost/'), {txt:txt}, function(data){
-			window.location = '/simpler/' + data + '/';
+			window.location = '/context/' + data + '/';
 		});
 	});
 
@@ -49,7 +49,18 @@ $(document).ready(function(){
 		var nquabls = String(content.split("-")[1]);
 		var nques = String(content.split("-")[2]);
 		
-		$(".contextstats").html(nquabls + " QUABLS & " + nques + " QUESTIONS.");
+		if (nquabls == 1 && nques == 1) {
+			$("#" + id).html("1 Quabl, 1 Question.");
+		}
+		else if (nquabls == 1) {
+			$("#" + id).html("1 Quabl, " + nques + " Questions.");
+		}
+		else if (nques == 1) {
+			$("#" + id).html(nquabls + " Quabls, 1 Question.");
+		}
+		else {
+			$("#" + id).html(nquabls + " Quabls, " + nques + " Questions.");
+		}
 
 		/*if(parseInt(number)==0){
 			$("#"+id).html("No Answers Yet.");
@@ -62,6 +73,18 @@ $(document).ready(function(){
 			$("#"+id).html(number + " Answers.");
 		}*/
 	});
+	
+	$('.contextstats').each(function() {
+		var context_id = $(this).attr('id');
+		var $this = $(this);
+		
+		$('.context').each(function() {
+			if ($(this).attr('data') == context_id) {
+				var offset = $(this).offset();
+				$this.offset({top:offset.top});
+			}
+		});
+	})
 
 	$(".folbtn").click(function(){		//AJAX request for follow/unfollow button.
 		var post_id = $(this).attr('data');
@@ -101,9 +124,17 @@ $(document).ready(function(){
 			
 			$(".ques").each(function() {
 				highlightid = $(this).attr('class').split('hid-')[1];
-				if (highlightid == h_id) $(this).show();
+				if (highlightid == h_id) {
+					$(this).show();
+					//var offset = $this.closest(".context").offset();
+					//$(this).offset({top: offset.top});
+				}
 			});
-
+			
+			var context_id = $this.closest(".context").attr('data');
+			//$('#' + context_id).hide();
+			$('.contextstats').hide();
+			
 			setTimeout(function(){
 				onehview = true;
 			},10);
@@ -117,6 +148,7 @@ $(document).ready(function(){
 			highlight_parent.empty().append(simpler_html_cache);		
 			onehview = false;
 			$('.ques').hide();
+			$('.contextstats').show();
 		}
 	});
 });

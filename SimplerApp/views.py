@@ -91,10 +91,10 @@ def follow(request):
 
 def addpost(request):
     context = RequestContext(request)
-    context_text = '<div class ="q-text"></div><div class ="answer">'+request.GET['txt']+'</div>'
+    context_text = request.GET['txt']
     p = Post.objects.get_or_create(post=context_text ,author=request.user.username, writer=request.user, context=context_text)[0]
-    s = Simpler.objects.get_or_create(post=p,simpler=p.context, simpler_original=p.context, coeficient=1, parent_list='contextsimpler', author=request.user.username, writer=request.user, display=' ')[0]
-    return HttpResponse(str(p.id))
+    s = Simpler.objects.get_or_create(post=p, question=-1, answer=p.context, simpler_original=p.context, coeficient=1, parent_list='contextsimpler', author=request.user.username, writer=request.user, display=' ')[0]
+    return HttpResponse(str(s.id))
 
 def question(request, question_id):
     context = RequestContext(request)
@@ -125,6 +125,12 @@ def question(request, question_id):
     context_dict['answers'] = answers
         
     return render_to_response('SimplerApp/question.html', context_dict, context)
+
+def csimpler(request, simpler_id):
+    context = RequestContext(request)
+    simpler = Simpler.objects.get(id = int(simpler_id))
+    context_dict = {'context':simpler}
+    return render_to_response('SimplerApp/context.html', context_dict, context)
 
 def post(request, post_id):
     context = RequestContext(request)

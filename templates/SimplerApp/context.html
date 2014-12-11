@@ -1,0 +1,18 @@
+{% extends 'SimplerApp/base.html' %}
+{% load static %}
+{% block scripts_block %}
+	<!--script src="{% static 'js/index.js' %}"></script-->
+{% endblock %}
+
+{% block css_block %}
+	<!--link href="{% static 'css/index.css' %}" rel="stylesheet" /-->
+	<link href="{% static 'css/highlight.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block body_block %}
+	<div class="context">
+	{% autoescape off %}
+		{{context.answer}}
+	{% endautoescape %}
+	</div>
+{% endblock %}
