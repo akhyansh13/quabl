@@ -21,17 +21,16 @@
 	<div style="text-align:center;"><h1><!--<a href='/register/'>Register Here</a> or --><a href="/login/">Login.</a></h1></div>
 {% endif %}
 {% if user.is_authenticated %}
-	
+
 	<div>
 	{% csrf_token %}
 		<div style="width:100%;">
-			<textarea class="contextbox" style="height:300px;"></textarea>
+			<textarea class="contextbox" style="height:12em; padding-bottom:5px;"></textarea>
 		</div>
-		<div align = "center" style="padding-bottom:30px;"><button type="submit" class="btn btn-primary btn-lg addpostbtn" disabled="disabled">Add</button></div>
-		<hr/>
+		<div align = "center" style="padding-bottom:30px;"><button type="submit" class="btn btn-primary btn-lg addpostbtn" disabled="disabled">Add Context.</button></div>
 		<div class="dropdown" style="float:right;">
 			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-				Options<span class="caret"></span>
+				Options&nbsp;<span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
 				<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sort by Topic</a></li>
@@ -40,18 +39,19 @@
 			</ul>
 		</div>
 		<br/>
-		<div class="context-area" style="float:left; width:70%;">
+		<div class="context-area" style="float:left; width:70%; padding-right:20px;">
 			{% autoescape off %}
 				{% for context in contexts %}
 					<div class="topicname" style="font-size:16pt;">#{{context.post.topic}}</div>
 					<div class="context">{{context.answer}}</div>
-					<span style="float:left"><a class="folbtn {% if context.id in followed %}unfollowstate{% else %}followstate{% endif %}" href='javascript:;' data='{{context.id}}'>{% if context.id in followed %}UNPIN THIS CONTEXT{% else %}PIN THIS CONTEXT{% endif %}</a></span>
+					<span style="float:left"><a class="folbtn {% if context.id in followed %}unfollowstate{% else %}followstate{% endif %}" href='javascript:;' data='{{context.id}}'>{% if context.id in followed %}UnPin This Context{% else %}Pin This Context{% endif %}</a></span>
 				{% endfor %}
 			{% endautoescape %}
 		</div>
-		<div class="question-area" style="float:right; width:30%">
+		<div class="question-area" style="float:right; width:30%; text-align:right;">
 			{% autoescape off %}
 			{% for context in contexts %}
+			    <br/>
 				<div class="contextstats" id="{{context.id}}"></div>
 				{% for que in ques %}
 					{% if que.highlight.highlight_parent.id == context.id %}

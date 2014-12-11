@@ -48,8 +48,19 @@ $(document).ready(function(){
 		var id = String(content.split("-")[0]);
 		var nquabls = String(content.split("-")[1]);
 		var nques = String(content.split("-")[2]);
-		
-		$(".contextstats").html(nquabls + " QUABLS & " + nques + " QUESTIONS.");
+
+        if (nquabls == 1 && nques) {
+		    $(".contextstats").html("1 Quabl, 1 Question.");
+        }
+        else if (nquabls == 1) {
+            $(".contextstats").html("1 Quabl, " + nques + " Questions.");
+        }
+        else if (nques == 1) {
+            $(".contextstats").html(nquabls + " Quabls, 1 Question.");
+        }
+        else {
+            $(".contextstats").html(nquabls + " Quabls, " + nques + " Questions.");
+        }
 
 		/*if(parseInt(number)==0){
 			$("#"+id).html("No Answers Yet.");
@@ -82,7 +93,7 @@ $(document).ready(function(){
 				$this.addClass('unfollowstate');
 			}
 	});
-	
+
 	$(document).on("click",".highlight", function(){
 
 		$this = $(this);
@@ -98,11 +109,13 @@ $(document).ready(function(){
 			var h_html_dummy = h_html.replace('class="highlight"', 'class="highlight_dummy"');
 			var new_simpler_html = simpler_html.replace(h_html + quabl_text, '<span class="quabl_full">' + h_html_dummy + quabl_text + '</span>');
 			$this.closest(".context").empty().append(new_simpler_html);
-			
+
 			$(".ques").each(function() {
 				highlightid = $(this).attr('class').split('hid-')[1];
 				if (highlightid == h_id) $(this).show();
 			});
+
+			$('.contextstats').hide();
 
 			setTimeout(function(){
 				onehview = true;
@@ -111,12 +124,13 @@ $(document).ready(function(){
 		});
 
 	});
-	
+
 	$(document).on("click", function(){
 		if(onehview){
-			highlight_parent.empty().append(simpler_html_cache);		
+			highlight_parent.empty().append(simpler_html_cache);
 			onehview = false;
 			$('.ques').hide();
+			$('.contextstats').show();
 		}
 	});
 });
