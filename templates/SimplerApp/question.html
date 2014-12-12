@@ -40,7 +40,10 @@
 	<div class="answer-area" style="float:left; width:70%;">
 		{% autoescape off %}
 			{% for answer in answers %}
-				<div class="answer" style="display:none;">{{answer.answer}}</div>
+			<div class="nthanswer" style="display:none;">
+				<div class="answer" >{{answer.answer}}</div>
+				<button class="btn btn-default ask reqsimp" data-id="{{answer.id}}" data-text="{{answer.post.id}}">Ask.</button>
+			</div>
 			{% endfor %}
 		{% endautoescape %}
 	</div>

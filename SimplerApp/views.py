@@ -15,13 +15,7 @@ from PIL import Image
 
 def index(request):
     context = RequestContext(request)
-    #topics = topic.objects.all()
-    #topic_dict = []
-    #for t in topics:
-    #   if Post.objects.all().filter(topic=t):
-    #        topic_dict.append(Post.objects.all().filter(topic=t))
-    #context_dict = {'topics':topic_dict}
-
+    
     contextsimplers = Simpler.objects.all().filter(parent_list='contextsimpler')
     context_dict = {'contexts':contextsimplers}
 
@@ -47,25 +41,9 @@ def index(request):
                 qcount += 1
                 del quests[quests.index(quest)]
         simpler_num_arr.append([simpler.id, len(hsimplers), qcount])
-    #simpler_num_arr = []
-    #for post in Post.objects.all():      #Picking all posts up right now. Gotta fix it later.
-    #    simpler_num_arr.append([post.id, len(post.simpler_set.all().filter(display=' '))])
+    
     context_dict['numarr']=simpler_num_arr
 
-    #posts = Post.objects.order_by('-explores')
-    #aposts = []
-    #uposts = []
-    #simplers = Simpler.objects.all()
-    #for post in posts:
-    #    if simplers.filter(post=post).count() == 1:
-    #        uposts.append(post)
-    #    elif simplers.filter(post=post).count() >= 2:
-    #        aposts.append(post)
-    #context_dict['aposts'] = aposts
-    #context_dict['uposts'] = uposts
-    #notifs = UserNotification.objects.all().filter(user=request.user.username).filter(status='unread')
-    #context_dict['notifs'] = notifs
-    #context_dict['notifcount'] = notifs.count()
     if request.user.is_authenticated():
         user_profile = UserProfile.objects.get(user=request.user)
         followedposts = user_profile.followed_posts.split(';')
@@ -153,9 +131,6 @@ def post(request, post_id):
     context_dict['max'] = maximum
     context_dict['loop'] = range(1, maximum+1)
     context_dict['highlightqs'] = highlightq_set              #All the highlighqs related to this question are being passed on.
-    #notifs = UserNotification.objects.all().filter(user=request.user.username).filter(status='unread')
-    #context_dict['notifs'] = notifs
-    #context_dict['notifcount'] = notifs.count()
     return render_to_response('SimplerApp/post.html', context_dict, context)
 
 def postreq(request, post_id, requestid):
@@ -184,38 +159,11 @@ def postreq(request, post_id, requestid):
     context_dict['max'] = maximum
     context_dict['loop'] = range(1, maximum+1)
     context_dict['highlightqs'] = highlightq_set              #All the highlighqs related to this question are being passed on.
-    #notifs = UserNotification.objects.all().filter(user=request.user.username).filter(status='unread')
-    #context_dict['notifs'] = notifs
-    #context_dict['notifcount'] = notifs.count()
     return render_to_response('SimplerApp/post.html', context_dict, context)
 
 
 def makesimpler(request):
     context = RequestContext(request)
-    #highlight_simpler_id = int(request.GET['simpler_id'])
-    #simpler_text = request.GET['simpler_text']
-    #highlight_simpler = Simpler.objects.get(id=highlight_simpler_id)
-    #c = Simpler.objects.get_or_create(post = highlight_simpler.post, parent_simpler = highlight_simpler.parent_simpler,  simpler = highlight_simpler.simpler + '<div class ="answer">'+ simpler_text + '</div>', simpler_original = highlight_simpler.simpler,coeficient = highlight_simpler.coeficient, parent_list = highlight_simpler.parent_list, author = request.user.username, writer=request.user, display=' ', created = datetime.now(), modified = datetime.now())[0]
-    #getting the user who asked the question
-    #if highlight_simpler.author != request.user.username:
-    #    u = UserNotification.objects.get_or_create(user=highlight_simpler.author, notification=str(request.user.username) + ' added answer to your question:' + show_less_ques(highlight_simpler.simpler), status='unread', postid=highlight_simpler.post.id, simplerid=c.id)
-    #    if u[1]:
-    #        u[0].created = datetime.now()
-    #    u[0].modified = datetime.now()
-    #    u[0].save()
-    #getting all the users who have followed the particular post
-    #authors=[]
-    #profiles = UserProfile.objects.all()
-    #for profile in profiles:
-    #    if (';' + str(highlight_simpler.post.id) + ';') in profile.followed_posts:
-    #        authors.append(profile.user.username)
-    #for author in authors:
-    #    if author != request.user.username:
-    #        u = UserNotification.objects.get_or_create(user=author, notification=str(request.user.username) + ' added answer to a question:' + show_less_ques(highlight_simpler.simpler), status='unread', postid=highlight_simpler.post.id, simplerid=c.id)
-    #        if u[1]:
-    #            u[0].created = datetime.now()
-    #        u[0].modified = datetime.now()
-    #        u[0].save()
     questionid = int(request.GET['qid'])
     simpler_text = request.GET['simpler_text']
     
@@ -307,23 +255,19 @@ def user_logout(request):
 
     return HttpResponseRedirect('/')
 
-def define(request, post_id, simpler_id, answer_part, question_part, quabl):
+def define(request, post_id, simpler_id, answer_part, quabl):
     context = RequestContext(request)
-    if question_part == 'empty':
-        question_part = ''
+    
     answer_part = answer_part.replace("xqmx", "?")
-    question_part = question_part.replace("xqmx", "?")
+    
     post_id = int(post_id)
     simpler_id = int(simpler_id)
     flag = False
-    if question_part == 'undefined':
-        question_part = ''
-    elif answer_part == 'undefined':
+    
+    if answer_part == 'undefined':
         answer_part = ''
-    if 'curr_highlight' not in answer_part:
-        answer_part, question_part = question_part, answer_part
-        flag = True
-    highlight = answer_part.split("curr_highlight")[1].split("</span>")[1];     #Extracts the highlight.
+    
+    highlightx = answer_part.split("curr_highlight")[1].split("</span>")[1];     #Extracts the highlight.
 
     context_dict = {'highlight':highlight}
     context_dict['quabl'] = quabl
@@ -343,51 +287,24 @@ def define(request, post_id, simpler_id, answer_part, question_part, quabl):
         form = HighlightDesc(request.POST)
         if form.is_valid():
             f = form.save(commit=False)
-            f.highlight_parent = simpler
-            f.highlight = highlight
+            h = highlight.objects.get_or_create(highlight=highlightx, highlight_parent=simpler)[0]
+            
+            f.highlight = h
             f.req_by = request.user
-            simpler_content = '<div class="q-text">' + f.description + '</div>'
-            parent_list = 'parent' + str(simpler.id) + ' '
-            curr_simpler = simpler
-            while curr_simpler.parent_simpler != None:
-                parent_list += "parent" + str(curr_simpler.parent_simpler.id) + " "
-                curr_simpler = curr_simpler.parent_simpler
-            g = Simpler.objects.get_or_create(post = simpler.post, parent_simpler = simpler, simpler = simpler_content, coeficient=simpler.coeficient+1, parent_list = parent_list, author = request.user.username, writer=request.user, display='none')[0]
-            f.highlight_simpler = g
+            simpler_content = f.question
+            
             f.created = datetime.now()
             f.save()
-            if flag:
-                simpler.simpler = '<div class="q-text">' + answer_part.replace('curr_highlight','highlight').replace('<span class="quabl"><span class="highlight"', '<span class="highlight" data-id="' + str(f.id) + '"').replace(highlight+'</span>', highlight).replace(highlight, quabl) + '</div><div class="answer">' + question_part + '</div>'
-            else:
-                simpler.simpler = '<div class="q-text">' + question_part + '</div><div class="answer">' + answer_part.replace('curr_highlight','highlight').replace('<span class="quabl"><span class="highlight"', '<span class="highlight" data-id="' + str(f.id) + '"').replace(highlight+'</span>', highlight).replace(highlight, quabl) + '</div>'
+            
+            simpler.answer = answer_part.replace('curr_highlight','highlight').replace('<span class="quabl"><span class="highlight"', '<span class="highlight" data-id="' + str(f.id) + '"').replace(highlightx+'</span>', highlightx).replace(highlightx, quabl)
+            
             simpler.modified = datetime.now()
             simpler.save()
 
-            question = highlightq.objects.get_or_create(highlight=f, question=f.description, created = datetime.now())
-            notif_ans = show_less_ans(Simpler.objects.get(id=simpler_id).simpler_original)
-            #notif_post = show_less_post(Post.objects.get(id=post_id).post)
-            #getting the user who wrote the simpler
-            if simpler.author != request.user.username:
-                u = UserNotification.objects.get_or_create(user=simpler.author, notification=str(request.user.username) + ' added question to your answer:' + notif_ans, status='unread', postid=post_id, simplerid=simpler_id)
-                if u[1]:
-                    u[0].created = datetime.now()
-                u[0].modified = datetime.now()
-                u[0].save()
-            #getting the users who have followed the post
-            authors = []
-            profiles = UserProfile.objects.all()
-            for profile in profiles:
-                if (';' + str(post_id) + ';') in profile.followed_posts:
-                    authors.append(profile.user.username)
-            for author in authors:
-                if author != request.user.username:
-                    u = UserNotification.objects.get_or_create(user=author, notification=str(request.user.username) + ' added question to an answer:' + notif_ans, status='unread', postid=post_id, simplerid=simpler_id)
-                    if u[1]:
-                        u[0].created = datetime.now()
-                    u[0].modified = datetime.now()
-                    u[0].save()
-            return HttpResponseRedirect('/request/askforsimpler/postid:' + str(post_id) + ';simplerid:' + str(simpler_id) + ';')
-            #return HttpResponseRedirect('/simpler/'+str(f.highlight_parent.post.id))
+            #question = highlightq.objects.get_or_create(highlight=f, question=f.description, created = datetime.now())
+            
+            #return HttpResponseRedirect('/request/askforsimpler/postid:' + str(post_id) + ';simplerid:' + str(simpler_id) + ';')
+            return HttpResponseRedirect('/question/'+str(f.id))
     else:
         form = HighlightDesc()
 

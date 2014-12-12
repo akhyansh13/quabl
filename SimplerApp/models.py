@@ -104,7 +104,7 @@ class UserProfileForm(forms.ModelForm):
         fields = ('full_name', 'shortbio', 'picture' )
 
 class HighlightDesc(forms.ModelForm):
-    description = forms.CharField(max_length=10000000,widget=forms.Textarea(attrs={'class':'DescBox'}))
+    question = forms.CharField(max_length=10000000,widget=forms.Textarea(attrs={'class':'DescBox'}))
     class Meta:
-        model = highlight
-        fields = ('description',)
+        model = highlightq
+        fields = ('question',)
