@@ -296,7 +296,7 @@ def define(request, post_id, simpler_id, answer_part, quabl):
             f.created = datetime.now()
             f.save()
             
-            simpler.answer = answer_part.replace('curr_highlight','highlight').replace('<span class="quabl"><span class="highlight"', '<span class="highlight" data-id="' + str(f.id) + '"').replace(highlightx+'</span>', highlightx).replace(highlightx, quabl)
+            simpler.answer = answer_part.replace('curr_highlight','highlight').replace('<span class="quabl"><span class="highlight"', '<span class="highlight" data-id="' + str(h.id) + '"').replace(highlightx+'</span>', highlightx).replace(highlightx, quabl)
             
             simpler.modified = datetime.now()
             simpler.save()
