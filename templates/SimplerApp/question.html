@@ -21,32 +21,32 @@
 
 	<div class="mainques" data-id="{{ques.id}}" data-hid="{{ques.highlight.id}}">{{ques}}</div>
 	<div class="mainquespane" style="float:left; width:70%;">
-	<div class="author" style="padding-bottom:10px;">Question By {{ques.req_by.username}} <br/>
+	<div class="author" style="padding-bottom:10px; font-size:12pt;">Question By {{ques.req_by.username}} <br/>
 		                    {{ques.req_by.first_name}} {{ques.req_by.last_name}}
 		</div>
 		<div class="viewcontext" data-id="{{ques.highlight.highlight_parent.question}}"><button class="btn btn-default">View Context</button></div><br/>
 		<div class="numanswers">{{anscount}} Answers</div><br/>
 	</div>
 	{% endautoescape %}
-	<div class="sidequespane" style="float:right; width:30%; text-align:right;">
-		<div class="jumptotext">JUMP TO<hr style="margin-top:0px; border-top:1px solid #C0C0C0;"/></div>
+	<div class="sidequespane" style="float:right; width:30%; font-size:13pt;">
+		<div class="jumptotext">JUMP TO<hr style="margin-top:0px; border-top:1px solid #C0C0C0; text-align:right;"/></div>
 		{% autoescape off %}
 			{% for rques in rquestions %}
 			<div class="rquesheader" data-id="{{rques.id}}">
 				<div class="rques hid-{{rques.highlight.id}}"><a href="/question/{{rques.id}}">{{rques.question}}</a></div>
-				<button class="btn btn-default addanswer"><a href="/addsimpler/{{rques.id}}">Add Answer.</a></button>
+				<button class="btn btn-default addanswer" style="display:none;"><a href="/addsimpler/{{rques.id}}">Add Answer.</a></button>
 			</div>
 			{% endfor %}
 			{% for cques in cquestions %}
 			<div class="cquesheader" style="display:none;" data-id="{{cques.id}}">
 				<div class="cques hid-{{cques.highlight.id}}"><a href="/question/{{cques.id}}">{{cques.question}}</a></div>
-				<button class="btn btn-default addanswer"><a href="/addsimpler/{{cques.id}}">Add Answer.</a></button>
+				<button class="btn btn-default addanswer" style="display:none;"><a href="/addsimpler/{{cques.id}}">Add Answer.</a></button>
 			</div>
 			{% endfor %}
 		{% endautoescape %}
 	</div>
-	<div class="shortquespane" style="display:none;">{{ques}}</div>
-	<div class="answer-area" style="float:left; width:70%;">
+	<!--div class="shortquespane" style="display:none; font-size:13pt;">{{ques}}</div-->
+	<div class="answer-area" style="float:left; width:70%; font-size:12pt;">
 		{% autoescape off %}
 			{% for answer in answers %}
 			<div class="nthanswer" style="display:none;">
@@ -56,6 +56,6 @@
 			{% endfor %}
 		{% endautoescape %}
 	</div>
-	<div class="prev"><a href="javascript:;">Click to see Previous Answer</a></div>
-	<div class="next"><a href="javascript:;">Click to see Next Answer</a></div>
+	<div class="prev"><a href="javascript:;">Previous Answer</a></div>
+	<div class="next"><a href="javascript:;">Next Answer</a></div>
 {% endblock %}

@@ -48,7 +48,7 @@ $(document).ready(function(){
 		var id = String(content.split("-")[0]);
 		var nquabls = String(content.split("-")[1]);
 		var nques = String(content.split("-")[2]);
-		
+
 		if (nquabls == 1 && nques == 1) {
 			$("#" + id).html("1 Quabl, 1 Question.");
 		}
@@ -73,11 +73,11 @@ $(document).ready(function(){
 			$("#"+id).html(number + " Answers.");
 		}*/
 	});
-	
+
 	$('.contextstats').each(function() {
 		var context_id = $(this).attr('id');
 		var $this = $(this);
-		
+
 		$('.context').each(function() {
 			if ($(this).attr('data') == context_id) {
 				var offset = $(this).offset();
@@ -95,17 +95,17 @@ $(document).ready(function(){
 		var $this = $(this);
 		var state = $this.attr("class").split(" ")[1];
 		if(state == 'unfollowstate'){
-				$this.html('PIN THIS CONTEXT');
+				$this.html('Pin This Context');
 				$this.removeClass('unfollowstate');
 				$this.addClass('followstate');
 			}
 			else{
-				$this.html('UNPIN THIS CONTEXT');
+				$this.html('Unpin This Context');
 				$this.removeClass('followstate');
 				$this.addClass('unfollowstate');
 			}
 	});
-	
+
 	$(document).on("click",".highlight", function(){
 
 		$this = $(this);
@@ -121,7 +121,7 @@ $(document).ready(function(){
 			var h_html_dummy = h_html.replace('class="highlight"', 'class="highlight_dummy"');
 			var new_simpler_html = simpler_html.replace(h_html + quabl_text, '<span class="quabl_full">' + h_html_dummy + quabl_text + '</span>');
 			$this.closest(".context").empty().append(new_simpler_html);
-			
+
 			$(".ques").each(function() {
 				highlightid = $(this).attr('class').split('hid-')[1];
 				if (highlightid == h_id) {
@@ -130,11 +130,11 @@ $(document).ready(function(){
 					//$(this).offset({top: offset.top});
 				}
 			});
-			
+
 			var context_id = $this.closest(".context").attr('data');
 			//$('#' + context_id).hide();
 			$('.contextstats').hide();
-			
+
 			setTimeout(function(){
 				onehview = true;
 			},10);
@@ -142,10 +142,10 @@ $(document).ready(function(){
 		});
 
 	});
-	
+
 	$(document).on("click", function(){
 		if(onehview){
-			highlight_parent.empty().append(simpler_html_cache);		
+			highlight_parent.empty().append(simpler_html_cache);
 			onehview = false;
 			$('.ques').hide();
 			$('.contextstats').show();

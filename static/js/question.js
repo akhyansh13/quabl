@@ -34,9 +34,9 @@ $(document).ready(function(){
 			$('.rques').parent().hide();
 			$('.cques').parent().hide();
 			$('#1').parent().show();
-			$('.shortquespane').show();
-			var bottom = $('.shortquespane').height();
-			$('.answer-area').attr('style', "float:left; width:70%; margin-top:" + String(bottom) + "px;");
+			//$('.shortquespane').show();
+			//var bottom = $('.mainquespane').height();
+			//$('.answer-area').attr('style', "float:left; width:70%; font-size:12pt; margin-top:" + String(bottom) + "px;");
 			curr_ans+=1;
 		}
 		else{
@@ -52,7 +52,7 @@ $(document).ready(function(){
 	$('.prev').click(function() {
 		if (curr_ans == 1) {
 			$('#1').parent().hide();
-			$('.shortquespane').hide();
+			//$('.shortquespane').hide();
 			$('.mainquespane').show();
 			$('.jumptotext').show();
 			$('.rques').parent().show();
