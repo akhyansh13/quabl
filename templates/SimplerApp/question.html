@@ -19,7 +19,7 @@
 	    <button class="btn btn-default ask reqsimp" data-id="{{contextsimpler.id}}" data-text="{{contextsimpler.post.id}}">Ask.</button>
 	</div>
 
-	<div class="mainques" data-id="{{ques.id}}">{{ques}}</div>
+	<div class="mainques" data-id="{{ques.id}}" data-hid="{{ques.highlight.id}}">{{ques}}</div>
 	<div class="mainquespane" style="float:left; width:70%;">
 	<div class="author" style="padding-bottom:10px;">Question By {{ques.req_by.username}} <br/>
 		                    {{ques.req_by.first_name}} {{ques.req_by.last_name}}
@@ -32,13 +32,13 @@
 		<div class="jumptotext">JUMP TO<hr style="margin-top:0px; border-top:1px solid #C0C0C0;"/></div>
 		{% autoescape off %}
 			{% for rques in rquestions %}
-			<div class="rquesheader">
+			<div class="rquesheader" data-id="{{rques.id}}">
 				<div class="rques hid-{{rques.highlight.id}}"><a href="/question/{{rques.id}}">{{rques.question}}</a></div>
 				<button class="btn btn-default addanswer"><a href="/addsimpler/{{rques.id}}">Add Answer.</a></button>
 			</div>
 			{% endfor %}
 			{% for cques in cquestions %}
-			<div class="cquesheader" style="display:none;">
+			<div class="cquesheader" style="display:none;" data-id="{{cques.id}}">
 				<div class="cques hid-{{cques.highlight.id}}"><a href="/question/{{cques.id}}">{{cques.question}}</a></div>
 				<button class="btn btn-default addanswer"><a href="/addsimpler/{{cques.id}}">Add Answer.</a></button>
 			</div>

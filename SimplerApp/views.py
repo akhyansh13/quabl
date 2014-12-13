@@ -15,7 +15,7 @@ from PIL import Image
 
 def index(request):
     context = RequestContext(request)
-    
+
     contextsimplers = Simpler.objects.all().filter(parent_list='contextsimpler')
     context_dict = {'contexts':contextsimplers}
 
@@ -41,7 +41,7 @@ def index(request):
                 qcount += 1
                 del quests[quests.index(quest)]
         simpler_num_arr.append([simpler.id, len(hsimplers), qcount])
-    
+
     context_dict['numarr']=simpler_num_arr
 
     if request.user.is_authenticated():
@@ -101,7 +101,7 @@ def question(request, question_id):
     context_dict['cquestions'] = cquestions
     context_dict['rquestions'] = rquestions
     context_dict['answers'] = answers
-        
+
     return render_to_response('SimplerApp/question.html', context_dict, context)
 
 def csimpler(request, simpler_id):
@@ -110,68 +110,16 @@ def csimpler(request, simpler_id):
     context_dict = {'context':simpler}
     return render_to_response('SimplerApp/context.html', context_dict, context)
 
-def post(request, post_id):
-    context = RequestContext(request)
-    parent_list_dict = {}
-    post_id_int = int(post_id)
-    context_dict ={'post_id':post_id}
-    post = Post.objects.get(id=post_id_int)
-    context_dict['post']=post
-    simplers = Simpler.objects.all().filter(post=post).filter(display =' ')         #Not so efficient algorithmically.
-    maximum = 0
-    highlightq_set = []
-    for simpler in simplers:
-        highlights = highlight.objects.all().filter(highlight_parent=simpler)
-        for hl in highlights:
-            highlightq_set.append(highlightq.objects.all().filter(highlight=hl))
-        if simpler.coeficient > maximum:
-            maximum = simpler.coeficient
-    context_dict['request']='-1'
-    context_dict['simplers']=simplers
-    context_dict['max'] = maximum
-    context_dict['loop'] = range(1, maximum+1)
-    context_dict['highlightqs'] = highlightq_set              #All the highlighqs related to this question are being passed on.
-    return render_to_response('SimplerApp/post.html', context_dict, context)
-
-def postreq(request, post_id, requestid):
-    context = RequestContext(request)
-    request_id = int(requestid)
-    try:
-        user_request = ReqByUser.objects.get(id=request_id)
-    except:
-        return HttpResponseRedirect('/simpler/' + post_id + '/')
-    parent_list_dict = {}
-    post_id_int = int(post_id)
-    context_dict ={'post_id':post_id}
-    post = Post.objects.get(id=post_id_int)
-    context_dict['post']=post
-    simplers = Simpler.objects.all().filter(post=post).filter(display =' ')         #Not so efficient algorithmically.
-    maximum = 0
-    highlightq_set = []
-    for simpler in simplers:
-        highlights = highlight.objects.all().filter(highlight_parent=simpler)
-        for hl in highlights:
-            highlightq_set.append(highlightq.objects.all().filter(highlight=hl))
-        if simpler.coeficient > maximum:
-            maximum = simpler.coeficient
-    context_dict['request']=user_request.description.split('simplerid:')[1].split(';')[0]
-    context_dict['simplers']=simplers
-    context_dict['max'] = maximum
-    context_dict['loop'] = range(1, maximum+1)
-    context_dict['highlightqs'] = highlightq_set              #All the highlighqs related to this question are being passed on.
-    return render_to_response('SimplerApp/post.html', context_dict, context)
-
-
 def makesimpler(request):
     context = RequestContext(request)
     questionid = int(request.GET['qid'])
     simpler_text = request.GET['simpler_text']
-    
+
     ques = highlightq.objects.get(id=questionid)
     post = ques.highlight.highlight_parent.post
     coefficient = ques.highlight.highlight_parent.coeficient + 1
     parent_list = 'parent' + str(ques.highlight.highlight_parent.id) + ques.highlight.highlight_parent.parent_list
-    
+
     c = Simpler.objects.get_or_create(post=post, question=questionid, answer=simpler_text, simpler_original=simpler_text, coeficient=coefficient, parent_list=parent_list, author=request.user.username, writer=request.user, display=' ')[0]
     return HttpResponse('success')
 
@@ -257,16 +205,16 @@ def user_logout(request):
 
 def define(request, post_id, simpler_id, answer_part, quabl):
     context = RequestContext(request)
-    
+
     answer_part = answer_part.replace("xqmx", "?")
-    
+
     post_id = int(post_id)
     simpler_id = int(simpler_id)
     flag = False
-    
+
     if answer_part == 'undefined':
         answer_part = ''
-    
+
     highlightx = answer_part.split("curr_highlight")[1].split("</span>")[1];     #Extracts the highlight.
 
     context_dict = {'highlight':highlight}
@@ -288,21 +236,21 @@ def define(request, post_id, simpler_id, answer_part, quabl):
         if form.is_valid():
             f = form.save(commit=False)
             h = highlight.objects.get_or_create(highlight=highlightx, highlight_parent=simpler)[0]
-            
+
             f.highlight = h
             f.req_by = request.user
             simpler_content = f.question
-            
+
             f.created = datetime.now()
             f.save()
-            
+
             simpler.answer = answer_part.replace('curr_highlight','highlight').replace('<span class="quabl"><span class="highlight"', '<span class="highlight" data-id="' + str(h.id) + '"').replace(highlightx+'</span>', highlightx).replace(highlightx, quabl)
-            
+
             simpler.modified = datetime.now()
             simpler.save()
 
             #question = highlightq.objects.get_or_create(highlight=f, question=f.description, created = datetime.now())
-            
+
             #return HttpResponseRedirect('/request/askforsimpler/postid:' + str(post_id) + ';simplerid:' + str(simpler_id) + ';')
             return HttpResponseRedirect('/question/'+str(f.id))
     else:

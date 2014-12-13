@@ -1,6 +1,24 @@
 $(document).ready(function(){
+
 	$('.footer').hide();
+
 	var answerno = 1;
+
+	window.onehview = false;
+
+	var selectmode = false;
+
+	$(document).mouseup(function(){
+		if(getSelectionHtml() != ''){
+			$(".highlight").hide('fast');
+			selectmode = true;
+		}
+		else if(selectmode && getSelectionHtml()==''){
+			selectmode = false;
+			$(".highlight").show('fast');
+		}
+	});
+
 	$(".answer").each(function(){
 		if ($(this).attr('class') != "context answer") {
 			$(this).attr('id', String(answerno));
@@ -49,53 +67,33 @@ $(document).ready(function(){
 			}
 		}
 	});
+
 	$(document).on("click",".highlight", function(){
-
-		$this = $(this);
-
-		$.when(simpler_cache($this.closest(".answer"))).then(function(){
-
-			highlight_parent = $this.closest(".answer");
-			var quabl_text = $this.data('text');
-			var h_id = $this.data('id');
-			$this.closest(".answer").find(".highlight").not($this).remove();
-			var simpler_html = $this.closest(".answer").html();
-			var h_html = $('<div>').append($this.clone()).html();
-			var h_html_dummy = h_html.replace('class="highlight"', 'class="highlight_dummy"');
-			var new_simpler_html = simpler_html.replace(h_html + quabl_text, '<span class="quabl_full">' + h_html_dummy + quabl_text + '</span>');
-			$this.closest(".answer").empty().append(new_simpler_html);
-
-			$(".rques").each(function() {
-				highlightid = $(this).attr('class').split('hid-')[1];
-				if (highlightid == h_id) $(this).parent().show();
-			});
-
-			$(".cques").each(function() {
-				highlightid = $(this).attr('class').split('hid-')[1];
-				if (highlightid == h_id) $(this).parent().show();
-			});
-
-			setTimeout(function(){
-				onehview = true;
-			},10);
-
-		});
-
+		clickonhighlight($(this));
 	});
 
 	$(document).on("click", function(){
-		if(onehview){
+		if(window.onehview){
 			highlight_parent.empty().append(simpler_html_cache);
-			onehview = false;
+			window.onehview = false;
 			$('.rques').parent().hide();
 			$('.cques').parent().hide();
 		}
 	});
 
-	$('.viewcontext').click(function(){
-	    var mainquesid = $(".mainques").data("id");
+	$(document).on("click", ".viewcontext", function(){
+		$('.mainques').hide();
+	  var hid = $(".mainques").data("hid");
 		var question = $(this).data('id');
 		var context = $(this).data('text');
+
+		var hreq;
+
+		$(".highlight").each(function(){
+			if($(this).data("id")==hid){
+				hreq = $(this);
+			}
+		});
 
 		if (question == -1) {
 			$('.mainquespane').hide();
@@ -103,6 +101,7 @@ $(document).ready(function(){
 			$('.rques').parent().hide();
 			$('.cques').parent().hide();
 			$('.context').parent().show();
+			clickonhighlight(hreq);
 		}
 		else {
 			uri = "/question/" + question;
@@ -191,4 +190,36 @@ function clearSelection() {
     } else if ( window.getSelection ) {
         window.getSelection().removeAllRanges();
     }
+}
+
+function clickonhighlight(highlight){
+	$this = highlight;
+
+	$.when(simpler_cache($this.closest(".answer"))).then(function(){
+
+		highlight_parent = $this.closest(".answer");
+		var quabl_text = $this.data('text');
+		var h_id = $this.data('id');
+		$this.closest(".answer").find(".highlight").not($this).remove();
+		var simpler_html = $this.closest(".answer").html();
+		var h_html = $('<div>').append($this.clone()).html();
+		var h_html_dummy = h_html.replace('class="highlight"', 'class="highlight_dummy"');
+		var new_simpler_html = simpler_html.replace(h_html + quabl_text, '<span class="quabl_full">' + h_html_dummy + quabl_text + '</span>');
+		$this.closest(".answer").empty().append(new_simpler_html);
+
+		$(".rques").each(function() {
+			highlightid = $(this).attr('class').split('hid-')[1];
+			if (highlightid == h_id) $(this).parent().show();
+		});
+
+		$(".cques").each(function() {
+			highlightid = $(this).attr('class').split('hid-')[1];
+			if (highlightid == h_id) $(this).parent().show();
+		});
+
+		setTimeout(function(){
+			window.onehview = true;
+		},10);
+
+	});
 }
