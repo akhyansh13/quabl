@@ -21,7 +21,7 @@
 	<div style="text-align:center;"><h1><!--<a href='/register/'>Register Here</a> or --><a href="/login/">Login.</a></h1></div>
 {% endif %}
 {% if user.is_authenticated %}
-	
+
 	<div>
 	{% csrf_token %}
 		<div style="width:100%; padding-bottom:5px;">
@@ -39,10 +39,10 @@
 			</ul>
 		</div>
 		<br/>
-		<div class="context-area" style="float:left; width:70%; padding-right:20px;">
+		<div class="context-area" style="float:left; width:70%; padding-right:20px;" align="justify">
 			{% autoescape off %}
 				{% for context in contexts %}
-				<div style="padding-bottom:20px;">
+				<div style="padding-bottom:40px;">
 					<div class="topicname" style="font-size:16pt;">#{{context.post.topic}}</div>
 					<div class="context" data="{{context.id}}">{{context.answer}}</div>
 					<span style="float:left"><a class="folbtn {% if context.id in followed %}unfollowstate{% else %}followstate{% endif %}" href='javascript:;' data='{{context.id}}'>{% if context.id in followed %}Unpin This Context{% else %}Pin This Context{% endif %}</a></span>

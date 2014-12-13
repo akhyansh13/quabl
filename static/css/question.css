@@ -1,17 +1,172 @@
+/* Space out content a bit */
+body {
+  padding-bottom: 0px;
+  z-index:1;
+}
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.marketing,
+.footer {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+/* Custom page header */
+.header {
+  height: 50px;
+  background-color:#F5F5F5;
+  padding-right:10%;
+  border-bottom: 1px solid #DDD;
+  margin-bottom: 30px;
+  box-shadow: 0px 3px 2px -2px rgba(200, 200, 200, 0.3);
+  width:100%;
+  z-index:2;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 50px;
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+/* Customize container */
+@media (min-width: 768px) {
+  .container {
+    padding-top:105px;
+    padding-bottom: 50px;
+  }
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+.jumbotron {
+  border-bottom: 1px solid #e5e5e5;
+}
+.jumbotron .btn {
+  padding: 14px 24px;
+  font-size: 21px;
+}
+
+.jumbotron p, .jumbotron .highlight{
+  font-size:12pt;
+}
+
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .marketing,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+
+textarea {
+ overflow: auto;
+   border-radius:3px;
+   border-width:1px;
+   border-style:solid; /* Uniform border across textarea as opposed to the shadowy default design */
+   border-color:lightgray;
+   resize: none;   /*The resize handle is removed */
+   padding: 2px; /* padding for the TEXT that goes into the textarea */
+}
+
+#header-wrapper{
+  position: fixed;
+  top:0;
+  width: 100%;
+  z-index: 2;
+}
+
+#profblock{
+  padding-left: 20%;
+  padding-right: 20%;
+  padding-bottom: 20px;
+  padding-top: 50px;
+  width: 100%;
+  min-height: 400px;
+  background-color:#F5F5F5;
+  z-index: 2;
+  display: none;
+}
+
+#fname{
+  font-weight:bold;
+  font-size:22pt;
+  padding-bottom:10px;
+}
+
+.category{
+  font-weight:bold;
+  color:#999;
+}
+
+.contextbox{
+  width: 100%;
+}
+
+#main-logo{
+  color:#FFFFFF;
+  text-decoration:none;
+  background-color:#FFA500;
+  padding-top:11.45px;
+  padding-bottom:17px;
+  border-radius:5px;
+  font-size:25pt;
+  padding-left:10px;
+  padding-right:10px;
+}
+
+.ql-container{
+  background-color: #FFFFFF;
+  border:solid;
+}
+
+.ql-toolbar{
+  padding-bottom:5px;
+}
+
+.ql-editor{
+  height: 300px;
+}
+
+.preview{
+  display: none;
+}
+
 .mainquespane{
-	padding:0px 60px 0px 0px;
+	padding:0px 0px 0px 0px;
 }
 .mainques{
-	font-size:30pt;
-	font-weight:bold;
+	font-size:24pt;
 }
 .viewcontext,
 .numanswers,
 .author{
-	font-size:20pt;
+	font-size:14pt;
 }
+
+.sidequespane{
+}
+
 .jumptotext{
-	font-size:15pt;
 	text-align:right;
 }
 .shortquespane{

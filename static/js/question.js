@@ -7,10 +7,10 @@ $(document).ready(function(){
 			answerno+=1;
 		}
 	});
-	
+
 	var curr_ans = 0;
 	$('.next').click(function() {
-		if (curr_ans == 0) {	
+		if (curr_ans == 0) {
 			$('.mainquespane').hide();
 			$('.jumptotext').hide();
 			$('.rques').parent().hide();
@@ -25,12 +25,12 @@ $(document).ready(function(){
 			if (curr_ans < answerno - 1) {
 				$('#' + String(curr_ans)).parent().hide();
 				$('#' + String(curr_ans + 1)).parent().show();
-				$('.rques').parent().hide();	
+				$('.rques').parent().hide();
 				curr_ans+=1;
 			}
 		}
 	});
-	
+
 	$('.prev').click(function() {
 		if (curr_ans == 1) {
 			$('#1').parent().hide();
@@ -64,7 +64,7 @@ $(document).ready(function(){
 			var h_html_dummy = h_html.replace('class="highlight"', 'class="highlight_dummy"');
 			var new_simpler_html = simpler_html.replace(h_html + quabl_text, '<span class="quabl_full">' + h_html_dummy + quabl_text + '</span>');
 			$this.closest(".answer").empty().append(new_simpler_html);
-			
+
 			$(".rques").each(function() {
 				highlightid = $(this).attr('class').split('hid-')[1];
 				if (highlightid == h_id) $(this).parent().show();
@@ -74,7 +74,7 @@ $(document).ready(function(){
 				highlightid = $(this).attr('class').split('hid-')[1];
 				if (highlightid == h_id) $(this).parent().show();
 			});
-			
+
 			setTimeout(function(){
 				onehview = true;
 			},10);
@@ -82,26 +82,27 @@ $(document).ready(function(){
 		});
 
 	});
-	
+
 	$(document).on("click", function(){
 		if(onehview){
-			highlight_parent.empty().append(simpler_html_cache);		
+			highlight_parent.empty().append(simpler_html_cache);
 			onehview = false;
 			$('.rques').parent().hide();
 			$('.cques').parent().hide();
 		}
 	});
-	
+
 	$('.viewcontext').click(function(){
+	    var mainquesid = $(".mainques").data("id");
 		var question = $(this).data('id');
 		var context = $(this).data('text');
-		
+
 		if (question == -1) {
 			$('.mainquespane').hide();
 			$('.jumptotext').hide();
 			$('.rques').parent().hide();
 			$('.cques').parent().hide();
-			$('.context').show();
+			$('.context').parent().show();
 		}
 		else {
 			uri = "/question/" + question;
@@ -110,7 +111,7 @@ $(document).ready(function(){
 		$('.next').hide();
 		$('.prev').hide();
 	});
-	
+
 	$(".reqsimp").click(function(){
 			$reqsimp = $(this);
 			var quabl_html = getSelectionHtml();
@@ -150,7 +151,7 @@ $(document).ready(function(){
 			clearSelection();
 
 			var answer_part = String($reqsimp.parent().find('.answer').html()).split('?').join('xqmx');		//the answer part of the highlight which will have the highlight
-			
+
 			uri = '/define/'+ post_id + '/' + simpler_id +'/ans/'+ answer_part + '/quabl/' + quabl_html + '/';
 			window.location = uri;
 	});

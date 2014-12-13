@@ -109,13 +109,13 @@ textarea {
 }
 
 #fname{
-  font-weight:bold; 
-  font-size:22pt; 
+  font-weight:bold;
+  font-size:22pt;
   padding-bottom:10px;
 }
 
 .category{
-  font-weight:bold; 
+  font-weight:bold;
   color:#999;
 }
 
@@ -124,14 +124,14 @@ textarea {
 }
 
 #main-logo{
-  color:#FFFFFF; 
-  text-decoration:none; 
-  background-color:#FFA500; 
-  padding-top:11.45px; 
+  color:#FFFFFF;
+  text-decoration:none;
+  background-color:#FFA500;
+  padding-top:11.45px;
   padding-bottom:17px;
   border-radius:5px;
-  font-size:25pt; 
-  padding-left:10px; 
+  font-size:25pt;
+  padding-left:10px;
   padding-right:10px;
 }
 
