@@ -1,5 +1,12 @@
 $(document).ready(function(){
 
+	$(".question-area").each(function(){
+			var numque = $(this).find(".ques").length;
+			var numqua = $(this).closest(".contqueswrapper").find('.highlight').length
+			$(this).find('.numqua').html(numqua);
+			$(this).find('.numque').html(numque);
+	});
+
 	$(".contqueswrapper").each(function(){
 		var offset = $(this).find(".context-area").offset();
 		$(this).find(".question-area").offset({top:offset.top+30});
@@ -79,18 +86,6 @@ $(document).ready(function(){
 			$("#"+id).html(number + " Answers.");
 		}*/
 	});
-
-	$('.contextstats').each(function() {
-		var context_id = $(this).attr('id');
-		var $this = $(this);
-
-		$('.context').each(function() {
-			if ($(this).attr('data') == context_id) {
-				var offset = $(this).offset();
-				$this.offset({top:offset.top+30});
-			}
-		});
-	})
 
 	$(".folbtn").click(function(){		//AJAX request for follow/unfollow button.
 		var post_id = $(this).attr('data');
