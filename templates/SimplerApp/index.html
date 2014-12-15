@@ -11,10 +11,6 @@
 
 {% block body_block %}
 
-	{% for num in numarr %}
-		<div style="display:none;" class="simnum">{{num.0}}-{{num.1}}-{{num.2}}</div>
-	{% endfor %}
-
 <div style='padding-bottom:30px;'>
 {% if user.is_authenticated %}
 {% else %}
@@ -39,30 +35,28 @@
 			</ul>
 		</div>
 		<br/>
-		<div class="context-area" style="float:left; width:70%; padding-right:20px;" align="justify">
-			{% autoescape off %}
-				{% for context in contexts %}
-				<div style="padding-bottom:40px;">
-					<div class="topicname" style="font-size:16pt;">#{{context.post.topic}}</div>
-					<div class="context" data="{{context.id}}">{{context.answer}}</div>
-					<span style="float:left"><a class="folbtn {% if context.id in followed %}unfollowstate{% else %}followstate{% endif %}" href='javascript:;' data='{{context.id}}'>{% if context.id in followed %}Unpin This Context{% else %}Pin This Context{% endif %}</a></span>
+				{% autoescape off %}
+					{% for context in contarr %}
+					<div class="contqueswrapper" id="cont-{{context.0.id}}">
+					<div class="context-area" style="float:left; width:70%;" align="justify">
+					<div style="padding-bottom:40px;">
+						<div class="topicname" style="font-size:16pt;">#{{context.0.post.topic}}</div>
+						<div class="context" data="{{context.0.id}}">{{context.0.answer}}</div>
+						<span style="float:left"><a class="folbtn {% if context.0.id in followed %}unfollowstate{% else %}followstate{% endif %}" href='javascript:;' data='{{context.0.id}}'>{% if context.0.id in followed %}Unpin This Context{% else %}Pin This Context{% endif %}</a></span>
+					</div>
 				</div>
-				{% endfor %}
-			{% endautoescape %}
-		</div>
-		<div class="question-area" style="float:right; width:30%; text-align:right;">
-			{% autoescape off %}
-			{% for context in contexts %}
-				<div class="contextstats" id="{{context.id}}"></div>
-				{% for que in ques %}
-					{% if que.highlight.highlight_parent.id == context.id %}
-						<div class="q-{{que.highlight.highlight_parent.id}} ques hid-{{que.highlight.id}}" style="display:none;"><a href="/question/{{que.id}}">{{que.question}}</a></div>
-					{% endif %}
-				{% endfor %}
-			{% endfor %}
-			{% endautoescape %}
-		</div>
+						<div class = "question-area" style="float:right; width:30%; text-align:right;">
+							<div class="contextstats">{{context.1|length}} Quabls, {{context.2|length}} Questions</div>
+							{% for q in context.2 %}
+							{% for que in q %}
+								<div class="q-{{que.highlight.highlight_parent.id}} ques hid-{{que.highlight.id}}" style="display:none; padding-bottom:10px;"><a href="/question/{{que.id}}">{{que.question}}</a></div>
+							{% endfor %}
+							{% endfor %}
+						</div>
+					</div>
 	</div>
 </div>
+{% endfor %}
+{% endautoescape %}
 {% endif %}
 {% endblock %}

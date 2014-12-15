@@ -19,30 +19,16 @@ def index(request):
     contextsimplers = Simpler.objects.all().filter(parent_list='contextsimpler')
     context_dict = {'contexts':contextsimplers}
 
-    questions = highlightq.objects.all()
-    ques = []
+    contextarr = []
 
-    for question in questions:
-        if question.highlight.highlight_parent in contextsimplers:
-            ques.append(question)
+    for contextsimpler in contextsimplers:
+        highlightset = highlight.objects.all().filter(highlight_parent=contextsimpler)
+        hqarr = []
+        for h in highlightset:
+            hqarr.append(highlightq.objects.all().filter(highlight=h))
+        contextarr.append([contextsimpler, highlightset, hqarr])
 
-    context_dict['ques'] = ques
-
-    quests = ques[:]
-
-    highlights = highlight.objects.all()
-
-    simpler_num_arr = []
-    for simpler in contextsimplers:
-        qcount = 0
-        hsimplers = highlights.filter(highlight_parent=simpler)
-        for quest in quests:
-            if quest.highlight.highlight_parent.id == simpler.id:
-                qcount += 1
-                del quests[quests.index(quest)]
-        simpler_num_arr.append([simpler.id, len(hsimplers), qcount])
-
-    context_dict['numarr']=simpler_num_arr
+    context_dict['contarr'] = contextarr
 
     if request.user.is_authenticated():
         user_profile = UserProfile.objects.get(user=request.user)
@@ -51,7 +37,7 @@ def index(request):
         for fpost in followedposts:
             followed.append(int(fpost))
         context_dict['followed'] = followed
-    return render_to_response('SimplerApp/index.html',context_dict, context)
+    return render_to_response('SimplerApp/index.html', context_dict, context)
 
 def follow(request):
     context = RequestContext(request)
@@ -107,7 +93,7 @@ def question(request, question_id):
 def csimpler(request, simpler_id):
     context = RequestContext(request)
     simpler = Simpler.objects.get(id = int(simpler_id))
-    context_dict = {'context':simpler}
+    context_dict = {'contextsimpler':simpler}
     return render_to_response('SimplerApp/context.html', context_dict, context)
 
 def makesimpler(request):
@@ -189,7 +175,7 @@ def user_login(request):
                 login(request, user)
                 return HttpResponseRedirect('/')
             else:
-                return HttpResponse("Your Simpler account is disabled.")
+                return HttpResponse("Your Quabl account is disabled.")
         else:
             print "Invalid login details: {0}, {1}".format(username, password)
             return HttpResponse("Invalid Username or Password.")
@@ -244,7 +230,7 @@ def define(request, post_id, simpler_id, answer_part, quabl):
             f.created = datetime.now()
             f.save()
 
-            simpler.answer = answer_part.replace('curr_highlight','highlight').replace('<span class="quabl"><span class="highlight"', '<span class="highlight" data-id="' + str(h.id) + '"').replace(highlightx+'</span>', highlightx).replace(highlightx, quabl)
+            simpler.answer = answer_part.replace('curr_highlight','highlight').replace('<span class="quabl"><span class="highlight"', '<span class="highlight" data-id="' + str(h.id) + '"').replace(highlightx+'</span>', highlightx).replace(highlightx, quabl).replace('style="display: none;"></span>', '></span>')
 
             simpler.modified = datetime.now()
             simpler.save()

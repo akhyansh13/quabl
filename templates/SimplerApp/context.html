@@ -1,7 +1,7 @@
 {% extends 'SimplerApp/base.html' %}
 {% load static %}
 {% block scripts_block %}
-	<!--script src="{% static 'js/index.js' %}"></script-->
+	<script src="{% static 'js/question.js' %}"></script>
 {% endblock %}
 
 {% block css_block %}
@@ -10,9 +10,15 @@
 {% endblock %}
 
 {% block body_block %}
-	<div class="context">
-	{% autoescape off %}
-		{{context.answer}}
-	{% endautoescape %}
-	</div>
+{% autoescape off %}
+
+<div class="nthcontext">
+
+		<div class="context answer">{{contextsimpler.answer}}<br/></div>
+		
+		<button class="btn btn-default ask reqsimp" data-id="{{contextsimpler.id}}" data-text="{{contextsimpler.post.id}}">Ask.</button>
+
+</div>
+
+{% endautoescape %}
 {% endblock %}

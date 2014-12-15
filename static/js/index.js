@@ -1,4 +1,10 @@
 $(document).ready(function(){
+
+	$(".contqueswrapper").each(function(){
+		var offset = $(this).find(".context-area").offset();
+		$(this).find(".question-area").offset({top:offset.top+30});
+	});
+
 	$(".footer").hide();
 
 	var onehview = false;
@@ -81,7 +87,7 @@ $(document).ready(function(){
 		$('.context').each(function() {
 			if ($(this).attr('data') == context_id) {
 				var offset = $(this).offset();
-				$this.offset({top:offset.top});
+				$this.offset({top:offset.top+30});
 			}
 		});
 	})
@@ -126,6 +132,7 @@ $(document).ready(function(){
 				highlightid = $(this).attr('class').split('hid-')[1];
 				if (highlightid == h_id) {
 					$(this).show();
+					$(this).parent().find('.contextstats').hide();
 					//var offset = $this.closest(".context").offset();
 					//$(this).offset({top: offset.top});
 				}
@@ -133,7 +140,7 @@ $(document).ready(function(){
 
 			var context_id = $this.closest(".context").attr('data');
 			//$('#' + context_id).hide();
-			$('.contextstats').hide();
+			//$('.contextstats').hide();
 
 			setTimeout(function(){
 				onehview = true;
