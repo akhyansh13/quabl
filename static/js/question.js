@@ -83,6 +83,8 @@ $(document).ready(function(){
 
 	$(document).on("click", ".viewcontext", function(){
 		$('.mainques').hide();
+		$(this).hide();
+		$("#upperwrapper").hide();
 	  var hid = $(".mainques").data("hid");
 		var question = $(this).data('id');
 		var context = $(this).data('text');
@@ -109,6 +111,19 @@ $(document).ready(function(){
 		}
 		$('.next').hide();
 		$('.prev').hide();
+	});
+
+	$(".addsimp").click(function(){					//add simpler button code [AJAX].
+		//var simpler_id = $(this).attr('id');
+		//var post_id = $(this).attr("data");
+		//var backsimplerid = $(this).attr('value');
+		//var simpler_textarea_id = 'simp'+ simpler_id;
+		var qid = $(this).attr('id');
+		var simpler_text = editor.getHTML();
+		$.get(('/makesimpler/'),{qid:qid, simpler_text:simpler_text,}, function(){
+			uri = '/question/' + qid;
+				window.location.href = uri;
+		});
 	});
 
 	$(".reqsimp").click(function(){
