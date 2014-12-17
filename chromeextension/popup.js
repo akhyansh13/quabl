@@ -9,7 +9,7 @@ var statusDisplay = null;
 function postcontext() 
 {
     event.preventDefault();
-    var url = 'www.quabl.com/addpost';
+    var url = 'www.quabl.com/addpostext';
     var req = new XMLHttpRequest();
     req.open('POST', url, true);
     var context = encodeURIComponent(document.getElementById('context').value);
