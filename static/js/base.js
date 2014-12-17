@@ -5,7 +5,7 @@ function deferred_up(getupinstance){		//Pre-fetching User Profiles.
 		$this = getupinstance;
 
 			var geturl = '/userprof/' + $this.attr("data");
-			
+
 			$.get((geturl),function(data){
 				$.each($.parseJSON(data), function(key,value){
 					if(key =='picurl'){
@@ -29,6 +29,10 @@ function deferred_up(getupinstance){		//Pre-fetching User Profiles.
 	}
 
 $(document).ready(function(){
+
+	$('.dropdown-menu').each(function(){
+		$(this).attr('style', "max-width:450px; min-width:450px; width:450px; min-height:" + screen.height + "px; max-height:" + screen.height + "px; height:450" + screen.height + "px;");
+	});
 
 	var lastst = 0;
 
@@ -62,10 +66,10 @@ $(document).ready(function(){
         if($("#profblock").is(":visible")){
 
 	        var st = $(document).scrollTop();
-	        
+
 	        if(st > upopen_tb_offset){  //Scrolling lower than topbar.
 
-	            $(".header").css({position: "fixed", top:0});   
+	            $(".header").css({position: "fixed", top:0});
 	            $("#menubtns").show();
 				$("#scrollinstruct").hide();
 				$("#profblock").hide();
@@ -75,15 +79,15 @@ $(document).ready(function(){
 	        }
 
 	        else if(lastst>st){		//Scrolling upwards.
-	            
+
 	            var stl = $(document).scrollTop();
 
 				upopen_tb_offset = $(".header").offset().top;
 				$("#header-wrapper").css("position", "relative");
 				$("#profblock").css({position: "absolute", top:stl});
-				$(".header").css({position:"absolute", top:stl+400});   
+				$(".header").css({position:"absolute", top:stl+400});
 
-	        } 
+	        }
 
 	        lastst = st;
 
