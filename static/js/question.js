@@ -2,6 +2,8 @@ $(document).ready(function(){
 
 	$('.footer').hide();
 
+	var lastscrolltop = 0;
+
 	window.quabltext = $("#contextsimpler").data("text");
 	window.quablid = $("#contextsimpler").data("id");
 	window.quablable = $("#contextsimpler"); //Keeps track of the only visible answer.
@@ -181,6 +183,17 @@ $(document).ready(function(){
 			uri = '/define/'+ post_id + '/' + simpler_id +'/ans/'+ answer_part + '/quabl/' + quabl_html + '/';
 
 			window.location = uri;
+	});
+
+	$(document).on('scroll', function(){				//The Scroll.
+			var scrolltop = document.scrollTop();
+			if(scrolltop == 100){
+				$(".lowerinstruct").show();
+			}
+			//if(scrolltop > lastscrolltop && scrolltop > 10){
+				//$(".quilleditor").hide();
+			//}
+
 	});
 });
 
