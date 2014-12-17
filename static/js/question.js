@@ -2,9 +2,9 @@ $(document).ready(function(){
 
 	$('.footer').hide();
 
-	window.quabltext = ' ';
-	window.quablid = ' ';
-	window.quablable = ' '; //Keeps track of the only visible answer.
+	window.quabltext = $("#contextsimpler").data("text");
+	window.quablid = $("#contextsimpler").data("id");
+	window.quablable = $("#contextsimpler"); //Keeps track of the only visible answer.
 
 	var answerno = 1;
 
@@ -179,7 +179,7 @@ $(document).ready(function(){
 			var answer_part = String(window.quablable.html()).split('?').join('xqmx');		//the answer part of the highlight which will have the highlight
 
 			uri = '/define/'+ post_id + '/' + simpler_id +'/ans/'+ answer_part + '/quabl/' + quabl_html + '/';
-			
+
 			window.location = uri;
 	});
 });
