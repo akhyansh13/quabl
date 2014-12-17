@@ -1,0 +1,43 @@
+<html>
+<head>
+<style>
+body 
+{ 
+	min-width: 450px; 
+	font-family: Segoe UI; 
+	font-size: 15px; 
+//background-color: yellow;
+}
+input, textarea 
+{ 
+	width: 450px;
+	font-family:"Segoe UI";  
+	font-size: 12px;  
+	resize: none;
+}
+            
+input#save 
+{ 
+	font-weight: bold; width: auto; 
+}
+</style>
+<script src="popup.js"></script>
+</head>
+<body>
+<form id="htmlcontext">
+Enclose parts of the context that you had trouble understanding in double brackets and ask your questions below
+
+<p><label for="context">Context</label><br />
+<textarea id="context" name="context" rows="6" cols="35" font></textarea></p>
+
+<p><label for="questions">Questions</label><br />
+<textarea id="questions" name="questions" rows="6" cols="35"></textarea></p>
+           
+<p>
+<input id="save" type="submit" value="Post Context" />
+<span id="status-display"></span>
+</p>
+
+</form>
+</body>
+</html>

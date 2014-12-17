@@ -1,0 +1,21 @@
+{
+    "manifest_version": 2,
+    "name": "Quabl Chrome Extension",
+    "description": "Post context and the related questions in the main site",
+    "version": "0.1",
+    "background": 
+    {
+        "scripts": ["event.js"],
+        "persistent": false
+    },
+    "browser_action": {
+        "default_icon": "quabl.png",
+        "default_popup": "main.html"
+    },
+    "permissions": 
+    [
+        "tabs", 
+        "http://*/*",
+        "https://*/*"
+    ]
+}
