@@ -195,7 +195,12 @@ $(document).ready(function(){
 			//}
 
 	});
-});
+
+	$(".showquill").click(function(){
+		$(".quilleditor").toggle();
+	});
+
+}); //document.ready close.
 
 function simpler_cache(input){
 	var cache_defer = $.Deferred();

@@ -25,7 +25,7 @@
 	<div class="mainques" data-id="{{ques.id}}" data-hid="{{ques.highlight.id}}">{{ques}}</div>
 	<div class="mainquespane" style="float:left; width:70%;">
 
-		<span class="numanswers"><button type="button" class="btn btn-default addsimp" id="{{ques.id}}" style="margin-bottom:5px;">Add Answer</button> &bull;
+		<span class="numanswers"><a href="javascript:;" class="showquill">Add Answer</a> &bull;
 {{anscount}} Answers </span><span class="jumptotext">JUMP TO <span class="glyphicon glyphicon-chevron-down"></span>
 	</div>
 </div>
@@ -48,7 +48,7 @@
 	</div>
 	<!--div class="shortquespane" style="display:none; font-size:13pt;">{{ques}}</div-->
 	<div class="answer-area" style="float:left; width:70%; font-size:12pt;">
-		<div class="quilleditor">
+		<div class="quilleditor" style="display:none;">
 			<div id="toolbar">
 				<button class="ql-bold btn btn-default" style="font-size:13pt; padding: 5px 10px; margin:5px;">B</button>
 				<button class="ql-italic btn btn-default" style="font-size:13pt; padding: 5px 13px; margin:5px;">I</button>
@@ -57,6 +57,7 @@
 			</div>
 			<div id='editor'></div>
 			{% csrf_token %}
+			<button type="button" class="btn btn-default addsimp" id="{{ques.id}}" style="margin-top: 5px; position:relative; left:79%;">Add Answer</button>
 		</div>
 		{% autoescape off %}
 			{% for answer in answers %}
