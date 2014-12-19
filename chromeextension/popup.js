@@ -9,7 +9,8 @@ var statusDisplay = null;
 function postcontext()
 {
     event.preventDefault();
-    var url = 'http://127.0.0.1:8000/addpostext';
+
+    var url = 'http://www.quabl.com/addpostext';
 
     var context = encodeURIComponent($('#context').val());
     var questions = encodeURIComponent($('#questions').val());
