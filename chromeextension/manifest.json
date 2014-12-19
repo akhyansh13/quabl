@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Quabl Chrome Extension",
-    "description": "Post context and the related questions in the main site",
+    "description": "Post context and the related questions to the main site",
     "version": "0.1",
     "background": 
     {
@@ -16,6 +16,9 @@
     [
         "tabs", 
         "http://*/*",
-        "https://*/*"
+        "https://*/*",
+        "http://www.google.com/",
+        "https://www.google.com/"
+
     ]
 }

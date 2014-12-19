@@ -330,3 +330,10 @@ def getUserProfile(request, user_id):
         req['shortbio'] = required_user_profile.shortbio
         data = json.dumps(req)
     return HttpResponse(data)
+
+def addpostext(request):
+    context = RequestContext(request)
+    userreqed = User.objects.get(username='anonymous')
+    contextpost = request.GET['context']
+    Post.objects.get_or_create(post=contextpost, author = 'anonymous', writer=userreqed, context=contextpost)
+    return HttpResponse('successful')
