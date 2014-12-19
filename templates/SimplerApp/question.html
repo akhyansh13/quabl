@@ -25,7 +25,7 @@
 	<div class="mainques" data-id="{{ques.id}}" data-hid="{{ques.highlight.id}}">{{ques}}</div>
 	<div class="mainquespane" style="float:left; width:70%;">
 
-		<span class="numanswers"><a href="javascript:;" class="showquill">Add Answer</a> &bull;
+		<span class="numanswers"><a href="javascript:;" class="showquill" style="text-decoration:none;">Add Answer</a> &bull;
 {{anscount}} Answers </span><span class="jumptotext">JUMP TO <span class="glyphicon glyphicon-chevron-down"></span>
 	</div>
 </div>
@@ -49,15 +49,15 @@
 	<!--div class="shortquespane" style="display:none; font-size:13pt;">{{ques}}</div-->
 	<div class="answer-area" style="float:left; width:70%; font-size:12pt;">
 		<div class="quilleditor" style="display:none;">
-			<div id="toolbar">
-				<button class="ql-bold btn btn-default" style="font-size:13pt; padding: 5px 10px; margin:5px;">B</button>
-				<button class="ql-italic btn btn-default" style="font-size:13pt; padding: 5px 13px; margin:5px;">I</button>
-				<button class="ql-underline btn btn-default" style="font-size:13pt; padding: 5px 10px; margin:5px;"><u>U</u></button>
-					<button class="ql-image btn btn-default" style="font-size:13pt; padding: 5px 10px;margin:5px;">Insert Image</button>
+			<div class="ql-toolbar">
+				<button class="ql-btn ql-bold btn btn-default" style="padding: 5px 10px;">B</button>
+				<button class="ql-btn ql-italic btn btn-default" style="padding: 5px 13px;">I</button>
+				<button class="ql-btn ql-underline btn btn-default" style="padding: 5px 10px;"><u>U</u></button>
+					<button class="ql-btn ql-image btn btn-default" style="padding: 5px 10px;">Insert Image</button>
 			</div>
 			<div id='editor'></div>
 			{% csrf_token %}
-			<button type="button" class="btn btn-default addsimp" id="{{ques.id}}" style="margin-top: 5px; position:relative; left:79%;">Add Answer</button>
+			<button type="button" class="btn btn-default addsimp" id="{{ques.id}}" style="margin-top: 5px; position:relative; left:79%; border-radius:0px;">Add Answer</button>
 		</div>
 		{% autoescape off %}
 			{% for answer in answers %}
