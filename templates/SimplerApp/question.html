@@ -25,8 +25,7 @@
 	<div class="mainques" data-id="{{ques.id}}" data-hid="{{ques.highlight.id}}">{{ques}}</div>
 	<div class="mainquespane" style="float:left; width:70%;">
 
-		<span class="numanswers"><a href="javascript:;" class="showquill" style="text-decoration:none;">Add Answer</a> &bull;
-{{anscount}} Answers </span><span class="jumptotext">JUMP TO <span class="glyphicon glyphicon-chevron-down"></span>
+		<span class="numanswers"><a href="javascript:;" class="showquill" style="text-decoration:none; display:none;">Add Answer</a>{{anscount}} Answers </span><span class="jumptotext">JUMP TO <span class="glyphicon glyphicon-chevron-down"></span>
 	</div>
 </div>
 	{% endautoescape %}
@@ -48,7 +47,7 @@
 	</div>
 	<!--div class="shortquespane" style="display:none; font-size:13pt;">{{ques}}</div-->
 	<div class="answer-area" style="float:left; width:70%; font-size:12pt;">
-		<div class="quilleditor" style="display:none;">
+		<div class="quilleditor">
 			<div id="toolbar">
 				<button class="ql-bold btn btn-default ql-btn " style="padding: 5px 10px;">B</button>
 				<button class="ql-italic btn btn-default ql-btn" style="padding: 5px 13px;">I</button>
@@ -68,7 +67,7 @@
 			{% endfor %}
 		{% endautoescape %}
 	</div>
-	<div class="lowerinstruct" style="position:fixed; bottom:0; display:none;" align="center">Scroll down to view first answer.</div>
+	<div style="position:fixed; bottom:0;width:60%;"><div class="lowerinstruct" align="center">Scroll down to view first answer.</div></div>
 	<div class="prev" style="display:none;"><a href="javascript:;">Previous Answer</a></div>
 	<div class="next" style="display:none;"><a href="javascript:;">Next Answer</a></div>
 {% endblock %}
