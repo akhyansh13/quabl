@@ -49,11 +49,11 @@
 	<!--div class="shortquespane" style="display:none; font-size:13pt;">{{ques}}</div-->
 	<div class="answer-area" style="float:left; width:70%; font-size:12pt;">
 		<div class="quilleditor" style="display:none;">
-			<div class="ql-toolbar">
-				<button class="ql-btn ql-bold btn btn-default" style="padding: 5px 10px;">B</button>
-				<button class="ql-btn ql-italic btn btn-default" style="padding: 5px 13px;">I</button>
-				<button class="ql-btn ql-underline btn btn-default" style="padding: 5px 10px;"><u>U</u></button>
-					<button class="ql-btn ql-image btn btn-default" style="padding: 5px 10px;">Insert Image</button>
+			<div id="toolbar">
+				<button class="ql-bold btn btn-default ql-btn " style="padding: 5px 10px;">B</button>
+				<button class="ql-italic btn btn-default ql-btn" style="padding: 5px 13px;">I</button>
+				<button class="ql-underline btn btn-default ql-btn" style="padding: 5px 10px;"><u>U</u></button>
+					<button class="ql-image btn btn-default ql-btn" style="padding: 5px 10px;">Insert Image</button>
 			</div>
 			<div id='editor'></div>
 			{% csrf_token %}
@@ -62,7 +62,7 @@
 		{% autoescape off %}
 			{% for answer in answers %}
 			<div class="nthanswer" style="display:none;">
-				<div class="answer" data-id="{{answer.id}}">{{answer.answer}}</div>
+				<div class="answer" data-id="{{answer.id}}" data-text="{{answer.post.id}}">{{answer.answer}}</div>
 				<button class="btn btn-default ask reqsimp" data-id="{{answer.id}}" data-text="{{answer.post.id}}">Ask.</button>
 			</div>
 			{% endfor %}

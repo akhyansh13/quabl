@@ -4,10 +4,6 @@ $(document).ready(function(){
 
 	var lastscrolltop = 0;
 
-	window.quabltext = $("#contextsimpler").data("text");
-	window.quablid = $("#contextsimpler").data("id");
-	window.quablable = $("#contextsimpler"); //Keeps track of the only visible answer.
-
 	var answerno = 1;
 
 	window.onehview = false;
@@ -18,13 +14,15 @@ $(document).ready(function(){
 		if(getSelectionHtml() != ''){
 			$(".highlight").hide('fast');
 			selectmode = true;
-			markSelection();
+			if($(window.getSelection().focusNode.parentNode).closest('.answer').length != 0){
+				markSelection();
+			}
 		}
 		else if(selectmode && getSelectionHtml()==''){
 			selectmode = false;
-			clearSelection();
 			$(".highlight").show('fast');
 			$(".reqsimp").hide();
+			clearSelection();
 		}
 	});
 
@@ -115,9 +113,6 @@ $(document).ready(function(){
 			$('.cques').parent().hide();
 			$('.context').parent().show();
 			clickonhighlight(hreq);
-			window.quablid = $("#contextsimpler").data("id");
-			window.quabltext = $("#contextsimpler").data("text");
-			window.quablable = $("#contextsimpler")
 		}
 		else {
 			uri = "/question/" + question;
@@ -144,8 +139,8 @@ $(document).ready(function(){
 			$reqsimp = $(this);
 			var quabl_html = getSelectionHtml();
 			var final_span = " ";
-			var simpler_id = window.quablid;
-			var post_id = window.quabltext;
+			var simpler_id = $(window.getSelection().focusNode.parentNode).closest('.answer').data("id");
+			var post_id = $(window.getSelection().focusNode.parentNode).closest('.answer').data("text");
 			var selection = window.getSelection().getRangeAt(0);
 			var selectedText = selection.extractContents();
 			var highlight = String(selectedText.textContent);
@@ -176,9 +171,7 @@ $(document).ready(function(){
 				$(selectedText.childNodes[1]).remove();
 			}
 
-			clearSelection();
-
-			var answer_part = String(window.quablable.html()).split('?').join('xqmx');		//the answer part of the highlight which will have the highlight
+			var answer_part = $(window.getSelection().focusNode.parentNode).closest('.answer').html().split('?').join('xqmx');		//the answer part of the highlight which will have the highlight
 
 			uri = '/define/'+ post_id + '/' + simpler_id +'/ans/'+ answer_part + '/quabl/' + quabl_html + '/';
 
@@ -186,7 +179,7 @@ $(document).ready(function(){
 	});
 
 	$(document).on('scroll', function(){				//The Scroll.
-			var scrolltop = document.scrollTop();
+			var scrolltop = $(document).scrollTop();
 			if(scrolltop == 100){
 				$(".lowerinstruct").show();
 			}

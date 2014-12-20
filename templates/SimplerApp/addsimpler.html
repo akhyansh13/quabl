@@ -1,7 +1,7 @@
 {% extends 'SimplerApp/base.html' %}
 {% load static %}
 
-{% block scripts_block %} 
+{% block scripts_block %}
 
 <script src="{% static 'js/addsimpler.js' %}"></script>
 
@@ -20,7 +20,7 @@
 						  <button class="ql-underline btn btn-default" style="font-size:13pt; padding: 5px 10px; margin:5px;"><u>U</u></button>
 				  		  <button class="ql-image btn btn-default" style="font-size:13pt; padding: 5px 10px;margin:5px;">Insert Image</button>
 						</div>
-						<div id='editor'></div>
+						<div id="editor"></div>
 						{% csrf_token %}
 					</div>
 					<div align="center">
