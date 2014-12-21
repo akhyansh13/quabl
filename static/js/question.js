@@ -2,6 +2,8 @@ $(document).ready(function(){
 
 	$('.footer').hide();
 
+	window.numansdisp = 0;
+
 	var lastscrolltop = 0;
 
 	var answerno = 1;
@@ -180,8 +182,22 @@ $(document).ready(function(){
 
 	$(document).on('scroll', function(){				//The Scroll.
 			var scrolltop = $(document).scrollTop();
-			if(scrolltop == 100){
-				$(".lowerinstruct").show();
+			if(window.numansdisp == 0){
+				window.numansdisp = 1;
+				$(".quilleditor").hide();
+				$('.jumptotext').html("ALL QUESTIONS ON THIS ANSWER <span class='glyphicon glyphicon-chevron-down'></span>")
+				var nahtml_old = $('.numanswers').html();
+				$('.numanswers').html(String(window.numansdisp)+' of ' + nahtml_old);
+				var i = 0;
+				$('.answer').each(function(){
+					if(i==window.numansdisp){
+						$(this).show();
+						$(this).parent().show();
+						$('.parent-' + $(this).data('id')).show();
+						$('.parent-' + $(this).data('id')).parent().show();
+					}
+					i=i+1;
+				});
 			}
 			//if(scrolltop > lastscrolltop && scrolltop > 10){
 				//$(".quilleditor").hide();

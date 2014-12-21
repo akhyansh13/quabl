@@ -25,15 +25,15 @@
 	<div class="mainques" data-id="{{ques.id}}" data-hid="{{ques.highlight.id}}">{{ques}}</div>
 	<div class="mainquespane" style="float:left; width:70%;">
 
-		<span class="numanswers"><a href="javascript:;" class="showquill" style="text-decoration:none; display:none;">Add Answer</a>{{anscount}} Answers </span><span class="jumptotext">JUMP TO <span class="glyphicon glyphicon-chevron-down"></span>
+		<span class="numanswers"><!--a href="javascript:;" class="showquill" style="text-decoration:none; display:none;">Add Answer</a-->{{anscount}} Answers </span><span class="jumptotext">JUMP TO <span class="glyphicon glyphicon-chevron-down"></span>
 	</div>
 </div>
 	{% endautoescape %}
 	<div class="sidequespane">
 		{% autoescape off %}
 			{% for rques in rquestions %}
-			<div class="rquesheader" data-id="{{rques.id}}">
-				<div class="rques hid-{{rques.highlight.id}}"><a href="/question/{{rques.id}}">{{rques.question}}</a></div>
+			<div class="rquesheader" data-id="{{rques.id}}" style="display:none;">
+				<div class="rques hid-{{rques.highlight.id}} parent-{{rques.highlight.highlight_parent.id}}"><a href="/question/{{rques.id}}">{{rques.question}}</a></div>
 				<button class="btn btn-default addanswer" style="display:none;"><a href="/addsimpler/{{rques.id}}">Add Answer.</a></button>
 			</div>
 			{% endfor %}
@@ -62,7 +62,6 @@
 			{% for answer in answers %}
 			<div class="nthanswer" style="display:none;">
 				<div class="answer" data-id="{{answer.id}}" data-text="{{answer.post.id}}">{{answer.answer}}</div>
-				<button class="btn btn-default ask reqsimp" data-id="{{answer.id}}" data-text="{{answer.post.id}}">Ask.</button>
 			</div>
 			{% endfor %}
 		{% endautoescape %}
