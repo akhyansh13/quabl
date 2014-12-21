@@ -82,13 +82,13 @@ body {
 }
 
 textarea {
- overflow: auto;
-   border-radius:3px;
-   border-width:1px;
-   border-style:solid; /* Uniform border across textarea as opposed to the shadowy default design */
-   border-color:lightgray;
-   resize: none;   /*The resize handle is removed */
-   padding: 2px; /* padding for the TEXT that goes into the textarea */
+  overflow: auto;
+  border-radius:3px;
+  border-width:1px;
+  border-style:solid; /* Uniform border across textarea as opposed to the shadowy default design */
+  border-color:lightgray;
+  resize: none;   /*The resize handle is removed */
+  padding: 2px; /* padding for the TEXT that goes into the textarea */
 }
 
 #header-wrapper{
@@ -160,15 +160,16 @@ textarea {
 }
 
 .mainquespane{
-	padding:0px 0px 0px 0px;
+  padding:0px 0px 0px 0px;
 }
 .mainques{
-	font-size:16pt;
+  font-size:16pt;
+  padding-bottom:10px;
 }
 .viewcontext,
 .numanswers,
 .author{
-	font-size:14pt;
+  font-size:14pt;
 }
 
 .sidequespane{
@@ -180,29 +181,26 @@ textarea {
 
 .jumptotext{
   font-size:12pt;
-	text-align:right;
   position:absolute;
-  bottom:0;
   right:0;
-  margin-bottom:2px;
 }
 .shortquespane{
-	font-size:15pt;
-	font-weight:bold;
-	position:fixed;
+  font-size:15pt;
+  font-weight:bold;
+  position:fixed;
 }
 .answer{
-	padding:0px 60px 0px 0px;
+  padding:0px 60px 0px 0px;
 }
 .prev{
-	float:left;
-	bottom: 0px;
-	font-size:15pt;
+  float:left;
+  bottom: 0px;
+  font-size:15pt;
 }
 .next{
-	float:right;
-	bottom: 0px;
-	font-size:15pt;
+  float:right;
+  bottom: 0px;
+  font-size:15pt;
 }
 .quabl_full{
   border-radius:12px;
@@ -228,13 +226,18 @@ textarea {
 #upperwrapper{
   position:relative;
   width:100%;
-  border-bottom:1px solid #C0C0C0;
-  min-height:200px;
   margin-bottom:10px;
+  border-bottom:1px solid #C0C0C0;
 }
 
 .numanswers{
-  position:absolute;
-  bottom:0;
-  left:0;
+  position:relative;
+}
+
+.numjumpwrapper{
+  position:relative;
+}
+
+.clicked{
+  background-color:#ebebeb;
 }

@@ -58,8 +58,8 @@
 		{% block header_block %}
 			<div class="header">
 			{% if user.is_authenticated %}
-				<ul class="nav navbar-nav navbar-right" id="scrollinstruct" style="font-weight:bold; font-size:13pt; display:none; padding-top:12px;">Scroll down to dismiss.</ul>
-				<ul class="nav navbar-nav navbar-right" id="menubtns" style="font-weight:bold; font-size:13pt;">
+				<ul class="nav navbar-nav navbar-right" id="scrollinstruct" style="font-size:13pt; display:none; padding-top:12px;">Scroll down to dismiss.</ul>
+				<ul class="nav navbar-nav navbar-right" id="menubtns" style="font-size:13pt;">
 					<li class="active getup" data="{{user.id}}">
 						<a href="javascript:;" style="color:#444;">{{user.username}}</a>
 					</li>
@@ -90,7 +90,7 @@
 				</ul>
 			{% endif %}
 
-            <span style="padding-left:13%;"><img src="http://simpler.pythonanywhere.com/quablmedia/logo.svg" height="54" style="border-bottom-left-radius:3px;border-bottom-right-radius:3px;"></span>
+            <span style="padding-left:13%;"><img src="/quablmedia/logo.svg" height="54" style="border-bottom-left-radius:3px;border-bottom-right-radius:3px;"></span>
 			</div>
 		</div>
 		{% endblock %}
@@ -104,7 +104,7 @@
 				</div>
 			</div>
 	</body>
-	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap.js' %}"></script>
 	<script src="{% static 'quill/quill.js' %}"></script>
 
 <script>

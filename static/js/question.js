@@ -182,7 +182,7 @@ $(document).ready(function(){
 
 	$(document).on('scroll', function(){				//The Scroll.
 			var scrolltop = $(document).scrollTop();
-			if(window.numansdisp == 0){
+			if(window.numansdisp == 0 && scrolltop - lastscrolltop > 2){
 				window.numansdisp = 1;
 				$(".quilleditor").hide();
 				$('.jumptotext').html("ALL QUESTIONS ON THIS ANSWER <span class='glyphicon glyphicon-chevron-down'></span>")
@@ -199,14 +199,20 @@ $(document).ready(function(){
 					i=i+1;
 				});
 			}
-			//if(scrolltop > lastscrolltop && scrolltop > 10){
-				//$(".quilleditor").hide();
-			//}
-
+			lastscrolltop = scrolltop;
 	});
 
 	$(".showquill").click(function(){
 		$(".quilleditor").toggle();
+	});
+
+	$('.ql-btn').not('.ql-image').click(function(){		//Color retention when B, I or U active.
+		if($(this).hasClass('clicked')){
+			$(this).removeClass('clicked');
+		}
+		else{
+			$(this).addClass('clicked');
+		}
 	});
 
 }); //document.ready close.
