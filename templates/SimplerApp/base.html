@@ -20,7 +20,7 @@
 		<!--<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script> -->
 
 		<script src="{% static 'js/base.js' %}"></script>
-			
+
 		</script>
 
 		{% block scripts_block %}{% endblock %}
@@ -42,7 +42,7 @@
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
-	<div id="header-wrapper">	
+	<div id="header-wrapper">
 
 		<div id="profblock">
 				<div id ='profpic' style='float:right;'><img id='profimg'/></div>
@@ -77,7 +77,7 @@
 								{% for unotif in unreadnotifs %}
 									<li><a href='/request/notifications/{{unotif.id}}/' class="unotif" style="white-space:normal; background-color:#F8F8F8;">{{unotif.notification}}</a></li>
 								{% endfor %}
-								
+
 								{% for rnotif in readnotifs %}
 									<li><a href='/request/notifications/{{rnotif.id}}/' class="rnotif" style="white-space:normal; display:none;">{{rnotif.notification}}</a></li>
 								{% endfor %}
@@ -87,7 +87,8 @@
 					</li>
 				</ul>
 			{% endif %}
-			<span style="padding-left:7%;"><a href='/' id="main-logo">Quabl.</a></span>
+
+            <span style="padding-left:13%;"><img src="http://simpler.pythonanywhere.com/quablmedia/logo.svg" height="54" style="border-bottom-left-radius:3px;border-bottom-right-radius:3px;"></span>
 			</div>
 		</div>
 		{% endblock %}
