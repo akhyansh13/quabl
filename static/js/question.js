@@ -16,11 +16,13 @@ $(document).ready(function(){
 
 	$(document).mouseup(function(){
 		if(getSelectionHtml() != ''){
-			$(".highlight").hide('fast');
+			$(".highlight").hide('fast', function(){
+				if($(window.getSelection().focusNode.parentNode).closest('.answer').length != 0){
+						$(".reqsimp").hide();
+						markSelection();
+				}
+			});
 			selectmode = true;
-			if($(window.getSelection().focusNode.parentNode).closest('.answer').length != 0){
-				markSelection();
-			}
 		}
 		else if(selectmode && getSelectionHtml()==''){
 			selectmode = false;
