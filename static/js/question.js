@@ -40,46 +40,6 @@ $(document).ready(function(){
 	});
 
 	var curr_ans = 0;
-	$('.next').click(function() {
-		if (curr_ans == 0) {
-			$('.mainquespane').hide();
-			$('.jumptotext').hide();
-			$('.rques').parent().hide();
-			$('.cques').parent().hide();
-			$('#1').parent().show();
-			//$('.shortquespane').show();
-			//var bottom = $('.mainquespane').height();
-			//$('.answer-area').attr('style', "float:left; width:70%; font-size:12pt; margin-top:" + String(bottom) + "px;");
-			curr_ans+=1;
-		}
-		else{
-			if (curr_ans < answerno - 1) {
-				$('#' + String(curr_ans)).parent().hide();
-				$('#' + String(curr_ans + 1)).parent().show();
-				$('.rques').parent().hide();
-				curr_ans+=1;
-			}
-		}
-	});
-
-	$('.prev').click(function() {
-		if (curr_ans == 1) {
-			$('#1').parent().hide();
-			//$('.shortquespane').hide();
-			$('.mainquespane').show();
-			$('.jumptotext').show();
-			$('.rques').parent().show();
-			curr_ans-=1;
-		}
-		else{
-			if (curr_ans > 0) {
-				$('#' + String(curr_ans)).parent().hide();
-				$('#' + String(curr_ans - 1)).parent().show();
-				$('.rques').parent().hide();
-				curr_ans-=1;
-			}
-		}
-	});
 
 	$(document).on("click",".highlight", function(){
 		clickonhighlight($(this));
@@ -89,8 +49,17 @@ $(document).ready(function(){
 		if(window.onehview){
 			highlight_parent.empty().append(simpler_html_cache);
 			window.onehview = false;
-			$('.rques').parent().hide();
-			$('.cques').parent().hide();
+			var conthigh = ' ';
+			$(".highlight").each(function(){
+				if($(this).data('id')==window.highclicked){
+					if($(this).closest(".context").length !=0){
+						$('.cques').show();
+					}
+					else{
+						$('.rques').show();
+					}
+				}
+			});
 		}
 	});
 
@@ -98,6 +67,7 @@ $(document).ready(function(){
 		$('.mainques').hide();
 		$(this).hide();
 		$("#upperwrapper").hide();
+		$(".nthanswer").hide();
 	  var hid = $(".mainques").data("hid");
 		var question = $(this).data('id');
 		var context = $(this).data('text');
@@ -115,8 +85,7 @@ $(document).ready(function(){
 		if (question == -1) {
 			$('.mainquespane').hide();
 			$('.jumptotext').hide();
-			$('.rques').parent().hide();
-			$('.cques').parent().hide();
+			$('.rques').hide();
 			$('.context').parent().show();
 			clickonhighlight(hreq);
 		}
@@ -124,8 +93,6 @@ $(document).ready(function(){
 			uri = "/question/" + question;
 			window.location.href = uri;
 		}
-		$('.next').hide();
-		$('.prev').hide();
 	});
 
 	$(".addsimp").click(function(){					//add simpler button code [AJAX].
@@ -292,11 +259,29 @@ function clearSelection() {
 function clickonhighlight(highlight){
 	$this = highlight;
 
+	window.highclicked = highlight.data("id");
+
 	$.when(simpler_cache($this.closest(".answer"))).then(function(){
+
+		var h_id = $this.data('id');
+
+		highlight.closest(".nthanswer").find(".rques").each(function() {
+			highlightid = $(this).attr('class').split('hid-')[1].split(" ")[0];
+			if (highlightid != h_id) {
+				$(this).hide();
+			}
+		});
+
+		$(".cques").each(function() {
+			highlightid = $(this).attr('class').split('hid-')[1];
+			if (highlightid != h_id){
+				$(this).hide();
+			}
+		});
+
 
 		highlight_parent = $this.closest(".answer");
 		var quabl_text = $this.data('text');
-		var h_id = $this.data('id');
 		$this.closest(".answer").find(".highlight").not($this).remove();
 		var simpler_html = $this.closest(".answer").html();
 		var h_html = $('<div>').append($this.clone()).html();
@@ -304,14 +289,14 @@ function clickonhighlight(highlight){
 		var new_simpler_html = simpler_html.replace(h_html + quabl_text, '<span class="quabl_full">' + h_html_dummy + quabl_text + '</span>');
 		$this.closest(".answer").empty().append(new_simpler_html);
 
-		$(".rques").each(function() {
-			highlightid = $(this).attr('class').split('hid-')[1];
-			if (highlightid == h_id) $(this).parent().show();
-		});
+
 
 		$(".cques").each(function() {
 			highlightid = $(this).attr('class').split('hid-')[1];
-			if (highlightid == h_id) $(this).parent().show();
+			if (highlightid == h_id){
+				$(this).parent().show();
+				$(this).show();
+			}
 		});
 
 		setTimeout(function(){
