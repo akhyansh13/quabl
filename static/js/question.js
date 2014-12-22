@@ -218,6 +218,13 @@ $(document).ready(function(){
 		$answer.closest(".nthanswer").find(".relques").append(newhtml);
 	});
 
+	blink("#loaddot");
+	setTimeout(function(){
+		$("#loaddot").remove();
+		$(".container").show();
+		$(".header").show();
+	},1500);
+
 }); //document.ready close.
 
 function simpler_cache(input){
@@ -390,4 +397,12 @@ function ifallpositive(arr){		//Checks if all elements of an array are positive(
 		}
 		j += 1;
 	}
+}
+
+function blink(selector){
+	$(selector).fadeOut('slow', function(){
+		$(this).fadeIn('slow', function(){
+			blink(this);
+		});
+	});
 }
