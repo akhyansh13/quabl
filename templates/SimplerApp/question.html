@@ -58,7 +58,11 @@
 	{% autoescape off %}
 	{% for answer in answers %}
 	<div class="nthanswer" style="display:none;">
-		<div class="answer" data-id="{{answer.id}}" data-text="{{answer.post.id}}">{{answer.answer}}</div>
+		<div class="answer" data-id="{{answer.id}}" data-text="{{answer.post.id}}">
+			Answer by <br/>
+			{{answer.writer.first_name}} {{answer.writer.last_name}}<br/><br/>
+			{{answer.answer}}
+			</div>
 	</div>
 	{% endfor %}
 	{% endautoescape %}

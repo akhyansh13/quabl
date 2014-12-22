@@ -2,6 +2,8 @@ $(document).ready(function(){
 
 	$('.footer').hide();
 
+	var scroll_arr = [0]
+
 	window.numansdisp = 0;
 
 	var lastscrolltop = 0;
@@ -182,21 +184,25 @@ $(document).ready(function(){
 
 	$(document).on('scroll', function(){				//The Scroll.
 			var scrolltop = $(document).scrollTop();
-			if(window.numansdisp == 0 && scrolltop - lastscrolltop > 2){
+
+			if(scrolltop == 0){
+				scroll_arr = [0];
+			}
+
+			scroll_arr.push(scrolltop);
+
+			if(window.numansdisp == 0 && ifallpositive(scroll_arr) && scrolltop != 0){
 				window.numansdisp = 1;
+				$("html").height("100%");
 				$(".quilleditor").hide();
 				$('.jumptotext').html("ALL QUESTIONS ON THIS ANSWER <span class='glyphicon glyphicon-chevron-down'></span>")
 				var nahtml_old = $('.numanswers').html();
 				$('.numanswers').html(String(window.numansdisp)+' of ' + nahtml_old);
-				var i = 0;
-				$('.answer').each(function(){
-					if(i==window.numansdisp){
+				$('.answer').not('.context').each(function(){
 						$(this).show();
 						$(this).parent().show();
 						$('.parent-' + $(this).data('id')).show();
 						$('.parent-' + $(this).data('id')).parent().show();
-					}
-					i=i+1;
 				});
 			}
 			lastscrolltop = scrolltop;
@@ -353,4 +359,20 @@ function markSelection() {
 
             markerEl.parentNode.removeChild(markerEl);
         }
+}
+
+function ifallpositive(arr){		//Checks if all elements of an array are positive(Zero inclusive).
+	var j = 0;
+	while(j <= arr.length-1){
+		if(arr[j]>=0){
+			if(j==arr.length -1){
+				return true;
+			}
+		}
+		else{
+			return false;
+			break;
+		}
+		j += 1;
+	}
 }

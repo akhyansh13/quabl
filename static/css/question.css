@@ -1,4 +1,8 @@
 /* Space out content a bit */
+html{
+  height:101%
+}
+
 body {
   padding-bottom: 0px;
   z-index:1;
@@ -190,7 +194,7 @@ textarea {
   position:fixed;
 }
 .answer{
-  padding:0px 60px 0px 0px;
+  margin-bottom:20px;
 }
 .prev{
   float:left;
