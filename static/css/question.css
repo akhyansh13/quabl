@@ -246,16 +246,27 @@ textarea {
   background-color:#ebebeb;
 }
 
+.rques{
+  padding-bottom:10px;
+}
+
+.withwriter{
+  width:70%;
+  padding-right:10px;
+}
+
+.nthanswer{
+  position:relative;
+}
+
 .relques{
   position:absolute;
   top:0;
   right:0;
+  width:30%;
+  text-align: right;
 }
 
-.nthanswer{
-  padding-bottom:50px;
-}
-
-.rques{
-  padding-bottom:10px;
+.writerinfo{
+  font-size:11pt;
 }

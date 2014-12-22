@@ -23,10 +23,9 @@
 	</div>
 	<div class="viewcontext" data-id="{{ques.highlight.highlight_parent.question}}"><button class="btn btn-default" style="position:absolute; top:0; right:0;">View Context</button></div>
 	<div class="mainques" data-id="{{ques.id}}" data-hid="{{ques.highlight.id}}">{{ques}}</div>
-	<div class='numjumpwrapper'><span class="numanswers"><a href="javascript:;" class="showquill" style="text-decoration:none;">Add Answer</a> <span id="bull">&bull;</span> <span id="anscounti">{{anscount}} Answers </span><span id="anscountf" style="display:none;"><a href="javscript:;" style="text-decoration:none;">View {{anscount}} Answers </a></span></span><span class="jumptotext">JUMP TO <span class="glyphicon glyphicon-chevron-down"></span></div>
+	<div class='numjumpwrapper'><span class="numanswers"><a href="javascript:;" class="showquill" style="text-decoration:none;">Add Answer</a> <span id="bull">&bull;</span> <span id="anscounti">{{anscount}} Answers </span><span id="anscountf" style="display:none;"><a href="javascript:;" style="text-decoration:none;">View {{anscount}} Answers </a></span></span><span class="jumptotext">JUMP TO <span class="glyphicon glyphicon-chevron-down"></span></div>
 </div>
 {% endautoescape %}
-<div class="sidequespane">
 	{% autoescape off %}
 	{% for rques in rquestions %}
 	<div class="rquesheader questionon-{{rques.highlight.highlight_parent.id}}" data-id="{{rques.id}}">
@@ -34,6 +33,7 @@
 		<button class="btn btn-default addanswer" style="display:none;"><a href="/addsimpler/{{rques.id}}">Add Answer.</a></button></div>
 	</div>
 	{% endfor %}
+	<div class="sidequespane">
 	{% for cques in cquestions %}
 	<div class="cquesheader" style="display:none;" data-id="{{cques.id}}">
 		<div class="cques hid-{{cques.highlight.id}}"><a href="/question/{{cques.id}}">{{cques.question}}</a></div>
@@ -57,15 +57,20 @@
 	</div>
 	{% autoescape off %}
 	{% for answer in answers %}
-	<div class="nthanswer" style="position:relative;">
+	<div class="nthanswer">
+		<div class="withwriter">
+		<div class="writerinfo">
 		Answer by <br/>
 		{{answer.writer.first_name}} {{answer.writer.last_name}}<br/><br/>
-		<div class="answer" style="float:left; width:70%; font-size:12pt;" data-id="{{answer.id}}" data-text="{{answer.post.id}}">
+	</div>
+		<div class="answer" data-id="{{answer.id}}" data-text="{{answer.post.id}}">
 			{{answer.answer}}
 			</div>
+		</div>
+			<div class="relques"></div>
 	</div>
 	{% endfor %}
 	{% endautoescape %}
 </div>
-<div style="position:fixed; bottom:0;width:60%; display:none;"><div class="lowerinstruct" align="center">Scroll down to view first answer.</div></div>
+<div id="empty" style="display:none;"></div>
 {% endblock %}

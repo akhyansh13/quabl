@@ -132,7 +132,8 @@ $(document).ready(function(){
 		//var backsimplerid = $(this).attr('value');
 		//var simpler_textarea_id = 'simp'+ simpler_id;
 		var qid = $(this).attr('id');
-		var simpler_text = editor.getHTML();
+		var answer_html = editor.getHTML();
+		var simpler_text = $('#empty').append('<p>'+ answer_html +'</p>').text();
 		$.get(('/makesimpler/'),{qid:qid, simpler_text:simpler_text,}, function(){
 			uri = '/question/' + qid;
 				window.location.href = uri;
@@ -245,7 +246,7 @@ $(document).ready(function(){
 				newhtml = newhtml + $(this).html();
 				$(this).remove();
 		});
-		$answer.closest(".nthanswer").append("<div class='relques'>"+ newhtml + "</div>");
+		$answer.closest(".nthanswer").find(".relques").append(newhtml);
 	});
 
 }); //document.ready close.
