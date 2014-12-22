@@ -245,3 +245,17 @@ textarea {
 .clicked{
   background-color:#ebebeb;
 }
+
+.relques{
+  position:absolute;
+  top:0;
+  right:0;
+}
+
+.nthanswer{
+  padding-bottom:50px;
+}
+
+.rques{
+  padding-bottom:10px;
+}
