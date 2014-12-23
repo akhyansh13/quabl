@@ -148,6 +148,8 @@ def register(request):
             profpic = Image.open(profile.picture.path)  #Primitive image filter.
             profpic = profpic.resize((300,300), PIL.Image.ANTIALIAS)
             profpic.save(profile.picture.path)
+            thumbnail = profpic.resize((32,32), PIL.Image.ANTIALIAS)
+            thumbnail.save(str(profile.picture.path).replace('profile_images','thumbnails'), 'JPEG')
 
         else:
             print user_form.errors, profile_form.errors
