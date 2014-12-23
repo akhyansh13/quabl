@@ -339,3 +339,9 @@ def addpostext(request):
     contextpost = request.GET['context']
     Post.objects.get_or_create(post=contextpost, author = 'anonymous', writer=userreqed, context=contextpost)
     return HttpResponse('successful')
+
+def getthumburl(request, username):
+    context = RequestContext(request)
+    requser = User.objects.get(username=username)
+    requp = UserProfile.objects.get(user=requser)
+    return HttpResponse((requp.picture.url).replace('profile_images', 'thumbnails'))

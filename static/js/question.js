@@ -218,13 +218,21 @@ $(document).ready(function(){
 		$answer.closest(".nthanswer").find(".relques").append(newhtml);
 	});
 
+	$(".thumb").each(function(){
+		var $t = $(this);
+		var requrl = '/thumb/' + $t.data("username");
+		$.get((requrl), function(data){
+			$t.attr("src", data);
+		});
+	});
+
+
 	blink("#loaddot");
 	setTimeout(function(){
 		$("#loaddot").remove();
 		$(".container").show();
 		$(".header").show();
 	},1000);
-
 }); //document.ready close.
 
 function simpler_cache(input){

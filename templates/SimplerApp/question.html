@@ -19,7 +19,7 @@
 </div>
 <div id="upperwrapper">
 	<div class="author" style="padding-bottom:10px; font-size:12pt;">Question By <br/>
-		{{ques.req_by.first_name}} {{ques.req_by.last_name}}
+		<img class="thumb" data-username="{{ques.req_by.username}}"/> {{ques.req_by.first_name}} {{ques.req_by.last_name}}
 	</div>
 	<div class="viewcontext" data-id="{{ques.highlight.highlight_parent.question}}"><button class="btn btn-default" style="position:absolute; top:0; right:0;">View Context</button></div>
 	<div class="mainques" data-id="{{ques.id}}" data-hid="{{ques.highlight.id}}">{{ques}}</div>
@@ -61,7 +61,7 @@
 		<div class="withwriter">
 		<div class="writerinfo">
 		Answer by <br/>
-		{{answer.writer.first_name}} {{answer.writer.last_name}}<br/><br/>
+		<img class="thumb" data-username="{{answer.writer.username}}"/> {{answer.writer.first_name}} {{answer.writer.last_name}}<br/><br/>
 	</div>
 		<div class="answer" data-id="{{answer.id}}" data-text="{{answer.post.id}}">
 			{{answer.answer}}

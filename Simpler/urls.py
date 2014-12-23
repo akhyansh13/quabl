@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from SimplerApp.views import index, csimpler, question, makesimpler, register, user_login, user_logout, addpost, define, addanswer, requestbyuser, getUserProfile, follow, addpostext
+from SimplerApp.views import index, csimpler, question, makesimpler, register, user_login, user_logout, addpost, define, addanswer, requestbyuser, getUserProfile, follow, addpostext, getthumburl
 from django.contrib import admin
 from django.conf import settings
 admin.autodiscover()
@@ -23,7 +23,8 @@ urlpatterns = patterns('',
     url(r'^addsimpler/(?P<qid>\w+)/$', addanswer),
     url(r'^request/(?P<category>[\w|\W]+)/(?P<description>[\w|\W]+)/$', requestbyuser),
     url(r'^userprof/(?P<user_id>\w+)/$', getUserProfile),
-    url(r'^addpostext/$', addpostext)
+    url(r'^addpostext/$', addpostext),
+    url(r'^thumb/(?P<username>\w+)/$', getthumburl),
 )
 
 if settings.DEBUG:

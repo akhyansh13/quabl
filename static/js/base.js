@@ -36,11 +36,6 @@ $(document).ready(function(){
 
 	var lastst = 0;
 
-	$("img").not("#profimg").each(function(){                //Correcting the img-src inconsistency using JS. Find a better solution.
-		proper_src = $(this).attr("src").replace("http:/", "http://");
-		$(this).attr("src",proper_src);
-	});
-
 	$(".getup").click(function(){
 		$thisgetup = $(this);
 		$.when(deferred_up($thisgetup)).then(function(){
