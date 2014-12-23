@@ -1,3 +1,11 @@
+.container{
+	display:none;
+}
+
+.header{
+	display:none;
+}
+
 .postbox{
 	width:100%;
 }
@@ -35,4 +43,16 @@
   height: 12px;
   background-color: #FFA500;
   margin-right: 3px;
+}
+
+#loaddot{
+	background-color:#FFA500;
+	border-radius:50%;
+	width:24px;
+	height:24px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -50px;
+	margin-left: -50px;
 }

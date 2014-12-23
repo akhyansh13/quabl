@@ -157,7 +157,16 @@ $(document).ready(function(){
 			}
 		});
 	});
-});
+
+	blink("#loaddot");
+	setTimeout(function(){
+		$("#loaddot").remove();
+		$(".container").show();
+		$(".header").show();
+	},1000);
+
+
+}); //document.ready closed.
 
 function simpler_cache(input){
 	var cache_defer = $.Deferred();
@@ -176,4 +185,12 @@ function checkifques(){
 	setTimeout(function(){
 		oqd.resolve();
 	},5);
+}
+
+function blink(selector){
+	$(selector).fadeOut('slow', function(){
+		$(this).fadeIn('slow', function(){
+			blink(this);
+		});
+	});
 }
