@@ -223,7 +223,7 @@ $(document).ready(function(){
 		$("#loaddot").remove();
 		$(".container").show();
 		$(".header").show();
-	},1500);
+	},1000);
 
 }); //document.ready close.
 
