@@ -54,7 +54,7 @@
 		</div>
 		<div id='editor'></div>
 		{% csrf_token %}
-		<button type="button" class="btn btn-default addsimp" id="{{ques.id}}" style="margin-top: 5px; position:relative; left:79%; border-radius:0px;">Add Answer</button>
+		<button type="button" class="btn btn-primary addsimp" id="{{ques.id}}" style="margin-top: 5px; position:relative; left:77%; border-radius:0px;" disabled="true">Add Answer</button>
 	</div>
 	{% autoescape off %}
 	{% for answer in answers %}

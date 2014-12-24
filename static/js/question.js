@@ -16,6 +16,7 @@ $(document).ready(function(){
 
 	$(document).mouseup(function(){
 		if(getSelectionHtml() != ''){
+			if($('.highlight')[0]){								//This if-else takes care of the context.html also.
 			$(".highlight").hide('fast', function(){
 				if($(window.getSelection().focusNode.parentNode).closest('.answer').length != 0){
 						$(".reqsimp").hide();
@@ -23,6 +24,13 @@ $(document).ready(function(){
 				}
 			});
 			selectmode = true;
+			}
+			else{
+				if($(window.getSelection().focusNode.parentNode).closest('.answer').length != 0){
+					$(".reqsimp").hide();
+					markSelection();
+				}
+			}
 		}
 		else if(selectmode && getSelectionHtml()==''){
 			selectmode = false;
@@ -196,7 +204,7 @@ $(document).ready(function(){
 		$("#bull").show();
 	})
 
-	$('.ql-btn').not('.ql-image').click(function(){		//Color retention when B, I or U active.
+	$('.ql-btn').not('.ql-image').click(function(){		//Color and style retention when B, I or U active.
 		if($(this).hasClass('clicked')){
 			$(this).removeClass('clicked');
 		}
@@ -256,6 +264,14 @@ $(document).ready(function(){
 		});
 	});
 
+	$(document).keyup(function(){				//Controls the deactivation/activation of the Add Answer button.
+		if (!(editor.getText().trim())) {
+			$(".addsimp").attr("disabled", "true");
+		}
+		else{
+			$(".addsimp").removeAttr("disabled");
+		}
+	});
 
 	blink("#loaddot");
 	setTimeout(function(){
