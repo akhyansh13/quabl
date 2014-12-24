@@ -155,9 +155,11 @@ textarea {
   height: 300px;
 }
 
-.ql-btn{
+.ql-btn,
+.ql-btn:hover{
   border-radius:0px;
   font-size:13pt;
+  border-color:#FFFFFF;
 }
 
 .preview{

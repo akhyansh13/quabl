@@ -203,6 +203,36 @@ $(document).ready(function(){
 		else{
 			$(this).addClass('clicked');
 		}
+		if($(this).hasClass('ql-bold')){
+			if($(this).hasClass("cbold")){
+				$(this).removeClass("cbold");
+				$(this).html("B");
+			}
+			else{
+				$(this).addClass("cbold");
+				$(this).html("<b>B</b>");
+			}
+		}
+		if($(this).hasClass('ql-italic')){
+			if($(this).hasClass("cita")){
+				$(this).removeClass("cita");
+				$(this).html("I");
+			}
+			else{
+				$(this).addClass("cita");
+				$(this).html("<i>I</i>");
+			}
+		}
+		if($(this).hasClass('ql-underline')){
+			if($(this).hasClass("cund")){
+				$(this).removeClass("cund");
+				$(this).html("U");
+			}
+			else{
+				$(this).addClass("cund");
+				$(this).html("<u>U</u>");
+			}
+		}
 	});
 
 	$(".answer").not(".context").each(function(){
