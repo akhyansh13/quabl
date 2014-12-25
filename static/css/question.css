@@ -160,6 +160,8 @@ textarea {
   border-radius:0px;
   font-size:13pt;
   border-color:#FFFFFF;
+  position:relative;
+  top:1px;
 }
 
 .preview{
@@ -171,7 +173,7 @@ textarea {
 }
 .mainques{
   font-size:16pt;
-  padding-bottom:10px;
+  padding-bottom:30px;
 }
 .viewcontext,
 .numanswers,
@@ -187,9 +189,12 @@ textarea {
 }
 
 .jumptotext{
-  font-size:12pt;
+  font-size:9pt;
   position:absolute;
   right:0;
+  top:35px;
+  border-bottom:solid 1px #C0C0C0;
+  padding-left:10px;
 }
 .shortquespane{
   font-size:15pt;
@@ -197,7 +202,7 @@ textarea {
   position:fixed;
 }
 .answer{
-  margin-bottom:20px;
+  margin-bottom:10px;
 }
 .prev{
   float:left;
@@ -233,12 +238,13 @@ textarea {
 #upperwrapper{
   position:relative;
   width:100%;
-  margin-bottom:10px;
-  border-bottom:1px solid #C0C0C0;
+  margin-bottom:40px;
 }
 
 .numanswers{
   position:relative;
+  border-bottom:1px solid #C0C0C0;
+  padding-right:10px;
 }
 
 .numjumpwrapper{
@@ -260,6 +266,8 @@ textarea {
 
 .nthanswer{
   position:relative;
+  margin-bottom:20px;
+  min-height:150px;
 }
 
 .relques{
@@ -274,6 +282,21 @@ textarea {
   font-size:11pt;
 }
 
+.writerwrap{
+  padding-top:50px;
+}
+
+.thumb{
+  float:left;
+  position:relative;
+  padding-right:2px;
+}
+
+.writerinfo, .author{
+  font-size:9pt;
+  color:gray;
+}
+
 #loaddot{
   background-color:#FFA500;
   border-radius:50%;
@@ -284,4 +307,9 @@ textarea {
   left: 50%;
   margin-top: -50px;
   margin-left: -50px;
+}
+
+.instruct{
+  font-size:9pt;
+  color:#C0C0C0;
 }

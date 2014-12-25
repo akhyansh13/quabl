@@ -193,6 +193,7 @@ $(document).ready(function(){
 		$("#anscountf").show();
 		$(this).hide();
 		$("#bull").hide();
+		$(".jumptotext").hide();
 	});
 
 	$("#anscountf").click(function(){
@@ -202,6 +203,7 @@ $(document).ready(function(){
 		$(".quilleditor").hide();
 		$(".showquill").show();
 		$("#bull").show();
+		$(".jumptotext").show();
 	})
 
 	$('.ql-btn').not('.ql-image').click(function(){		//Color and style retention when B, I or U active.
@@ -270,6 +272,12 @@ $(document).ready(function(){
 		}
 		else{
 			$(".addsimp").removeAttr("disabled");
+		}
+	});
+
+	$('.relques').each(function(){
+		if(!($(this).html())){
+			$(this).html("<div class='instruct'>No questions yet. Select a part of the answer to add a new question.</div>")
 		}
 	});
 

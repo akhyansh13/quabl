@@ -19,12 +19,12 @@
 </div>
 <div id="upperwrapper">
 	<div class="authwrapper">
-		<img class="thumb" data-username="{{ques.req_by.username}}" style="float:left; position:relative; top:6px; padding-right:2px;"/>
-	<div class="author" style="font-size:11pt;">Question By <br/>{{ques.req_by.first_name}} {{ques.req_by.last_name}}</div>
+		<img class="thumb" data-username="{{ques.req_by.username}}"/>
+	<div class="author">Question By <br/>{{ques.req_by.first_name}} {{ques.req_by.last_name}}</div>
 </div>
 	<div class="viewcontext" data-id="{{ques.highlight.highlight_parent.question}}"><button class="btn btn-default" style="position:absolute; top:0; right:0;">View Context</button></div>
 	<div class="mainques" data-id="{{ques.id}}" data-hid="{{ques.highlight.id}}">{{ques}}</div>
-	<div class='numjumpwrapper'><span class="numanswers"><a href="javascript:;" class="showquill" style="text-decoration:none;">Add Answer</a> <span id="bull">&bull;</span> <span id="anscounti">{{anscount}} Answers </span><span id="anscountf" style="display:none;"><a href="javascript:;" style="text-decoration:none;">View {{anscount}} Answers </a></span></span><span class="jumptotext">QUESTIONS</div>
+	<div class='numjumpwrapper'><span class="numanswers"><a href="javascript:;" class="showquill" style="text-decoration:none;">Add Answer</a> <span id="bull">&bull;</span> <span id="anscounti">{{anscount}} Answers </span><span id="anscountf" style="display:none;"><a href="javascript:;" style="text-decoration:none;">View {{anscount}} Answers </a></span></span><span class="jumptotext">QUESTIONS ON THIS ANSWER</div>
 </div>
 {% endautoescape %}
 	{% autoescape off %}
@@ -60,12 +60,12 @@
 	{% for answer in answers %}
 	<div class="nthanswer">
 		<div class="withwriter">
-			<div class="writerwrap">
-		<img class="thumb" data-username="{{answer.writer.username}}" style="float:left; position:relative; top:6px; padding-right:2px;"/>
-		<div class="writerinfo">Answer by <br/>{{answer.writer.first_name}} {{answer.writer.last_name}}</div>
-		</div>
 		<div class="answer" data-id="{{answer.id}}" data-text="{{answer.post.id}}">
 			{{answer.answer}}
+			</div>
+			<div class="writerwrap" style="position:relative; left:70%">
+				<img class="thumb" data-username="{{answer.writer.username}}"/>
+				<div class="writerinfo">Answer by <br/>{{answer.writer.first_name}} {{answer.writer.last_name}}</div>
 			</div>
 		</div>
 			<div class="relques"></div>
