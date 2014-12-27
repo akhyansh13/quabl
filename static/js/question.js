@@ -2,11 +2,9 @@ $(document).ready(function(){
 
 	$('.footer').hide();
 
-	var scroll_arr = [0]
-
 	window.numansdisp = 0;
 
-	var lastscrolltop = 0;
+	var scrolltop = 0;
 
 	var answerno = 1;
 
@@ -287,6 +285,19 @@ $(document).ready(function(){
 		$(".container").show();
 		$(".header").show();
 	},1000);
+
+	$(window).on("scroll", function(){
+		var scrolltop = $(window).scrollTop();
+		var cached_css = ' ';
+		if(scrolltop >= $(".nthanswer").offset().top-40){
+			cached_css = $("#fixedpane").attr("style");
+			$("#fixedpane").css({position: "fixed", top:90, left:"62%"});
+			$("#fixedpane").css("min-width", "18%")
+		}
+		else{
+			$("#fixedpane").attr("style", cached_css);
+		}
+	});
 }); //document.ready close.
 
 function simpler_cache(input){
@@ -336,8 +347,11 @@ function clickonhighlight(highlight){
 
 		highlight.closest(".nthanswer").find(".rques").each(function() {
 			highlightid = $(this).attr('class').split('hid-')[1].split(" ")[0];
-			if (highlightid != h_id) {
-				$(this).hide();
+			if (highlightid == h_id) {
+				$("#fixedpane").append($(this).clone().html()+'<br/>');
+			}
+			else{
+				$(this).remove();
 			}
 		});
 
@@ -347,7 +361,6 @@ function clickonhighlight(highlight){
 				$(this).hide();
 			}
 		});
-
 
 		highlight_parent = $this.closest(".answer");
 		var quabl_text = $this.data('text');
