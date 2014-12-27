@@ -145,6 +145,7 @@ textarea {
 .ql-container{
   background-color: #FFFFFF;
   border:1px solid lightgray;
+  word-wrap:break-word;
 }
 
 #toolbar{
@@ -175,9 +176,7 @@ textarea {
   font-size:16pt;
   padding-bottom:30px;
 }
-.viewcontext,
-.numanswers,
-.author{
+.viewcontext{
   font-size:14pt;
 }
 
@@ -193,27 +192,20 @@ textarea {
   position:absolute;
   right:0;
   top:35px;
-  border-bottom:solid 1px #C0C0C0;
-  padding-left:10px;
+  display:none;
 }
+
 .shortquespane{
   font-size:15pt;
   font-weight:bold;
   position:fixed;
 }
+
 .answer{
   margin-bottom:10px;
+  text-align:justify;
 }
-.prev{
-  float:left;
-  bottom: 0px;
-  font-size:15pt;
-}
-.next{
-  float:right;
-  bottom: 0px;
-  font-size:15pt;
-}
+
 .quabl_full{
   border-radius:12px;
   background-color: #FFA500;
@@ -239,16 +231,16 @@ textarea {
   position:relative;
   width:100%;
   margin-bottom:40px;
+  border-bottom: solid 1px #C0C0C0;
 }
 
 .numanswers{
   position:relative;
-  border-bottom:1px solid #C0C0C0;
-  padding-right:10px;
 }
 
 .numjumpwrapper{
   position:relative;
+  font-size:12pt;
 }
 
 .clicked{
@@ -294,7 +286,7 @@ textarea {
 
 .writerinfo, .author{
   font-size:9pt;
-  color:gray;
+  color:#333;
 }
 
 #loaddot{
