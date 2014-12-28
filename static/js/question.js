@@ -4,6 +4,8 @@ $(document).ready(function(){
 
 	window.numansdisp = 0;
 
+	var answer_arr = [0];
+
 	var scrolltop = 0;
 
 	var answerno = 1;
@@ -11,6 +13,8 @@ $(document).ready(function(){
 	window.onehview = false;
 
 	var selectmode = false;
+
+	window.highclick = false;
 
 	$(document).mouseup(function(){
 		if(getSelectionHtml() != ''){
@@ -52,25 +56,43 @@ $(document).ready(function(){
 	});
 
 	$(document).on("click", function(){
-		if(window.onehview){
-			highlight_parent.empty().append(simpler_html_cache);
-			window.onehview = false;
-			var conthigh = ' ';
-			$(".highlight").each(function(){
-				if($(this).data('id')==window.highclicked){
-					if($(this).closest(".context").length !=0){
-						$('.cques').show();
-					}
-					else{
-						$('.rques').show();
-					}
+
+		$.when(ifclickonhighlight()).then(function(){
+
+			if(!(window.highclick)){
+
+				if(window.onehview){
+
+					$("#fixedpane .rques").remove();
+					$(".instruct").show();
+
+					highlight_parent.empty().append(simpler_html_cache);
+
+					$(".highlight").show();
+
+					window.onehview = false;
+
+					var conthigh = ' ';
+
+					$(".highlight").each(function(){
+
+						if($(this).data('id')==window.highclicked){
+
+							if($(this).closest(".context").length !=0){
+
+								$('.cques').show();
+							}
+						}
+					});
 				}
-			});
-		}
+			}
+		});
+
 	});
 
 	$(document).on("click", ".viewcontext", function(){
 		$('.mainques').hide();
+		$("#fixedpane").hide();
 		$(this).hide();
 		$("#upperwrapper").hide();
 		$(".nthanswer").hide();
@@ -192,6 +214,7 @@ $(document).ready(function(){
 		$(this).hide();
 		$("#bull").hide();
 		$(".jumptotext").hide();
+		$("#fixedpane").hide();
 	});
 
 	$("#anscountf").click(function(){
@@ -202,6 +225,7 @@ $(document).ready(function(){
 		$(".showquill").show();
 		$("#bull").show();
 		$(".jumptotext").show();
+		$("#fixedpane").show();
 	})
 
 	$('.ql-btn').not('.ql-image').click(function(){		//Color and style retention when B, I or U active.
@@ -284,6 +308,10 @@ $(document).ready(function(){
 		$("#loaddot").remove();
 		$(".container").show();
 		$(".header").show();
+		$(".answer").each(function(){
+			answer_arr.push($(this).data("id") + "<-- Answer starts after this. -->" + $("#empty").append($(this).clone()).html());
+			$("#empty").empty();
+		});
 	},1000);
 
 	$(window).on("scroll", function(){
@@ -292,12 +320,14 @@ $(document).ready(function(){
 		if(scrolltop >= $(".nthanswer").offset().top-40){
 			cached_css = $("#fixedpane").attr("style");
 			$("#fixedpane").css({position: "fixed", top:90, left:"62%"});
-			$("#fixedpane").css("min-width", "18%")
+			$("#fixedpane").css("width", "18%")
+			$(".triangle").css({"left":"-21px"});
 		}
 		else{
 			$("#fixedpane").attr("style", cached_css);
 		}
 	});
+
 }); //document.ready close.
 
 function simpler_cache(input){
@@ -339,7 +369,11 @@ function clearSelection() {
 function clickonhighlight(highlight){
 	$this = highlight;
 
+	$("#fixedpane .rques").remove();
+
 	window.highclicked = highlight.data("id");
+
+	$(".instruct").hide();
 
 	$.when(simpler_cache($this.closest(".answer"))).then(function(){
 
@@ -348,10 +382,9 @@ function clickonhighlight(highlight){
 		highlight.closest(".nthanswer").find(".rques").each(function() {
 			highlightid = $(this).attr('class').split('hid-')[1].split(" ")[0];
 			if (highlightid == h_id) {
-				$("#fixedpane").append($(this).clone().html()+'<br/>');
-			}
-			else{
-				$(this).remove();
+				var rqueshtml = $("#rquesdump").append($(this).clone()).html();
+				$("#fixedpane").append(rqueshtml);
+				$("#rquesdump").empty();
 			}
 		});
 
@@ -365,6 +398,7 @@ function clickonhighlight(highlight){
 		highlight_parent = $this.closest(".answer");
 		var quabl_text = $this.data('text');
 		$this.closest(".answer").find(".highlight").not($this).remove();
+		$(".highlight").hide();
 		var simpler_html = $this.closest(".answer").html();
 		var h_html = $('<div>').append($this.clone()).html();
 		var h_html_dummy = h_html.replace('class="highlight"', 'class="highlight_dummy"');
@@ -480,4 +514,16 @@ function blink(selector){
 			blink(this);
 		});
 	});
+}
+
+function ifclickonhighlight(){
+	window.highclick = false;
+	var clickdefer = $.Deferred();
+	$(document).on('click', '.highlight', function(){
+		window.highclick = true;
+	});
+	setTimeout(function(){
+		clickdefer.resolve();
+	},5);
+	return clickdefer;
 }

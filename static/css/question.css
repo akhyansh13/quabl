@@ -305,11 +305,12 @@ textarea {
 
 #fixedpane{
   float:right;
-  min-width:30%;
+  width:30%;
   text-align:right;
   min-height: 100px;
   border-left:solid 2px #FFA500;
   position:relative;
+  padding-left:10px;
 }
 
 .triangle{
@@ -320,6 +321,6 @@ textarea {
   border-top:solid 10px #FFFFFF;
   border-bottom:solid 10px #FFFFFF;
   position:absolute;
-  left:-23px;
+  left:-22px;
   top:40%;
 }
