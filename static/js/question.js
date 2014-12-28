@@ -312,6 +312,17 @@ $(document).ready(function(){
 			answer_arr.push($(this).data("id") + "<-- Answer starts after this. -->" + $("#empty").append($(this).clone()).html());
 			$("#empty").empty();
 		});
+		if(parseInt($("#anscounter").html())==0){
+			$(".quilleditor").show();
+			$(".nthanswer").hide();
+			$("#anscounti").hide();
+			$("#anscountf").show();
+			$(this).hide();
+			$("#bull").hide();
+			$(".jumptotext").hide();
+			$("#fixedpane").hide();
+			$("#numjumwrapper").html("View 0 Answers");
+		}
 	},1000);
 
 	$(window).on("scroll", function(){
