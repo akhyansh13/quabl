@@ -19,7 +19,13 @@ $(document).ready(function(){
 	var onehview = false;
 
 	$(".addpostbtn").click(function(){
-		var txt = '<p>' + $(".contextbox").val() + '</p>';
+		var answer_html = editor.getHTML();
+		$("#empty").append(answer_html);
+		$("#empty").find("*").not("b,u,i").each(function(){
+			$(this).replaceWith(this.innerHTML);
+		});
+		var txt = $("#empty").html();
+		$("#empty").empty();;
 		$.get(('/addpost/'), {txt:txt}, function(data){
 			window.location = '/context/' + data + '/';
 		});
@@ -30,12 +36,12 @@ $(document).ready(function(){
 	});
 
 
-	$(document).keyup(function(){
-		if (!$(".contextbox").val()) {
-	    	$(".addpostbtn").attr("disabled", "disabled");
+	$(document).keyup(function(){				//Controls the deactivation/activation of the Add Answer button.
+		if (!(editor.getText().trim())) {
+			$(".addpostbtn").attr("disabled", "true");
 		}
-		else {
-	    $(".addpostbtn").removeAttr("disabled");
+		else{
+			$(".addpostbtn").removeAttr("disabled");
 		}
 	});
 

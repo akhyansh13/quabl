@@ -139,15 +139,25 @@ textarea {
 
 .ql-container{
   background-color: #FFFFFF;
-  border:solid;
+  border:1px solid lightgray;
+  word-wrap:break-word;
 }
 
-.ql-toolbar{
-  padding-bottom:5px;
+#toolbar{
+  padding-bottom:0px;
 }
 
 .ql-editor{
-  height: 300px;
+  height: 200px;
+}
+
+.ql-btn,
+.ql-btn:hover{
+  border-radius:0px;
+  font-size:13pt;
+  border-color:#FFFFFF;
+  position:relative;
+  top:1px;
 }
 
 .preview{

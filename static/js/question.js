@@ -130,7 +130,12 @@ $(document).ready(function(){
 		//var simpler_textarea_id = 'simp'+ simpler_id;
 		var qid = $(this).attr('id');
 		var answer_html = editor.getHTML();
-		var simpler_text = $('#empty').append('<p>'+ answer_html +'</p>').text();
+		$('#empty').append(answer_html);
+		$("#empty").find("*").not("b,u,i").each(function(){
+			$(this).replaceWith(this.innerHTML);
+		});
+		var simpler_text = $("#empty").html();
+		$("#empty").empty();
 		$.get(('/makesimpler/'),{qid:qid, simpler_text:simpler_text,}, function(){
 			uri = '/question/' + qid;
 				window.location.href = uri;
