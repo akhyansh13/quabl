@@ -174,7 +174,8 @@ textarea {
 }
 .mainques{
   font-size:16pt;
-  padding-bottom:30px;
+  padding-bottom:5px;
+  padding-top:5px;
 }
 .viewcontext{
   font-size:14pt;
