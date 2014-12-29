@@ -530,6 +530,9 @@ function blink(selector){
 function ifclickonhighlight(){
 	window.highclick = false;
 	var clickdefer = $.Deferred();
+	$(document).on('click', '.rques', function(){
+		window.highclick = true;
+	});
 	$(document).on('click', '.highlight', function(){
 		window.highclick = true;
 	});
