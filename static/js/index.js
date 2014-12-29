@@ -21,7 +21,7 @@ $(document).ready(function(){
 	$(".addpostbtn").click(function(){
 		var answer_html = editor.getHTML();
 		$("#empty").append(answer_html);
-		$("#empty").find("*").not("b,u,i").each(function(){
+		$("#empty").find("*").not("b,u,i,img,a").each(function(){
 			$(this).replaceWith(this.innerHTML);
 		});
 		var txt = $("#empty").html();
@@ -199,4 +199,9 @@ function blink(selector){
 			blink(this);
 		});
 	});
+}
+
+function placeholder(phstring){
+	$(".ql-line").remove();
+	$("#ql-editor-1").append('<div class="ql-line" id="ql-line-1" style="color:#C0C0C0;">'+ phstring + '</div>')
 }
