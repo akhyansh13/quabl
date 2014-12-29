@@ -248,7 +248,7 @@ textarea {
 }
 
 .withwriter{
-  width:70%;
+  width:100%;
   padding-right:10px;
 }
 
@@ -323,4 +323,9 @@ textarea {
   position:absolute;
   left:-22px;
   top:40%;
+}
+
+.answer-area{
+  float:left;
+  width:70%;
 }
