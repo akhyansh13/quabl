@@ -220,6 +220,7 @@ $(document).ready(function(){
 		$("#bull").hide();
 		$(".jumptotext").hide();
 		$("#fixedpane").hide();
+		$("#upperwrapper").css("margin-bottom", "10px")
 	});
 
 	$("#anscountf").click(function(){
@@ -231,6 +232,7 @@ $(document).ready(function(){
 		$("#bull").show();
 		$(".jumptotext").show();
 		$("#fixedpane").show();
+		$("#upperwrapper").css("margin-bottom", "40px")
 	})
 
 	$('.ql-btn').not('.ql-image').click(function(){		//Color and style retention when B, I or U active.
@@ -321,6 +323,7 @@ $(document).ready(function(){
 			$(".jumptotext").hide();
 			$("#fixedpane").hide();
 			$("#numjumwrapper").html("View 0 Answers");
+			$("#upperwrapper").css("margin-bottom", "10px")
 		}
 	},1000);
 
@@ -413,7 +416,7 @@ function clickonhighlight(highlight){
 		$(".highlight").hide();
 		var simpler_html = $this.closest(".answer").html();
 		var h_html = $('<div>').append($this.clone()).html();
-		var h_html_dummy = h_html.replace('class="highlight"', 'class="highlight_dummy"');
+		var h_html_dummy = h_html.replace('class="highlight"', 'class="highlight_dummy"').replace("none", ' ');
 		var new_simpler_html = simpler_html.replace(h_html + quabl_text, '<span class="quabl_full">' + h_html_dummy + quabl_text + '</span>');
 		$this.closest(".answer").empty().append(new_simpler_html);
 
