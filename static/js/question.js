@@ -302,12 +302,6 @@ $(document).ready(function(){
 		}
 	});
 
-	$('.relques').each(function(){
-		if(!($(this).html())){
-			$(this).html("<div class='instruct'>No questions yet. Select a part of the answer to add a new question.</div>")
-		}
-	});
-
 	blink("#loaddot");
 	setTimeout(function(){
 		$("#loaddot").remove();
@@ -333,14 +327,16 @@ $(document).ready(function(){
 	$(window).on("scroll", function(){
 		var scrolltop = $(window).scrollTop();
 		var cached_css = ' ';
-		if(scrolltop >= $(".nthanswer").offset().top-40){
-			cached_css = $("#fixedpane").attr("style");
-			$("#fixedpane").css({position: "fixed", top:90, left:"62%"});
-			$("#fixedpane").css("width", "18%")
-			$(".triangle").css({"left":"-21px"});
-		}
-		else{
-			$("#fixedpane").attr("style", cached_css);
+		if($("#fixedpane").is(":visible")){
+			if(scrolltop >= $(".nthanswer").offset().top-40){
+				cached_css = $("#fixedpane").attr("style");
+				$("#fixedpane").css({position: "fixed", top:90, left:"62%"});
+				$("#fixedpane").css("width", "18%")
+				$(".triangle").css({"left":"-21px"});
+			}
+			else{
+				$("#fixedpane").attr("style", cached_css);
+			}
 		}
 	});
 
