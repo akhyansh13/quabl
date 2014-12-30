@@ -220,7 +220,7 @@ $(document).ready(function(){
 		$("#bull").hide();
 		$(".jumptotext").hide();
 		$("#fixedpane").hide();
-		$("#upperwrapper").css("margin-bottom", "10px")
+		$("#upperwrapper").css("margin-bottom", "10px");
 	});
 
 	$("#anscountf").click(function(){
@@ -232,7 +232,7 @@ $(document).ready(function(){
 		$("#bull").show();
 		$(".jumptotext").show();
 		$("#fixedpane").show();
-		$("#upperwrapper").css("margin-bottom", "40px")
+		$("#upperwrapper").css("margin-bottom", "40px");
 	})
 
 	$('.ql-btn').not('.ql-image').click(function(){		//Color and style retention when B, I or U active.
@@ -323,7 +323,7 @@ $(document).ready(function(){
 			$(".jumptotext").hide();
 			$("#fixedpane").hide();
 			$("#numjumwrapper").html("View 0 Answers");
-			$("#upperwrapper").css("margin-bottom", "10px")
+			$("#upperwrapper").css("margin-bottom", "10px");
 		}
 	},1000);
 
