@@ -330,3 +330,10 @@ textarea {
   float:left;
   width:70%;
 }
+
+::selection {
+  background:rgba(255, 165, 0, 0.33);
+}
+::-moz-selection {
+  background: rgba(255, 165, 0, 0.33);
+}

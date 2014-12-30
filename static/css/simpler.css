@@ -163,3 +163,10 @@ textarea {
 .preview{
   display: none;
 }
+
+::selection {
+  background:rgba(255, 165, 0, 0.33);
+}
+::-moz-selection {
+  background: rgba(255, 165, 0, 0.33);
+}
