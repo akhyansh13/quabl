@@ -146,6 +146,7 @@ textarea {
   background-color: #FFFFFF;
   border:1px solid lightgray;
   word-wrap:break-word;
+  font-size:12pt;
 }
 
 #toolbar{
@@ -201,23 +202,6 @@ textarea {
 .answer{
   margin-bottom:10px;
   text-align:justify;
-}
-
-.quabl_full{
-  border-radius:12px;
-  background-color: rgba(255, 165, 0, 0.60);
-  padding-right:6px;
-  color:#FFFFFF;
-  padding-left:6px;
-}
-
-.highlight_dummy{
-  display: inline-block;
-  border-radius: 50%;
-  width: 12px;
-  height: 12px;
-  background-color: rgba(255, 165, 0, 0.60);
-  margin-right: 3px;
 }
 
 .glyphicon-chevron-down{
@@ -329,11 +313,4 @@ textarea {
 .answer-area{
   float:left;
   width:70%;
-}
-
-::selection {
-  background:rgba(255, 165, 0, 0.33);
-}
-::-moz-selection {
-  background: rgba(255, 165, 0, 0.33);
 }
