@@ -68,7 +68,7 @@ $(document).ready(function(){
 
 					highlight_parent.empty().append(simpler_html_cache);
 
-					$(".highlight").show();
+					$(".highlight").css("visibility", "visible");
 
 					window.onehview = false;
 
@@ -382,6 +382,7 @@ function clearSelection() {
 }
 
 function clickonhighlight(highlight){
+
 	$this = highlight;
 
 	$("#fixedpane .rques").remove();
@@ -412,8 +413,7 @@ function clickonhighlight(highlight){
 
 		highlight_parent = $this.closest(".answer");
 		var quabl_text = $this.data('text');
-		$this.closest(".answer").find(".highlight").not($this).remove();
-		$(".highlight").hide();
+		$(".highlight").not($this).css("visibility", "collapse");
 		var simpler_html = $this.closest(".answer").html();
 		var h_html = $('<div>').append($this.clone()).html();
 		var h_html_dummy = h_html.replace('class="highlight"', 'class="highlight_dummy"').replace("none", ' ');

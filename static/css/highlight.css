@@ -21,9 +21,8 @@
 .quabl_full{
   border-radius:12px;
   background-color: rgba(255, 255, 0, 0.2);
-  padding-right:6px;
   color:#555;
-  padding-left:6px;
+  z-index:5;
 }
 
 .highlight,
