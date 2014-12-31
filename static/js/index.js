@@ -20,12 +20,12 @@ $(document).ready(function(){
 
 	$(".addpostbtn").click(function(){
 		var answer_html = editor.getHTML();
-		$("#empty").append(answer_html);
-		$("#empty").find("*").not("b,u,i,img,a").each(function(){
-			$(this).replaceWith(this.innerHTML);
+		$('#empty').append(answer_html);
+		$("#empty").find("*").not("b,u,i,a,img").each(function(){
+			striptag_jq($(this));
 		});
 		var txt = $("#empty").html();
-		$("#empty").empty();;
+		$("#empty").empty();
 		$.get(('/addpost/'), {txt:txt}, function(data){
 			window.location = '/context/' + data + '/';
 		});
@@ -204,4 +204,8 @@ function blink(selector){
 function placeholder(phstring){
 	$(".ql-line").remove();
 	$("#ql-editor-1").append('<div class="ql-line" id="ql-line-1" style="color:#C0C0C0;">'+ phstring + '</div>')
+}
+
+function striptag_jq(element){
+	element.contents().unwrap();
 }

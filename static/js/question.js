@@ -131,8 +131,8 @@ $(document).ready(function(){
 		var qid = $(this).attr('id');
 		var answer_html = editor.getHTML();
 		$('#empty').append(answer_html);
-		$("#empty").find("*").not("b,u,i").each(function(){
-			$(this).replaceWith(this.innerHTML);
+		$("#empty").find("*").not("b,u,i,a,img").each(function(){
+			striptag_jq($(this));
 		});
 		var simpler_text = $("#empty").html();
 		$("#empty").empty();
@@ -236,40 +236,44 @@ $(document).ready(function(){
 	})
 
 	$('.ql-btn').not('.ql-image').click(function(){		//Color and style retention when B, I or U active.
-		if($(this).hasClass('clicked')){
-			$(this).removeClass('clicked');
-		}
-		else{
-			$(this).addClass('clicked');
-		}
-		if($(this).hasClass('ql-bold')){
-			if($(this).hasClass("cbold")){
-				$(this).removeClass("cbold");
-				$(this).html("B");
+
+		if(getSelectionHtml() == ''){
+
+			if($(this).hasClass('clicked')){
+				$(this).removeClass('clicked');
 			}
 			else{
-				$(this).addClass("cbold");
-				$(this).html("<b>B</b>");
+				$(this).addClass('clicked');
 			}
-		}
-		if($(this).hasClass('ql-italic')){
-			if($(this).hasClass("cita")){
-				$(this).removeClass("cita");
-				$(this).html("I");
+			if($(this).hasClass('ql-bold')){
+				if($(this).hasClass("cbold")){
+					$(this).removeClass("cbold");
+					$(this).html("B");
+				}
+				else{
+					$(this).addClass("cbold");
+					$(this).html("<b>B</b>");
+				}
 			}
-			else{
-				$(this).addClass("cita");
-				$(this).html("<i>I</i>");
+			if($(this).hasClass('ql-italic')){
+				if($(this).hasClass("cita")){
+					$(this).removeClass("cita");
+					$(this).html("I");
+				}
+				else{
+					$(this).addClass("cita");
+					$(this).html("<i>I</i>");
+				}
 			}
-		}
-		if($(this).hasClass('ql-underline')){
-			if($(this).hasClass("cund")){
-				$(this).removeClass("cund");
-				$(this).html("U");
-			}
-			else{
-				$(this).addClass("cund");
-				$(this).html("<u>U</u>");
+			if($(this).hasClass('ql-underline')){
+				if($(this).hasClass("cund")){
+					$(this).removeClass("cund");
+					$(this).html("U");
+				}
+				else{
+					$(this).addClass("cund");
+					$(this).html("<u>U</u>");
+				}
 			}
 		}
 	});
@@ -544,4 +548,20 @@ function ifclickonhighlight(){
 		clickdefer.resolve();
 	},5);
 	return clickdefer;
+}
+
+function striptag_js(tag){
+	var b = document.getElementsByTagName(tag);
+
+	while(b.length) {
+		var parent = b[ 0 ].parentNode;
+		while( b[ 0 ].firstChild ) {
+			parent.insertBefore(  b[ 0 ].firstChild, b[ 0 ] );
+		}
+		parent.removeChild( b[ 0 ] );
+	}
+}
+
+function striptag_jq(element){
+	element.contents().unwrap();
 }
