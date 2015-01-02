@@ -191,10 +191,12 @@ def user_logout(request):
 
     return HttpResponseRedirect('/')
 
-def define(request, post_id, simpler_id, answer_part, quabl):
+def define(request, post_id, simpler_id, answer_part, quabl, cques, highlightx):
     context = RequestContext(request)
 
     answer_part = answer_part.replace("xqmx", "?")
+
+    cques = cques.replace('xqmx', '?')
 
     post_id = int(post_id)
     simpler_id = int(simpler_id)
@@ -203,51 +205,28 @@ def define(request, post_id, simpler_id, answer_part, quabl):
     if answer_part == 'undefined':
         answer_part = ''
 
-    highlightx = answer_part.split("curr_highlight")[1].split("</span>")[1];     #Extracts the highlight.
-
-    context_dict = {'highlight':highlight}
-    context_dict['quabl'] = quabl
-
     answer_part = answer_part.replace('<span id="blankspace"></span></span>', " ")
     answer_part = answer_part.replace('<span id="noblankspace"></span></span>', "")
     answer_part = answer_part.replace('<span class="highlight-wrapper">&nbsp;', " ")
     answer_part = answer_part.replace('<span class="highlight-wrapper">', "")
 
-    context_dict['answer_part']=answer_part
     post = Post.objects.get(id=post_id)
     simpler = Simpler.objects.get(id=simpler_id)
-    context_dict['post']=post
-    context_dict['simpler']=simpler
 
-    if request.method == 'POST':
-        form = HighlightDesc(request.POST)
-        if form.is_valid():
-            f = form.save(commit=False)
-            h = highlight.objects.get_or_create(highlight=highlightx, highlight_parent=simpler)[0]
+    h = highlight.objects.get_or_create(highlight=highlightx, highlight_parent=simpler)[0]
 
-            f.highlight = h
-            f.req_by = request.user
-            simpler_content = f.question
+    f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, created = datetime.now(), question = cques)[0]
 
-            f.created = datetime.now()
-            f.save()
+    simpler.answer = answer_part.replace('curr_highlight','highlight').replace('<span class="quabl"><span class="highlight"', '<span class="highlight" data-id="' + str(h.id) + '"').replace(highlightx+'</span>', highlightx).replace(highlightx, quabl).replace('style="display: none;"></span>', '></span>')
 
-            simpler.answer = answer_part.replace('curr_highlight','highlight').replace('<span class="quabl"><span class="highlight"', '<span class="highlight" data-id="' + str(h.id) + '"').replace(highlightx+'</span>', highlightx).replace(highlightx, quabl).replace('style="display: none;"></span>', '></span>')
+    simpler.modified = datetime.now()
+    simpler.save()
 
-            simpler.modified = datetime.now()
-            simpler.save()
+    #question = highlightq.objects.get_or_create(highlight=f, question=f.description, created = datetime.now())
 
-            #question = highlightq.objects.get_or_create(highlight=f, question=f.description, created = datetime.now())
+    #return HttpResponseRedirect('/request/askforsimpler/postid:' + str(post_id) + ';simplerid:' + str(simpler_id) + ';')
 
-            #return HttpResponseRedirect('/request/askforsimpler/postid:' + str(post_id) + ';simplerid:' + str(simpler_id) + ';')
-            return HttpResponseRedirect('/question/'+str(f.id))
-    else:
-        form = HighlightDesc()
-
-    context_dict['post_id']=str(post_id)
-    context_dict['pid']=str(simpler_id)
-    context_dict['form']=form
-    return render_to_response('SimplerApp/define.html',context_dict,context)
+    return HttpResponse('success')
 
 def requestbyuser(request, category, description):
     context = RequestContext(request)

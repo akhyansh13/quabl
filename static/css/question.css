@@ -314,3 +314,14 @@ textarea {
   float:left;
   width:70%;
 }
+
+#contextquesbox{
+  border:solid 1px #C0C0C0;
+  width:100%;
+  height:100px;
+  margin-top:10px;
+}
+
+.highlight-wrapper{
+  background-color:rgba(255, 255, 0, 0.2);
+}

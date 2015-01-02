@@ -17,20 +17,22 @@ $(document).ready(function(){
 	window.highclick = false;
 
 	$(document).mouseup(function(){
+		window.quabl_html = getSelectionHtml();
 		if(getSelectionHtml() != ''){
 			if($('.highlight')[0]){								//This if-else takes care of the context.html also.
 			$(".highlight").hide('fast', function(){
 				if($(window.getSelection().focusNode.parentNode).closest('.answer').length != 0){
-						$(".reqsimp").hide();
-						markSelection();
+					$.when(replaceanswer()).then(function(){
+						$("#quesboxwrapper").show();
+						$("#contextquesbox").focus();
+					});
 				}
 			});
 			selectmode = true;
 			}
 			else{
 				if($(window.getSelection().focusNode.parentNode).closest('.answer').length != 0){
-					$(".reqsimp").hide();
-					markSelection();
+
 				}
 			}
 		}
@@ -40,6 +42,13 @@ $(document).ready(function(){
 			$(".reqsimp").hide();
 			clearSelection();
 		}
+	});
+
+	$('.askcontques').click(function(){
+		window.uriarr[4] = window.uriarr[4] + '/cques/' +  $("#contextquesbox").val().replace('?', 'xqmx') + '/highlight/' + window.highlight;
+		$.get((window.uriarr[4]), function(data){
+			location.reload();
+		});
 	});
 
 	$(".answer").each(function(){
@@ -141,75 +150,6 @@ $(document).ready(function(){
 				window.location.href = uri;
 		});
 	});
-
-	$(document).on('click', '.reqsimp', function(){
-			$reqsimp = $(this);
-			var quabl_html = getSelectionHtml();
-			var final_span = " ";
-			var simpler_id = $(window.getSelection().focusNode.parentNode).closest('.answer').data("id");
-			var post_id = $(window.getSelection().focusNode.parentNode).closest('.answer').data("text");
-			var selection = window.getSelection().getRangeAt(0);
-			var selectedText = selection.extractContents();
-			var highlight = String(selectedText.textContent);
-			var highlight_arr = highlight.split("");
-			var firstel = highlight_arr[0];
-			var lastel = highlight_arr[highlight_arr.length-1];
-			highlight = highlight.trim();
-			trimmed_highlight_arr = highlight.split("");
-			var req_span = '<span class="quabl"><span class="curr_highlight" data-text="'+ highlight +'"></span>' + highlight + '</span>';
-			if(firstel==" "){				//Fixing the Quabl-spacing problem.
-				final_span = '<span class="highlight-wrapper">&nbsp;' + req_span;
-			}
-			else{
-				final_span = '<span class="highlight-wrapper">' + req_span;
-			}
-			if(lastel==" "){
-				final_span = final_span + '<span id="blankspace"></span></span>';
-			}
-			else{
-				final_span = final_span + '<span id="noblankspace"></span></span>';
-			}
-			var span = $(final_span);
-			//The new highlight has class curr_highlight and the new checkbox has class curr_checkedhigh. They have related CSS.
-			selection.insertNode(span[0]);
-
-			if (selectedText.childNodes[1] != undefined){
-				console.log(selectedText.childNodes[1]);
-				$(selectedText.childNodes[1]).remove();
-			}
-
-			var answer_part = $(window.getSelection().focusNode.parentNode).closest('.answer').html().split('?').join('xqmx');		//the answer part of the highlight which will have the highlight
-
-			uri = '/define/'+ post_id + '/' + simpler_id +'/ans/'+ answer_part + '/quabl/' + quabl_html + '/';
-
-			window.location = uri;
-	});
-
-	/*$(document).on('scroll', function(){				//The Scroll.
-			var scrolltop = $(document).scrollTop();
-
-			if(scrolltop == 0){
-				scroll_arr = [0];
-			}
-
-			scroll_arr.push(scrolltop);
-
-			if(window.numansdisp == 0 && ifallpositive(scroll_arr) && scrolltop != 0){
-				window.numansdisp = 1;
-				$("html").height("100%");
-				$(".quilleditor").hide();
-				$('.jumptotext').html("ALL QUESTIONS ON THIS ANSWER <span class='glyphicon glyphicon-chevron-down'></span>")
-				var nahtml_old = $('.numanswers').html();
-				$('.numanswers').html(String(window.numansdisp)+' of ' + nahtml_old);
-				$('.answer').not('.context').each(function(){
-						$(this).show();
-						$(this).parent().show();
-						$('.parent-' + $(this).data('id')).show();
-						$('.parent-' + $(this).data('id')).parent().show();
-				});
-			}
-			lastscrolltop = scrolltop;
-	}); */
 
 	$(".showquill").click(function(){
 		$(".quilleditor").show();
@@ -441,76 +381,6 @@ function clickonhighlight(highlight){
 	});
 }
 
-function markSelection() {
-    var markerTextChar = "\ufeff";
-    var markerTextCharEntity = "&#xfeff;";
-
-    var markerEl, markerId = "sel_" + new Date().getTime() + "_" + Math.random().toString().substr(2);
-
-    var selectionEl;
-
-    var sel, range;
-
-        if (document.selection && document.selection.createRange) {
-            // Clone the TextRange and collapse
-            range = document.selection.createRange().duplicate();
-            range.collapse(false);
-
-            // Create the marker element containing a single invisible character by creating literal HTML and insert it
-            range.pasteHTML('<span id="' + markerId + '" style="position: relative;">' + markerTextCharEntity + '</span>');
-            markerEl = document.getElementById(markerId);
-        } else if (window.getSelection) {
-            sel = window.getSelection();
-
-            if (sel.getRangeAt) {
-                range = sel.getRangeAt(0).cloneRange();
-            } else {
-                // Older WebKit doesn't have getRangeAt
-                range.setStart(sel.anchorNode, sel.anchorOffset);
-                range.setEnd(sel.focusNode, sel.focusOffset);
-
-                // Handle the case when the selection was selected backwards (from the end to the start in the
-                // document)
-                if (range.collapsed !== sel.isCollapsed) {
-                    range.setStart(sel.focusNode, sel.focusOffset);
-                    range.setEnd(sel.anchorNode, sel.anchorOffset);
-                }
-            }
-
-            range.collapse(false);
-
-            // Create the marker element containing a single invisible character using DOM methods and insert it
-            markerEl = document.createElement("span");
-            markerEl.id = markerId;
-            markerEl.appendChild( document.createTextNode(markerTextChar) );
-            range.insertNode(markerEl);
-        }
-
-        if (markerEl) {
-            // Lazily create element to be placed next to the selection
-            if (!selectionEl) {
-                selectionEl = document.createElement("button");
-                selectionEl.className = "btn btn-default reqsimp";
-                selectionEl.innerHTML = "Quabl This.";
-                selectionEl.style.position = "absolute";
-
-                document.body.appendChild(selectionEl);
-            }
-
-        var obj = markerEl;
-        var left = 0, top = 0;
-        do {
-            left += obj.offsetLeft;
-            top += obj.offsetTop;
-        } while (obj = obj.offsetParent);
-
-            selectionEl.style.left = left + "px";
-            selectionEl.style.top = top + "px";
-
-            markerEl.parentNode.removeChild(markerEl);
-        }
-}
-
 function ifallpositive(arr){		//Checks if all elements of an array are positive(Zero inclusive).
 	var j = 0;
 	while(j <= arr.length-1){
@@ -564,4 +434,62 @@ function striptag_js(tag){
 
 function striptag_jq(element){
 	element.contents().unwrap();
+}
+
+function replaceanswer(){
+
+	var repdefer = $.Deferred();
+
+	var final_span = " ";
+	var simpler_id = $(window.getSelection().focusNode.parentNode).closest('.answer').data("id");
+	var post_id = $(window.getSelection().focusNode.parentNode).closest('.answer').data("text");
+	var selection = window.getSelection().getRangeAt(0);
+	var selectedText = selection.extractContents();
+	var highlight = String(selectedText.textContent);
+	var highlight_arr = highlight.split("");
+	var firstel = highlight_arr[0];
+	var lastel = highlight_arr[highlight_arr.length-1];
+	highlight = highlight.trim();
+	trimmed_highlight_arr = highlight.split("");
+	var req_span = '<span class="quabl"><span class="curr_highlight" data-text="'+ highlight +'"></span>' + highlight + '</span>';
+	if(firstel==" "){				//Fixing the Quabl-spacing problem.
+		final_span = '<span class="highlight-wrapper">&nbsp;' + req_span;
+	}
+	else{
+		final_span = '<span class="highlight-wrapper">' + req_span;
+	}
+	if(lastel==" "){
+		final_span = final_span + '<span id="blankspace"></span></span>';
+	}
+	else{
+		final_span = final_span + '<span id="noblankspace"></span></span>';
+	}
+	var span = $(final_span);
+	//The new highlight has class curr_highlight and the new checkbox has class curr_checkedhigh. They have related CSS.
+
+	if(highlight.trim() != ''){
+	selection.insertNode(span[0]);
+}
+
+	if (selectedText.childNodes[1] != undefined){
+		console.log(selectedText.childNodes[1]);
+		$(selectedText.childNodes[1]).remove();
+	}
+
+	var answer_part = $(window.getSelection().focusNode.parentNode).closest('.answer').html().split('?').join('xqmx');		//the answer part of the highlight which will have the highlight
+
+	uri = '/define/'+ post_id + '/' + simpler_id +'/ans/'+ answer_part + '/quabl/' + window.quabl_html + '/';
+
+	setTimeout(function(){
+		repdefer.resolve();
+	}, 5);
+
+	window.uriarr = [post_id, simpler_id, answer_part, window.quabl_html, uri];
+
+	if(highlight.trim() != '' ){
+		window.highlight = highlight;
+	}
+
+
+	return repdefer;
 }
