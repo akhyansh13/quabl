@@ -21,7 +21,7 @@ $(document).ready(function(){
 		if(getSelectionHtml() != ''){
 			if($('.highlight')[0]){								//This if-else takes care of the context.html also.
 			$(".highlight").hide('fast', function(){
-				if($(window.getSelection().focusNode.parentNode).closest('.answer').length != 0){
+				if($(window.getSelection().getRangeAt(0).commonAncestorContainer).closest('.answer').length != 0){
 					$.when(replaceanswer()).then(function(){
 						$("#quesboxwrapper").show();
 						$("#contextquesbox").focus();
@@ -31,7 +31,7 @@ $(document).ready(function(){
 			selectmode = true;
 			}
 			else{
-				if($(window.getSelection().focusNode.parentNode).closest('.answer').length != 0){
+				if($(window.getSelection().getRangeAt(0).commonAncestorContainer).closest('.answer').length !== 0){
 
 				}
 			}
@@ -47,6 +47,7 @@ $(document).ready(function(){
 	$('.askcontques').click(function(){
 		window.uriarr[4] = window.uriarr[4] + '/cques/' +  $("#contextquesbox").val().replace('?', 'xqmx') + '/highlight/' + window.highlight;
 		$.get((window.uriarr[4]), function(data){
+			alert(data);
 			location.reload();
 		});
 	});
@@ -441,8 +442,8 @@ function replaceanswer(){
 	var repdefer = $.Deferred();
 
 	var final_span = " ";
-	var simpler_id = $(window.getSelection().focusNode.parentNode).closest('.answer').data("id");
-	var post_id = $(window.getSelection().focusNode.parentNode).closest('.answer').data("text");
+	var simpler_id = $(window.getSelection().getRangeAt(0).commonAncestorContainer).closest('.answer').data("id");
+	var post_id = $(window.getSelection().getRangeAt(0).commonAncestorContainer).closest('.answer').data("text");
 	var selection = window.getSelection().getRangeAt(0);
 	var selectedText = selection.extractContents();
 	var highlight = String(selectedText.textContent);
@@ -451,7 +452,7 @@ function replaceanswer(){
 	var lastel = highlight_arr[highlight_arr.length-1];
 	highlight = highlight.trim();
 	trimmed_highlight_arr = highlight.split("");
-	var req_span = '<span class="quabl"><span class="curr_highlight" data-text="'+ highlight +'"></span>' + highlight + '</span>';
+	var req_span = '<span class="curr_highlight" data-text="'+ highlight +'"></span>' + highlight;
 	if(firstel==" "){				//Fixing the Quabl-spacing problem.
 		final_span = '<span class="highlight-wrapper">&nbsp;' + req_span;
 	}
@@ -459,7 +460,7 @@ function replaceanswer(){
 		final_span = '<span class="highlight-wrapper">' + req_span;
 	}
 	if(lastel==" "){
-		final_span = final_span + '<span id="blankspace"></span></span>';
+		final_span = final_span + '<span id="blankspace">&nbsp;</span></span>';
 	}
 	else{
 		final_span = final_span + '<span id="noblankspace"></span></span>';
@@ -476,9 +477,9 @@ function replaceanswer(){
 		$(selectedText.childNodes[1]).remove();
 	}
 
-	var answer_part = $(window.getSelection().focusNode.parentNode).closest('.answer').html().split('?').join('xqmx');		//the answer part of the highlight which will have the highlight
+	var answer_part = $(window.getSelection().getRangeAt(0).commonAncestorContainer).closest('.answer').html().split('?').join('xqmx');		//the answer part of the highlight which will have the highlight
 
-	uri = '/define/'+ post_id + '/' + simpler_id +'/ans/'+ answer_part + '/quabl/' + window.quabl_html + '/';
+	uri = '/define/'+ post_id + '/' + simpler_id +'/ans/'+ answer_part + '/quabl/' + window.quabl_html;
 
 	setTimeout(function(){
 		repdefer.resolve();

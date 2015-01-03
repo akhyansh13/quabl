@@ -205,7 +205,7 @@ def define(request, post_id, simpler_id, answer_part, quabl, cques, highlightx):
     if answer_part == 'undefined':
         answer_part = ''
 
-    answer_part = answer_part.replace('<span id="blankspace"></span></span>', " ")
+    answer_part = answer_part.replace('<span id="blankspace">&nbsp;</span></span>', " ")
     answer_part = answer_part.replace('<span id="noblankspace"></span></span>', "")
     answer_part = answer_part.replace('<span class="highlight-wrapper">&nbsp;', " ")
     answer_part = answer_part.replace('<span class="highlight-wrapper">', "")
@@ -217,7 +217,7 @@ def define(request, post_id, simpler_id, answer_part, quabl, cques, highlightx):
 
     f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, created = datetime.now(), question = cques)[0]
 
-    simpler.answer = answer_part.replace('curr_highlight','highlight').replace('<span class="quabl"><span class="highlight"', '<span class="highlight" data-id="' + str(h.id) + '"').replace(highlightx+'</span>', highlightx).replace(highlightx, quabl).replace('style="display: none;"></span>', '></span>')
+    simpler.answer = answer_part.replace('curr_highlight','highlight').replace('<span class="highlight"', '<span class="highlight" data-id="' + str(h.id) + '"').replace(highlightx, quabl) #replace('style="display: none;"></span>', '></span>')
 
     simpler.modified = datetime.now()
     simpler.save()
@@ -226,7 +226,7 @@ def define(request, post_id, simpler_id, answer_part, quabl, cques, highlightx):
 
     #return HttpResponseRedirect('/request/askforsimpler/postid:' + str(post_id) + ';simplerid:' + str(simpler_id) + ';')
 
-    return HttpResponse('success')
+    return HttpResponse(answer_part)
 
 def requestbyuser(request, category, description):
     context = RequestContext(request)
