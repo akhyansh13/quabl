@@ -217,7 +217,7 @@ def define(request, post_id, simpler_id, answer_part, quabl, cques, highlightx):
 
     f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, created = datetime.now(), question = cques)[0]
 
-    simpler.answer = answer_part.replace('curr_highlight','highlight').replace('<span class="highlight"', '<span class="highlight" data-id="' + str(h.id) + '"').replace(highlightx, quabl) #replace('style="display: none;"></span>', '></span>')
+    simpler.answer = answer_part.replace('curr_highlight','highlight').replace('<span class="highlight"', '<span class="highlight" data-id="' + str(h.id) + '"').replace(highlightx, quabl).replace('display: none;', '')
 
     simpler.modified = datetime.now()
     simpler.save()

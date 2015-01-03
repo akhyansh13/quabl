@@ -3,7 +3,7 @@
   border-radius: 50%;
   width: 12px;
   height: 12px;
-  background-color: rgba(255, 165, 0, 0.60);
+  background-color: #FFC966;
   margin-right: 3px;
   cursor: hand;
   cursor: pointer;
@@ -14,13 +14,13 @@
   border-radius: 50%;
   width: 12px;
   height: 12px;
-  background-color: rgba(255, 165, 0, 0.60);
+  background-color: #FFC966;
   margin-right: 3px;
 }
 
 .quabl_full{
   border-radius:12px;
-  background-color: rgba(255, 255, 0, 0.2);
+  background-color: #FFFFCC;
   color:#555;
   z-index:5;
 }
@@ -40,8 +40,8 @@
 }
 
 ::selection {
-  background:rgba(255, 255, 0, 0.2);
+  background:#FFFFCC;
 }
 ::-moz-selection {
-  background: rgba(255, 255, 0, 0.2);
+  background: #FFFFCC;
 }
