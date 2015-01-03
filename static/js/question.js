@@ -47,7 +47,6 @@ $(document).ready(function(){
 	$('.askcontques').click(function(){
 		window.uriarr[4] = window.uriarr[4] + '/cques/' +  $("#contextquesbox").val().replace('?', 'xqmx') + '/highlight/' + window.highlight;
 		$.get((window.uriarr[4]), function(data){
-			alert(data);
 			location.reload();
 		});
 	});
