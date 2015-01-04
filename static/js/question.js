@@ -10,24 +10,36 @@ $(document).ready(function(){
 
 	var answerno = 1;
 
-	window.onehview = false;
+	window.onehview = false;     //True if a highlight is expanded.
 
-	var selectmode = false;
+	var selectmode = false;			//False if nothings been selected and true otherwise.
 
-	window.highclick = false;
+	window.highclick = false;			//True if a highlight is clicked.
 
 	$(document).mouseup(function(){
 		window.quabl_html = getSelectionHtml();
 		if(getSelectionHtml() != ''){
 			if($('.highlight')[0]){								//This if-else takes care of the context.html also.
-			$(".highlight").hide('fast', function(){
+
 				if($(window.getSelection().getRangeAt(0).commonAncestorContainer).closest('.answer').length != 0){
-					$.when(replaceanswer()).then(function(){
-						$("#quesboxwrapper").show();
-						$("#contextquesbox").focus();
+
+					highlight_parent = $(window.getSelection().getRangeAt(0).commonAncestorContainer).closest('.answer');
+
+					$.when(simpler_cache($(window.getSelection().getRangeAt(0).commonAncestorContainer).closest('.answer'))).then(function(){
+
+						$(".highlight").hide('fast', function(){
+
+							$.when(replaceanswer()).then(function(){
+
+								$("#quesboxwrapper").show();
+								$("#contextquesbox").focus();
+								window.onehview = true;
+
+
+							});
 					});
-				}
 			});
+		}
 			selectmode = true;
 			}
 			else{
@@ -73,7 +85,6 @@ $(document).ready(function(){
 				if(window.onehview){
 
 					$("#fixedpane .rques").remove();
-					$(".instruct").show();
 
 					highlight_parent.empty().append(simpler_html_cache);
 
@@ -294,7 +305,7 @@ function simpler_cache(input){
 	simpler_html_cache = input.html();
 	setTimeout(function(){
 		cache_defer.resolve();
-	},10);
+	},5);
 	return cache_defer;
 }
 
