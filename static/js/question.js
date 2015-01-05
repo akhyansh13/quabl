@@ -27,10 +27,11 @@ $(document).ready(function(){
 
 					$.when(simpler_cache($(window.getSelection().getRangeAt(0).commonAncestorContainer).closest('.answer'))).then(function(){
 
-						$(".highlight").hide('fast', function(){
+						$.when(hidehighlights()).then(function(){
 
 							$.when(replaceanswer()).then(function(){
 
+								$(".highlight").hide('fast');
 								$("#quesboxwrapper").show();
 								$("#contextquesbox").focus();
 								window.onehview = true;
@@ -86,9 +87,9 @@ $(document).ready(function(){
 
 					$("#fixedpane .rques").remove();
 
-					highlight_parent.empty().append(simpler_html_cache);
-
 					$(".highlight").css("visibility", "visible");
+
+					highlight_parent.empty().append(simpler_html_cache);
 
 					window.onehview = false;
 
@@ -341,10 +342,9 @@ function clickonhighlight(highlight){
 	$this = highlight;
 
 	$("#fixedpane .rques").remove();
+	$(".instruct").hide('fast');
 
 	window.highclicked = highlight.data("id");
-
-	$(".instruct").hide();
 
 	$.when(simpler_cache($this.closest(".answer"))).then(function(){
 
@@ -367,11 +367,11 @@ function clickonhighlight(highlight){
 		});
 
 		highlight_parent = $this.closest(".answer");
-		var quabl_text = $this.data('text');
-		$(".highlight").not($this).css("visibility", "collapse");
+		var quabl_text = decodeURIComponent($this.data('text'));
+		highlight_parent.find(".highlight").not($this).remove();
 		var simpler_html = $this.closest(".answer").html();
 		var h_html = $('<div>').append($this.clone()).html();
-		var h_html_dummy = h_html.replace('class="highlight"', 'class="highlight_dummy"').replace("none", ' ');
+		var h_html_dummy = h_html.replace('class="highlight"', 'class="highlight_dummy"')
 		var new_simpler_html = simpler_html.replace(h_html + quabl_text, '<span class="quabl_full">' + h_html_dummy + quabl_text + '</span>');
 		$this.closest(".answer").empty().append(new_simpler_html);
 
@@ -452,17 +452,22 @@ function replaceanswer(){
 	var repdefer = $.Deferred();
 
 	var final_span = " ";
+
 	var simpler_id = $(window.getSelection().getRangeAt(0).commonAncestorContainer).closest('.answer').data("id");
 	var post_id = $(window.getSelection().getRangeAt(0).commonAncestorContainer).closest('.answer').data("text");
+
 	var selection = window.getSelection().getRangeAt(0);
 	var selectedText = selection.extractContents();
 	var highlight = String(selectedText.textContent);
+
 	var highlight_arr = highlight.split("");
 	var firstel = highlight_arr[0];
 	var lastel = highlight_arr[highlight_arr.length-1];
+
 	highlight = highlight.trim();
-	trimmed_highlight_arr = highlight.split("");
-	var req_span = '<span class="curr_highlight" data-text="'+ highlight +'"></span>' + highlight;
+
+	var req_span = '<span class="curr_highlight" data-text="texthtmlgoeshere"></span>' + window.quabl_html;
+
 	if(firstel==" "){				//Fixing the Quabl-spacing problem.
 		final_span = '<span class="highlight-wrapper">&nbsp;' + req_span;
 	}
@@ -475,6 +480,7 @@ function replaceanswer(){
 	else{
 		final_span = final_span + '<span id="noblankspace"></span></span>';
 	}
+
 	var span = $(final_span);
 	//The new highlight has class curr_highlight and the new checkbox has class curr_checkedhigh. They have related CSS.
 
@@ -487,15 +493,27 @@ function replaceanswer(){
 		$(selectedText.childNodes[1]).remove();
 	}
 
-	var answer_part = $(window.getSelection().getRangeAt(0).commonAncestorContainer).closest('.answer').html().split('?').join('xqmx');		//the answer part of the highlight which will have the highlight
 
-	uri = '/define/'+ post_id + '/' + simpler_id +'/ans/'+ answer_part + '/quabl/' + window.quabl_html;
+	$("#ansdump").append($(window.getSelection().getRangeAt(0).commonAncestorContainer).closest('.answer').html());
+	$("#ansdump").find(".curr_highlight").attr("data-id","idtobesetinview");
+	$("#ansdump").find(".curr_highlight").removeClass("curr_highlight").addClass("highlight");
+	$("#ansdump").find(".highlight").each(function(){
+		$(this).show();
+	});
+
+	$("#highlightdump").append(window.quabl_html);
+	$("#highlightdump").find(".highlight").remove();
+	var qh = $("#highlightdump").html();
+
+	var answer_part = $("#ansdump").html().replace("?", "xqmx");
+
+	uri = '/define/'+ post_id + '/' + simpler_id +'/ans/'+ answer_part + '/quabl/' + qh;
 
 	setTimeout(function(){
 		repdefer.resolve();
 	}, 5);
 
-	window.uriarr = [post_id, simpler_id, answer_part, window.quabl_html, uri];
+	window.uriarr = [post_id, simpler_id, answer_part, qh, uri];
 
 	if(highlight.trim() != '' ){
 		window.highlight = highlight;
@@ -503,4 +521,17 @@ function replaceanswer(){
 
 
 	return repdefer;
+}
+
+function hidehighlights(){
+
+	var hldefer = $.Deferred();
+
+	$('.highlight').hide('fast');
+
+	setTimeout(function(){
+		hldefer.resolve();
+	},5);
+
+	return hldefer;
 }

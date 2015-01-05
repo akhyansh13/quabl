@@ -12,6 +12,7 @@ import json
 from django.contrib.auth.models import User
 import PIL
 from PIL import Image
+import urllib
 
 def index(request):
     context = RequestContext(request)
@@ -205,6 +206,8 @@ def define(request, post_id, simpler_id, answer_part, quabl, cques, highlightx):
     if answer_part == 'undefined':
         answer_part = ''
 
+    encodedquabl = urllib.quote(quabl)
+
     answer_part = answer_part.replace('<span id="blankspace">&nbsp;</span></span>', " ")
     answer_part = answer_part.replace('<span id="noblankspace"></span></span>', "")
     answer_part = answer_part.replace('<span class="highlight-wrapper">&nbsp;', " ")
@@ -217,7 +220,7 @@ def define(request, post_id, simpler_id, answer_part, quabl, cques, highlightx):
 
     f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, created = datetime.now(), question = cques)[0]
 
-    simpler.answer = answer_part.replace('curr_highlight','highlight').replace('<span class="highlight"', '<span class="highlight" data-id="' + str(h.id) + '"').replace(highlightx, quabl).replace('display: none;', '')
+    simpler.answer = answer_part.replace("idtobesetinview", str(h.id)).replace("texthtmlgoeshere", encodedquabl)
 
     simpler.modified = datetime.now()
     simpler.save()
