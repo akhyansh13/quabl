@@ -29,10 +29,14 @@ $(document).ready(function(){
 							$.when(replaceanswer()).then(function(){
 
 								$(".highlight").hide('fast');
+								
 								$("#quesboxwrapper").show();
 								$("#contextquesbox").focus();
+
 								window.onehview = true;
 								$("body").addClass("noselect");
+
+								$(".instruct").hide();
 
 							});
 					});
