@@ -4,8 +4,6 @@ $(document).ready(function(){
 
 	window.numansdisp = 0;
 
-	var answer_arr = [0];
-
 	var scrolltop = 0;
 
 	var answerno = 1;
@@ -14,12 +12,11 @@ $(document).ready(function(){
 
 	var selectmode = false;			//False if nothings been selected and true otherwise.
 
-	window.highclick = false;			//True if a highlight is clicked.
-
 	$(document).mouseup(function(){
+
 		window.quabl_html = getSelectionHtml();
+
 		if(getSelectionHtml() != ''){
-			if($('.highlight')[0]){								//This if-else takes care of the context.html also.
 
 				if($(window.getSelection().getRangeAt(0).commonAncestorContainer).closest('.answer').length != 0){
 
@@ -35,24 +32,17 @@ $(document).ready(function(){
 								$("#quesboxwrapper").show();
 								$("#contextquesbox").focus();
 								window.onehview = true;
-
+								$("body").addClass("noselect");
 
 							});
 					});
 			});
 		}
 			selectmode = true;
-			}
-			else{
-				if($(window.getSelection().getRangeAt(0).commonAncestorContainer).closest('.answer').length !== 0){
-
-				}
-			}
 		}
 		else if(selectmode && getSelectionHtml()==''){
 			selectmode = false;
-			$(".highlight").show('fast');
-			$(".reqsimp").hide();
+			//$(".highlight").show('fast');
 			clearSelection();
 		}
 	});
@@ -75,19 +65,28 @@ $(document).ready(function(){
 
 	$(document).on("click",".highlight", function(){
 		clickonhighlight($(this));
+		$("#queswrapper").show();
 	});
 
 	$(document).on("click", function(){
 
-		$.when(ifclickonhighlight()).then(function(){
-
-			if(!(window.highclick)){
-
 				if(window.onehview){
 
-					$("#fixedpane .rques").remove();
+					$("#quescrate").empty();
+
+					$(".instruct").show('fast');
+
+					$("#qinst").hide();
+
+					$("#quesboxwrapper").hide();
+
+					$("#queswrapper").hide();
+
+					$("body").removeClass("noselect");
 
 					$(".highlight").css("visibility", "visible");
+
+					$(".highlight").show();
 
 					highlight_parent.empty().append(simpler_html_cache);
 
@@ -102,13 +101,31 @@ $(document).ready(function(){
 							if($(this).closest(".context").length !=0){
 
 								$('.cques').show();
+
 							}
 						}
 					});
 				}
-			}
-		});
+			});
 
+	$("#quescrate").click(function(evt){
+		evt.stopPropagation();
+	});
+
+	$("#contextquesbox").click(function(evt){
+		evt.stopPropagation();
+	});
+
+	$("#quesbox").click(function(evt){
+		evt.stopPropagation();
+	});
+
+	$(".askcontques").click(function(evt){
+		evt.stopPropagation();
+	});
+
+	$(".askques").click(function(evt){
+		evt.stopPropagation();
 	});
 
 	$(document).on("click", ".viewcontext", function(){
@@ -265,10 +282,6 @@ $(document).ready(function(){
 		$("#loaddot").remove();
 		$(".container").show();
 		$(".header").show();
-		$(".answer").each(function(){
-			answer_arr.push($(this).data("id") + "<-- Answer starts after this. -->" + $("#empty").append($(this).clone()).html());
-			$("#empty").empty();
-		});
 		if(parseInt($("#anscounter").html())==0){
 			$(".quilleditor").show();
 			$(".nthanswer").hide();
@@ -299,6 +312,13 @@ $(document).ready(function(){
 		}
 	});
 
+	$(".askques").click(function(){
+		var newques = $("#quesbox").val();
+		var uri = '/defined/' + String(window.highclicked) + '/' + newques.replace('?','xqmx');
+		$.get((uri), function(data){
+			alert(data);
+		})
+	});
 }); //document.ready close.
 
 function simpler_cache(input){
@@ -341,8 +361,11 @@ function clickonhighlight(highlight){
 
 	$this = highlight;
 
-	$("#fixedpane .rques").remove();
+	$("#quescrate").empty();
 	$(".instruct").hide('fast');
+	$("#qinst").show();
+
+	$("body").addClass("noselect");
 
 	window.highclicked = highlight.data("id");
 
@@ -354,7 +377,7 @@ function clickonhighlight(highlight){
 			highlightid = $(this).attr('class').split('hid-')[1].split(" ")[0];
 			if (highlightid == h_id) {
 				var rqueshtml = $("#rquesdump").append($(this).clone()).html();
-				$("#fixedpane").append(rqueshtml);
+				$("#quescrate").append(rqueshtml);
 				$("#rquesdump").empty();
 			}
 		});
@@ -369,6 +392,13 @@ function clickonhighlight(highlight){
 		highlight_parent = $this.closest(".answer");
 		var quabl_text = decodeURIComponent($this.data('text'));
 		highlight_parent.find(".highlight").not($this).remove();
+
+		$(".answer").not(highlight_parent).each(function(){
+			$(this).find(".highlight").each(function(){
+				$(this).css('visibility', 'collapse');
+			});
+		});
+
 		var simpler_html = $this.closest(".answer").html();
 		var h_html = $('<div>').append($this.clone()).html();
 		var h_html_dummy = h_html.replace('class="highlight"', 'class="highlight_dummy"')
@@ -414,21 +444,6 @@ function blink(selector){
 			blink(this);
 		});
 	});
-}
-
-function ifclickonhighlight(){
-	window.highclick = false;
-	var clickdefer = $.Deferred();
-	$(document).on('click', '.rques', function(){
-		window.highclick = true;
-	});
-	$(document).on('click', '.highlight', function(){
-		window.highclick = true;
-	});
-	setTimeout(function(){
-		clickdefer.resolve();
-	},5);
-	return clickdefer;
 }
 
 function striptag_js(tag){

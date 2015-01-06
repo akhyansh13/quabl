@@ -193,6 +193,7 @@ def user_logout(request):
     return HttpResponseRedirect('/')
 
 def define(request, post_id, simpler_id, answer_part, quabl, cques, highlightx):
+
     context = RequestContext(request)
 
     answer_part = answer_part.replace("xqmx", "?")
@@ -230,6 +231,13 @@ def define(request, post_id, simpler_id, answer_part, quabl, cques, highlightx):
     #return HttpResponseRedirect('/request/askforsimpler/postid:' + str(post_id) + ';simplerid:' + str(simpler_id) + ';')
 
     return HttpResponse(answer_part)
+
+def defined(request, h_id, cques):
+
+    context = RequestContext(request)
+    h = highlight.objects.get(id=int(h_id))
+    f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, created = datetime.now(), question = cques.replace('xqmx', '?'))[0]
+    return HttpResponse('success')
 
 def requestbyuser(request, category, description):
     context = RequestContext(request)
