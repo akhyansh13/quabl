@@ -2,6 +2,8 @@ $(document).ready(function(){
 
 	$('.footer').hide();
 
+	blink(".ansloaddot");
+
 	window.numansdisp = 0;
 
 	var scrolltop = 0;
@@ -22,21 +24,23 @@ $(document).ready(function(){
 
 					highlight_parent = $(window.getSelection().getRangeAt(0).commonAncestorContainer).closest('.answer');
 
+					window.conans = highlight_parent;
+
 					$.when(simpler_cache($(window.getSelection().getRangeAt(0).commonAncestorContainer).closest('.answer'))).then(function(){
 
 						$.when(hidehighlights()).then(function(){
 
 							$.when(replaceanswer()).then(function(){
 
-								$(".highlight").hide('fast');
-								
+								$(".highlight").css('visibility', 'collapse');
+
 								$("#quesboxwrapper").show();
 								$("#contextquesbox").focus();
 
 								window.onehview = true;
 								$("body").addClass("noselect");
 
-								$(".instruct").hide();
+								$(".instruct").html('Enter the related question below.');
 
 							});
 					});
@@ -46,15 +50,87 @@ $(document).ready(function(){
 		}
 		else if(selectmode && getSelectionHtml()==''){
 			selectmode = false;
-			//$(".highlight").show('fast');
 			clearSelection();
 		}
 	});
 
 	$('.askcontques').click(function(){
+
+		$this = $(this);
+
+		$("#quescrate").hide();
+
+		$this.attr("disabled", "true");
+
+		window.conans.css('visibility', 'hidden');
+
+		window.conans.closest('.nthanswer').find('.aldwrapper').show();
+
 		window.uriarr[4] = window.uriarr[4] + '/cques/' +  $("#contextquesbox").val().replace('?', 'xqmx') + '/highlight/' + window.highlight;
+
 		$.get((window.uriarr[4]), function(data){
-			location.reload();
+
+			$this.parent().find('textarea').val('');
+
+			var resarr = data.split('<cqdelimit>');
+
+			$(".answer").each(function(){
+
+				var $answer = $(this);
+
+				setTimeout(function(){
+					window.conans.closest('.nthanswer').find('.aldwrapper').hide();
+					$answer.css('visibility', 'visible');
+					$("#quescrate").fadeIn('fast');
+				}, 400);
+
+
+				if($(this).data('id')==resarr[1]){
+
+					$(this).empty().append(resarr[0]);
+					$(".instruct").hide();
+					$("#qinst").show();
+					$("#quesboxwrapper").hide();
+					$("#queswrapper").show();
+
+					$answer.closest(".nthanswer").find('.relques').append('<div class="rques hid-' + resarr[3] + ' parent-'+ resarr[4] +'"><a href="/question/' + resarr[5] + '">' + resarr[2] + '</a>');
+
+					$answer.find('.highlight').each(function(){
+					 	if($(this).data('id')==resarr[3]){
+
+							var $highlight = $(this);
+
+							clickonhighlight($highlight, 'n');
+
+						}
+					});
+
+				}
+			});
+		});
+	});
+
+	$(".askques").click(function(){
+
+		$this = $(this);
+
+		$this.attr('disabled', 'true');
+
+		var newques = $("#quesbox").val();
+
+		var uri = '/defined/' + String(window.highclicked) + '/' + newques.replace('?','xqmx');
+
+		$.get((uri), function(data){
+			$this.parent().find('textarea').val('');
+			var resarr = data.split('<cqdelimit>');
+
+			$(".answer").each(function(){
+				if($(this).data('id')==resarr[0]){
+					var $answer = $(this);
+					$answer.closest(".nthanswer").find('.relques').append('<div class="rques hid-' + resarr[2] + ' parent-'+ resarr[3] +'"><a href="/question/' + resarr[4] + '">' + resarr[1] + '</a>');
+					$("#quescrate").append('<div class="rques hid-' + resarr[2] + ' parent-'+ resarr[3] +'"><a href="/question/' + resarr[4] + '">' + resarr[1] + '</a>');
+				}
+			});
 		});
 	});
 
@@ -68,7 +144,7 @@ $(document).ready(function(){
 	var curr_ans = 0;
 
 	$(document).on("click",".highlight", function(){
-		clickonhighlight($(this));
+		clickonhighlight($(this), 'y');
 		$("#queswrapper").show();
 	});
 
@@ -77,6 +153,8 @@ $(document).ready(function(){
 				if(window.onehview){
 
 					$("#quescrate").empty();
+
+					$(".instruct").html('Select any text to add a question<br/> Or, click on a dot to view related question(s).')
 
 					$(".instruct").show('fast');
 
@@ -89,8 +167,6 @@ $(document).ready(function(){
 					$("body").removeClass("noselect");
 
 					$(".highlight").css("visibility", "visible");
-
-					$(".highlight").show();
 
 					highlight_parent.empty().append(simpler_html_cache);
 
@@ -157,7 +233,7 @@ $(document).ready(function(){
 			$('.jumptotext').hide();
 			$('.rques').hide();
 			$('.context').parent().show();
-			clickonhighlight(hreq);
+			clickonhighlight(hreq, 'y');
 		}
 		else {
 			uri = "/question/" + question;
@@ -166,10 +242,7 @@ $(document).ready(function(){
 	});
 
 	$(".addsimp").click(function(){					//add simpler button code [AJAX].
-		//var simpler_id = $(this).attr('id');
-		//var post_id = $(this).attr("data");
-		//var backsimplerid = $(this).attr('value');
-		//var simpler_textarea_id = 'simp'+ simpler_id;
+
 		var qid = $(this).attr('id');
 		var answer_html = editor.getHTML();
 		$('#empty').append(answer_html);
@@ -272,13 +345,29 @@ $(document).ready(function(){
 		});
 	});
 
-	$(document).keyup(function(){				//Controls the deactivation/activation of the Add Answer button.
+	$(document).keyup(function(){				//Code for the deactivation/activation of the Add Answer button.
+
 		if (!(editor.getText().trim())) {
 			$(".addsimp").attr("disabled", "true");
 		}
 		else{
 			$(".addsimp").removeAttr("disabled");
 		}
+
+		if (!($("#contextquesbox").val().trim())) {
+			$(".askcontques").attr("disabled", "true");
+		}
+		else{
+			$(".askcontques").removeAttr("disabled");
+		}
+
+		if (!($("#quesbox").val().trim())) {
+			$(".askques").attr("disabled", "true");
+		}
+		else{
+			$(".askques").removeAttr("disabled");
+		}
+
 	});
 
 	blink("#loaddot");
@@ -314,14 +403,6 @@ $(document).ready(function(){
 				$("#fixedpane").attr("style", cached_css);
 			}
 		}
-	});
-
-	$(".askques").click(function(){
-		var newques = $("#quesbox").val();
-		var uri = '/defined/' + String(window.highclicked) + '/' + newques.replace('?','xqmx');
-		$.get((uri), function(data){
-			alert(data);
-		})
 	});
 }); //document.ready close.
 
@@ -361,11 +442,14 @@ function clearSelection() {
     }
 }
 
-function clickonhighlight(highlight){
+function clickonhighlight(highlight, emptyxqmx){				//The second argument specifies if the quescrate has to be vacated before appending new rques-es. 'y' for vacating, anything else bypasses the empty().
 
 	$this = highlight;
 
-	$("#quescrate").empty();
+	if(emptyxqmx=='y'){
+		$("#quescrate").empty();
+	}
+
 	$(".instruct").hide('fast');
 	$("#qinst").show();
 
@@ -389,7 +473,7 @@ function clickonhighlight(highlight){
 		$(".cques").each(function() {
 			highlightid = $(this).attr('class').split('hid-')[1];
 			if (highlightid != h_id){
-				$(this).hide();
+				$(this).css('visibility', 'collapse');
 			}
 		});
 
@@ -518,6 +602,7 @@ function replaceanswer(){
 	$("#ansdump").find(".curr_highlight").removeClass("curr_highlight").addClass("highlight");
 	$("#ansdump").find(".highlight").each(function(){
 		$(this).show();
+		$(this).removeAttr('style');
 	});
 
 	$("#highlightdump").append(window.quabl_html);
@@ -530,6 +615,8 @@ function replaceanswer(){
 
 	setTimeout(function(){
 		repdefer.resolve();
+		$("#ansdump").empty();
+		$("#highlightdump").empty();
 	}, 5);
 
 	window.uriarr = [post_id, simpler_id, answer_part, qh, uri];
@@ -546,7 +633,7 @@ function hidehighlights(){
 
 	var hldefer = $.Deferred();
 
-	$('.highlight').hide('fast');
+	$('.highlight').css('visibility', 'collapse');
 
 	setTimeout(function(){
 		hldefer.resolve();

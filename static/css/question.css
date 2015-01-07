@@ -350,3 +350,21 @@ textarea {
   -ms-user-select: none;
   user-select: none;
 }
+
+.cques{
+  padding-bottom:10px;
+}
+
+.ansloaddot{
+  border-radius:50%;
+  height:18px;
+  width:18px;
+  background-color:#FFA500;
+  position:absolute;
+  bottom:65%;
+  left:45%;
+}
+
+.aldwrapper{
+  display:none;
+}

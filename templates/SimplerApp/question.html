@@ -57,14 +57,14 @@
 <div id="quesboxwrapper" style="display:none;">
 
 	<textarea id="contextquesbox"></textarea>
-	<button class="btn btn-primary askcontques">Ask Question</button>
+	<button class="btn btn-primary askcontques" disabled="true">Ask Question</button>
 
 </div>
 
 <div id="queswrapper" style="display:none;">
 
 	<textarea id="quesbox"></textarea>
-	<button class="btn btn-primary askques">Ask Question</button>
+	<button class="btn btn-primary askques" disabled="true">Ask Question</button>
 
 </div>
 
@@ -89,6 +89,7 @@
 		<div class="answer" data-id="{{answer.id}}" data-text="{{answer.post.id}}">
 			{{answer.answer}}
 			</div>
+			<div class="aldwrapper"><div class="ansloaddot"></div></div>
 			<div class="writerwrap">
 				<img class="thumb" data-username="{{answer.writer.username}}"/>
 				<div class="writerinfo">Answer by <br/>{{answer.writer.first_name}} {{answer.writer.last_name}}</div>
