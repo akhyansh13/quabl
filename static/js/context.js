@@ -66,7 +66,7 @@ $(document).ready(function(){
 
 		window.conans.closest('.nthanswer').find('.aldwrapper').show();
 
-		window.uriarr[4] = window.uriarr[4] + '/cques/' +  $("#contextquesbox").val().replace('?', 'xqmx') + '/highlight/' + window.highlight;
+		window.uriarr[4] = window.uriarr[4] + '/cques/' +  $("#contextquesbox").val().split('?').join('xqmx') + '/highlight/' + window.highlight;
 
 		$.get((window.uriarr[4]), function(data){
 
@@ -118,7 +118,7 @@ $(document).ready(function(){
 
 		var newques = $("#quesbox").val();
 
-		var uri = '/defined/' + String(window.highclicked) + '/' + newques.replace('?','xqmx');
+		var uri = '/defined/' + String(window.highclicked) + '/' + newques.split('?').join('xqmx');
 
 		$.get((uri), function(data){
 			$this.parent().find('textarea').val('');
@@ -502,7 +502,7 @@ function replaceanswer(){
 	$("#highlightdump").find(".highlight").remove();
 	var qh = $("#highlightdump").html();
 
-	var answer_part = $("#ansdump").html().replace("?", "xqmx");
+	var answer_part = $("#ansdump").html().split('?').join('xqmx');
 
 	uri = '/define/'+ post_id + '/' + simpler_id +'/ans/'+ answer_part + '/quabl/' + qh;
 
