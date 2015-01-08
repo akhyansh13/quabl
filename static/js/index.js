@@ -3,10 +3,20 @@ $(document).ready(function(){
 	window.clickonques = false;
 
 	$(".question-area").each(function(){
-			var numque = $(this).find(".ques").length;
-			var numqua = $(this).closest(".contqueswrapper").find('.highlight').length
-			$(this).find('.numqua').html(numqua);
-			$(this).find('.numque').html(numque);
+			var nques = $(this).find(".ques").length;
+			var nquabls = $(this).closest(".contqueswrapper").find('.highlight').length
+
+			if (nquabls == 1) {
+				if(nques == 1){
+					$(this).find('.nums').html("1 Quabl, 1 Question.");
+				}
+				else{
+					$(this).find('.nums').html("1 Quabl, " + nques + " Questions.");
+				}
+			}
+			else {
+				$(this).find('.nums').html(nquabls + " Quabls, " + nques + " Questions.");
+			}
 	});
 
 	$(".contqueswrapper").each(function(){
@@ -63,37 +73,6 @@ $(document).ready(function(){
 
 
 	$(".contextbox").attr("placeholder", "Read something too complex to understand? Post it here!");
-
-	$(".simnum").each(function(){
-		var content = $(this).html();
-		var id = String(content.split("-")[0]);
-		var nquabls = String(content.split("-")[1]);
-		var nques = String(content.split("-")[2]);
-
-		if (nquabls == 1 && nques == 1) {
-			$("#" + id).html("1 Quabl, 1 Question.");
-		}
-		else if (nquabls == 1) {
-			$("#" + id).html("1 Quabl, " + nques + " Questions.");
-		}
-		else if (nques == 1) {
-			$("#" + id).html(nquabls + " Quabls, 1 Question.");
-		}
-		else {
-			$("#" + id).html(nquabls + " Quabls, " + nques + " Questions.");
-		}
-
-		/*if(parseInt(number)==0){
-			$("#"+id).html("No Answers Yet.");
-		}
-
-		else if(parseInt(number)==1){
-			$("#"+id).html("1 Answer.");
-		}
-		else{
-			$("#"+id).html(number + " Answers.");
-		}*/
-	});
 
 	$(".folbtn").click(function(){		//AJAX request for follow/unfollow button.
 		var post_id = $(this).attr('data');
