@@ -536,7 +536,7 @@ function replaceanswer(){
 
 	highlight = highlight.trim();
 
-	var req_span = '<span class="curr_highlight" data-text="texthtmlgoeshere"></span>' + window.quabl_html;
+	var req_span = '<span class="curr_highlight"><span class="html">texthtmlgoeshere</span></span>' + window.quabl_html;
 
 	if(firstel==" "){				//Fixing the Quabl-spacing problem.
 		final_span = '<span class="highlight-wrapper">&nbsp;' + req_span;
