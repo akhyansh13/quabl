@@ -445,7 +445,7 @@ function clickonhighlight(highlight, emptyxqmx){				//The second argument specif
 		});
 
 		highlight_parent = $this.closest(".answer");
-		var quabl_text = decodeURIComponent($this.data('text'));
+		var quabl_text = $this.find('.html').html();
 		highlight_parent.find(".highlight").not($this).remove();
 
 		$(".answer").not(highlight_parent).each(function(){

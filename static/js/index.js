@@ -122,7 +122,7 @@ $(document).ready(function(){
 		$.when(simpler_cache($this.closest(".context"))).then(function(){
 
 			highlight_parent = $this.closest(".context");
-			var quabl_text = $this.data('text');
+			var quabl_text = $this.find('.html').html();
 			var h_id = $this.data('id');
 			$this.closest(".context").find(".highlight").not($this).remove();
 			var simpler_html = $this.closest(".context").html();

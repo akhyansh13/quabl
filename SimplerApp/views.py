@@ -217,7 +217,7 @@ def define(request, post_id, simpler_id, answer_part, quabl, cques, highlightx):
     if answer_part == 'undefined':
         answer_part = ''
 
-    encodedquabl = urllib.quote(quabl)
+    encodedquabl = quabl
 
     answer_part = answer_part.replace('<span id="blankspace">&nbsp;</span></span>', " ")
     answer_part = answer_part.replace('<span id="noblankspace"></span></span>', "")

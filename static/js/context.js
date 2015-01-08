@@ -371,7 +371,7 @@ $.when(simpler_cache($this.closest(".answer"))).then(function(){
 	});
 
 	highlight_parent = $this.closest(".answer");
-	var quabl_text = decodeURIComponent($this.data('text'));
+	var quabl_text = $this.find('.html').html();
 	highlight_parent.find(".highlight").not($this).remove();
 
 	$(".answer").not(highlight_parent).each(function(){
@@ -462,7 +462,7 @@ function replaceanswer(){
 
 	highlight = highlight.trim();
 
-	var req_span = '<span class="curr_highlight" data-text="texthtmlgoeshere"></span>' + window.quabl_html;
+	var req_span = '<span class="curr_highlight"><span class="html">texthtmlgoeshere</span></span>' + window.quabl_html;
 
 	if(firstel==" "){				//Fixing the Quabl-spacing problem.
 		final_span = '<span class="highlight-wrapper">&nbsp;' + req_span;
