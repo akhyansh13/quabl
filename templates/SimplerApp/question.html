@@ -1,5 +1,6 @@
 {% extends 'SimplerApp/base.html' %}
 {% load static %}
+
 {% block scripts_block %}
 <script src="{% static 'js/question.js' %}"></script>
 {% endblock %}
@@ -13,36 +14,41 @@
 {% endblock %}
 
 {% block body_block %}
+
 {% autoescape off %}
-<div class="nthcontext" style="float:left; width:70%; display:none;">
-	<div id="contextsimpler" class="context answer" data-id="{{contextsimpler.id}}" data-text="{{contextsimpler.post.id}}">{{contextsimpler.answer}}</div>
-</div>
+
 <div id="upperwrapper">
+
 	<div class="authwrapper">
+
 		<img class="thumb" data-username="{{ques.req_by.username}}"/>
 	<div class="author">Question By <br/>{{ques.req_by.first_name}} {{ques.req_by.last_name}}</div>
+
 </div>
-	<div class="viewcontext" data-id="{{ques.highlight.highlight_parent.question}}"><button class="btn btn-default" style="position:absolute; top:0; right:0;">View Context</button></div>
+
+	<div class="viewcontext"><a href='/context/{{contextsimplerid}}'><button class="btn btn-default" style="position:absolute; top:0; right:0;">View Context</button></div></a>
+
 	<div class="mainques" data-id="{{ques.id}}" data-hid="{{ques.highlight.id}}">{{ques}}</div>
+
 	<div id="numjumwrapper" class='numjumpwrapper'><span class="numanswers"><a href="javascript:;" class="showquill" style="text-decoration:none;">Add Answer</a> <span id="bull">&bull;</span> <span id="anscounti">{{anscount}} Answers </span><span id="anscountf" style="display:none;"><a href="javascript:;" style="text-decoration:none;">View {{anscount}} Answers </a></span></span></div>
+
 </div>
 {% endautoescape %}
-	{% autoescape off %}
+
+{% autoescape off %}
+
 	{% for rques in rquestions %}
+
 	<div class="rquesheader questionon-{{rques.highlight.highlight_parent.id}}" data-id="{{rques.id}}">
+
 		<div class="rques hid-{{rques.highlight.id}} parent-{{rques.highlight.highlight_parent.id}}"><a href="/question/{{rques.id}}">{{rques.question}}</a>
 		<button class="btn btn-default addanswer" style="display:none;"><a href="/addsimpler/{{rques.id}}">Add Answer.</a></button></div>
+
 	</div>
+
 	{% endfor %}
-	<div class="sidequespane">
-	{% for cques in cquestions %}
-	<div class="cquesheader" data-id="{{cques.id}}">
-		<div class="cques hid-{{cques.highlight.id}}" style="display:none;"><a href="/question/{{cques.id}}">{{cques.question}}</a></div>
-		<button class="btn btn-default addanswer" style="display:none;"><a href="/addsimpler/{{cques.id}}">Add Answer.</a></button>
-	</div>
-	{% endfor %}
+
 	{% endautoescape %}
-</div>
 
 <div id="fixedpane">
 
@@ -71,7 +77,9 @@
 </div>
 <!--div class="shortquespane" style="display:none; font-size:13pt;">{{ques}}</div-->
 <div class="answer-area">
+
 	<div class="quilleditor" style="display:none;float:left; width:100%; font-size:12pt;">
+
 		<div id="toolbar">
 			<button class="ql-bold btn btn-default ql-btn " style="padding: 5px 10px;">B</button>
 			<button class="ql-italic btn btn-default ql-btn" style="padding: 5px 13px;">I</button>
@@ -81,28 +89,46 @@
 		<div id='editor'></div>
 		{% csrf_token %}
 		<button type="button" class="btn btn-primary addsimp" id="{{ques.id}}" style="margin-top: 5px; position:relative; left:77%; border-radius:0px;" disabled="true">Add Answer</button>
+
 	</div>
-	{% autoescape off %}
+
+{% autoescape off %}
+
 	{% for answer in answers %}
+
 	<div class="nthanswer">
+
 		<div class="withwriter">
+
 		<div class="answer" data-id="{{answer.id}}" data-text="{{answer.post.id}}">
 			{{answer.answer}}
 			</div>
+
 			<div class="aldwrapper"><div class="ansloaddot"></div></div>
+
 			<div class="writerwrap">
 				<img class="thumb" data-username="{{answer.writer.username}}"/>
 				<div class="writerinfo">Answer by <br/>{{answer.writer.first_name}} {{answer.writer.last_name}}</div>
 			</div>
+
 		</div>
+
 			<div class="relques"></div>
+
 	</div>
+
 	{% endfor %}
-	{% endautoescape %}
+
+{% endautoescape %}
 </div>
+
+<div id="dumps">
+
 <div id="empty" style="display:none;"></div>
 <div id="rquesdump" style="display:none;"></div>
 <div id="anscounter" style="display:none;">{{anscount}}</div>
 <div id="ansdump" style="display:none;"></div>
 <div id="highlightdump" style="display:none;"></div>
+
+</div>
 {% endblock %}

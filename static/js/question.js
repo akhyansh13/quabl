@@ -208,39 +208,6 @@ $(document).ready(function(){
 		evt.stopPropagation();
 	});
 
-	$(document).on("click", ".viewcontext", function(){
-		$('.mainques').hide();
-		$("#fixedpane").hide();
-		$(this).hide();
-		$("#upperwrapper").hide();
-		$(".nthanswer").hide();
-	  var hid = $(".mainques").data("hid");
-		var question = $(this).data('id');
-		var context = $(this).data('text');
-
-		$(".quilleditor").hide();
-
-		var hreq;
-
-		$(".highlight").each(function(){
-			if($(this).data("id")==hid){
-				hreq = $(this);
-			}
-		});
-
-		if (question == -1) {
-			$('.mainquespane').hide();
-			$('.jumptotext').hide();
-			$('.rques').hide();
-			$('.context').parent().show();
-			clickonhighlight(hreq, 'y');
-		}
-		else {
-			uri = "/question/" + question;
-			window.location.href = uri;
-		}
-	});
-
 	$(".addsimp").click(function(){					//add simpler button code [AJAX].
 
 		var qid = $(this).attr('id');
@@ -279,7 +246,7 @@ $(document).ready(function(){
 		$(".jumptotext").show();
 		$("#fixedpane").show();
 		$("#upperwrapper").css("margin-bottom", "40px");
-	})
+	});
 
 	$('.ql-btn').not('.ql-image').click(function(){		//Color and style retention when B, I or U active.
 

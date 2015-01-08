@@ -67,17 +67,14 @@ def question(request, question_id):
     context_dict = {'ques':ques}
 
     contextsimpler = Simpler.objects.get(id=ques.highlight.highlight_parent.id)
-    context_dict['contextsimpler'] = contextsimpler
+    context_dict['contextsimplerid'] = contextsimpler.id
 
     answers = Simpler.objects.all().filter(question=question_id)
     context_dict['anscount'] = len(answers)
 
     highlights = highlight.objects.all()
     questions = highlightq.objects.all()
-    cquestions = []
     highs = highlights.filter(highlight_parent=contextsimpler)
-    for high in highs:
-            cquestions.extend(questions.filter(highlight=high))
     rquestions = []
 
     for answer in answers:
@@ -85,7 +82,6 @@ def question(request, question_id):
         for high in highs:
             rquestions.extend(questions.filter(highlight=high))
 
-    context_dict['cquestions'] = cquestions
     context_dict['rquestions'] = rquestions
     context_dict['answers'] = answers
 
@@ -93,8 +89,22 @@ def question(request, question_id):
 
 def csimpler(request, simpler_id):
     context = RequestContext(request)
-    simpler = Simpler.objects.get(id = int(simpler_id))
-    context_dict = {'contextsimpler':simpler}
+
+    questions = highlightq.objects.all()
+
+    contextsimpler = Simpler.objects.get(id = int(simpler_id))
+    context_dict = {'answer':contextsimpler}
+
+    highlights = highlight.objects.all()
+
+    cquestions = []
+
+    highs = highlights.filter(highlight_parent=contextsimpler)
+    for high in highs:
+            cquestions.extend(questions.filter(highlight=high))
+
+    context_dict['rquestions'] = cquestions
+
     return render_to_response('SimplerApp/context.html', context_dict, context)
 
 def makesimpler(request):
@@ -235,8 +245,10 @@ def define(request, post_id, simpler_id, answer_part, quabl, cques, highlightx):
 def defined(request, h_id, cques):
 
     context = RequestContext(request)
+
     h = highlight.objects.get(id=int(h_id))
     f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, created = datetime.now(), question = cques.replace('xqmx', '?'))[0]
+
     return HttpResponse(str(f.highlight.highlight_parent.id) + '<cqdelimit>' + f.question + '<cqdelimit>' + str(f.highlight.id) + '<cqdelimit>' + str(f.highlight.highlight_parent.id) + '<cqdelimit>' + str(f.id))
 
 def requestbyuser(request, category, description):
