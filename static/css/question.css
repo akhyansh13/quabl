@@ -202,6 +202,7 @@ textarea {
 .answer{
   margin-bottom:10px;
   text-align:justify;
+  padding-right:10px;
 }
 
 .glyphicon-chevron-down{

@@ -473,7 +473,7 @@ function clickonhighlight(highlight, emptyxqmx){				//The second argument specif
 		$(".cques").each(function() {
 			highlightid = $(this).attr('class').split('hid-')[1];
 			if (highlightid != h_id){
-				$(this).css('visibility', 'collapse');
+				$(this).hide();
 			}
 		});
 
