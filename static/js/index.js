@@ -6,6 +6,10 @@ $(document).ready(function(){
 			var nques = $(this).find(".ques").length;
 			var nquabls = $(this).closest(".contqueswrapper").find('.highlight').length
 
+			if(nquabls == 0){
+				$(this).closest(".contqueswrapper").remove();
+			}
+
 			if (nquabls == 1) {
 				if(nques == 1){
 					$(this).find('.nums').html("1 Quabl, 1 Question.");
