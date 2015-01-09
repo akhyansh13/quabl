@@ -24,7 +24,7 @@ $(document).ready(function(){
 	});
 
 	$(".contqueswrapper").each(function(){
-		var offset = $(this).find(".context-area").offset();
+		var offset = $(this).find(".context").offset();
 		$(this).find(".question-area").offset({top:offset.top});
 	});
 

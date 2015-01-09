@@ -79,10 +79,9 @@ body {
 
 textarea {
  overflow: auto;
-   border-radius:3px;
    border-width:1px;
    border-style:solid; /* Uniform border across textarea as opposed to the shadowy default design */
-   border-color:lightgray;
+   border-color:#C0C0C0;
    resize: none;   /*The resize handle is removed */
    padding: 2px; /* padding for the TEXT that goes into the textarea */
 }
