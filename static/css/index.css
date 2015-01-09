@@ -47,3 +47,7 @@
 .topicbox textarea{
 	height:32px;
 }
+
+.addpostbtn{
+	border-radius:0px;
+}
