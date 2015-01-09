@@ -39,8 +39,9 @@ $(document).ready(function(){
 			striptag_jq($(this));
 		});
 		var txt = $("#empty").html();
+		var topic = $("#topic").val().split(' ').join('').toLowerCase();
 		$("#empty").empty();
-		$.get(('/addpost/'), {txt:txt}, function(data){
+		$.get(('/addpost/'), {txt:txt, topic:topic}, function(data){
 			window.location = '/context/' + data + '/';
 		});
 	});

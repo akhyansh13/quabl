@@ -57,7 +57,8 @@ def follow(request):
 def addpost(request):
     context = RequestContext(request)
     context_text = request.GET['txt']
-    p = Post.objects.get_or_create(post=context_text ,author=request.user.username, writer=request.user, context=context_text)[0]
+    ptopic = topic.objects.get_or_create(topic = request.GET['topic'])[0]
+    p = Post.objects.get_or_create(topic=ptopic, post=context_text ,author=request.user.username, writer=request.user, context=context_text)[0]
     s = Simpler.objects.get_or_create(post=p, question=-1, answer=p.context, simpler_original=p.context, coeficient=1, parent_list='contextsimpler', author=request.user.username, writer=request.user, display=' ')[0]
     return HttpResponse(str(s.id))
 

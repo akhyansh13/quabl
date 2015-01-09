@@ -39,3 +39,11 @@
 	margin-top: -50px;
 	margin-left: -50px;
 }
+
+.topicbox{
+	float:left;
+}
+
+.topicbox textarea{
+	height:32px;
+}

@@ -30,7 +30,8 @@
 				{% csrf_token %}
 			</div>
 		</div>
-		<div align = "center" style="padding-bottom:30px;"><button type="submit" class="btn btn-primary addpostbtn" disabled="disabled">Add Context.</button></div>
+		<div class="topicbox"><textarea id="topic" placeholder="Topic here."></textarea></div>
+		<div align = "right" style="padding-bottom:30px;"><button type="submit" class="btn btn-primary addpostbtn" disabled="disabled">Add Context.</button></div>
 		<div class="dropdown" style="float:right; display:none;">
 			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
 				Options&nbsp;<span class="caret"></span>
@@ -47,7 +48,6 @@
 					<div class="contqueswrapper" id="cont-{{context.0.id}}">
 					<div class="context-area" style="float:left; width:70%;" align="justify">
 					<div style="padding-bottom:50px;">
-						<div class="topicname" style="font-size:16pt; display:none;"><b>#</b>{{context.0.post.topic}}</div>
 						<div class="context" data="{{context.0.id}}" style="margin-right:20px;">{{context.0.answer}}</div>
 						<span style="float:left; display:none;"><a class="folbtn {% if context.0.id in followed %}unfollowstate{% else %}followstate{% endif %}" href='javascript:;' data='{{context.0.id}}'>{% if context.0.id in followed %}Unpin This Context{% else %}Pin This Context{% endif %}</a></span>
 					</div>

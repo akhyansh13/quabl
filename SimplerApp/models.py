@@ -14,15 +14,15 @@ class Post(models.Model):
     post = models.CharField(max_length=10000000, default=' ')
     author = models.CharField(max_length=100000, default=' ')
     writer = models.ForeignKey(User)
-    topic = models.CharField(max_length=100000, default=' ')
+    topic = models.ForeignKey(topic, null=True, blank=True)
     explores = models.IntegerField(null = False, blank = False, default = 0)
     context = models.CharField(max_length=10000000000, null = False, blank=False, default=' ')
     created = models.DateTimeField(default=datetime.now())
     modified = models.DateTimeField(default=datetime.now())
     def __unicode__(self):
         post_less = show_less(self.post)
-        return post_less   
-    
+        return post_less
+
 class Simpler(models.Model):
     post = models.ForeignKey(Post)
     parent_simpler = models.ForeignKey('self', related_name="parent", blank= True, null= True)
@@ -46,15 +46,15 @@ class highlight(models.Model):
     created = models.DateTimeField(default=datetime.now())
     def __unicode__(self):
         return self.highlight
-    
+
 class highlightq(models.Model):
     highlight = models.ForeignKey(highlight)
     question = models.CharField(max_length=10000000, blank=True, null=True)
     req_by = models.ForeignKey(User, null=True, blank=True)
     created = models.DateTimeField(default=datetime.now())
     def __unicode__(self):
-        return self.question   
-        
+        return self.question
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     full_name = models.CharField(max_length=1000000, default=' ')
@@ -89,7 +89,7 @@ class ReqByUser(models.Model):
 
     def __unicode__(self):
         return self.category + ' by ' + str(self.user.username)
-    
+
 class UserForm(forms.ModelForm):
 
     password = forms.CharField(widget=forms.PasswordInput())
