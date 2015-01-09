@@ -205,6 +205,11 @@ textarea {
   padding-right:10px;
 }
 
+.answer img{
+  padding-top:10px;
+  padding-bottom:10px;
+}
+
 .glyphicon-chevron-down{
   font-size:10pt;
 }

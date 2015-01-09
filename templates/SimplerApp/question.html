@@ -22,7 +22,7 @@
 	<div class="authwrapper">
 
 		<img class="thumb" data-username="{{ques.req_by.username}}"/>
-	<div class="author">Question By <br/>{{ques.req_by.first_name}} {{ques.req_by.last_name}}</div>
+	<div class="author">Question By <br/><a href="javascript:;" class="getup" data="{{ques.req_by.id}}">{{ques.req_by.first_name}} {{ques.req_by.last_name}}</a></div>
 
 </div>
 
@@ -108,7 +108,7 @@
 
 			<div class="writerwrap">
 				<img class="thumb" data-username="{{answer.writer.username}}"/>
-				<div class="writerinfo">Answer by <br/>{{answer.writer.first_name}} {{answer.writer.last_name}}</div>
+				<div class="writerinfo">Answer by <br/><a href="javascript:;" class="getup" data="{{answer.writer.id}}">{{answer.writer.first_name}} {{answer.writer.last_name}}</a></div>
 			</div>
 
 		</div>

@@ -21,7 +21,7 @@ $(document).ready(function(){
 
 	$(".contqueswrapper").each(function(){
 		var offset = $(this).find(".context-area").offset();
-		$(this).find(".question-area").offset({top:offset.top+30});
+		$(this).find(".question-area").offset({top:offset.top});
 	});
 
 	$(".footer").hide();
@@ -71,8 +71,6 @@ $(document).ready(function(){
 		$(this).parent().parent().find(".topicname").html(topic);
 	});*/
 
-
-	$(".contextbox").attr("placeholder", "Read something too complex to understand? Post it here!");
 
 	$(".folbtn").click(function(){		//AJAX request for follow/unfollow button.
 		var post_id = $(this).attr('data');
