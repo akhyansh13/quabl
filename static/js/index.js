@@ -50,8 +50,35 @@ $(document).ready(function(){
 		$(this).attr('style', "max-width:450px; min-width:450px; width:450px; min-height:" + screen.height + "px; max-height:" + screen.height + "px; height:450" + screen.height + "px;");
 	});
 
+	$(document).mouseup(function(){
+		var ql_height = 0;
+		$(".ql-line").each(function(){
+			ql_height = ql_height + $(this).height();
+		});
+
+		if(ql_height >= 180){
+			$(".ql-container").height(ql_height);
+		}
+		else{
+			$(".ql-container").height(200);
+		}
+
+	});
 
 	$(document).keyup(function(){				//Controls the deactivation/activation of the Add Answer button.
+
+		var ql_height = 0;
+		$(".ql-line").each(function(){
+			ql_height = ql_height + $(this).height();
+		});
+
+		if(ql_height >= 180){
+			$(".ql-container").height(ql_height);
+		}
+		else{
+			$(".ql-container").height(200);
+		}
+
 		if (!(editor.getText().trim())) {
 			$(".addpostbtn").attr("disabled", "true");
 		}

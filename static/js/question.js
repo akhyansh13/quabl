@@ -14,7 +14,33 @@ $(document).ready(function(){
 
 	var selectmode = false;			//False if nothings been selected and true otherwise.
 
-	$(document).mouseup(function(){
+	var textarea1 = document.getElementById("contextquesbox");				//Code for textarea1 auto height increase.
+
+	textarea1.oninput = function() {
+		textarea1.style.height = ""; /* Reset the height*/
+		textarea1.style.height = Math.min(textarea1.scrollHeight+2, 300) + "px";
+	};
+
+	var textarea2 = document.getElementById("quesbox");				//Code for textarea2 auto height increase.
+
+	textarea2.oninput = function() {
+		textarea2.style.height = ""; /* Reset the height*/
+		textarea2.style.height = Math.min(textarea2.scrollHeight+2, 300) + "px";
+	};
+
+$(document).mouseup(function(){
+
+		var ql_height = 0;
+		$(".ql-line").each(function(){
+			ql_height = ql_height + $(this).height();
+		});
+
+		if(ql_height >= 280){
+		$(".ql-container").height(ql_height);
+	}
+	else{
+		$(".ql-container").height(300);
+	}
 
 		window.quabl_html = getSelectionHtml();
 
@@ -313,6 +339,19 @@ $(document).ready(function(){
 	});
 
 	$(document).keyup(function(){				//Code for the deactivation/activation of the Add Answer button.
+
+		var ql_height = 0;
+		$(".ql-line").each(function(){
+			ql_height = ql_height + $(this).height();
+		});
+
+		if(ql_height>=280){
+			$(".ql-container").height(ql_height);
+		}
+		else{
+			$(".ql-container").height(300);
+		}
+
 
 		if (!(editor.getText().trim())) {
 			$(".addsimp").attr("disabled", "true");
