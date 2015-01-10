@@ -1,0 +1,78 @@
+{% extends 'SimplerApp/base.html' %}
+{% load static %}
+{% block scripts_block %}
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock %}
+
+{% block css_block %}
+<link href="{% static 'css/index.css' %}" rel="stylesheet" />
+<link href="{% static 'css/highlight.css' %}" rel="stylesheet" />
+<style>
+.addcontexttoggle{
+  display:none;
+}
+</style>
+{% endblock %}
+
+{% block body_block %}
+
+<div style='padding-bottom:30px;'>
+  {% if user.is_authenticated %}
+  {% else %}
+  <div style="text-align:center;"><h1><!--<a href='/register/'>Register Here</a> or --><a href="/login/">Login.</a></h1></div>
+  {% endif %}
+  {% if user.is_authenticated %}
+  {% csrf_token %}
+  <div id="contaddwrap">
+    <div id="quilljswrapper" style="width:100%; padding-bottom:5px;">
+      <div class="quilleditor">
+        <div id="toolbar" style="display:none;">
+          <button class="ql-bold btn btn-default ql-btn " style="padding: 5px 10px;">B</button>
+          <button class="ql-italic btn btn-default ql-btn" style="padding: 5px 13px;">I</button>
+          <button class="ql-underline btn btn-default ql-btn" style="padding: 5px 10px;">U</button>
+          <button class="ql-image btn btn-default ql-btn" style="padding: 5px 10px;">Insert Image</button>
+        </div>
+        <div id='editor'></div>
+        {% csrf_token %}
+      </div>
+    </div>
+    <div class="topicbox"><textarea id="topic" placeholder="Topic here."></textarea></div>
+    <div align = "right" style="padding-bottom:30px;"><button type="submit" class="btn btn-primary addpostbtn" disabled="disabled">Add Context.</button></div>
+  </div>
+
+  <div class="dropdown" style="float:right; display:none;">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+      Options&nbsp;<span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sort by Topic</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sort by Data Added</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sort by Popularity</a></li>
+    </ul>
+  </div>
+  <br/>
+  {% autoescape off %}
+  {% for context in contarr %}
+  <div class="contqueswrapper" id="cont-{{context.0.id}}">
+    <div class="context-area" style="float:left; width:70%;" align="justify">
+      <div style="padding-bottom:50px;">
+        <div class="topicname" style="font-size:16pt;"><b>#</b>{{context.0.post.topic.topic}}</div>
+        <div class="context" data="{{context.0.id}}" style="margin-right:10px;">{{context.0.answer}}</div>
+        <span style="float:left; display:none;"><a class="folbtn {% if context.0.id in followed %}unfollowstate{% else %}followstate{% endif %}" href='javascript:;' data='{{context.0.id}}'>{% if context.0.id in followed %}Unpin This Context{% else %}Pin This Context{% endif %}</a></span>
+      </div>
+    </div>
+    <div class = "question-area" style="float:right; width:30%; text-align:right;">
+      <div class="contextstats"><a href="/context/{{context.0.id}}/"><span class="nums"></span></a></div>
+      {% for q in context.2 %}
+      {% for que in q %}
+      <div class="q-{{que.highlight.highlight_parent.id}} ques hid-{{que.highlight.id}}" style="display:none; padding-bottom:10px;"><a href="/question/{{que.id}}">{{que.question}}</a></div>
+      {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+  {% endautoescape %}
+  {% endif %}
+</div>
+<div id="empty"></div>
+{% endblock %}

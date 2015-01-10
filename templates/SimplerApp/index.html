@@ -18,20 +18,6 @@
 {% endif %}
 {% if user.is_authenticated %}
 	{% csrf_token %}
-		<div style="width:100%; padding-bottom:5px;">
-			<div class="quilleditor">
-				<div id="toolbar" style="display:none;">
-					<button class="ql-bold btn btn-default ql-btn " style="padding: 5px 10px;">B</button>
-					<button class="ql-italic btn btn-default ql-btn" style="padding: 5px 13px;">I</button>
-					<button class="ql-underline btn btn-default ql-btn" style="padding: 5px 10px;">U</button>
-					<button class="ql-image btn btn-default ql-btn" style="padding: 5px 10px;">Insert Image</button>
-				</div>
-				<div id='editor'></div>
-				{% csrf_token %}
-			</div>
-		</div>
-		<div class="topicbox"><textarea id="topic" placeholder="Topic here."></textarea></div>
-		<div align = "right" style="padding-bottom:30px;"><button type="submit" class="btn btn-primary addpostbtn" disabled="disabled">Add Context.</button></div>
 		<div class="dropdown" style="float:right; display:none;">
 			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
 				Options&nbsp;<span class="caret"></span>
