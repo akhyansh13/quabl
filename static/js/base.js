@@ -36,10 +36,6 @@ $(document).ready(function(){
 
 	var lastst = 0;
 
-	$(".addcontexttoggle").click(function(){
-		window.location = '/indexcontext/';
-	});
-
 	$(".getup").click(function(){
 		$thisgetup = $(this);
 		$.when(deferred_up($thisgetup)).then(function(){

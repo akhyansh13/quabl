@@ -172,3 +172,8 @@ textarea {
 .html{
   display:none;
 }
+
+#addcontexttoggle{
+  text-decoration:none;
+  color:#333;
+}
