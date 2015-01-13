@@ -2,18 +2,24 @@ $(document).ready(function(){
 
   var fixmeTop = $('#ftopbar').offset().top;
   $(window).scroll(function() {
+    var scrollmark = $("#biglogo").offset().top + $("#biglogo").height() + 10;
     var currentScroll = $(window).scrollTop();
-    if (currentScroll >= fixmeTop) {
+    if(currentScroll <= scrollmark){
+      if($("#biglogo").is(":visible")){
+        $("#logocontainer img").fadeOut('fast');
+      }
+    }
+    else{
       $("#logocontainer img").fadeIn('fast');
+    }
+    if (currentScroll >= fixmeTop) {
       $('#ftopbar').css({
         position: 'fixed',
         top: '0',
         left: '0'
       });
     } else {
-      if($("#biglogo").is(":visible")){
-        $("#logocontainer img").fadeOut('fast');
-      }
+
       $('#ftopbar').css({
         position: 'static'
       });
