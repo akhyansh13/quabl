@@ -21,7 +21,9 @@
 		<script src="{% static 'js/jquery-1.11.1.js' %}"></script>
 		<!--<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script> -->
 
+		{% block basejs %}
 		<script src="{% static 'js/base.js' %}"></script>
+		{% endblock %}
 
 		</script>
 
@@ -44,6 +46,8 @@
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
+		{% block header_block %}
+
 	<div id="header-wrapper">
 
 		<div id="profblock">
@@ -55,7 +59,6 @@
 			</div>
 		</div>
 
-		{% block header_block %}
 			<div class="header">
 			{% if user.is_authenticated %}
 				<ul class="nav navbar-nav navbar-right" id="scrollinstruct" style="font-size:13pt; display:none; padding-top:12px;">Scroll down to dismiss.</ul>

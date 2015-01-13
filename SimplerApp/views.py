@@ -14,6 +14,32 @@ import PIL
 from PIL import Image
 import urllib
 
+def tour(request):
+    context = RequestContext(request)
+
+    contextsimplers = Simpler.objects.all().filter(parent_list='contextsimpler')
+    context_dict = {'contexts':contextsimplers}
+
+    contextarr = []
+
+    for contextsimpler in contextsimplers:
+        highlightset = highlight.objects.all().filter(highlight_parent=contextsimpler)
+        hqarr = []
+        for h in highlightset:
+            hqarr.append(highlightq.objects.all().filter(highlight=h))
+        contextarr.append([contextsimpler, highlightset, hqarr])
+
+    context_dict['contarr'] = contextarr
+
+    if request.user.is_authenticated():
+        user_profile = UserProfile.objects.get(user=request.user)
+        followedposts = user_profile.followed_posts.split(';')
+        followed = []
+        for fpost in followedposts:
+            followed.append(int(fpost))
+        context_dict['followed'] = followed
+    return render_to_response('SimplerApp/tour.html', context_dict, context)
+
 def index(request):
     context = RequestContext(request)
 

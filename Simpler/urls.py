@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from SimplerApp.views import index, csimpler, question, makesimpler, register, user_login, user_logout, addpost, define, addanswer, requestbyuser, getUserProfile, follow, addpostext, getthumburl, defined, indexalt
+from SimplerApp.views import index, csimpler, question, makesimpler, register, user_login, user_logout, addpost, define, addanswer, requestbyuser, getUserProfile, follow, addpostext, getthumburl, defined, indexalt, tour
 from django.contrib import admin
 from django.conf import settings
 admin.autodiscover()
@@ -10,7 +10,8 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', index),
+    url(r'^$', tour),
+    url(r'^index/$', index),
     url(r'^question/(?P<question_id>\w+)/$', question),
     url(r'^context/(?P<simpler_id>\w+)/$', csimpler),
     url(r'^follow/$', follow),
