@@ -35,7 +35,7 @@ $(document).ready(function(){
 	$(".addpostbtn").click(function(){
 		var answer_html = editor.getHTML();
 		$('#empty').append(answer_html);
-		$("#empty").find("*").not("b,u,i,a,img").each(function(){
+		$("#empty").find("*").not("b,u,i,img").each(function(){
 			striptag_jq($(this));
 		});
 		var txt = $("#empty").html();
