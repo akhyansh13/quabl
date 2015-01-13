@@ -21,6 +21,7 @@ $(document).ready(function(){
   });
 
   $("#signin").click(function(){
+    window.scrollTo(0,0);
     $(this).hide('fast');
     $("#biglogo").hide();
     $("#introtext").hide();

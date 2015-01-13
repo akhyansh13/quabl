@@ -22,9 +22,9 @@
 
     <form id="login_form" method="post" action="/login/">
       {% csrf_token %}
-      <input type="text" name="username" value="" size="30" style="height:46px; font-size:22px; border-radius: 6px; border:none;" placeholder="Username"/>
+      <input type="text" name="username" value="" size="30" style="height:46px; font-size:22px; border-radius: 6px; border:none; padding:4px;" placeholder="Username"/>
       <br /><br/>
-      <input type="password" name="password" value="" size="30" style="height:46px; font-size:22px; border-radius: 6px; border:none;" placeholder="Password" />
+      <input type="password" name="password" value="" size="30" style="height:46px; font-size:22px; border-radius: 6px; border:none; padding:4px;" placeholder="Password" />
       <br /><br/>
 
       <button class="btn btn-default" type="submit" value="Login"><b>Log In</b></button>
