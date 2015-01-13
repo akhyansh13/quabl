@@ -11,11 +11,21 @@ $(document).ready(function(){
         left: '0'
       });
     } else {
-      $("#logocontainer img").fadeOut('fast');
+      if($("#biglogo").is(":visible")){
+        $("#logocontainer img").fadeOut('fast');
+      }
       $('#ftopbar').css({
         position: 'static'
       });
     }
+  });
+
+  $("#signin").click(function(){
+    $(this).hide('fast');
+    $("#biglogo").hide();
+    $("#introtext").hide();
+    $("#login").fadeIn('fast');
+    $("#logocontainer img").fadeIn('fast');
   });
 
 }); //document.ready closed.
