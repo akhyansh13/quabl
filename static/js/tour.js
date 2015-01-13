@@ -2,7 +2,7 @@ $(document).ready(function(){
 
   var fixmeTop = $('#ftopbar').offset().top;
   $(window).scroll(function() {
-    var scrollmark = $("#biglogo").offset().top + $("#biglogo").height() + 10;
+    var scrollmark = $("#biglogo").offset().top + $("#biglogo").height();
     var currentScroll = $(window).scrollTop();
     if(currentScroll <= scrollmark){
       if($("#biglogo").is(":visible")){
