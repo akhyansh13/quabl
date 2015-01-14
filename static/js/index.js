@@ -34,14 +34,20 @@ $(document).ready(function(){
 
 	$(".addpostbtn").click(function(){
 		var answer_html = editor.getHTML();
+		var link = ' ';
+		var atext = ' ';
 		$('#empty').append(answer_html);
+		$("#empty").find('a').each(function(){
+			link = $(this).attr("href");
+			atext = $(this).text();
+		});
 		$("#empty").find("*").not("b,u,i,img").each(function(){
 			striptag_jq($(this));
 		});
 		var txt = $("#empty").html();
 		var topic = $("#topic").val().split(' ').join('').toLowerCase();
 		$("#empty").empty();
-		$.get(('/addpost/'), {txt:txt, topic:topic}, function(data){
+		$.get(('/addpost/'), {txt:txt, topic:topic, link:link, atext: atext}, function(data){
 			window.location = '/context/' + data + '/';
 		});
 	});

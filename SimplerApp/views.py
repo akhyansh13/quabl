@@ -3,7 +3,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Simpler.settings')
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
-from models import Post, Simpler, UserForm, UserProfileForm, HighlightDesc, highlightq, highlight, topic, ReqByUser, UserNotification, UserProfile
+from models import Post, Simpler, UserForm, UserProfileForm, HighlightDesc, highlightq, highlight, topic, ReqByUser, UserNotification, UserProfile, Link
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
@@ -112,6 +112,7 @@ def addpost(request):
     ptopic = topic.objects.get_or_create(topic = request.GET['topic'])[0]
     p = Post.objects.get_or_create(topic=ptopic, post=context_text ,author=request.user.username, writer=request.user, context=context_text)[0]
     s = Simpler.objects.get_or_create(post=p, question=-1, answer=p.context, simpler_original=p.context, coeficient=1, parent_list='contextsimpler', author=request.user.username, writer=request.user, display=' ')[0]
+    l = Link.objects.get_or_create(atext = request.GET['atext'], href = request.GET['link'], simpler=s, post=p)[0]
     return HttpResponse(str(s.id))
 
 def question(request, question_id):
@@ -171,6 +172,8 @@ def makesimpler(request):
     parent_list = 'parent' + str(ques.highlight.highlight_parent.id) + ques.highlight.highlight_parent.parent_list
 
     c = Simpler.objects.get_or_create(post=post, question=questionid, answer=simpler_text, simpler_original=simpler_text, coeficient=coefficient, parent_list=parent_list, author=request.user.username, writer=request.user, display=' ')[0]
+    l = Link.objects.get_or_create(atext = request.GET['atext'], href = request.GET['link'], simpler=c)[0]
+
     return HttpResponse('success')
 
 def register(request):

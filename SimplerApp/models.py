@@ -90,6 +90,13 @@ class ReqByUser(models.Model):
     def __unicode__(self):
         return self.category + ' by ' + str(self.user.username)
 
+class Link(models.Model):
+
+    atext = models.CharField(max_length = 100000000, blank=True, null=True)
+    href = models.CharField(max_length = 100000000, blank=True, null=True)
+    simpler = models.ForeignKey(Simpler, null=True, blank=True)
+    post = models.ForeignKey(Post, null=True, blank = True)
+
 class UserForm(forms.ModelForm):
 
     password = forms.CharField(widget=forms.PasswordInput())

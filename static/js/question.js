@@ -239,12 +239,18 @@ $(document).mouseup(function(){
 		var qid = $(this).attr('id');
 		var answer_html = editor.getHTML();
 		$('#empty').append(answer_html);
+		var link = ' ';
+		var atext = ' ';
+		$("#empty").find('a').each(function(){
+			link = $(this).attr("href");
+			atext = $(this).text();
+		});
 		$("#empty").find("*").not("b,u,i,img").each(function(){
 			striptag_jq($(this));
 		});
 		var simpler_text = $("#empty").html();
 		$("#empty").empty();
-		$.get(('/makesimpler/'),{qid:qid, simpler_text:simpler_text,}, function(){
+		$.get(('/makesimpler/'),{qid:qid, simpler_text:simpler_text, link:link, atext: atext}, function(){
 			uri = '/question/' + qid;
 				window.location.href = uri;
 		});
