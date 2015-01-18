@@ -193,6 +193,12 @@ def register(request):
             profile.user = user
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
+                profpic = Image.open(profile.picture.path)  #Primitive image filter.
+                profpic = profpic.resize((300,300), PIL.Image.ANTIALIAS)
+                profpic.save(profile.picture.path)
+                thumbnail = profpic.resize((32,32), PIL.Image.ANTIALIAS)
+                thumbnail.save(str(profile.picture.path).replace('profile_images','thumbnails'), 'JPEG')
+
             profile.created = datetime.now()
             profile.modified = datetime.now()
             name_arr = profile.full_name.split(' ')
@@ -211,12 +217,6 @@ def register(request):
             user.save()
 
             registered = True
-
-            profpic = Image.open(profile.picture.path)  #Primitive image filter.
-            profpic = profpic.resize((300,300), PIL.Image.ANTIALIAS)
-            profpic.save(profile.picture.path)
-            thumbnail = profpic.resize((32,32), PIL.Image.ANTIALIAS)
-            thumbnail.save(str(profile.picture.path).replace('profile_images','thumbnails'), 'JPEG')
 
         else:
             print user_form.errors, profile_form.errors
@@ -377,7 +377,10 @@ def getUserProfile(request, user_id):
     if request_user_id == user_id_int:
         uprof = UserProfile.objects.get(user=request_user)
         req = {'username':uprof.user.username}
-        req['picurl'] = uprof.picture.url
+        if uprof.picture:
+            req['picurl'] = uprof.picture.url
+        else:
+            req['picurl'] = '/quablmedia/profile_images/default.jpeg'
         req['fullname'] = request_user.first_name + " " + request_user.last_name
         req['shortbio'] = uprof.shortbio
         data = json.dumps(req)
@@ -385,7 +388,10 @@ def getUserProfile(request, user_id):
         required_user = User.objects.get(id=user_id_int)
         required_user_profile = UserProfile.objects.get(user=required_user)
         req = {'username':required_user.username}
-        req['picurl'] = required_user_profile.picture.url
+        if required_user_profile.picture:
+            req['picurl'] = required_user_profile.picture.url
+        else:
+            req['picurl'] = '/quablmedia/profile_images/default.jpeg'
         req['fullname'] = required_user.first_name + " " + required_user.last_name
         req['shortbio'] = required_user_profile.shortbio
         data = json.dumps(req)
@@ -402,4 +408,7 @@ def getthumburl(request, username):
     context = RequestContext(request)
     requser = User.objects.get(username=username)
     requp = UserProfile.objects.get(user=requser)
-    return HttpResponse((requp.picture.url).replace('profile_images', 'thumbnails'))
+    if requp.picture:
+        return HttpResponse((requp.picture.url).replace('profile_images', 'thumbnails'))
+    else:
+        return HttpResponse('/quablmedia/thumbnails/default.jpeg')

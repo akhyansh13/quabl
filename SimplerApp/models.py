@@ -58,7 +58,7 @@ class highlightq(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     full_name = models.CharField(max_length=1000000, default=' ')
-    picture = models.ImageField(upload_to='profile_images', blank=True)
+    picture = models.ImageField(upload_to='profile_images', blank=True, null=True)
     followed_posts = models.CharField(max_length=10000000, default='-1;-1')
     followed_simplers = models.CharField(max_length=10000000, default='-1;-1')
     shortbio = models.CharField(max_length=10000000, default="Don't know :(")
