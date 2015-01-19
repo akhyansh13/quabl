@@ -16,29 +16,7 @@ import urllib
 
 def tour(request):
     context = RequestContext(request)
-
-    contextsimplers = Simpler.objects.all().filter(parent_list='contextsimpler')
-    context_dict = {'contexts':contextsimplers}
-
-    contextarr = []
-
-    for contextsimpler in contextsimplers:
-        highlightset = highlight.objects.all().filter(highlight_parent=contextsimpler)
-        hqarr = []
-        for h in highlightset:
-            hqarr.append(highlightq.objects.all().filter(highlight=h))
-        contextarr.append([contextsimpler, highlightset, hqarr])
-
-    context_dict['contarr'] = contextarr
-
-    if request.user.is_authenticated():
-        user_profile = UserProfile.objects.get(user=request.user)
-        followedposts = user_profile.followed_posts.split(';')
-        followed = []
-        for fpost in followedposts:
-            followed.append(int(fpost))
-        context_dict['followed'] = followed
-    return render_to_response('SimplerApp/tour.html', context_dict, context)
+    return render_to_response('SimplerApp/tour.html', context)
 
 def index(request):
     context = RequestContext(request)
@@ -57,13 +35,6 @@ def index(request):
 
     context_dict['contarr'] = contextarr
 
-    if request.user.is_authenticated():
-        user_profile = UserProfile.objects.get(user=request.user)
-        followedposts = user_profile.followed_posts.split(';')
-        followed = []
-        for fpost in followedposts:
-            followed.append(int(fpost))
-        context_dict['followed'] = followed
     return render_to_response('SimplerApp/index.html', context_dict, context)
 
 def indexalt(request):
@@ -82,28 +53,16 @@ def indexalt(request):
         contextarr.append([contextsimpler, highlightset, hqarr])
 
     context_dict['contarr'] = contextarr
-
-    if request.user.is_authenticated():
-        user_profile = UserProfile.objects.get(user=request.user)
-        followedposts = user_profile.followed_posts.split(';')
-        followed = []
-        for fpost in followedposts:
-            followed.append(int(fpost))
-        context_dict['followed'] = followed
     return render_to_response('SimplerApp/indexalt.html', context_dict, context)
 
 def follow(request):
     context = RequestContext(request)
     post_id = request.GET['post_id']
-    user_profile = UserProfile.objects.get(user=request.user)
-    followedposts = user_profile.followed_posts.split(';')
-    if post_id in followedposts:
-        del followedposts[followedposts.index(post_id)]
+    p = Post.objects.get(id=int(post_id))
+    if request.user in p.followers.all():
+        p.followers.remove(request.user)
     else:
-        followedposts.insert(-1, post_id)
-    user_profile.followed_posts = ';'.join(followedposts)
-    user_profile.modified = datetime.now()
-    user_profile.save()
+        p.followers.add(request.user)
     return HttpResponse('success')
 
 def addpost(request):
@@ -161,7 +120,7 @@ def csimpler(request, simpler_id):
 
     return render_to_response('SimplerApp/context.html', context_dict, context)
 
-def makesimpler(request):
+def makesimpler(request):                       #View that takes care of addition of answers.
     context = RequestContext(request)
     questionid = int(request.GET['qid'])
     simpler_text = request.GET['simpler_text']
@@ -173,6 +132,10 @@ def makesimpler(request):
 
     c = Simpler.objects.get_or_create(post=post, question=questionid, answer=simpler_text, simpler_original=simpler_text, coeficient=coefficient, parent_list=parent_list, author=request.user.username, writer=request.user, display=' ')[0]
     l = Link.objects.get_or_create(atext = request.GET['atext'], href = request.GET['link'], simpler=c)[0]
+
+    for u in post.followers.all():
+        if u != request.user:
+            UserNotification.objects.create(user=u, notification=request.user.username + ' added an answer to <div class="notifquestion notiflink" data-id="' + str(ques.id) + '">' + ques.question + '</div>', status="unread", created = datetime.now(), modified = datetime.now())
 
     return HttpResponse('success')
 
@@ -296,6 +259,10 @@ def define(request, post_id, simpler_id, answer_part, quabl, cques, highlightx):
 
     #return HttpResponseRedirect('/request/askforsimpler/postid:' + str(post_id) + ';simplerid:' + str(simpler_id) + ';')
 
+    for u in h.highlight_parent.post.followers.all():
+        if u != request.user:
+            UserNotification.objects.create(user=u, notification=f.req_by.username + ' added a question on <div data-id="'+ str(f.id) +'" class="simplernotif notiflink">' + h.highlight_parent.answer + '</div>', status='unread', created = datetime.now(), modified = datetime.now())
+
     return HttpResponse(simpler.answer + '<cqdelimit>' + str(simpler.id) + '<cqdelimit>' + cques + '<cqdelimit>' + str(f.highlight.id) + '<cqdelimit>' + str(f.highlight.highlight_parent.id) + '<cqdelimit>' + str(f.id))
 
 def defined(request, h_id, cques):
@@ -304,6 +271,10 @@ def defined(request, h_id, cques):
 
     h = highlight.objects.get(id=int(h_id))
     f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, created = datetime.now(), question = cques.replace('xqmx', '?'))[0]
+
+    for u in h.highlight_parent.post.followers.all():
+        if u != request.user:
+            UserNotification.objects.create(user=u, notification=f.req_by.username + ' added a question on <div data-id="'+ str(f.id) +'"class="simplernotif notiflink">' + h.highlight_parent.answer + '</div>', status='unread', created = datetime.now(), modified = datetime.now())
 
     return HttpResponse(str(f.highlight.highlight_parent.id) + '<cqdelimit>' + f.question + '<cqdelimit>' + str(f.highlight.id) + '<cqdelimit>' + str(f.highlight.highlight_parent.id) + '<cqdelimit>' + str(f.id))
 
@@ -360,14 +331,6 @@ def requestbyuser(request, category, description):
             c[0].frequency = c[0].frequency + 1
             c[0].save()
         return HttpResponseRedirect('/simpler/' + postid + '/')
-
-def addanswer(request, qid):
-    context = RequestContext(request)
-    q = highlightq.objects.get(id=qid)
-    #simpler = '<p>' + q.question + '</p>'
-    context_dict = {'q':q}
-    context_dict['post_id'] = q.highlight.highlight_parent.post.id
-    return render_to_response('SimplerApp/addsimpler.html', context_dict, context)
 
 def getUserProfile(request, user_id):
     context = RequestContext(request)

@@ -30,8 +30,8 @@ function deferred_up(getupinstance){		//Pre-fetching User Profiles.
 
 $(document).ready(function(){
 
-	$('.dropdown-menu').each(function(){
-		$(this).attr('style', "max-width:450px; min-width:450px; width:450px; min-height:" + screen.height + "px; max-height:" + screen.height + "px; height:450" + screen.height + "px;");
+	$(".notif").click(function(){
+		window.location = '/question/' + $(this).find(".notiflink").data("id");
 	});
 
 	var lastst = 0;

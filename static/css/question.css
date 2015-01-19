@@ -383,3 +383,9 @@ textarea {
   text-decoration:none;
   color:#333;
 }
+
+.dropdown-menu{
+  width: 400px;
+  height:300px;
+  overflow:auto;
+}
