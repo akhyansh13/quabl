@@ -389,3 +389,7 @@ textarea {
   height:300px;
   overflow:auto;
 }
+
+.answer img{
+    width:100%;
+}
