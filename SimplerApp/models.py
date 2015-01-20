@@ -13,12 +13,13 @@ class topic(models.Model):
 class Post(models.Model):
     post = models.CharField(max_length=10000000, default=' ')
     author = models.CharField(max_length=100000, default=' ')
-    writer = models.ForeignKey(User)
+    writer = models.ForeignKey(User, related_name="writer")
     topic = models.ForeignKey(topic, null=True, blank=True)
     explores = models.IntegerField(null = False, blank = False, default = 0)
     context = models.CharField(max_length=10000000000, null = False, blank=False, default=' ')
     created = models.DateTimeField(default=datetime.now())
     modified = models.DateTimeField(default=datetime.now())
+    followers = models.ManyToManyField(User, null=True, blank=True)
     def __unicode__(self):
         post_less = show_less(self.post)
         return post_less
@@ -58,9 +59,7 @@ class highlightq(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     full_name = models.CharField(max_length=1000000, default=' ')
-    picture = models.ImageField(upload_to='profile_images', blank=True)
-    followed_posts = models.CharField(max_length=10000000, default='-1;-1')
-    followed_simplers = models.CharField(max_length=10000000, default='-1;-1')
+    picture = models.ImageField(upload_to='profile_images', blank=True, null=True)
     shortbio = models.CharField(max_length=10000000, default="Don't know :(")
     created = models.DateTimeField(default=datetime.now())
     modified = models.DateTimeField(default=datetime.now())
@@ -68,11 +67,9 @@ class UserProfile(models.Model):
         return self.user.username
 
 class UserNotification(models.Model):
-    user = models.CharField(max_length=1000000)
+    user = models.ForeignKey(User)
     notification = models.CharField(max_length=10000000)
     status = models.CharField(max_length=10)
-    postid = models.IntegerField(null=False, default=-1)
-    simplerid = models.IntegerField(null=False, default=-1)
     created = models.DateTimeField(default=datetime.now())
     modified = models.DateTimeField(default=datetime.now())
     def __unicode__(self):

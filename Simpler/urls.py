@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from SimplerApp.views import index, csimpler, question, makesimpler, register, user_login, user_logout, addpost, define, addanswer, requestbyuser, getUserProfile, follow, addpostext, getthumburl, defined, indexalt, tour
+from SimplerApp.views import index, csimpler, question, makesimpler, register, user_login, user_logout, addpost, define, requestbyuser, getUserProfile, follow, addpostext, getthumburl, defined, indexalt, tour
 from django.contrib import admin
 from django.conf import settings
 admin.autodiscover()
@@ -22,7 +22,6 @@ urlpatterns = patterns('',
     url(r'^addpost/$', addpost),
     url(r'^define/(?P<post_id>\w+)/(?P<simpler_id>\w+)/ans/(?P<answer_part>[\w|\W]+)/quabl/(?P<quabl>[\w|\W]*)/cques/(?P<cques>[\w|\W]*)/highlight/(?P<highlightx>[\w|\W]*)/$', define),
     url(r'^defined/(?P<h_id>\w+)/(?P<cques>[\w|\W]*)/$', defined),
-    url(r'^addsimpler/(?P<qid>\w+)/$', addanswer),
     url(r'^request/(?P<category>[\w|\W]+)/(?P<description>[\w|\W]+)/$', requestbyuser),
     url(r'^userprof/(?P<user_id>\w+)/$', getUserProfile),
     url(r'^addpostext/$', addpostext),

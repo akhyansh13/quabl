@@ -36,7 +36,7 @@
 					<div style="padding-bottom:50px;">
 						<div class="topicname" style="font-size:16pt;"><b>#</b>{{context.0.post.topic.topic}}</div>
 						<div class="context" data="{{context.0.id}}" style="margin-right:10px;">{{context.0.answer}}</div>
-						<span style="float:left;"><a class="folbtn {% if context.0.id in followed %}unfollowstate{% else %}followstate{% endif %}" href='javascript:;' data='{{context.0.id}}'>{% if context.0.id in followed %}Unpin This Context{% else %}Pin This Context{% endif %}</a></span>
+						<span style="float:left;"><a class="folbtn {% if user in context.0.post.followers.all %}unfollowstate{% else %}followstate{% endif %}" href='javascript:;' data='{{context.0.post.id}}'>{% if user in context.0.post.followers.all %}Unpin This Context{% else %}Pin This Context{% endif %}</a></span>
 					</div>
 				</div>
 						<div class = "question-area" style="float:right; width:30%; text-align:right;">
