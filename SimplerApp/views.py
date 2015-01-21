@@ -72,6 +72,7 @@ def addpost(request):
     p = Post.objects.get_or_create(topic=ptopic, post=context_text ,author=request.user.username, writer=request.user, context=context_text)[0]
     s = Simpler.objects.get_or_create(post=p, question=-1, answer=p.context, simpler_original=p.context, coeficient=1, parent_list='contextsimpler', author=request.user.username, writer=request.user, display=' ')[0]
     l = Link.objects.get_or_create(atext = request.GET['atext'], href = request.GET['link'], simpler=s, post=p)[0]
+    p.followers.add(request.user)
     return HttpResponse(str(s.id))
 
 def question(request, question_id):
@@ -133,6 +134,8 @@ def makesimpler(request):                       #View that takes care of additio
     c = Simpler.objects.get_or_create(post=post, question=questionid, answer=simpler_text, simpler_original=simpler_text, coeficient=coefficient, parent_list=parent_list, author=request.user.username, writer=request.user, display=' ')[0]
     l = Link.objects.get_or_create(atext = request.GET['atext'], href = request.GET['link'], simpler=c)[0]
 
+    post.followers.add(request.user)
+
     for u in post.followers.all():
         if u != request.user:
             UserNotification.objects.create(user=u, notification=request.user.username + ' added an answer to <div class="notifquestion notiflink" data-id="' + str(ques.id) + '">' + ques.question + '</div>', status="unread", created = datetime.now(), modified = datetime.now())
@@ -155,12 +158,13 @@ def register(request):
             profile = profile_form.save(commit=False)
             profile.user = user
             if 'picture' in request.FILES:
-                profile.picture = request.FILES['picture']
-                profpic = Image.open(profile.picture.path)  #Primitive image filter.
-                profpic = profpic.resize((300,300), PIL.Image.ANTIALIAS)
-                profpic.save(profile.picture.path)
-                thumbnail = profpic.resize((32,32), PIL.Image.ANTIALIAS)
-                thumbnail.save(str(profile.picture.path).replace('profile_images','thumbnails'), 'JPEG')
+                try:
+                    profile.picture = request.FILES['picture']
+                    profpic = Image.open(profile.picture.url)  #Primitive image filter.
+                    profpic = profpic.resize((300,300), PIL.Image.ANTIALIAS)
+                    profpic.save(profile.picture.url)
+                    thumbnail = profpic.resize((32,32), PIL.Image.ANTIALIAS)
+                    thumbnail.save(str(profile.picture.path).replace('profile_images','thumbnails'), 'JPEG')
 
             profile.created = datetime.now()
             profile.modified = datetime.now()
@@ -259,6 +263,8 @@ def define(request, post_id, simpler_id, answer_part, quabl, cques, highlightx):
 
     #return HttpResponseRedirect('/request/askforsimpler/postid:' + str(post_id) + ';simplerid:' + str(simpler_id) + ';')
 
+    h.highlight_parent.post.followers.add(request.user)
+
     for u in h.highlight_parent.post.followers.all():
         if u != request.user:
             UserNotification.objects.create(user=u, notification=f.req_by.username + ' added a question on <div data-id="'+ str(f.id) +'" class="simplernotif notiflink">' + h.highlight_parent.answer + '</div>', status='unread', created = datetime.now(), modified = datetime.now())
@@ -271,6 +277,8 @@ def defined(request, h_id, cques):
 
     h = highlight.objects.get(id=int(h_id))
     f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, created = datetime.now(), question = cques.replace('xqmx', '?'))[0]
+
+    h.highlight_parent.post.followers.add(request.user)
 
     for u in h.highlight_parent.post.followers.all():
         if u != request.user:
