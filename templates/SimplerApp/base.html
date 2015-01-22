@@ -15,7 +15,7 @@
 		<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
 		<meta http-equiv="pragma" content="no-cache" />
 
-		<title>{% block title_block %}{% if notifcount == 0 %}{% else %}({{notifcount}}){% endif %}Quabl{% endblock %}</title>
+		<title>{% block title_block %}{% if user.is_authenticated %}{% if notifcount == 0 %}{% else %}({{notifcount}}){% endif %}{% endif %}Quabl{% endblock %}</title>
 
 		<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
 		<script src="{% static 'js/jquery-1.11.1.js' %}"></script>
@@ -68,9 +68,6 @@
 					<li class="active getup" data="{{user.id}}">
 						<a href="javascript:;" style="color:#444;">{{user.username}}</a>
 					</li>
-					<li class="active">
-						<a href="/logout/" style="color:#444;"><span class="glyphicon glyphicon-log-out"></span></a>
-					</li>
 					<li class="dropdown">
 					{% autoescape off %}
 						<a href="#" class="dropdown-toggle notifications" data-toggle="dropdown" style="color:#444;"><span id='notifdisp'>{{unotifcount}}&nbsp;&nbsp;</span><b class="glyphicon glyphicon-exclamation-sign"></b></a>
@@ -91,6 +88,9 @@
 							{% endif %}
 						</ul>
 					{% endautoescape %}
+					</li>
+					<li class="active">
+						<a href="/logout/" style="color:#444;"><span class="glyphicon glyphicon-log-out"></span></a>
 					</li>
 				</ul>
 			{% endif %}
