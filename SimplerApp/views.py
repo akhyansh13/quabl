@@ -157,13 +157,16 @@ def register(request):
 
             profile = profile_form.save(commit=False)
             profile.user = user
-            if 'picture' in request.FILES:
-                profile.picture = request.FILES['picture']
-                profpic = Image.open(profile.picture.url)  #Primitive image filter.
-                profpic = profpic.resize((300,300), PIL.Image.ANTIALIAS)
-                profpic.save(profile.picture.url)
-                thumbnail = profpic.resize((32,32), PIL.Image.ANTIALIAS)
-                thumbnail.save(str(profile.picture.path).replace('profile_images','thumbnails'), 'JPEG')
+            try:
+                if 'picture' in request.FILES:
+                    profile.picture = request.FILES['picture']
+                    profpic = Image.open(profile.picture.url)  #Primitive image filter.
+                    profpic = profpic.resize((300,300), PIL.Image.ANTIALIAS)
+                    profpic.save(profile.picture.url)
+                    thumbnail = profpic.resize((32,32), PIL.Image.ANTIALIAS)
+                    thumbnail.save(str(profile.picture.path).replace('profile_images','thumbnails'), 'JPEG')
+            except:
+                pass
             profile.created = datetime.now()
             profile.modified = datetime.now()
             name_arr = profile.full_name.split(' ')
