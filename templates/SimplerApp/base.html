@@ -15,7 +15,7 @@
 		<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
 		<meta http-equiv="pragma" content="no-cache" />
 
-		<title>{% block title_block %}{% if user.is_authenticated %}{% if notifcount == 0 %}{% else %}({{notifcount}}){% endif %}{% endif %}Quabl{% endblock %}</title>
+		<title>{% block title_block %}{% if user.is_authenticated %}{% if unotifcount == 0 %}{% else %}({{unotifcount}}){% endif %}{% endif %}Quabl{% endblock %}</title>
 
 		<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
 		<script src="{% static 'js/jquery-1.11.1.js' %}"></script>
@@ -109,7 +109,9 @@
 	</body>
 	<script src="{% static 'js/bootstrap.js' %}"></script>
 	<script src="{% static 'quill/quill.js' %}"></script>
-
+	<script type="text/javascript"
+	src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script>
 <script>
     var editor = new Quill('#editor', {
     modules: {
