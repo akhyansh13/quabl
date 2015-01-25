@@ -105,6 +105,27 @@ def question(request, question_id):
 
     return render_to_response('SimplerApp/question.html', context_dict, context)
 
+def sutton(request):
+    context = RequestContext(request)
+
+    answers = Simpler.objects.all().filter(question=-100)
+    context_dict = {'anscount': len(answers)}
+
+    highlights = highlight.objects.all()
+    questions = highlightq.objects.all()
+    rquestions = []
+
+    for answer in answers:
+        highs = highlights.filter(highlight_parent=answer)
+        for high in highs:
+            rquestions.extend(questions.filter(highlight=high))
+
+    context_dict['rquestions'] = rquestions
+    context_dict['answers'] = answers
+
+    return render_to_response('SimplerApp/content.html', context_dict, context)
+
+
 def csimpler(request, simpler_id):
     context = RequestContext(request)
 
