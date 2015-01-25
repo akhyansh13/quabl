@@ -33,7 +33,7 @@ def index(request):
             hqarr.append(highlightq.objects.all().filter(highlight=h))
         contextarr.append([contextsimpler, highlightset, hqarr])
 
-    contextarr.reverse()
+    contextarr = contextarr[::-1]
 
     context_dict['contarr'] = contextarr
 
@@ -54,7 +54,7 @@ def indexalt(request):
             hqarr.append(highlightq.objects.all().filter(highlight=h))
         contextarr.append([contextsimpler, highlightset, hqarr])
 
-    contextarr.reverse()
+    contextarr = contextarr[::-1]
 
     context_dict['contarr'] = contextarr
     return render_to_response('SimplerApp/indexalt.html', context_dict, context)
