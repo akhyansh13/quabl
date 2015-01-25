@@ -54,6 +54,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'SimplerApp',
+    'haystack',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -104,3 +105,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
     "SimplerApp.context_processors.notifs_processor",
 )
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        'URL': 'http://127.0.0.1:8983/solr'
+    },
+}
