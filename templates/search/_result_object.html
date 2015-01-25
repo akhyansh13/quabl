@@ -1,0 +1,16 @@
+{% with obj=result.object %}</pre>
+<div class="accordion-group">
+<div class="accordion-heading"><a class="accordion-toggle" href="collapse_{{ obj.id }}" data-toggle="collapse" data-parent="#accordion2">
+ {{ obj.post }}
+ </a>
+<div style="padding: 8px 15px;">
+Topic: {{obj.topic.topic}}
+Author: {{ obj.author }}
+</div>
+</div>
+<div id="collapse_{{ obj.id }}" class="accordion-body collapse in">
+
+</div>
+</div>
+<pre>
+{% endwith %}
