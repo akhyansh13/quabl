@@ -1,3 +1,11 @@
+{% for result in page.object_list %}
+ {% include 'search/_result_object.html' %}
+ {% empty %}
+ 
+ <li> No results found. (Note that only full words are matched.)</li>
+ 
+ {% endfor %}
+{% comment %}
 {% extends 'search/base.html' %}
  
 {% block content %}</pre>
@@ -26,3 +34,4 @@ No results found.
  
 {% endif %}
 {% endblock %}
+{% endcomment %}

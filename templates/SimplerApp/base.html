@@ -33,6 +33,7 @@
 		<!-- Bootstrap -->
 
 		<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/dropdownsearch.css' %}">
 
 		{% block css_block %}{% endblock %}
 
@@ -97,13 +98,26 @@
 			{% endif %}
 
             <span style="padding-left:13%;"><a href="/index/"><img src="/quablmedia/logo.svg" height="54" style="border-bottom-left-radius:3px;border-bottom-right-radius:3px;"></a>
-							<textarea id="searchbox" placeholder="Search for contexts."></textarea>
+    <form class="search" method="post" action="index.html">
+      <input id="q" type="search" name="q" placeholder="Search..." autocomplete="off">
+
+      <ul id="searchresults" class="search-ac">
+        <li><a href="index.html">Search Result #1<br><span>Description...Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description.Description./<span></a></li>
+        <li><a href="index.html">Search Result #2<br><span>Description...</span></a></li>
+        <li><a href="index.html">Search Result #3<br><span>Description...</span></a></li>
+        <li><a href="index.html">Search Result #4</a></li>
+      </ul>
+    </form>
+
+
+<!--							<textarea id="searchbox" placeholder="Search for contexts."></textarea> -->
 						</span>
 			</div>
 		</div>
 		{% endblock %}
 	</head>
 	<body>
+    <p id="temptemp"> </p>
 		{% block sideblock %}{% endblock %}
 			<div class="container">
 			{% block body_block %}{% endblock %}

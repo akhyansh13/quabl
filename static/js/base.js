@@ -102,4 +102,7 @@ $(document).ready(function(){
 			$('.rnotif').hide();
 		}
 	});
+    $(document).keyup(function(){
+    $.get(("/search/?q="+$("#q").val()),function(data){$("#searchresults").html(data)});
+        });
 });

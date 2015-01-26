@@ -85,12 +85,12 @@ $(document).ready(function(){
 			$(".ql-container").height(200);
 		}
 
-		if (!(editor.getText().trim())) {
+/*		if (!(editor.getText().trim())) {
 			$(".addpostbtn").attr("disabled", "true");
 		}
 		else{
 			$(".addpostbtn").removeAttr("disabled");
-		}
+		}*/
 	});
 
 	$(".postlink").each(function(){
