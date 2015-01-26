@@ -65,8 +65,6 @@
 			{% if user.is_authenticated %}
 				<ul class="nav navbar-nav navbar-right" id="scrollinstruct" style="font-size:13pt; display:none; padding-top:12px;">Scroll down to dismiss.</ul>
 				<ul class="nav navbar-nav navbar-right" id="menubtns" style="font-size:13pt;">
-					<li><a id="addcontexttoggle" href='/indexcontext/'>+Add Context</a>
-					</li>
 					<li class="active getup" data="{{user.id}}">
 						<a href="javascript:;" style="color:#444;">{{user.username}}</a>
 					</li>

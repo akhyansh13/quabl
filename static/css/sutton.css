@@ -246,7 +246,6 @@ textarea {
 .nthanswer{
   position:relative;
   margin-bottom:20px;
-  min-height:150px;
 }
 
 .relques{
@@ -405,4 +404,9 @@ textarea {
   border: solid 1px #C0C0C0;
   padding-top: 9px;
   padding-left: 7px;
+}
+
+h1{
+  font-size:22pt;
+  padding-bottom: 10px;
 }
