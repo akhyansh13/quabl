@@ -28,6 +28,7 @@ urlpatterns = patterns('',
     url(r'^thumb/(?P<username>\w+)/$', getthumburl),
     url(r'^indexcontext/$', indexalt),
     url(r'^sutton/$', sutton),
+    url(r'^search/$', include('haystack.urls')),
 )
 
 if settings.DEBUG:
