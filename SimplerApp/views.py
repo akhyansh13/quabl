@@ -409,3 +409,9 @@ def getthumburl(request, username):
         return HttpResponse((requp.picture.url).replace('profile_images', 'thumbnails'))
     else:
         return HttpResponse('/quablmedia/thumbnails/default.jpeg')
+
+def rearrange(request):
+    context = RequestContext(request)
+    ph = request.GET['ph']
+    Simpler.objects.create(post=Post.objects.get(post='Sutton RL book.'), question=-100, answer = ph, coeficient = 0, parent_list='RL Text', author = 'Sutton')
+    return HttpResponse('success')

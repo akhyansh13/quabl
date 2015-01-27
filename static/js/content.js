@@ -396,6 +396,19 @@ $(document).mouseup(function(){
 			}
 		}
 	});
+
+	/*$("#rearrange").click(function(){
+		$(".answer").each(function(){
+			var parr = $(this).html().split('<p>');
+			var len = parr.length;
+			for (var i=0; i<len; i++) {
+				var ph = '<p>'+parr[i]+'</p>';
+				$.get(('/rearrange/'), {ph:ph}, function(){
+				});
+			}
+		});
+	}); */
+
 }); //document.ready close.
 
 function simpler_cache(input){
