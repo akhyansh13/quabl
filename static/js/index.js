@@ -32,149 +32,6 @@ $(document).ready(function(){
 
 	var onehview = false;
 
-	$(".addpostbtn").click(function(){
-		var answer_html = editor.getHTML();
-		var link = ' ';
-		var atext = ' ';
-		$('#empty').append(answer_html);
-		$("#empty").find('a').each(function(){
-			link = $(this).attr("href");
-			atext = $(this).text();
-		});
-		$("#empty").find("*").not("b,u,i,img").each(function(){
-			striptag_jq($(this));
-		});
-		var txt = $("#empty").html();
-		var topic = $("#topic").val().split(' ').join('').toLowerCase();
-		$("#empty").empty();
-		$.get(('/addpost/'), {txt:txt, topic:topic, link:link, atext: atext}, function(data){
-			window.location = '/context/' + data + '/';
-		});
-	});
-
-	$(document).mouseup(function(){
-		var ql_height = 0;
-		$(".ql-line").each(function(){
-			ql_height = ql_height + $(this).height();
-		});
-
-		if(ql_height >= 180){
-			$(".ql-container").height(ql_height);
-		}
-		else{
-			$(".ql-container").height(200);
-		}
-
-	});
-
-	$(document).keyup(function(){				//Controls the deactivation/activation of the Add Answer button.
-
-		var ql_height = 0;
-		$(".ql-line").each(function(){
-			ql_height = ql_height + $(this).height();
-		});
-
-		if(ql_height >= 180){
-			$(".ql-container").height(ql_height);
-		}
-		else{
-			$(".ql-container").height(200);
-		}
-
-/*		if (!(editor.getText().trim())) {
-			$(".addpostbtn").attr("disabled", "true");
-		}
-		else{
-			$(".addpostbtn").removeAttr("disabled");
-		}*/
-	});
-
-	$(".postlink").each(function(){
-		var height = $(this).height();
-		$(this).parent().find(".posttopic").height(height-20);
-	});
-
-	//$(".topicname").attr("style","position: relative; top: 30%; font-size:16pt; color:#777;");
-
-	/*$(".hidtopic").each(function(){
-		var topic = $(this).html();
-		$(this).parent().parent().find(".topicname").html('<i>' + topic + '</i><span style="font-size:12pt;">&nbsp;TOPIC</span>');
-	});
-	$(".hidtopic2").each(function(){
-		var topic = $(this).html();
-		$(this).parent().parent().find(".topicname").html(topic);
-	});*/
-
-
-	$(".folbtn").click(function(){		//AJAX request for follow/unfollow button.
-		var post_id = $(this).attr('data');
-		$.get(('/follow/'), {post_id:post_id});
-	});
-
-	$(".folbtn").click(function(){		//This function inverts between 'Unfollow' or 'Follow'
-		var $this = $(this);
-		var state = $this.attr("class").split(" ")[1];
-		if(state == 'unfollowstate'){
-				$this.html('Pin This Context');
-				$this.removeClass('unfollowstate');
-				$this.addClass('followstate');
-			}
-			else{
-				$this.html('Unpin This Context');
-				$this.removeClass('followstate');
-				$this.addClass('unfollowstate');
-			}
-	});
-
-	$(document).on("click",".highlight", function(){
-
-		$this = $(this);
-
-		$.when(simpler_cache($this.closest(".context"))).then(function(){
-
-			highlight_parent = $this.closest(".context");
-			var quabl_text = $this.find('.html').html();
-			var h_id = $this.data('id');
-			$this.closest(".context").find(".highlight").not($this).remove();
-			var simpler_html = $this.closest(".context").html();
-			var h_html = $('<div>').append($this.clone()).html();
-			var h_html_dummy = h_html.replace('class="highlight"', 'class="highlight_dummy"');
-			var new_simpler_html = simpler_html.replace(h_html + quabl_text, '<span class="quabl_full">' + h_html_dummy + quabl_text + '</span>');
-			$this.closest(".context").empty().append(new_simpler_html);
-
-			$(".ques").each(function() {
-				highlightid = $(this).attr('class').split('hid-')[1];
-				if (highlightid == h_id) {
-					$(this).show();
-					$(this).parent().find('.contextstats').hide();
-					//var offset = $this.closest(".context").offset();
-					//$(this).offset({top: offset.top});
-				}
-			});
-
-			var context_id = $this.closest(".context").attr('data');
-			//$('#' + context_id).hide();
-			//$('.contextstats').hide();
-
-			setTimeout(function(){
-				onehview = true;
-			},10);
-
-		});
-
-	});
-
-	$('body').on('click', function(){
-		$.when(checkifques()).then(function(){
-			if(onehview && !window.clickonques){
-				highlight_parent.empty().append(simpler_html_cache);
-				onehview = false;
-				$('.ques').hide();
-				$('.contextstats').show();
-			}
-		});
-	});
-
 	blink("#loaddot");
 	setTimeout(function(){
 		$("#loaddot").remove();
@@ -182,27 +39,14 @@ $(document).ready(function(){
 		$(".header").show();
 	},1000);
 
-
-}); //document.ready closed.
-
-function simpler_cache(input){
-	var cache_defer = $.Deferred();
-	simpler_html_cache = input.html();
-	setTimeout(function(){
-		cache_defer.resolve();
-	},10);
-	return cache_defer;
-}
-
-function checkifques(){
-	var oqd = $.Deferred();
-	$(".ques").click(function(){
-		window.clickonques = true;
+	$("#linksnav").click(function(){
+		$("#linkcontainer").toggle();
 	});
-	setTimeout(function(){
-		oqd.resolve();
-	},5);
-}
+
+	$("#suttonlink").click(function(){
+		window.location = '/sutton/';
+	});
+}); //document.ready closed.
 
 function blink(selector){
 	$(selector).fadeOut('slow', function(){
@@ -210,13 +54,4 @@ function blink(selector){
 			blink(this);
 		});
 	});
-}
-
-function placeholder(phstring){
-	$(".ql-line").remove();
-	$("#ql-editor-1").append('<div class="ql-line" id="ql-line-1" style="color:#C0C0C0;">'+ phstring + '</div>')
-}
-
-function striptag_jq(element){
-	element.contents().unwrap();
 }

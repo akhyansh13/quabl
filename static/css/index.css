@@ -61,11 +61,11 @@
 	border-bottom: 1px solid #FFA500;
 }
 
-.coursenav:hover{
-	border-bottom: none;
-}
-
 #coursenavwrap{
 	padding-top:20px;
 	padding-bottom:20px;
+}
+
+#suttonlink:hover, #scribelink:hover{
+	background-color:#F5F5F5;
 }
