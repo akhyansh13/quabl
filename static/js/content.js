@@ -362,15 +362,19 @@ $(document).mouseup(function(){
 
 	});
 
+if($("#scrollto").html()!='default'){
 	$(".answer").each(function(){
 		if($("#scrollto").html()==$(this).data('id')){
 			window.ansscroll = $(this);
 		}
 	});
 
+
 		$('html, body').animate({
 			scrollTop: window.ansscroll.offset().top - 55
 		}, 500);
+
+	}
 
 	$(window).on("scroll", function(){
 		var scrolltop = $(window).scrollTop();
