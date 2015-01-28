@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from SimplerApp.views import index, csimpler, question, makesimpler, register, user_login, user_logout, addpost, define, requestbyuser, getUserProfile, follow, addpostext, getthumburl, defined, indexalt, tour, sutton, rearrange
+from SimplerApp.views import index, csimpler, question, makesimpler, register, user_login, user_logout, addpost, define, requestbyuser, getUserProfile, follow, addpostext, getthumburl, defined, indexalt, tour, sutton, rearrange, suttonscroll, changenotifstatus
 from django.contrib import admin
 from django.conf import settings
 admin.autodiscover()
@@ -28,7 +28,9 @@ urlpatterns = patterns('',
     url(r'^thumb/(?P<username>\w+)/$', getthumburl),
     url(r'^indexcontext/$', indexalt),
     url(r'^sutton/$', sutton),
+    url(r'^sutton/(?P<scrollto>\w+)/$', suttonscroll),
     url(r'^rearrange/$', rearrange),
+    url(r'^changenotifstatus/$', changenotifstatus),
     url(r'^search/$', include('haystack.urls')),
 )
 

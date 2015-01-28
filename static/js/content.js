@@ -362,24 +362,15 @@ $(document).mouseup(function(){
 
 	});
 
-	blink("#loaddot");
-	setTimeout(function(){
-		$("#loaddot").remove();
-		$(".container").show();
-		$(".header").show();
-		if(parseInt($("#anscounter").html())==0){
-			$(".quilleditor").show();
-			$(".nthanswer").hide();
-			$("#anscounti").hide();
-			$("#anscountf").show();
-			$(this).hide();
-			$("#bull").hide();
-			$(".jumptotext").hide();
-			$("#fixedpane").hide();
-			$("#numjumwrapper").html("View 0 Answers");
-			$("#upperwrapper").css("margin-bottom", "10px");
+	$(".answer").each(function(){
+		if($("#scrollto").html()==$(this).data('id')){
+			window.ansscroll = $(this);
 		}
-	},1000);
+	});
+
+		$('html, body').animate({
+			scrollTop: window.ansscroll.offset().top - 55
+		}, 500);
 
 	$(window).on("scroll", function(){
 		var scrolltop = $(window).scrollTop();

@@ -16,7 +16,7 @@
 {% block body_block %}
 
 {% autoescape off %}
-
+<div id='scrollto' style="display:none;">{% if scrollto %}{{scrollto}}{% else %}default{% endif %}</div>
 <div id="upperwrapper">
 
   <div class="mainques">Reinforcement Learning by Richard S. Sutton</div>

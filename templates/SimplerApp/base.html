@@ -79,11 +79,11 @@
 								<a href="javascript:;" class="vrn" style="float:right; text-align:right;">View Read Notifications</a>
 								{% endif %}
 								{% for unotif in unreadnotifs %}
-									<li><a href="javascript:;" class="unotif notif" style="white-space:normal;">{{unotif.notification}}</a></li><hr/>
+									<li><a href="javascript:;" class="unotif notif" data-id="{{unotif.id}}" style="white-space:normal;color:blue;">{{unotif.notification}}</a></li><hr/>
 								{% endfor %}
 
 								{% for rnotif in readnotifs %}
-									<li><a href='javascript:;' class="rnotif notif" style="white-space:normal;">{{rnotif.notification}}</a></li><hr/>
+									<li><a href='javascript:;' class="rnotif notif" data-id="{{rnotif.id}}" style="white-space:normal;">{{rnotif.notification}}</a></li><hr/>
 								{% endfor %}
 							{% endif %}
 						</ul>
@@ -97,15 +97,13 @@
 
             <span style="padding-left:13%;"><a href="/index/"><img src="/quablmedia/logo.svg" height="54" style="border-bottom-left-radius:3px;border-bottom-right-radius:3px;"></a>
     <form class="search" method="post" action="index.html">
-      <input id="q" type="search" name="q" placeholder="Search..." autocomplete="off">
+      <input id="q" type="search" name="q" placeholder="Skip to a context or part of an answer." autocomplete="off">
 
-      <ul id="searchresults" class="search-ac">
-      </ul>
-    </form>
+      			<ul id="searchresults" class="search-ac">
+      			</ul>
 
-
-<!--							<textarea id="searchbox" placeholder="Search for contexts."></textarea> -->
-						</span>
+    			</form>
+				</span>
 			</div>
 		</div>
 		{% endblock %}

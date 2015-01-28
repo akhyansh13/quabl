@@ -30,8 +30,17 @@ function deferred_up(getupinstance){		//Pre-fetching User Profiles.
 
 $(document).ready(function(){
 
+	$(document).on('click', '.search-ac li', function(){
+		window.location = '/sutton/' + $(this).find('.id').html();
+	});
+
 	$(".notif").click(function(){
-		window.location = '/question/' + $(this).find(".notiflink").data("id");
+		if($(this).hasClass(unotif)){
+			$(this).data("id");
+			$.get(('/changenotifstatus/'), {id:id}, function(){
+				window.location = '/question/' + $(this).find(".notiflink").data("id");
+			});
+		}
 	});
 
 	var lastst = 0;
@@ -102,7 +111,10 @@ $(document).ready(function(){
 			$('.rnotif').hide();
 		}
 	});
-    $(document).keyup(function(){
-    $.get(("/search/?q="+$("#q").val()),function(data){$("#searchresults").html(data)});
-        });
-});
+    $("#q").bind('input propertychange', function(){
+    $.get(("/search/?q="+$("#q").val()),function(data){
+				$("#searchresults").html(data);
+			});
+  	});
+
+	});//document.ready close

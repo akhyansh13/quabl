@@ -17,6 +17,5 @@ Author: {{ obj.author }}
 {% endcomment %}
 
 {% with obj=result.object %}
-<li>{% autoescape off %} {{ obj.answer }} {% endautoescape %}</li>
+<li>{% autoescape off %} {{ obj.answer }}<span class='id' style='display:none;'>{{ obj.id }}</span> {% endautoescape %}</li>
 {% endwith %}
-

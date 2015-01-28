@@ -125,6 +125,28 @@ def sutton(request):
 
     return render_to_response('SimplerApp/content.html', context_dict, context)
 
+def suttonscroll(request, scrollto):
+    context = RequestContext(request)
+
+    answers = Simpler.objects.all().filter(question=-100)
+    context_dict = {'anscount': len(answers)}
+
+    highlights = highlight.objects.all()
+    questions = highlightq.objects.all()
+    rquestions = []
+
+    for answer in answers:
+        highs = highlights.filter(highlight_parent=answer)
+        for high in highs:
+            rquestions.extend(questions.filter(highlight=high))
+
+    context_dict['rquestions'] = rquestions
+    context_dict['answers'] = answers
+
+    context_dict['scrollto'] = scrollto
+
+    return render_to_response('SimplerApp/content.html', context_dict, context)
+
 
 def csimpler(request, simpler_id):
     context = RequestContext(request)
@@ -208,7 +230,7 @@ def register(request):
                         break
             profile.save()
             user.save()
-
+            Post.objects.get(post='Sutton RL book.').followers.add(user)    //The new user gets RL notifications.
             registered = True
 
         else:
@@ -414,4 +436,11 @@ def rearrange(request):
     context = RequestContext(request)
     ph = request.GET['ph']
     Simpler.objects.create(post=Post.objects.get(post='Sutton RL book.'), question=-100, answer = ph, coeficient = 0, parent_list='RL Text', author = 'Sutton')
+    return HttpResponse('success')
+
+def changenotifstatus(reuqest):
+    context = RequestContext(request)
+    notif = UserNotification.objects.get(id=int(request.GET['id']))
+    notif.status = 'read'
+    notif.save()
     return HttpResponse('success')
