@@ -51,3 +51,20 @@
 .addpostbtn{
 	border-radius:0px;
 }
+
+.coursenav{
+	cursor:pointer;
+	cursor:hand;
+	font-size:10pt;
+	color: gray;
+	margin-right: 30px;
+}
+
+.coursenav:hover{
+	border-bottom:2px solid #FFA500;
+}
+
+#coursenavwrap{
+	padding-top:20px;
+	padding-bottom:20px;
+}

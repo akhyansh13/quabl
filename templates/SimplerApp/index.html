@@ -17,38 +17,12 @@
 	<div style="text-align:center;"><h1><!--<a href='/register/'>Register Here</a> or --><a href="/login/">Login.</a></h1></div>
 {% endif %}
 {% if user.is_authenticated %}
-	{% csrf_token %}
-		<div class="dropdown" style="float:right; display:none;">
-			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-				Options&nbsp;<span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-				<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sort by Topic</a></li>
-				<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sort by Data Added</a></li>
-				<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sort by Popularity</a></li>
-			</ul>
-		</div>
-		<br/>
-				{% autoescape off %}
-					{% for context in contarr %}
-					<div class="contqueswrapper" id="cont-{{context.0.id}}">
-					<div class="context-area" style="float:left; width:70%;" align="justify">
-					<div style="padding-bottom:50px;">
-						<div class="topicname" style="font-size:16pt;"><b>#</b>{{context.0.post.topic.topic}}</div>
-						<div class="context" data="{{context.0.id}}" style="margin-right:10px;">{{context.0.answer}}</div>
-						<span style="float:left;"><a class="folbtn {% if user in context.0.post.followers.all %}unfollowstate{% else %}followstate{% endif %}" href='javascript:;' data='{{context.0.post.id}}'>{% if user in context.0.post.followers.all %}Unpin This Context{% else %}Pin This Context{% endif %}</a></span>
-					</div>
-				</div>
-						<div class = "question-area" style="float:right; width:30%; text-align:right;">
-							<div class="contextstats"><a href="/context/{{context.0.id}}/"><span class="nums"></span></a></div>
-							{% for q in context.2 %}
-							{% for que in q %}
-								<div class="q-{{que.highlight.highlight_parent.id}} ques hid-{{que.highlight.id}}" style="display:none; padding-bottom:10px;"><a href="/question/{{que.id}}">{{que.question}}</a></div>
-							{% endfor %}
-							{% endfor %}
-						</div>
-					</div>
-{% endfor %}
+{% autoescape off %}
+
+	<h1>Reinforcement Learning</h1>
+	<h2>CS670, IIT Madras</h2>
+	<div id="coursenavwrap"><span class="coursenav">COURSE FEED</span> <span class="coursenav">COURSE CONTENT</span> <span class="coursenav">OVERVIEW</span></div>
+
 {% endautoescape %}
 {% endif %}
 </div>
