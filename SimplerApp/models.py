@@ -75,17 +75,8 @@ class UserNotification(models.Model):
     def __unicode__(self):
         return str(self.user) + '-' + self.notification
 
-class ReqByUser(models.Model):
-
-    user = models.ForeignKey(User)
-    category = models.CharField(max_length=1000)
-    description = models.CharField(max_length=1000)
-    frequency = models.IntegerField(null=False, default=0)
-    created = models.DateTimeField(default=datetime.now())
-    modified = models.DateTimeField(default=datetime.now())
-
-    def __unicode__(self):
-        return self.category + ' by ' + str(self.user.username)
+class activity(models.Model):
+    activity = models.CharField(max_length=10000000)
 
 class Link(models.Model):
 

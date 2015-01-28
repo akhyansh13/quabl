@@ -22,7 +22,9 @@
 	<h1>Reinforcement Learning</h1>
 	<h2>CS670, IIT Madras</h2>
 	<div id="coursenavwrap"><span class="coursenav">COURSE FEED</span> <span class="coursenav">COURSE CONTENT</span> <span class="coursenav">OVERVIEW</span></div>
-
+	{% for a in activity %}
+		{{a.activity}}
+	{% endfor %}
 {% endautoescape %}
 {% endif %}
 </div>

@@ -3,7 +3,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Simpler.settings')
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
-from models import Post, Simpler, UserForm, UserProfileForm, HighlightDesc, highlightq, highlight, topic, ReqByUser, UserNotification, UserProfile, Link
+from models import Post, Simpler, UserForm, UserProfileForm, HighlightDesc, highlightq, highlight, topic, UserNotification, UserProfile, Link, activity
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
@@ -23,6 +23,8 @@ def index(request):
 
     contextsimplers = Simpler.objects.all().filter(parent_list='contextsimpler')
     context_dict = {'contexts':contextsimplers}
+
+    context_dict['activity'] = activity.objects.all()
 
     contextarr = []
 
@@ -183,6 +185,8 @@ def makesimpler(request):                       #View that takes care of additio
 
     post.followers.add(request.user)
 
+    activity.objects.create(activity='<div>' + request.user.username + '</div>' + ' added an answer to <div class="notifquestion notiflink" data-id="' + str(ques.id) + '">' + ques.question + '</div>')
+
     for u in post.followers.all():
         if u != request.user:
             UserNotification.objects.create(user=u, notification=request.user.username + ' added an answer to <div class="notifquestion notiflink" data-id="' + str(ques.id) + '">' + ques.question + '</div>', status="unread", created = datetime.now(), modified = datetime.now())
@@ -313,6 +317,8 @@ def define(request, post_id, simpler_id, answer_part, quabl, cques, highlightx):
 
     h.highlight_parent.post.followers.add(request.user)
 
+    activity.objects.create(activity=f.req_by.username + ' added a question on <div data-id="'+ str(f.id) +'" class="simplernotif notiflink">' + h.highlight_parent.answer + '</div>')
+
     for u in h.highlight_parent.post.followers.all():
         if u != request.user:
             UserNotification.objects.create(user=u, notification=f.req_by.username + ' added a question on <div data-id="'+ str(f.id) +'" class="simplernotif notiflink">' + h.highlight_parent.answer + '</div>', status='unread', created = datetime.now(), modified = datetime.now())
@@ -327,6 +333,8 @@ def defined(request, h_id, cques):
     f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, created = datetime.now(), question = cques.replace('xqmx', '?'))[0]
 
     h.highlight_parent.post.followers.add(request.user)
+
+    activity.objects.create(activity=f.req_by.username + ' added a question on <div data-id="'+ str(f.id) +'"class="simplernotif notiflink">' + h.highlight_parent.answer + '</div>')
 
     for u in h.highlight_parent.post.followers.all():
         if u != request.user:
