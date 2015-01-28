@@ -44,7 +44,7 @@ body {
 /* Customize container */
 @media (min-width: 768px) {
   .container {
-    width:60%;
+    width:75%;
     padding-top:85px;
     padding-bottom: 50px;
   }

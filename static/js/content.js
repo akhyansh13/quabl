@@ -382,8 +382,8 @@ if($("#scrollto").html()!='default'){
 		if($("#fixedpane").is(":visible")){
 			if(scrolltop >= $(".nthanswer").offset().top-40){
 				cached_css = $("#fixedpane").attr("style");
-				$("#fixedpane").css({position: "fixed", top:90, left:"62%"});
-				$("#fixedpane").css("width", "18%")
+				$("#fixedpane").css({position: "fixed", top:90, left:"65%"});
+				$("#fixedpane").css("width", "21%")
 				$(".triangle").css({"left":"-21px"});
 			}
 			else{
