@@ -58,10 +58,11 @@
 	font-size:10pt;
 	color: gray;
 	margin-right: 30px;
+	border-bottom: 1px solid #FFA500;
 }
 
 .coursenav:hover{
-	border-bottom:2px solid #FFA500;
+	border-bottom: none;
 }
 
 #coursenavwrap{
