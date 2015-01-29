@@ -21,10 +21,19 @@
 
 	<h1>Reinforcement Learning</h1>
 	<h2>CS670, IIT Madras</h2>
-	<div id="coursenavwrap"><span class="coursenav">COURSE FEED</span> <span id="linksnav" class="coursenav" style="position:relative;">COURSE CONTENT<span id="linkcontainer" style="position: absolute;top: 18px;right: 0px;width: 100%; display:none;"><span id="suttonlink">Reinforcement Learning: An Introduction by Richard S. Sutton</span><br/><span id="scribelink" style="border-top:1px solid #FFA500;">Scribes</span></span></span> <span class="coursenav">OVERVIEW</span></div>
+	<div id="coursenavwrap"><span id="cfeed" class="coursenav">COURSE FEED</span> <span id="linksnav" class="coursenav">COURSE CONTENT<span id="linkcontainer"><span id="suttonlink">Reinforcement Learning: An Introduction by Richard S. Sutton</span><br/><span id="scribelink" style="border-top:1px solid #FFA500;">Scribes</span></span></span> <span id='overview' class="coursenav">OVERVIEW</span></div>
+	<div id="afeed">
 	{% for a in activity %}
 		{{a.activity}}
+		<div>
+			<span>View Context</span>&bull;<span>Upvote</span>
+		</div>
+		<hr/>
 	{% endfor %}
+</div>
+<div id="ocont">
+	Overview content here.
+</div>
 {% endautoescape %}
 {% endif %}
 </div>

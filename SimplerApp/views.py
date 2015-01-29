@@ -185,7 +185,7 @@ def makesimpler(request):                       #View that takes care of additio
 
     post.followers.add(request.user)
 
-    activity.objects.create(activity='<div class="getup" data='+ str(request.user.id) +'><a href="javascript:;">' + request.user.username + '</a> added an answer to </div>' + '<div class="notifquestion notiflink" data-id="' + str(ques.id) + '">' + ques.question + '</div>')
+    activity.objects.create(activity='<div><span class="getup" data='+ str(request.user.id) +'><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> added an answer to </span></div>' + '<div class="activityques" data-id="' + str(ques.id) + '"><a href="/question/'+ str(ques.id) + '">' + ques.question + '</a></div><div class="activityans">'+ c.answer +'</div>')
 
     #for u in post.followers.all():
         #if u != request.user:
@@ -317,11 +317,11 @@ def define(request, post_id, simpler_id, answer_part, quabl, cques, highlightx):
 
     h.highlight_parent.post.followers.add(request.user)
 
-    activity.objects.create(activity='<div class="getup" data='+ str(request.user.id) +'><a href="javascript:;">' + request.user.username + '</a> added a question on </div>' + '<div data-id="'+ str(f.id) +'" class="simplernotif notiflink">' + h.highlight_parent.answer + '</div>')
+    activity.objects.create(activity='<div><span class="getup" data='+ str(request.user.id) +'><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> added a question </span></div>' + '<div class="activityques" data-id="'+ str(f.id) +'" data-parent="' + str(f.highlight.highlight_parent.id) + '"><a href="/question/'+ str(f.id) +'">' + f.question + '</a></div>')
 
-    for u in h.highlight_parent.post.followers.all():
-        if u != request.user:
-            UserNotification.objects.create(user=u, notification=f.req_by.username + ' added a question on <div data-id="'+ str(f.id) +'" class="simplernotif notiflink">' + h.highlight_parent.answer + '</div>', status='unread', created = datetime.now(), modified = datetime.now())
+    #for u in h.highlight_parent.post.followers.all():
+        #if u != request.user:
+            #UserNotification.objects.create(user=u, notification=f.req_by.username + ' added a question on <div data-id="'+ str(f.id) +'" class="simplernotif notiflink">' + h.highlight_parent.answer + '</div>', status='unread', created = datetime.now(), modified = datetime.now())
 
     return HttpResponse(simpler.answer + '<cqdelimit>' + str(simpler.id) + '<cqdelimit>' + cques + '<cqdelimit>' + str(f.highlight.id) + '<cqdelimit>' + str(f.highlight.highlight_parent.id) + '<cqdelimit>' + str(f.id))
 
@@ -334,11 +334,11 @@ def defined(request, h_id, cques):
 
     h.highlight_parent.post.followers.add(request.user)
 
-    activity.objects.create(activity='<div class="getup" data='+ str(request.user.id) +'><a href="javascript:;">' + request.user.username + '</a> added a question on </div>' + '<div data-id="'+ str(f.id) +'"class="simplernotif notiflink">' + h.highlight_parent.answer + '</div>')
+    activity.objects.create(activity='<div><span class="getup" data='+ str(request.user.id) +'><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> added a question </span></div>' + '<div class="activityques" data-parent="'+ str(f.highlight.highlight_parent.id) +'" data-id="'+ str(f.id) +'">' + '<a href="/question/' + str(f.id) + '">' + f.question + '</a></div>')
 
-    for u in h.highlight_parent.post.followers.all():
-        if u != request.user:
-            UserNotification.objects.create(user=u, notification=f.req_by.username + ' added a question on <div data-id="'+ str(f.id) +'"class="simplernotif notiflink">' + h.highlight_parent.answer + '</div>', status='unread', created = datetime.now(), modified = datetime.now())
+    #for u in h.highlight_parent.post.followers.all():
+        #if u != request.user:
+            #UserNotification.objects.create(user=u, notification=f.req_by.username + ' added a question on <div data-id="'+ str(f.id) +'"class="simplernotif notiflink">' + h.highlight_parent.answer + '</div>', status='unread', created = datetime.now(), modified = datetime.now())
 
     return HttpResponse(str(f.highlight.highlight_parent.id) + '<cqdelimit>' + f.question + '<cqdelimit>' + str(f.highlight.id) + '<cqdelimit>' + str(f.highlight.highlight_parent.id) + '<cqdelimit>' + str(f.id))
 

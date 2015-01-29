@@ -46,6 +46,17 @@ $(document).ready(function(){
 	$("#suttonlink").click(function(){
 		window.location = '/sutton/';
 	});
+
+	$("#overview").click(function(){
+		$("#afeed").hide();
+		$("#ocont").show();
+		$(this).css('border-botttom', '4px solid #FFA500');
+	});
+
+	$("#cfeed").click(function(){
+		$("#afeed").show();
+		$("#ocont").hide();
+	});
 }); //document.ready closed.
 
 function blink(selector){
