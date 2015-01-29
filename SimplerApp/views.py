@@ -187,9 +187,9 @@ def makesimpler(request):                       #View that takes care of additio
 
     activity.objects.create(activity='<div class="getup" data='+ str(request.user.id) +'><a href="javascript:;">' + request.user.username + '</a> added an answer to </div>' + '<div class="notifquestion notiflink" data-id="' + str(ques.id) + '">' + ques.question + '</div>')
 
-    for u in post.followers.all():
-        if u != request.user:
-            UserNotification.objects.create(user=u, notification=request.user.username + ' added an answer to <div class="notifquestion notiflink" data-id="' + str(ques.id) + '">' + ques.question + '</div>', status="unread", created = datetime.now(), modified = datetime.now())
+    #for u in post.followers.all():
+        #if u != request.user:
+            #UserNotification.objects.create(user=u, notification=request.user.username + ' added an answer to <div class="notifquestion notiflink" data-id="' + str(ques.id) + '">' + ques.question + '</div>', status="unread", created = datetime.now(), modified = datetime.now())
 
     return HttpResponse('success')
 

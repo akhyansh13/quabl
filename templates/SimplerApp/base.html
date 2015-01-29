@@ -16,7 +16,7 @@
 		<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
 		<meta http-equiv="pragma" content="no-cache" />
 
-		<title>{% block title_block %}{% if user.is_authenticated %}{% if unotifcount == 0 %}{% else %}({{unotifcount}}){% endif %}{% endif %}Quabl{% endblock %}</title>
+		<title>Quabl</title>
 
 		<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
 		<script src="{% static 'js/jquery-1.11.1.js' %}"></script>
@@ -70,7 +70,7 @@
 					</li>
 					<li class="dropdown">
 					{% autoescape off %}
-						<a href="#" class="dropdown-toggle notifications" data-toggle="dropdown" style="color:#444;"><span id='notifdisp'>{{unotifcount}}&nbsp;&nbsp;</span><b class="glyphicon glyphicon-exclamation-sign"></b></a>
+						<!--a href="#" class="dropdown-toggle notifications" data-toggle="dropdown" style="color:#444;"><span id='notifdisp'>{{unotifcount}}&nbsp;&nbsp;</span><b class="glyphicon glyphicon-exclamation-sign"></b></a>
 						<ul class="dropdown-menu" id="dropdown-notifications">
 							{% if notifcount == 0 %}
 								<p class='text-muted' style='text-align:center;'>You don't have any notifications right now.</p>
@@ -86,7 +86,7 @@
 									<li><a href='javascript:;' class="rnotif notif" data-id="{{rnotif.id}}" style="white-space:normal;">{{rnotif.notification}}</a></li><hr/>
 								{% endfor %}
 							{% endif %}
-						</ul>
+						</ul-->
 					{% endautoescape %}
 					</li>
 					<li class="active">
