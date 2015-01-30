@@ -24,10 +24,12 @@
 	<div id="coursenavwrap"><span id="cfeed" class="coursenav">COURSE FEED</span> <span id="linksnav" class="coursenav">COURSE CONTENT<span id="linkcontainer"><span id="suttonlink">Reinforcement Learning: An Introduction by Richard S. Sutton</span><br/><span id="scribelink" style="border-top:1px solid #FFA500;">Scribes</span></span></span> <span id='overview' class="coursenav">OVERVIEW</span></div>
 	<div id="afeed">
 	{% for a in activity %}
+	<div class="afeedel">
 		{{a.activity}}
-		<div>
-			<span>View Context</span>&bull;<span>Upvote</span>
+		<div id="upview">
+			<span class="viewcont"><a href="javascript:;">View Context</a></span>&bull;<span class="up"><a href="javascript:;">Upvote</a></span>
 		</div>
+	</div>
 		<hr/>
 	{% endfor %}
 </div>

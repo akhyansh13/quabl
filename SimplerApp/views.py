@@ -185,7 +185,7 @@ def makesimpler(request):                       #View that takes care of additio
 
     post.followers.add(request.user)
 
-    activity.objects.create(activity='<div><span class="getup" data='+ str(request.user.id) +'><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> added an answer to </span></div>' + '<div class="activityques" data-id="' + str(ques.id) + '"><a href="/question/'+ str(ques.id) + '">' + ques.question + '</a></div><div class="activityans">'+ c.answer +'</div>')
+    activity.objects.create(activity='<div><span class="getup" data='+ str(request.user.id) +'><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> added an answer. </span></div>' + '<div class="activityques" data-id="' + str(ques.id) + '"><a href="/question/'+ str(ques.id) + '">' + ques.question + '</a></div><div class="activityans" data-ansid="' + str(c.id) + '">'+ c.answer +'</div>')
 
     #for u in post.followers.all():
         #if u != request.user:
@@ -317,7 +317,7 @@ def define(request, post_id, simpler_id, answer_part, quabl, cques, highlightx):
 
     h.highlight_parent.post.followers.add(request.user)
 
-    activity.objects.create(activity='<div><span class="getup" data='+ str(request.user.id) +'><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> added a question </span></div>' + '<div class="activityques" data-id="'+ str(f.id) +'" data-parent="' + str(f.highlight.highlight_parent.id) + '"><a href="/question/'+ str(f.id) +'">' + f.question + '</a></div>')
+    activity.objects.create(activity='<div><span class="getup" data='+ str(request.user.id) +'><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> has a question. </span></div>' + '<div class="activityques" data-id="'+ str(f.id) +'" data-parent="' + str(f.highlight.highlight_parent.id) + '"><a href="/question/'+ str(f.id) +'">' + f.question + '</a></div>')
 
     #for u in h.highlight_parent.post.followers.all():
         #if u != request.user:
@@ -334,7 +334,7 @@ def defined(request, h_id, cques):
 
     h.highlight_parent.post.followers.add(request.user)
 
-    activity.objects.create(activity='<div><span class="getup" data='+ str(request.user.id) +'><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> added a question </span></div>' + '<div class="activityques" data-parent="'+ str(f.highlight.highlight_parent.id) +'" data-id="'+ str(f.id) +'">' + '<a href="/question/' + str(f.id) + '">' + f.question + '</a></div>')
+    activity.objects.create(activity='<div><span class="getup" data='+ str(request.user.id) +'><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> has a question. </span></div>' + '<div class="activityques" data-parent="'+ str(f.highlight.highlight_parent.id) +'" data-id="'+ str(f.id) +'">' + '<a href="/question/' + str(f.id) + '">' + f.question + '</a></div>')
 
     #for u in h.highlight_parent.post.followers.all():
         #if u != request.user:
@@ -440,9 +440,28 @@ def getthumburl(request, username):
     else:
         return HttpResponse('/quablmedia/thumbnails/default.jpeg')
 
-def changenotifstatus(reuqest):
+def upvote(request, type, id):
     context = RequestContext(request)
-    notif = UserNotification.objects.get(id=int(request.GET['id']))
-    notif.status = 'read'
-    notif.save()
-    return HttpResponse('success')
+    if type=='ans':
+        reqed = Simpler.objects.get(id = int(id))
+    else:
+        reqed = highlightq.objects.get(id = int(id))
+    if request.user in reqed.upvoters.all():
+        reqed.upvoters.remove(request.user)
+        return HttpResponse('unupvoted')
+    else:
+        reqed.upvoters.add(request.user)
+        return HttpResponse('upvoted')
+
+def ucheck(request, type, id):
+    context = RequestContext(request)
+    if type=='ans':
+        reqed = Simpler.objects.get(id = int(id))
+    else:
+        reqed = highlightq.objects.get(id = int(id))
+    if request.user in reqed.upvoters.all():
+        reqed.upvoters.remove(request.user)
+        return HttpResponse('y')
+    else:
+        reqed.upvoters.add(request.user)
+        return HttpResponse('n')

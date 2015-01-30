@@ -37,6 +37,8 @@ class Simpler(models.Model):
     display = models.CharField(max_length=1000, default=' ')
     created = models.DateTimeField(default=datetime.now())
     modified = models.DateTimeField(default=datetime.now())
+    upvoters = models.ManyToManyField(User, related_name="aupvoted", null=True, blank=True)
+
     def __unicode__(self):
         simpler_less = show_less(self.answer)
         return simpler_less
@@ -53,6 +55,7 @@ class highlightq(models.Model):
     question = models.CharField(max_length=10000000, blank=True, null=True)
     req_by = models.ForeignKey(User, null=True, blank=True)
     created = models.DateTimeField(default=datetime.now())
+    upvoters = models.ManyToManyField(User, related_name="qupvoted", null=True, blank=True)
     def __unicode__(self):
         return self.question
 
