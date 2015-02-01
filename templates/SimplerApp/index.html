@@ -25,9 +25,11 @@
 	<div id="afeed">
 	{% for a in activity %}
 	<div class="afeedel">
+		<div class="activity" data-actid="{{a.id}}">
 		{{a.activity}}
-		<div id="upview">
-			<span class="viewcont"><a href="javascript:;">View Context</a></span>&bull;<span class="up"><a href="javascript:;">Upvote</a></span>
+		<div>
+		<div class="upview">
+			<span class="viewcont"><a href="javascript:;">View Context</a></span>&bull;<a href="javascript:;"><span class="up">{% if a.upvoted == 1 %}Un-Upvote{% else %}Upvote{% endif %}</span></a>
 		</div>
 	</div>
 		<hr/>

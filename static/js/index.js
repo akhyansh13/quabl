@@ -1,32 +1,37 @@
 $(document).ready(function(){
 
-	window.clickonques = false;
-
-	$(".question-area").each(function(){
-			var nques = $(this).find(".ques").length;
-			var nquabls = $(this).closest(".contqueswrapper").find('.highlight').length
-
-			if(nquabls == 0){
-				$(this).closest(".contqueswrapper").remove();
-			}
-
-			if (nquabls == 1) {
-				if(nques == 1){
-					$(this).find('.nums').html("1 Quabl, 1 Question.");
+	$(document).on('click', '.up', function(){
+		var $up = $(this);
+		var aans = $(this).closest('.afeedel').find('.activityans');
+		if(!(aans.html())){
+			var id = $(this).closest('.afeedel').find('.activityques').data('id');
+			var actid = $(this).closest('.afeedel').find('.activity').data('actid');
+			$.get(('/upvote/ques/' + id + '/' + actid), function(data){
+				if(data == 'upvoted'){
+					$up.empty().append('Un-Upvote');
+				}
+				else if(data=='unupvoted'){
+					$up.empty().append('Upvote');
+				}
+			});
+		}
+		else{
+			var id = $(this).closest('.afeedel').find('.activityans').data('ansid');
+			var actid = $(this).closest('.afeedel').find('.activity').data('actid');
+			$.get(('/upvote/ans/'+ id + '/' + actid), function(data){
+				if(data == 'upvoted'){
+					$up.html('Un-Upvote');
 				}
 				else{
-					$(this).find('.nums').html("1 Quabl, " + nques + " Questions.");
+					$up.html('Upvote');
 				}
-			}
-			else {
-				$(this).find('.nums').html(nquabls + " Quabls, " + nques + " Questions.");
-			}
+			});
+		}
+		return false;
 	});
 
-	$(".contqueswrapper").each(function(){
-		var offset = $(this).find(".context").offset();
-		$(this).find(".question-area").offset({top:offset.top});
-	});
+
+	window.clickonques = false;
 
 	$(".footer").hide();
 
@@ -60,60 +65,6 @@ $(document).ready(function(){
 
 	$(".viewcont").click(function(){
 		window.location = '/sutton/' + $(this).closest(".afeedel").find(".activityques").data("parent");
-	});
-
-	$('.afeedel').each(function(){
-		var afd = $(this);
-		var aans = $(this).find('.activityans');
-		if(!(aans.html())){
-			var id = aans.data('ansid');
-			$.get(('/ucheck/ans/'+ id), function(data){
-				if(data=='y'){
-					afd.find('.up a').html('Un-Upvote');
-				}
-				else{
-					afd.find('.up a').html('Upvote');
-				}
-			});
-		}
-		else{
-			var id = afd.find('.activityques').data('id');
-			$.get(('/ucheck/ques/'+ id), function(data){
-				if(data=='y'){
-					afd.find('.up a').html('Un-Upvote');
-				}
-				else{
-					afd.find('.up a').html('Upvote');
-				}
-			});
-		}
-	});
-
-	$(document).on('click', '.up', function(){
-		var $up = $(this);
-		var aans = $(this).closest('.afeedel').find('.activityans');
-		if(!(aans.html())){
-		 var id = $(this).closest('.afeedel').find('.activityques').data('id');
-		 $.get(('/upvote/ques/'+id), function(data){
-			if(data == 'upvoted'){
-				$up.html('<a href="javascript:;">Un-Upvote</a>');
-				}
-				else{
-					$up.html('<a href="javascript:;">Upvote</a>');
-				}
-			});
-		}
-		else{
-			var id = $(this).closest('.afeedel').find('.activityans').data('ansid');
-			$.get(('/upvote/ans/'+id), function(data){
-				if(data == 'upvoted'){
-					$up.html('<a href="javascript:;">Un-Upvote</a>');
-				}
-				else{
-					$up.html('<a href="javascript:;">Upvote</a>');
-				}
-			});
-		}
 	});
 
 }); //document.ready closed.
