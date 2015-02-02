@@ -24,7 +24,7 @@ def index(request):
     contextsimplers = Simpler.objects.all().filter(parent_list='contextsimpler')
     context_dict = {'contexts':contextsimplers}
 
-    context_dict['activity'] = activity.objects.all().filter(user=request.user)
+    context_dict['activity'] = activity.objects.all()
 
     contextarr = []
 
@@ -185,8 +185,7 @@ def makesimpler(request):                       #View that takes care of additio
 
     post.followers.add(request.user)
 
-    for u in User.objects.all():
-        actobj = activity.objects.create(user=u, activity='<span class="getup" data='+ str(request.user.id) +'><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> added an answer. </span></div>' + '<div class="activityques" data-id="' + str(ques.id) + '"><a href="/question/'+ str(ques.id) + '">' + ques.question + '</a></div><div class="activityans " data-ansid="' + str(c.id) + '">'+ c.answer)
+    actobj = activity.objects.create(activity='<span class="getup" data='+ str(request.user.id) +'><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> added an answer. </span></div>' + '<div class="activityques" data-id="' + str(ques.id) + '"><a href="/question/'+ str(ques.id) + '">' + ques.question + '</a></div><div class="activityans " data-ansid="' + str(c.id) + '">'+ c.answer)
 
     #for u in post.followers.all():
         #if u != request.user:
@@ -318,8 +317,7 @@ def define(request, post_id, simpler_id, answer_part, quabl, cques, highlightx):
 
     h.highlight_parent.post.followers.add(request.user)
 
-    for u in User.objects.all():
-        actobj = activity.objects.create(user=u, activity='<span class="getup" data="'+ str(request.user.id) +'"><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> has a question. </span></div>' + '<div class="activityques " data-id="'+ str(f.id) +'" data-parent="' + str(f.highlight.highlight_parent.id) + '"><a href="/question/'+ str(f.id) +'/">' + f.question + '</a>')
+    actobj = activity.objects.create(activity='<span class="getup" data="'+ str(request.user.id) +'"><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> has a question. </span></div>' + '<div class="activityques " data-id="'+ str(f.id) +'" data-parent="' + str(f.highlight.highlight_parent.id) + '"><a href="/question/'+ str(f.id) +'/">' + f.question + '</a>')
 
     #for u in h.highlight_parent.post.followers.all():
         #if u != request.user:
@@ -336,8 +334,7 @@ def defined(request, h_id, cques):
 
     h.highlight_parent.post.followers.add(request.user)
 
-    for u in User.objects.all():
-        actobj = activity.objects.create(user= u, activity='<span class="getup" data='+ str(request.user.id) +'><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> has a question. </span></div>' + '<div class="activityques " data-parent="'+ str(f.highlight.highlight_parent.id) +'" data-id="'+ str(f.id) +'">' + '<a href="/question/' + str(f.id) + '">' + f.question + '</a>')
+    actobj = activity.objects.create(activity='<span class="getup" data='+ str(request.user.id) +'><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> has a question. </span></div>' + '<div class="activityques " data-parent="'+ str(f.highlight.highlight_parent.id) +'" data-id="'+ str(f.id) +'">' + '<a href="/question/' + str(f.id) + '">' + f.question + '</a>')
 
     #for u in h.highlight_parent.post.followers.all():
         #if u != request.user:
@@ -443,15 +440,8 @@ def getthumburl(request, username):
     else:
         return HttpResponse('/quablmedia/thumbnails/default.jpeg')
 
-def upvote(request, type, id, actid):
+def upvote(request, type, id):
     context = RequestContext(request)
-    activityobj = activity.objects.get(id = int(actid))
-    if activityobj.upvoted == 1:
-        activityobj.upvoted = 0
-        activityobj.save()
-    else:
-        activityobj.upvoted = 1
-        activityobj.save()
     if type=='ans':
         reqed = Simpler.objects.get(id = int(id))
     else:
@@ -462,3 +452,14 @@ def upvote(request, type, id, actid):
     else:
         reqed.upvoters.add(request.user)
         return HttpResponse('upvoted')
+
+def ucheck(request, type, id):
+    context = RequestContext(request)
+    if type=='ans':
+        reqed = Simpler.objects.get(id = int(id))
+    else:
+        reqed = highlightq.objects.get(id = int(id))
+    if request.user in reqed.upvoters.all():
+        return HttpResponse('upvoted')
+    else:
+        return HttpResponse('unupvoted')

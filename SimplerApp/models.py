@@ -80,8 +80,6 @@ class UserNotification(models.Model):
 
 class activity(models.Model):                                   #Model object for all quabl activity *for* a user. Not a particular user's activity.
     activity = models.CharField(max_length=10000000)
-    user = models.ForeignKey(User, null=True, blank=True)
-    upvoted = models.IntegerField(max_length=100, default=0)
 
 class Link(models.Model):
 

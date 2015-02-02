@@ -1,12 +1,38 @@
 $(document).ready(function(){
 
+	$(".up").each(function(){
+		var $up = $(this);
+		var aans = $up.closest('.afeedel').find(".activityans");
+		if(!(aans.html())){
+			var id = $up.closest('.afeedel').find('.activityques').data('id');
+			$.get(('/ucheck/ques/' + id), function(data){
+				if(data == 'upvoted'){
+					$up.empty().append('Un-Upvote');
+				}
+				else if(data=='unupvoted'){
+					$up.empty().append('Upvote');
+				}
+			});
+		}
+		else{
+			var id = $up.closest('.afeedel').find('.activityans').data('ansid');
+			$.get(('/ucheck/ans/'+ id), function(data){
+				if(data == 'upvoted'){
+					$up.html('Un-Upvote');
+				}
+				else{
+					$up.html('Upvote');
+				}
+			});
+		}
+	});
+
 	$(document).on('click', '.up', function(){
 		var $up = $(this);
 		var aans = $(this).closest('.afeedel').find('.activityans');
 		if(!(aans.html())){
 			var id = $(this).closest('.afeedel').find('.activityques').data('id');
-			var actid = $(this).closest('.afeedel').find('.activity').data('actid');
-			$.get(('/upvote/ques/' + id + '/' + actid), function(data){
+			$.get(('/upvote/ques/' + id), function(data){
 				if(data == 'upvoted'){
 					$up.empty().append('Un-Upvote');
 				}
@@ -17,8 +43,7 @@ $(document).ready(function(){
 		}
 		else{
 			var id = $(this).closest('.afeedel').find('.activityans').data('ansid');
-			var actid = $(this).closest('.afeedel').find('.activity').data('actid');
-			$.get(('/upvote/ans/'+ id + '/' + actid), function(data){
+			$.get(('/upvote/ans/'+ id), function(data){
 				if(data == 'upvoted'){
 					$up.html('Un-Upvote');
 				}
