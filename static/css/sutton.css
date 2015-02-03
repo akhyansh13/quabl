@@ -390,6 +390,7 @@ textarea {
 
 .answer img{
   max-width:100%;
+  height:inherit;
 }
 
 #searchbox{
