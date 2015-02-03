@@ -1,0 +1,347 @@
+0    [main] INFO  org.eclipse.jetty.server.Server  – jetty-8.1.10.v20130312
+49   [main] INFO  org.eclipse.jetty.deploy.providers.ScanningAppProvider  – Deployment monitor /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/contexts at interval 0
+58   [main] INFO  org.eclipse.jetty.deploy.DeploymentManager  – Deployable added: /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/contexts/solr-jetty-context.xml
+288  [main] INFO  org.eclipse.jetty.webapp.WebInfConfiguration  – Extract jar:file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/example/webapps/solr.war!/ to /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr-webapp/webapp
+3740 [main] INFO  org.eclipse.jetty.webapp.StandardDescriptorProcessor  – NO JSP Support for /solr, did not find org.apache.jasper.servlet.JspServlet
+3945 [main] INFO  org.apache.solr.servlet.SolrDispatchFilter  – SolrDispatchFilter.init()
+4009 [main] INFO  org.apache.solr.core.SolrResourceLoader  – JNDI not configured for solr (NoInitialContextEx)
+4010 [main] INFO  org.apache.solr.core.SolrResourceLoader  – solr home defaulted to 'solr/' (could not find system property or JNDI)
+4011 [main] INFO  org.apache.solr.core.SolrResourceLoader  – new SolrResourceLoader for directory: 'solr/'
+4343 [main] INFO  org.apache.solr.core.ConfigSolr  – Loading container configuration from /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/solr.xml
+4617 [main] INFO  org.apache.solr.core.CoresLocator  – Config-defined core root directory: /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr
+4630 [main] INFO  org.apache.solr.core.CoreContainer  – New CoreContainer 881366894
+4630 [main] INFO  org.apache.solr.core.CoreContainer  – Loading cores into CoreContainer [instanceDir=solr/]
+4650 [main] INFO  org.apache.solr.handler.component.HttpShardHandlerFactory  – Setting socketTimeout to: 0
+4651 [main] INFO  org.apache.solr.handler.component.HttpShardHandlerFactory  – Setting urlScheme to: null
+4656 [main] INFO  org.apache.solr.handler.component.HttpShardHandlerFactory  – Setting connTimeout to: 0
+4660 [main] INFO  org.apache.solr.handler.component.HttpShardHandlerFactory  – Setting maxConnectionsPerHost to: 20
+4660 [main] INFO  org.apache.solr.handler.component.HttpShardHandlerFactory  – Setting corePoolSize to: 0
+4661 [main] INFO  org.apache.solr.handler.component.HttpShardHandlerFactory  – Setting maximumPoolSize to: 2147483647
+4661 [main] INFO  org.apache.solr.handler.component.HttpShardHandlerFactory  – Setting maxThreadIdleTime to: 5
+4667 [main] INFO  org.apache.solr.handler.component.HttpShardHandlerFactory  – Setting sizeOfQueue to: -1
+4668 [main] INFO  org.apache.solr.handler.component.HttpShardHandlerFactory  – Setting fairnessPolicy to: false
+5299 [main] INFO  org.apache.solr.update.UpdateShardHandler  – Creating UpdateShardHandler HTTP client with params: socketTimeout=0&connTimeout=0&retry=false
+5302 [main] INFO  org.apache.solr.logging.LogWatcher  – SLF4J impl is org.slf4j.impl.Log4jLoggerFactory
+5304 [main] INFO  org.apache.solr.logging.LogWatcher  – Registering Log Listener [Log4j (org.slf4j.impl.Log4jLoggerFactory)]
+5306 [main] INFO  org.apache.solr.core.CoreContainer  – Host Name: 
+5424 [main] INFO  org.apache.solr.core.CoresLocator  – Looking for core definitions underneath /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr
+5455 [main] INFO  org.apache.solr.core.CoresLocator  – Found core collection1 in /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/
+5456 [main] INFO  org.apache.solr.core.CoresLocator  – Found 1 core definitions
+5464 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – new SolrResourceLoader for directory: '/home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/'
+5717 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrConfig  – Adding specified lib dirs to ClassLoader
+5721 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/apache-mime4j-dom-0.7.2.jar' to classloader
+5722 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/xz-1.4.jar' to classloader
+5722 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/juniversalchardet-1.0.3.jar' to classloader
+5723 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/tika-parsers-1.5.jar' to classloader
+5723 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/vorbis-java-tika-0.1.jar' to classloader
+5727 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/dom4j-1.6.1.jar' to classloader
+5728 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/tagsoup-1.2.1.jar' to classloader
+5728 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/jdom-1.0.jar' to classloader
+5728 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/tika-core-1.5.jar' to classloader
+5729 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/metadata-extractor-2.6.2.jar' to classloader
+5735 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/rome-0.9.jar' to classloader
+5735 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/jempbox-1.8.4.jar' to classloader
+5736 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/pdfbox-1.8.4.jar' to classloader
+5736 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/isoparser-1.0-RC-1.jar' to classloader
+5737 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/poi-scratchpad-3.10.1.jar' to classloader
+5737 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/xmlbeans-2.6.0.jar' to classloader
+5737 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/xercesImpl-2.9.1.jar' to classloader
+5738 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/vorbis-java-core-0.1.jar' to classloader
+5738 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/icu4j-53.1.jar' to classloader
+5743 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/poi-3.10.1.jar' to classloader
+5749 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/apache-mime4j-core-0.7.2.jar' to classloader
+5749 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/commons-compress-1.7.jar' to classloader
+5750 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/boilerpipe-1.1.0.jar' to classloader
+5750 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/xmpcore-5.1.2.jar' to classloader
+5750 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/bcprov-jdk15-1.45.jar' to classloader
+5751 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/poi-ooxml-3.10.1.jar' to classloader
+5751 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/poi-ooxml-schemas-3.10.1.jar' to classloader
+5752 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/fontbox-1.8.4.jar' to classloader
+5752 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/bcmail-jdk15-1.45.jar' to classloader
+5754 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/aspectjrt-1.6.11.jar' to classloader
+5754 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/tika-xmp-1.5.jar' to classloader
+5754 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/jhighlight-1.0.jar' to classloader
+5760 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/dist/solr-cell-4.10.2.jar' to classloader
+5761 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/clustering/lib/carrot2-mini-3.9.0.jar' to classloader
+5761 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/clustering/lib/attributes-binder-1.2.1.jar' to classloader
+5763 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/clustering/lib/mahout-collections-1.0.jar' to classloader
+5764 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/clustering/lib/hppc-0.5.2.jar' to classloader
+5764 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/clustering/lib/mahout-math-0.6.jar' to classloader
+5764 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/clustering/lib/simple-xml-2.7.jar' to classloader
+5765 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/clustering/lib/jackson-core-asl-1.9.13.jar' to classloader
+5765 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/clustering/lib/jackson-mapper-asl-1.9.13.jar' to classloader
+5766 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/dist/solr-clustering-4.10.2.jar' to classloader
+5767 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/langid/lib/jsonic-1.2.7.jar' to classloader
+5771 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/langid/lib/langdetect-1.1-20120112.jar' to classloader
+5776 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/dist/solr-langid-4.10.2.jar' to classloader
+5777 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/velocity/lib/commons-collections-3.2.1.jar' to classloader
+5777 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/velocity/lib/velocity-1.7.jar' to classloader
+5777 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/velocity/lib/commons-beanutils-1.8.3.jar' to classloader
+5778 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/velocity/lib/velocity-tools-2.0.jar' to classloader
+5779 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrResourceLoader  – Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/dist/solr-velocity-4.10.2.jar' to classloader
+6341 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.update.SolrIndexConfig  – IndexWriter infoStream solr logging is enabled
+6353 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrConfig  – Using Lucene MatchVersion: 4.10.2
+6819 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.Config  – Loaded SolrConfig: solrconfig.xml
+6833 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.schema.IndexSchema  – Reading Solr Schema from /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/conf/schema.xml
+6890 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.schema.IndexSchema  – [collection1] Schema name=default
+7017 [coreLoadExecutor-5-thread-1] WARN  org.apache.solr.core.SolrResourceLoader  – Solr loaded a deprecated plugin/analysis class [solr.SortableIntField]. Please consult documentation how to replace it accordingly.
+7036 [coreLoadExecutor-5-thread-1] WARN  org.apache.solr.core.SolrResourceLoader  – Solr loaded a deprecated plugin/analysis class [solr.SortableLongField]. Please consult documentation how to replace it accordingly.
+7046 [coreLoadExecutor-5-thread-1] WARN  org.apache.solr.core.SolrResourceLoader  – Solr loaded a deprecated plugin/analysis class [solr.SortableFloatField]. Please consult documentation how to replace it accordingly.
+7054 [coreLoadExecutor-5-thread-1] WARN  org.apache.solr.core.SolrResourceLoader  – Solr loaded a deprecated plugin/analysis class [solr.SortableDoubleField]. Please consult documentation how to replace it accordingly.
+7224 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.schema.IndexSchema  – default search field in schema is text
+7227 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.schema.IndexSchema  – query parser default operator is AND
+7228 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.schema.IndexSchema  – unique key field: id
+7466 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.CoreContainer  – Creating SolrCore 'collection1' using configuration from instancedir /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/
+7496 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrCore  – solr.NRTCachingDirectoryFactory
+7513 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrCore  – [collection1] Opening new SolrCore at /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/, dataDir=/home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/data/
+7516 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.JmxMonitoredMap  – No JMX servers found, not exposing Solr information with JMX.
+7523 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrCore  – [collection1] Added SolrEventListener for newSearcher: org.apache.solr.core.QuerySenderListener{queries=[]}
+7523 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrCore  – [collection1] Added SolrEventListener for firstSearcher: org.apache.solr.core.QuerySenderListener{queries=[{q=static firstSearcher warming in solrconfig.xml}]}
+7545 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.CachingDirectoryFactory  – return new directory for /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/data
+7551 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrCore  – New index directory detected: old=null new=/home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/data/index/
+7552 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.CachingDirectoryFactory  – return new directory for /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/data/index
+7577 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrCore  – created json: solr.JSONResponseWriter
+7577 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrCore  – adding lazy queryResponseWriter: solr.VelocityResponseWriter
+7578 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrCore  – created velocity: solr.VelocityResponseWriter
+7583 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrCore  – created xslt: solr.XSLTResponseWriter
+7584 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.response.XSLTResponseWriter  – xsltCacheLifetimeSeconds=5
+7751 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrCore  – no updateRequestProcessorChain defined as default, creating implicit default
+7761 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – created /update: org.apache.solr.handler.UpdateRequestHandler
+7762 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – created /update/json: org.apache.solr.handler.UpdateRequestHandler
+7762 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – created /update/csv: org.apache.solr.handler.UpdateRequestHandler
+7763 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – created /update/json/docs: org.apache.solr.handler.UpdateRequestHandler
+7771 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – created /select: solr.SearchHandler
+7771 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – created /query: solr.SearchHandler
+7774 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – created /get: solr.RealTimeGetHandler
+7774 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – created /export: solr.SearchHandler
+7775 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – created /browse: solr.SearchHandler
+7780 [coreLoadExecutor-5-thread-1] WARN  org.apache.solr.core.RequestHandlers  – Multiple requestHandler registered to the same name: /update ignoring: org.apache.solr.handler.UpdateRequestHandler
+7781 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – created /update: solr.UpdateRequestHandler
+7781 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – adding lazy requestHandler: solr.extraction.ExtractingRequestHandler
+7782 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – created /update/extract: solr.extraction.ExtractingRequestHandler
+7782 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – adding lazy requestHandler: solr.FieldAnalysisRequestHandler
+7782 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – created /analysis/field: solr.FieldAnalysisRequestHandler
+7782 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – adding lazy requestHandler: solr.DocumentAnalysisRequestHandler
+7783 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – created /analysis/document: solr.DocumentAnalysisRequestHandler
+7786 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – created /admin/: solr.admin.AdminHandlers
+7789 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – created /admin/ping: solr.PingRequestHandler
+7792 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – created /debug/dump: solr.DumpRequestHandler
+7806 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – created /replication: solr.ReplicationHandler
+7806 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – adding lazy requestHandler: solr.SearchHandler
+7806 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – created /spell: solr.SearchHandler
+7806 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – adding lazy requestHandler: solr.SearchHandler
+7806 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – created /suggest: solr.SearchHandler
+7807 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – adding lazy requestHandler: solr.SearchHandler
+7807 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – created /tvrh: solr.SearchHandler
+7807 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – adding lazy requestHandler: solr.SearchHandler
+7807 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – created /terms: solr.SearchHandler
+7808 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – adding lazy requestHandler: solr.SearchHandler
+7808 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.RequestHandlers  – created /elevate: solr.SearchHandler
+7832 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.handler.loader.XMLLoader  – xsltCacheLifetimeSeconds=60
+7835 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.handler.loader.XMLLoader  – xsltCacheLifetimeSeconds=60
+7835 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.handler.loader.XMLLoader  – xsltCacheLifetimeSeconds=60
+7836 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.handler.loader.XMLLoader  – xsltCacheLifetimeSeconds=60
+7843 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.handler.loader.XMLLoader  – xsltCacheLifetimeSeconds=60
+7886 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrCore  – Hard AutoCommit: if uncommited for 15000ms; 
+7886 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrCore  – Soft AutoCommit: disabled
+7965 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrCore  – SolrDeletionPolicy.onInit: commits: num=1
+	commit{dir=NRTCachingDirectory(MMapDirectory@/home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/data/index lockFactory=NativeFSLockFactory@/home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/data/index; maxCacheMB=48.0 maxMergeSizeMB=4.0),segFN=segments_8,generation=8}
+7966 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.SolrCore  – newest commit generation = 8
+8008 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.search.SolrIndexSearcher  – Opening Searcher@24fd5136[collection1] main
+8054 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.rest.ManagedResourceStorage  – File-based storage initialized to use dir: /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/conf
+8054 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.rest.RestManager  – Initializing RestManager with initArgs: {storageDir=/home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/conf}
+8069 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.rest.ManagedResourceStorage  – Reading _rest_managed.json using file:dir=/home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/conf
+8074 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.rest.ManagedResourceStorage  – Loaded LinkedHashMap at path _rest_managed.json using file:dir=/home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/conf
+8074 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.rest.ManagedResource  – Loaded initArgs {} for /rest/managed
+8074 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.rest.RestManager  – Initializing 0 registered ManagedResources
+8075 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.handler.component.SpellCheckComponent  – Initializing spell checkers
+8087 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.spelling.DirectSolrSpellChecker  – init: {name=default,field=text,classname=solr.DirectSolrSpellChecker,distanceMeasure=internal,accuracy=0.5,maxEdits=2,minPrefix=1,maxInspections=5,minQueryLength=4,maxQueryFrequency=0.01}
+8103 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.handler.component.SpellCheckComponent  – No queryConverter defined, using default converter
+8106 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.handler.component.SuggestComponent  – Initializing SuggestComponent
+8108 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.spelling.suggest.SolrSuggester  – init: {name=mySuggester,lookupImpl=FuzzyLookupFactory,dictionaryImpl=DocumentDictionaryFactory,field=cat,weightField=price,suggestAnalyzerFieldType=string}
+8133 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.spelling.suggest.SolrSuggester  – Dictionary loaded with params: {name=mySuggester,lookupImpl=FuzzyLookupFactory,dictionaryImpl=DocumentDictionaryFactory,field=cat,weightField=price,suggestAnalyzerFieldType=string}
+8135 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.handler.component.QueryElevationComponent  – Loading QueryElevation from: /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/conf/elevate.xml
+8184 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.handler.ReplicationHandler  – Commits will be reserved for  10000
+8185 [searcherExecutor-6-thread-1] INFO  org.apache.solr.core.SolrCore  – QuerySenderListener sending requests to Searcher@24fd5136[collection1] main{StandardDirectoryReader(segments_8:15:nrt _3(4.10.2):C301)}
+8196 [coreLoadExecutor-5-thread-1] INFO  org.apache.solr.core.CoreContainer  – registering core: collection1
+8207 [main] INFO  org.apache.solr.servlet.SolrDispatchFilter  – user.dir=/home/ubuntu/public_html/quabl.com/solr-4.10.2/example
+8208 [main] INFO  org.apache.solr.servlet.SolrDispatchFilter  – SolrDispatchFilter.init() done
+8432 [main] INFO  org.eclipse.jetty.server.AbstractConnector  – Started SocketConnector@0.0.0.0:8983
+8448 [searcherExecutor-6-thread-1] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=null path=null params={event=firstSearcher&q=static+firstSearcher+warming+in+solrconfig.xml&distrib=false} hits=0 status=0 QTime=260 
+8448 [searcherExecutor-6-thread-1] INFO  org.apache.solr.core.SolrCore  – QuerySenderListener done.
+8449 [searcherExecutor-6-thread-1] INFO  org.apache.solr.handler.component.SpellCheckComponent  – Loading spell index for spellchecker: default
+8449 [searcherExecutor-6-thread-1] INFO  org.apache.solr.handler.component.SpellCheckComponent  – Loading spell index for spellchecker: wordbreak
+8449 [searcherExecutor-6-thread-1] INFO  org.apache.solr.handler.component.SuggestComponent  – Loading suggester index for: mySuggester
+8449 [searcherExecutor-6-thread-1] INFO  org.apache.solr.spelling.suggest.SolrSuggester  – reload()
+8450 [searcherExecutor-6-thread-1] INFO  org.apache.solr.spelling.suggest.SolrSuggester  – build()
+8617 [searcherExecutor-6-thread-1] INFO  org.apache.solr.core.SolrCore  – [collection1] Registered new searcher Searcher@24fd5136[collection1] main{StandardDirectoryReader(segments_8:15:nrt _3(4.10.2):C301)}
+116426 [qtp1572683631-11] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=20 
+116444 [qtp1572683631-11] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+116503 [qtp1572683631-12] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(re)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=1 status=0 QTime=2 
+116510 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=2 
+116514 [qtp1572683631-13] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=3 
+116525 [qtp1572683631-13] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=1} hits=0 status=0 QTime=1 
+116526 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=8 
+116539 [qtp1572683631-13] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+116551 [qtp1572683631-13] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=2 
+116556 [qtp1572683631-12] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+116562 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=0 
+116591 [qtp1572683631-12] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+116596 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=26 
+116778 [qtp1572683631-11] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=3 
+116785 [qtp1572683631-11] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+116836 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+116842 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+118006 [qtp1572683631-11] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforce)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=1 
+118008 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforc)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=7 
+150642 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=2 
+150656 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+150740 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(re)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=1 status=0 QTime=4 
+150917 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+150922 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+150980 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+150984 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+151079 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+151083 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+151179 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+151185 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+151293 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+151298 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+151515 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforc)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=1 
+151677 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforce)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=1 
+2692138 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=2 
+2692143 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+2692511 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(re)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=1 status=0 QTime=1 
+2692644 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+2692648 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+2692658 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+2692661 [qtp1572683631-16] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+2692669 [qtp1572683631-16] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+2692710 [qtp1572683631-17] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=2 
+2692723 [qtp1572683631-17] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+2692964 [qtp1572683631-16] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=6 
+2692970 [qtp1572683631-16] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+2693051 [qtp1572683631-17] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+2693056 [qtp1572683631-17] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+2693340 [qtp1572683631-16] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforc)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=1 
+2693412 [qtp1572683631-16] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforce)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=5 
+2693535 [qtp1572683631-16] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforcem)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+2693540 [qtp1572683631-16] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforcem)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+2693673 [qtp1572683631-17] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforceme)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+2693680 [qtp1572683631-17] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforceme)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+2693755 [qtp1572683631-16] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforcemen)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=2 
+2693759 [qtp1572683631-16] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforcemen)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+2693928 [qtp1572683631-16] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforcement)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=2 
+2723466 [qtp1572683631-17] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(l)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=1 status=0 QTime=2 
+2723516 [qtp1572683631-17] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(le)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+2723521 [qtp1572683631-13] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(le)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+2723523 [qtp1572683631-17] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(le)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+2723528 [qtp1572683631-13] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(le)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+2723581 [qtp1572683631-13] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(lea)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+2723586 [qtp1572683631-13] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(lea)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+2723750 [qtp1572683631-13] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(lear)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+2723760 [qtp1572683631-13] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(lear)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+2723922 [qtp1572683631-16] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(learn)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=141 status=0 QTime=2 
+2733118 [qtp1572683631-13] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(l)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=1 status=0 QTime=1 
+2733488 [qtp1572683631-16] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(le)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+2733492 [qtp1572683631-16] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(le)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+2733514 [qtp1572683631-13] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(lear)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+2733518 [qtp1572683631-13] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(lear)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+2733607 [qtp1572683631-13] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(lea)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=7 
+2733613 [qtp1572683631-13] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(lea)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+2733824 [qtp1572683631-13] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(learn)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=141 status=0 QTime=1 
+12433950 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=9 
+12433954 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+12433995 [qtp1572683631-16] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(re)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=1 status=0 QTime=1 
+12434523 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12434528 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+12434560 [qtp1572683631-16] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12434566 [qtp1572683631-16] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=3 
+12437810 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12437814 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+12437886 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12437896 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+12438022 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12438026 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+12438665 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforc)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=1 
+12438676 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforce)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=1 
+12438698 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforce)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=1 
+12507444 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12507449 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+12507497 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(re)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=1 status=0 QTime=1 
+12507639 [qtp1572683631-12] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12507643 [qtp1572683631-12] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+12508011 [qtp1572683631-12] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=2 
+12508017 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12508030 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+12508032 [qtp1572683631-12] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+12509415 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=3 
+12509421 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+12510125 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12510134 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+12511444 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12511449 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+12511627 [qtp1572683631-12] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=4 
+12511632 [qtp1572683631-12] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+12512012 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12512016 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+12513467 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12513472 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+12514272 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12514277 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+12514969 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12514973 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+12516061 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforc)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=1 
+12516188 [qtp1572683631-12] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforce)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=1 
+12532122 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12532127 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+12532151 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(re)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=1 status=0 QTime=1 
+12532435 [qtp1572683631-12] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12532440 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12532445 [qtp1572683631-18] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12532450 [qtp1572683631-12] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+12532453 [qtp1572683631-18] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12532457 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+12532466 [qtp1572683631-12] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+12532604 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12532609 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+12532621 [qtp1572683631-19] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12532625 [qtp1572683631-19] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+12532629 [qtp1572683631-15] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=1} hits=0 status=0 QTime=1 
+12533019 [qtp1572683631-12] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforc)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=1 
+12533106 [qtp1572683631-12] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforce)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=1 
+12605117 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=2 
+12605122 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+12605210 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(re)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=1 status=0 QTime=1 
+12605423 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12605427 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+12606112 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12606117 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+12606578 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12606583 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+12606604 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfi)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12606610 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfi)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+12607182 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12607187 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+12607210 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12607214 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+12607349 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+12607353 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+12607578 [qtp1572683631-17] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforc)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=0 
+12607801 [qtp1572683631-14] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforce)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=1 
+36128940 [qtp1572683631-13] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(t)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=7 status=0 QTime=12 
+36129130 [qtp1572683631-13] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(th)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=7 status=0 QTime=2 
+36129187 [qtp1572683631-18] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(the)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+36129192 [qtp1572683631-18] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(the)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+36129847 [qtp1572683631-18] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(theo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=2 
+36129851 [qtp1572683631-18] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(theo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+36129988 [qtp1572683631-13] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(theor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=2 
+36129992 [qtp1572683631-13] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(theor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+36130307 [qtp1572683631-18] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(theori)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=18 status=0 QTime=2 
+36130481 [qtp1572683631-13] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(theoriz)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=1 status=0 QTime=1 
+36130604 [qtp1572683631-13] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(theorizi)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+36130608 [qtp1572683631-13] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(theorizi)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+36130747 [qtp1572683631-18] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(theorizin)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+36130751 [qtp1572683631-18] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(theorizin)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+36131168 [qtp1572683631-18] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(theorizing)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=1 status=0 QTime=1 
+36131545 [qtp1572683631-18] INFO  org.apache.solr.core.SolrCore  – [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(theorizing)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=1 status=0 QTime=1 
