@@ -3313,3 +3313,350 @@ INFO  - 2015-01-28 13:49:55.261; org.apache.solr.core.SolrCore; [collection1] we
 INFO  - 2015-01-28 13:49:55.273; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={q=(What)&fl=*+score&start=0&fq=django_ct:(SimplerApp.simpler)&rows=20&wt=json} hits=50 status=0 QTime=0 
 INFO  - 2015-01-28 13:49:55.272; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={q=(What)&fl=*+score&start=0&fq=django_ct:(SimplerApp.simpler)&rows=20&wt=json} hits=50 status=0 QTime=14 
 INFO  - 2015-01-28 13:49:55.462; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={q=(What\?)&fl=*+score&start=0&fq=django_ct:(SimplerApp.simpler)&rows=20&wt=json} hits=50 status=0 QTime=1 
+INFO  - 2015-02-02 06:43:57.074; org.eclipse.jetty.server.Server; jetty-8.1.10.v20130312
+INFO  - 2015-02-02 06:43:57.123; org.eclipse.jetty.deploy.providers.ScanningAppProvider; Deployment monitor /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/contexts at interval 0
+INFO  - 2015-02-02 06:43:57.132; org.eclipse.jetty.deploy.DeploymentManager; Deployable added: /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/contexts/solr-jetty-context.xml
+INFO  - 2015-02-02 06:43:57.362; org.eclipse.jetty.webapp.WebInfConfiguration; Extract jar:file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/example/webapps/solr.war!/ to /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr-webapp/webapp
+INFO  - 2015-02-02 06:44:00.814; org.eclipse.jetty.webapp.StandardDescriptorProcessor; NO JSP Support for /solr, did not find org.apache.jasper.servlet.JspServlet
+INFO  - 2015-02-02 06:44:01.019; org.apache.solr.servlet.SolrDispatchFilter; SolrDispatchFilter.init()
+INFO  - 2015-02-02 06:44:01.083; org.apache.solr.core.SolrResourceLoader; JNDI not configured for solr (NoInitialContextEx)
+INFO  - 2015-02-02 06:44:01.084; org.apache.solr.core.SolrResourceLoader; solr home defaulted to 'solr/' (could not find system property or JNDI)
+INFO  - 2015-02-02 06:44:01.085; org.apache.solr.core.SolrResourceLoader; new SolrResourceLoader for directory: 'solr/'
+INFO  - 2015-02-02 06:44:01.417; org.apache.solr.core.ConfigSolr; Loading container configuration from /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/solr.xml
+INFO  - 2015-02-02 06:44:01.691; org.apache.solr.core.CorePropertiesLocator; Config-defined core root directory: /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr
+INFO  - 2015-02-02 06:44:01.704; org.apache.solr.core.CoreContainer; New CoreContainer 881366894
+INFO  - 2015-02-02 06:44:01.704; org.apache.solr.core.CoreContainer; Loading cores into CoreContainer [instanceDir=solr/]
+INFO  - 2015-02-02 06:44:01.724; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting socketTimeout to: 0
+INFO  - 2015-02-02 06:44:01.725; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting urlScheme to: null
+INFO  - 2015-02-02 06:44:01.730; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting connTimeout to: 0
+INFO  - 2015-02-02 06:44:01.734; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting maxConnectionsPerHost to: 20
+INFO  - 2015-02-02 06:44:01.734; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting corePoolSize to: 0
+INFO  - 2015-02-02 06:44:01.735; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting maximumPoolSize to: 2147483647
+INFO  - 2015-02-02 06:44:01.735; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting maxThreadIdleTime to: 5
+INFO  - 2015-02-02 06:44:01.741; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting sizeOfQueue to: -1
+INFO  - 2015-02-02 06:44:01.742; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting fairnessPolicy to: false
+INFO  - 2015-02-02 06:44:02.373; org.apache.solr.update.UpdateShardHandler; Creating UpdateShardHandler HTTP client with params: socketTimeout=0&connTimeout=0&retry=false
+INFO  - 2015-02-02 06:44:02.376; org.apache.solr.logging.LogWatcher; SLF4J impl is org.slf4j.impl.Log4jLoggerFactory
+INFO  - 2015-02-02 06:44:02.378; org.apache.solr.logging.LogWatcher; Registering Log Listener [Log4j (org.slf4j.impl.Log4jLoggerFactory)]
+INFO  - 2015-02-02 06:44:02.380; org.apache.solr.core.CoreContainer; Host Name: 
+INFO  - 2015-02-02 06:44:02.498; org.apache.solr.core.CorePropertiesLocator; Looking for core definitions underneath /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr
+INFO  - 2015-02-02 06:44:02.529; org.apache.solr.core.CorePropertiesLocator; Found core collection1 in /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/
+INFO  - 2015-02-02 06:44:02.530; org.apache.solr.core.CorePropertiesLocator; Found 1 core definitions
+INFO  - 2015-02-02 06:44:02.538; org.apache.solr.core.SolrResourceLoader; new SolrResourceLoader for directory: '/home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/'
+INFO  - 2015-02-02 06:44:02.791; org.apache.solr.core.SolrConfig; Adding specified lib dirs to ClassLoader
+INFO  - 2015-02-02 06:44:02.795; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/apache-mime4j-dom-0.7.2.jar' to classloader
+INFO  - 2015-02-02 06:44:02.796; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/xz-1.4.jar' to classloader
+INFO  - 2015-02-02 06:44:02.796; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/juniversalchardet-1.0.3.jar' to classloader
+INFO  - 2015-02-02 06:44:02.797; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/tika-parsers-1.5.jar' to classloader
+INFO  - 2015-02-02 06:44:02.797; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/vorbis-java-tika-0.1.jar' to classloader
+INFO  - 2015-02-02 06:44:02.801; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/dom4j-1.6.1.jar' to classloader
+INFO  - 2015-02-02 06:44:02.802; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/tagsoup-1.2.1.jar' to classloader
+INFO  - 2015-02-02 06:44:02.802; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/jdom-1.0.jar' to classloader
+INFO  - 2015-02-02 06:44:02.802; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/tika-core-1.5.jar' to classloader
+INFO  - 2015-02-02 06:44:02.803; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/metadata-extractor-2.6.2.jar' to classloader
+INFO  - 2015-02-02 06:44:02.809; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/rome-0.9.jar' to classloader
+INFO  - 2015-02-02 06:44:02.809; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/jempbox-1.8.4.jar' to classloader
+INFO  - 2015-02-02 06:44:02.810; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/pdfbox-1.8.4.jar' to classloader
+INFO  - 2015-02-02 06:44:02.810; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/isoparser-1.0-RC-1.jar' to classloader
+INFO  - 2015-02-02 06:44:02.811; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/poi-scratchpad-3.10.1.jar' to classloader
+INFO  - 2015-02-02 06:44:02.811; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/xmlbeans-2.6.0.jar' to classloader
+INFO  - 2015-02-02 06:44:02.811; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/xercesImpl-2.9.1.jar' to classloader
+INFO  - 2015-02-02 06:44:02.812; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/vorbis-java-core-0.1.jar' to classloader
+INFO  - 2015-02-02 06:44:02.812; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/icu4j-53.1.jar' to classloader
+INFO  - 2015-02-02 06:44:02.817; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/poi-3.10.1.jar' to classloader
+INFO  - 2015-02-02 06:44:02.823; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/apache-mime4j-core-0.7.2.jar' to classloader
+INFO  - 2015-02-02 06:44:02.823; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/commons-compress-1.7.jar' to classloader
+INFO  - 2015-02-02 06:44:02.824; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/boilerpipe-1.1.0.jar' to classloader
+INFO  - 2015-02-02 06:44:02.824; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/xmpcore-5.1.2.jar' to classloader
+INFO  - 2015-02-02 06:44:02.824; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/bcprov-jdk15-1.45.jar' to classloader
+INFO  - 2015-02-02 06:44:02.825; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/poi-ooxml-3.10.1.jar' to classloader
+INFO  - 2015-02-02 06:44:02.825; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/poi-ooxml-schemas-3.10.1.jar' to classloader
+INFO  - 2015-02-02 06:44:02.826; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/fontbox-1.8.4.jar' to classloader
+INFO  - 2015-02-02 06:44:02.826; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/bcmail-jdk15-1.45.jar' to classloader
+INFO  - 2015-02-02 06:44:02.828; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/aspectjrt-1.6.11.jar' to classloader
+INFO  - 2015-02-02 06:44:02.828; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/tika-xmp-1.5.jar' to classloader
+INFO  - 2015-02-02 06:44:02.828; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/extraction/lib/jhighlight-1.0.jar' to classloader
+INFO  - 2015-02-02 06:44:02.834; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/dist/solr-cell-4.10.2.jar' to classloader
+INFO  - 2015-02-02 06:44:02.835; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/clustering/lib/carrot2-mini-3.9.0.jar' to classloader
+INFO  - 2015-02-02 06:44:02.835; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/clustering/lib/attributes-binder-1.2.1.jar' to classloader
+INFO  - 2015-02-02 06:44:02.837; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/clustering/lib/mahout-collections-1.0.jar' to classloader
+INFO  - 2015-02-02 06:44:02.838; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/clustering/lib/hppc-0.5.2.jar' to classloader
+INFO  - 2015-02-02 06:44:02.838; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/clustering/lib/mahout-math-0.6.jar' to classloader
+INFO  - 2015-02-02 06:44:02.838; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/clustering/lib/simple-xml-2.7.jar' to classloader
+INFO  - 2015-02-02 06:44:02.839; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/clustering/lib/jackson-core-asl-1.9.13.jar' to classloader
+INFO  - 2015-02-02 06:44:02.839; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/clustering/lib/jackson-mapper-asl-1.9.13.jar' to classloader
+INFO  - 2015-02-02 06:44:02.840; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/dist/solr-clustering-4.10.2.jar' to classloader
+INFO  - 2015-02-02 06:44:02.841; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/langid/lib/jsonic-1.2.7.jar' to classloader
+INFO  - 2015-02-02 06:44:02.845; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/langid/lib/langdetect-1.1-20120112.jar' to classloader
+INFO  - 2015-02-02 06:44:02.850; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/dist/solr-langid-4.10.2.jar' to classloader
+INFO  - 2015-02-02 06:44:02.851; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/velocity/lib/commons-collections-3.2.1.jar' to classloader
+INFO  - 2015-02-02 06:44:02.851; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/velocity/lib/velocity-1.7.jar' to classloader
+INFO  - 2015-02-02 06:44:02.851; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/velocity/lib/commons-beanutils-1.8.3.jar' to classloader
+INFO  - 2015-02-02 06:44:02.852; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/contrib/velocity/lib/velocity-tools-2.0.jar' to classloader
+INFO  - 2015-02-02 06:44:02.853; org.apache.solr.core.SolrResourceLoader; Adding 'file:/home/ubuntu/public_html/quabl.com/solr-4.10.2/dist/solr-velocity-4.10.2.jar' to classloader
+INFO  - 2015-02-02 06:44:03.415; org.apache.solr.update.SolrIndexConfig; IndexWriter infoStream solr logging is enabled
+INFO  - 2015-02-02 06:44:03.427; org.apache.solr.core.SolrConfig; Using Lucene MatchVersion: 4.10.2
+INFO  - 2015-02-02 06:44:03.893; org.apache.solr.core.SolrConfig; Loaded SolrConfig: solrconfig.xml
+INFO  - 2015-02-02 06:44:03.907; org.apache.solr.schema.IndexSchema; Reading Solr Schema from /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/conf/schema.xml
+INFO  - 2015-02-02 06:44:03.964; org.apache.solr.schema.IndexSchema; [collection1] Schema name=default
+WARN  - 2015-02-02 06:44:04.091; org.apache.solr.core.SolrResourceLoader; Solr loaded a deprecated plugin/analysis class [solr.SortableIntField]. Please consult documentation how to replace it accordingly.
+WARN  - 2015-02-02 06:44:04.110; org.apache.solr.core.SolrResourceLoader; Solr loaded a deprecated plugin/analysis class [solr.SortableLongField]. Please consult documentation how to replace it accordingly.
+WARN  - 2015-02-02 06:44:04.120; org.apache.solr.core.SolrResourceLoader; Solr loaded a deprecated plugin/analysis class [solr.SortableFloatField]. Please consult documentation how to replace it accordingly.
+WARN  - 2015-02-02 06:44:04.128; org.apache.solr.core.SolrResourceLoader; Solr loaded a deprecated plugin/analysis class [solr.SortableDoubleField]. Please consult documentation how to replace it accordingly.
+INFO  - 2015-02-02 06:44:04.298; org.apache.solr.schema.IndexSchema; default search field in schema is text
+INFO  - 2015-02-02 06:44:04.301; org.apache.solr.schema.IndexSchema; query parser default operator is AND
+INFO  - 2015-02-02 06:44:04.302; org.apache.solr.schema.IndexSchema; unique key field: id
+INFO  - 2015-02-02 06:44:04.540; org.apache.solr.core.CoreContainer; Creating SolrCore 'collection1' using configuration from instancedir /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/
+INFO  - 2015-02-02 06:44:04.570; org.apache.solr.core.SolrCore; solr.NRTCachingDirectoryFactory
+INFO  - 2015-02-02 06:44:04.587; org.apache.solr.core.SolrCore; [collection1] Opening new SolrCore at /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/, dataDir=/home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/data/
+INFO  - 2015-02-02 06:44:04.590; org.apache.solr.core.JmxMonitoredMap; No JMX servers found, not exposing Solr information with JMX.
+INFO  - 2015-02-02 06:44:04.597; org.apache.solr.core.SolrCore; [collection1] Added SolrEventListener for newSearcher: org.apache.solr.core.QuerySenderListener{queries=[]}
+INFO  - 2015-02-02 06:44:04.597; org.apache.solr.core.SolrCore; [collection1] Added SolrEventListener for firstSearcher: org.apache.solr.core.QuerySenderListener{queries=[{q=static firstSearcher warming in solrconfig.xml}]}
+INFO  - 2015-02-02 06:44:04.619; org.apache.solr.core.CachingDirectoryFactory; return new directory for /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/data
+INFO  - 2015-02-02 06:44:04.625; org.apache.solr.core.SolrCore; New index directory detected: old=null new=/home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/data/index/
+INFO  - 2015-02-02 06:44:04.626; org.apache.solr.core.CachingDirectoryFactory; return new directory for /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/data/index
+INFO  - 2015-02-02 06:44:04.651; org.apache.solr.core.SolrCore; created json: solr.JSONResponseWriter
+INFO  - 2015-02-02 06:44:04.651; org.apache.solr.core.SolrCore; adding lazy queryResponseWriter: solr.VelocityResponseWriter
+INFO  - 2015-02-02 06:44:04.652; org.apache.solr.core.SolrCore; created velocity: solr.VelocityResponseWriter
+INFO  - 2015-02-02 06:44:04.657; org.apache.solr.core.SolrCore; created xslt: solr.XSLTResponseWriter
+INFO  - 2015-02-02 06:44:04.658; org.apache.solr.response.XSLTResponseWriter; xsltCacheLifetimeSeconds=5
+INFO  - 2015-02-02 06:44:04.825; org.apache.solr.core.SolrCore; no updateRequestProcessorChain defined as default, creating implicit default
+INFO  - 2015-02-02 06:44:04.835; org.apache.solr.core.RequestHandlers; created /update: org.apache.solr.handler.UpdateRequestHandler
+INFO  - 2015-02-02 06:44:04.836; org.apache.solr.core.RequestHandlers; created /update/json: org.apache.solr.handler.UpdateRequestHandler
+INFO  - 2015-02-02 06:44:04.836; org.apache.solr.core.RequestHandlers; created /update/csv: org.apache.solr.handler.UpdateRequestHandler
+INFO  - 2015-02-02 06:44:04.837; org.apache.solr.core.RequestHandlers; created /update/json/docs: org.apache.solr.handler.UpdateRequestHandler
+INFO  - 2015-02-02 06:44:04.845; org.apache.solr.core.RequestHandlers; created /select: solr.SearchHandler
+INFO  - 2015-02-02 06:44:04.845; org.apache.solr.core.RequestHandlers; created /query: solr.SearchHandler
+INFO  - 2015-02-02 06:44:04.848; org.apache.solr.core.RequestHandlers; created /get: solr.RealTimeGetHandler
+INFO  - 2015-02-02 06:44:04.848; org.apache.solr.core.RequestHandlers; created /export: solr.SearchHandler
+INFO  - 2015-02-02 06:44:04.849; org.apache.solr.core.RequestHandlers; created /browse: solr.SearchHandler
+WARN  - 2015-02-02 06:44:04.854; org.apache.solr.core.RequestHandlers; Multiple requestHandler registered to the same name: /update ignoring: org.apache.solr.handler.UpdateRequestHandler
+INFO  - 2015-02-02 06:44:04.855; org.apache.solr.core.RequestHandlers; created /update: solr.UpdateRequestHandler
+INFO  - 2015-02-02 06:44:04.855; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.extraction.ExtractingRequestHandler
+INFO  - 2015-02-02 06:44:04.856; org.apache.solr.core.RequestHandlers; created /update/extract: solr.extraction.ExtractingRequestHandler
+INFO  - 2015-02-02 06:44:04.856; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.FieldAnalysisRequestHandler
+INFO  - 2015-02-02 06:44:04.856; org.apache.solr.core.RequestHandlers; created /analysis/field: solr.FieldAnalysisRequestHandler
+INFO  - 2015-02-02 06:44:04.856; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.DocumentAnalysisRequestHandler
+INFO  - 2015-02-02 06:44:04.857; org.apache.solr.core.RequestHandlers; created /analysis/document: solr.DocumentAnalysisRequestHandler
+INFO  - 2015-02-02 06:44:04.860; org.apache.solr.core.RequestHandlers; created /admin/: solr.admin.AdminHandlers
+INFO  - 2015-02-02 06:44:04.863; org.apache.solr.core.RequestHandlers; created /admin/ping: solr.PingRequestHandler
+INFO  - 2015-02-02 06:44:04.866; org.apache.solr.core.RequestHandlers; created /debug/dump: solr.DumpRequestHandler
+INFO  - 2015-02-02 06:44:04.880; org.apache.solr.core.RequestHandlers; created /replication: solr.ReplicationHandler
+INFO  - 2015-02-02 06:44:04.880; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2015-02-02 06:44:04.880; org.apache.solr.core.RequestHandlers; created /spell: solr.SearchHandler
+INFO  - 2015-02-02 06:44:04.880; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2015-02-02 06:44:04.880; org.apache.solr.core.RequestHandlers; created /suggest: solr.SearchHandler
+INFO  - 2015-02-02 06:44:04.881; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2015-02-02 06:44:04.881; org.apache.solr.core.RequestHandlers; created /tvrh: solr.SearchHandler
+INFO  - 2015-02-02 06:44:04.881; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2015-02-02 06:44:04.881; org.apache.solr.core.RequestHandlers; created /terms: solr.SearchHandler
+INFO  - 2015-02-02 06:44:04.882; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2015-02-02 06:44:04.882; org.apache.solr.core.RequestHandlers; created /elevate: solr.SearchHandler
+INFO  - 2015-02-02 06:44:04.906; org.apache.solr.handler.loader.XMLLoader; xsltCacheLifetimeSeconds=60
+INFO  - 2015-02-02 06:44:04.909; org.apache.solr.handler.loader.XMLLoader; xsltCacheLifetimeSeconds=60
+INFO  - 2015-02-02 06:44:04.909; org.apache.solr.handler.loader.XMLLoader; xsltCacheLifetimeSeconds=60
+INFO  - 2015-02-02 06:44:04.910; org.apache.solr.handler.loader.XMLLoader; xsltCacheLifetimeSeconds=60
+INFO  - 2015-02-02 06:44:04.917; org.apache.solr.handler.loader.XMLLoader; xsltCacheLifetimeSeconds=60
+INFO  - 2015-02-02 06:44:04.960; org.apache.solr.update.CommitTracker; Hard AutoCommit: if uncommited for 15000ms; 
+INFO  - 2015-02-02 06:44:04.960; org.apache.solr.update.CommitTracker; Soft AutoCommit: disabled
+INFO  - 2015-02-02 06:44:05.039; org.apache.solr.core.SolrDeletionPolicy; SolrDeletionPolicy.onInit: commits: num=1
+	commit{dir=NRTCachingDirectory(MMapDirectory@/home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/data/index lockFactory=NativeFSLockFactory@/home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/data/index; maxCacheMB=48.0 maxMergeSizeMB=4.0),segFN=segments_8,generation=8}
+INFO  - 2015-02-02 06:44:05.040; org.apache.solr.core.SolrDeletionPolicy; newest commit generation = 8
+INFO  - 2015-02-02 06:44:05.082; org.apache.solr.search.SolrIndexSearcher; Opening Searcher@24fd5136[collection1] main
+INFO  - 2015-02-02 06:44:05.128; org.apache.solr.rest.ManagedResourceStorage$FileStorageIO; File-based storage initialized to use dir: /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/conf
+INFO  - 2015-02-02 06:44:05.128; org.apache.solr.rest.RestManager; Initializing RestManager with initArgs: {storageDir=/home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/conf}
+INFO  - 2015-02-02 06:44:05.143; org.apache.solr.rest.ManagedResourceStorage; Reading _rest_managed.json using file:dir=/home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/conf
+INFO  - 2015-02-02 06:44:05.148; org.apache.solr.rest.ManagedResourceStorage; Loaded LinkedHashMap at path _rest_managed.json using file:dir=/home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/conf
+INFO  - 2015-02-02 06:44:05.148; org.apache.solr.rest.ManagedResource; Loaded initArgs {} for /rest/managed
+INFO  - 2015-02-02 06:44:05.148; org.apache.solr.rest.RestManager; Initializing 0 registered ManagedResources
+INFO  - 2015-02-02 06:44:05.149; org.apache.solr.handler.component.SpellCheckComponent; Initializing spell checkers
+INFO  - 2015-02-02 06:44:05.161; org.apache.solr.spelling.DirectSolrSpellChecker; init: {name=default,field=text,classname=solr.DirectSolrSpellChecker,distanceMeasure=internal,accuracy=0.5,maxEdits=2,minPrefix=1,maxInspections=5,minQueryLength=4,maxQueryFrequency=0.01}
+INFO  - 2015-02-02 06:44:05.177; org.apache.solr.handler.component.SpellCheckComponent; No queryConverter defined, using default converter
+INFO  - 2015-02-02 06:44:05.180; org.apache.solr.handler.component.SuggestComponent; Initializing SuggestComponent
+INFO  - 2015-02-02 06:44:05.182; org.apache.solr.spelling.suggest.SolrSuggester; init: {name=mySuggester,lookupImpl=FuzzyLookupFactory,dictionaryImpl=DocumentDictionaryFactory,field=cat,weightField=price,suggestAnalyzerFieldType=string}
+INFO  - 2015-02-02 06:44:05.207; org.apache.solr.spelling.suggest.SolrSuggester; Dictionary loaded with params: {name=mySuggester,lookupImpl=FuzzyLookupFactory,dictionaryImpl=DocumentDictionaryFactory,field=cat,weightField=price,suggestAnalyzerFieldType=string}
+INFO  - 2015-02-02 06:44:05.209; org.apache.solr.handler.component.QueryElevationComponent; Loading QueryElevation from: /home/ubuntu/public_html/quabl.com/solr-4.10.2/example/solr/collection1/conf/elevate.xml
+INFO  - 2015-02-02 06:44:05.258; org.apache.solr.handler.ReplicationHandler; Commits will be reserved for  10000
+INFO  - 2015-02-02 06:44:05.259; org.apache.solr.core.QuerySenderListener; QuerySenderListener sending requests to Searcher@24fd5136[collection1] main{StandardDirectoryReader(segments_8:15:nrt _3(4.10.2):C301)}
+INFO  - 2015-02-02 06:44:05.270; org.apache.solr.core.CoreContainer; registering core: collection1
+INFO  - 2015-02-02 06:44:05.281; org.apache.solr.servlet.SolrDispatchFilter; user.dir=/home/ubuntu/public_html/quabl.com/solr-4.10.2/example
+INFO  - 2015-02-02 06:44:05.282; org.apache.solr.servlet.SolrDispatchFilter; SolrDispatchFilter.init() done
+INFO  - 2015-02-02 06:44:05.506; org.eclipse.jetty.server.AbstractConnector; Started SocketConnector@0.0.0.0:8983
+INFO  - 2015-02-02 06:44:05.522; org.apache.solr.core.SolrCore; [collection1] webapp=null path=null params={event=firstSearcher&q=static+firstSearcher+warming+in+solrconfig.xml&distrib=false} hits=0 status=0 QTime=260 
+INFO  - 2015-02-02 06:44:05.522; org.apache.solr.core.QuerySenderListener; QuerySenderListener done.
+INFO  - 2015-02-02 06:44:05.523; org.apache.solr.handler.component.SpellCheckComponent$SpellCheckerListener; Loading spell index for spellchecker: default
+INFO  - 2015-02-02 06:44:05.523; org.apache.solr.handler.component.SpellCheckComponent$SpellCheckerListener; Loading spell index for spellchecker: wordbreak
+INFO  - 2015-02-02 06:44:05.523; org.apache.solr.handler.component.SuggestComponent$SuggesterListener; Loading suggester index for: mySuggester
+INFO  - 2015-02-02 06:44:05.523; org.apache.solr.spelling.suggest.SolrSuggester; reload()
+INFO  - 2015-02-02 06:44:05.524; org.apache.solr.spelling.suggest.SolrSuggester; build()
+INFO  - 2015-02-02 06:44:05.691; org.apache.solr.core.SolrCore; [collection1] Registered new searcher Searcher@24fd5136[collection1] main{StandardDirectoryReader(segments_8:15:nrt _3(4.10.2):C301)}
+INFO  - 2015-02-02 06:45:53.500; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=20 
+INFO  - 2015-02-02 06:45:53.518; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 06:45:53.577; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(re)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=1 status=0 QTime=2 
+INFO  - 2015-02-02 06:45:53.584; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=2 
+INFO  - 2015-02-02 06:45:53.588; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=3 
+INFO  - 2015-02-02 06:45:53.599; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=1} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 06:45:53.600; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=8 
+INFO  - 2015-02-02 06:45:53.613; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 06:45:53.625; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=2 
+INFO  - 2015-02-02 06:45:53.630; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 06:45:53.636; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=0 
+INFO  - 2015-02-02 06:45:53.665; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 06:45:53.670; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=26 
+INFO  - 2015-02-02 06:45:53.852; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=3 
+INFO  - 2015-02-02 06:45:53.859; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 06:45:53.910; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 06:45:53.916; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 06:45:55.080; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforce)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=1 
+INFO  - 2015-02-02 06:45:55.082; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforc)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=7 
+INFO  - 2015-02-02 06:46:27.716; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=2 
+INFO  - 2015-02-02 06:46:27.730; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 06:46:27.814; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(re)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=1 status=0 QTime=4 
+INFO  - 2015-02-02 06:46:27.991; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 06:46:27.996; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+INFO  - 2015-02-02 06:46:28.054; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 06:46:28.058; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+INFO  - 2015-02-02 06:46:28.153; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 06:46:28.157; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 06:46:28.253; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 06:46:28.259; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 06:46:28.367; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 06:46:28.372; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 06:46:28.589; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforc)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=1 
+INFO  - 2015-02-02 06:46:28.751; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforce)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=1 
+INFO  - 2015-02-02 07:28:49.212; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=2 
+INFO  - 2015-02-02 07:28:49.217; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 07:28:49.585; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(re)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=1 status=0 QTime=1 
+INFO  - 2015-02-02 07:28:49.718; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 07:28:49.722; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 07:28:49.732; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 07:28:49.735; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 07:28:49.743; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+INFO  - 2015-02-02 07:28:49.784; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=2 
+INFO  - 2015-02-02 07:28:49.797; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 07:28:50.038; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=6 
+INFO  - 2015-02-02 07:28:50.044; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+INFO  - 2015-02-02 07:28:50.125; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 07:28:50.130; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 07:28:50.414; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforc)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=1 
+INFO  - 2015-02-02 07:28:50.486; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforce)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=5 
+INFO  - 2015-02-02 07:28:50.609; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforcem)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 07:28:50.614; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforcem)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 07:28:50.747; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforceme)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 07:28:50.754; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforceme)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 07:28:50.829; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforcemen)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=2 
+INFO  - 2015-02-02 07:28:50.833; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforcemen)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+INFO  - 2015-02-02 07:28:51.002; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforcement)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=2 
+INFO  - 2015-02-02 07:29:20.540; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(l)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=1 status=0 QTime=2 
+INFO  - 2015-02-02 07:29:20.590; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(le)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 07:29:20.595; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(le)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 07:29:20.597; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(le)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 07:29:20.602; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(le)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+INFO  - 2015-02-02 07:29:20.655; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(lea)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 07:29:20.660; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(lea)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+INFO  - 2015-02-02 07:29:20.824; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(lear)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 07:29:20.834; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(lear)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 07:29:20.996; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(learn)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=141 status=0 QTime=2 
+INFO  - 2015-02-02 07:29:30.192; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(l)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=1 status=0 QTime=1 
+INFO  - 2015-02-02 07:29:30.562; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(le)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 07:29:30.566; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(le)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 07:29:30.588; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(lear)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 07:29:30.592; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(lear)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+INFO  - 2015-02-02 07:29:30.681; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(lea)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=7 
+INFO  - 2015-02-02 07:29:30.687; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(lea)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 07:29:30.898; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(learn)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=141 status=0 QTime=1 
+INFO  - 2015-02-02 10:11:11.024; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=9 
+INFO  - 2015-02-02 10:11:11.028; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:11:11.069; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(re)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=1 status=0 QTime=1 
+INFO  - 2015-02-02 10:11:11.597; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:11:11.602; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:11:11.634; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:11:11.640; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=3 
+INFO  - 2015-02-02 10:11:14.884; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:11:14.888; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+INFO  - 2015-02-02 10:11:14.960; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:11:14.970; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:11:15.096; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:11:15.100; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+INFO  - 2015-02-02 10:11:15.739; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforc)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=1 
+INFO  - 2015-02-02 10:11:15.750; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforce)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=1 
+INFO  - 2015-02-02 10:11:15.772; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforce)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:24.518; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:24.523; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:24.571; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(re)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=1 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:24.713; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:24.717; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+INFO  - 2015-02-02 10:12:25.085; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=2 
+INFO  - 2015-02-02 10:12:25.091; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:25.104; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:25.106; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:26.489; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=3 
+INFO  - 2015-02-02 10:12:26.495; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+INFO  - 2015-02-02 10:12:27.199; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:27.208; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:28.518; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:28.523; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:28.701; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=4 
+INFO  - 2015-02-02 10:12:28.706; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:29.086; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:29.090; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:30.541; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:30.546; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:31.346; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:31.351; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:32.043; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:32.047; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+INFO  - 2015-02-02 10:12:33.135; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforc)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:33.262; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforce)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:49.196; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:49.201; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:49.225; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(re)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=1 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:49.509; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:49.514; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:49.519; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:49.524; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+INFO  - 2015-02-02 10:12:49.527; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:49.531; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+INFO  - 2015-02-02 10:12:49.540; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:49.678; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:49.683; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:49.695; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:49.699; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:49.703; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=1} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:50.093; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforc)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=1 
+INFO  - 2015-02-02 10:12:50.180; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforce)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=1 
+INFO  - 2015-02-02 10:14:02.191; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=2 
+INFO  - 2015-02-02 10:14:02.196; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(r)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:14:02.284; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(re)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=1 status=0 QTime=1 
+INFO  - 2015-02-02 10:14:02.497; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:14:02.501; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rei)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:14:03.186; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:14:03.191; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(rein)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+INFO  - 2015-02-02 10:14:03.652; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:14:03.657; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:14:03.678; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfi)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:14:03.684; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfi)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+INFO  - 2015-02-02 10:14:04.256; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:14:04.261; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinf)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:14:04.284; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:14:04.288; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:14:04.423; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:14:04.427; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinfor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 10:14:04.652; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforc)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=0 
+INFO  - 2015-02-02 10:14:04.875; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(reinforce)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=119 status=0 QTime=1 
+INFO  - 2015-02-02 16:46:06.014; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(t)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=7 status=0 QTime=12 
+INFO  - 2015-02-02 16:46:06.204; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(th)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=7 status=0 QTime=2 
+INFO  - 2015-02-02 16:46:06.261; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(the)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 16:46:06.266; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(the)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+INFO  - 2015-02-02 16:46:06.921; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(theo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=2 
+INFO  - 2015-02-02 16:46:06.925; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(theo)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 16:46:07.062; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(theor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=2 
+INFO  - 2015-02-02 16:46:07.066; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(theor)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 16:46:07.381; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(theori)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=18 status=0 QTime=2 
+INFO  - 2015-02-02 16:46:07.555; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(theoriz)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=1 status=0 QTime=1 
+INFO  - 2015-02-02 16:46:07.678; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(theorizi)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 16:46:07.682; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(theorizi)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=0 
+INFO  - 2015-02-02 16:46:07.821; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(theorizin)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 16:46:07.825; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(theorizin)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=0} hits=0 status=0 QTime=1 
+INFO  - 2015-02-02 16:46:08.242; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(theorizing)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=1 status=0 QTime=1 
+INFO  - 2015-02-02 16:46:08.619; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/select/ params={fl=*+score&start=0&q=(theorizing)&wt=json&fq=django_ct:(SimplerApp.simpler)&rows=20} hits=1 status=0 QTime=1 
