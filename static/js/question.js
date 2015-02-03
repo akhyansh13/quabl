@@ -92,7 +92,14 @@ $(document).mouseup(function(){
 
 		window.conans.closest('.nthanswer').find('.aldwrapper').show();
 
-		window.uriarr[4] = window.uriarr[4] + '/cques/' +  $("#contextquesbox").val().replace('?', 'xqmx') + '/highlight/' + window.highlight;
+		if($("#anoncheckcq").is(":checked")){
+			var newques = $("#contextquesbox").val() + ' xanonx';
+		}
+		else{
+			var newques = $("#contextquesbox").val();
+		}
+
+		window.uriarr[4] = window.uriarr[4] + '/cques/' +  newques.replace('?', 'xqmx') + '/highlight/' + window.highlight;
 
 		$.get((window.uriarr[4]), function(data){
 
@@ -142,8 +149,12 @@ $(document).mouseup(function(){
 
 		$this.attr('disabled', 'true');
 
-		var newques = $("#quesbox").val();
-
+		if($("#anoncheckq").is(":checked")){
+			var newques = $("#quesbox").val() + ' xanonx';
+		}
+		else{
+			var newques = $("#quesbox").val();
+		}
 		var uri = '/defined/' + String(window.highclicked) + '/' + newques.replace('?','xqmx');
 
 		$.get((uri), function(data){
@@ -231,6 +242,10 @@ $(document).mouseup(function(){
 	});
 
 	$(".askques").click(function(evt){
+		evt.stopPropagation();
+	});
+
+	$(".anoncheck").click(function(evt){
 		evt.stopPropagation();
 	});
 

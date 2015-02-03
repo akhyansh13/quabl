@@ -285,6 +285,8 @@ def define(request, post_id, simpler_id, answer_part, quabl, cques, highlightx):
 
     cques = cques.replace('xqmx', '?')
 
+    anon = User.objects.get(username="Anonymous")
+
     post_id = int(post_id)
     simpler_id = int(simpler_id)
     flag = False
@@ -304,7 +306,10 @@ def define(request, post_id, simpler_id, answer_part, quabl, cques, highlightx):
 
     h = highlight.objects.get_or_create(highlight=highlightx, highlight_parent=simpler)[0]
 
-    f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, created = datetime.now(), question = cques)[0]
+    if cques.find(' xanonx') == -1:
+        f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, created = datetime.now(), question = cques)[0]
+    else:
+        f = highlightq.objects.get_or_create(highlight=h, req_by = anon, created = datetime.now(), question = cques.replace(' xanonx', ''))[0]
 
     simpler.answer = answer_part.replace("idtobesetinview", str(h.id)).replace("texthtmlgoeshere", encodedquabl)
 
@@ -323,14 +328,20 @@ def define(request, post_id, simpler_id, answer_part, quabl, cques, highlightx):
         #if u != request.user:
             #UserNotification.objects.create(user=u, notification=f.req_by.username + ' added a question on <div data-id="'+ str(f.id) +'" class="simplernotif notiflink">' + h.highlight_parent.answer + '</div>', status='unread', created = datetime.now(), modified = datetime.now())
 
-    return HttpResponse(simpler.answer + '<cqdelimit>' + str(simpler.id) + '<cqdelimit>' + cques + '<cqdelimit>' + str(f.highlight.id) + '<cqdelimit>' + str(f.highlight.highlight_parent.id) + '<cqdelimit>' + str(f.id))
+    return HttpResponse(simpler.answer + '<cqdelimit>' + str(simpler.id) + '<cqdelimit>' + f.question + '<cqdelimit>' + str(f.highlight.id) + '<cqdelimit>' + str(f.highlight.highlight_parent.id) + '<cqdelimit>' + str(f.id))
 
 def defined(request, h_id, cques):
 
     context = RequestContext(request)
 
     h = highlight.objects.get(id=int(h_id))
-    f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, created = datetime.now(), question = cques.replace('xqmx', '?'))[0]
+
+    anon = User.objects.get(username="Anonymous")
+
+    if cques.find(' xanonx') == -1:
+        f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, created = datetime.now(), question = cques.replace('xqmx', '?'))[0]
+    else:
+        f = highlightq.objects.get_or_create(highlight=h, req_by = anon, created = datetime.now(), question = cques.replace('xqmx', '?').replace(' xanonx', ''))[0]
 
     h.highlight_parent.post.followers.add(request.user)
 

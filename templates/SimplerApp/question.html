@@ -41,7 +41,7 @@
 
 	<div class="rquesheader questionon-{{rques.highlight.highlight_parent.id}}" data-id="{{rques.id}}" style="display:none;">
 
-		<div class="rques hid-{{rques.highlight.id}} parent-{{rques.highlight.highlight_parent.id}}" style="display:none;"><a href="/question/{{rques.id}}">{{rques.question}}</a>
+		<div class="rques hid-{{rques.highlight.id}} parent-{{rques.highlight.highlight_parent.id}}"><a href="/question/{{rques.id}}">{{rques.question}}</a>
 		<button class="btn btn-default addanswer" style="display:none;"><a href="/addsimpler/{{rques.id}}">Add Answer.</a></button></div>
 
 	</div>
@@ -63,14 +63,16 @@
 <div id="quesboxwrapper" style="display:none;">
 
 	<textarea id="contextquesbox"></textarea>
-	<button class="btn btn-primary askcontques" disabled="true">Ask Question</button>
+	<button class="btn btn-primary askcontques" disabled="true">Ask Question</button><br/>
+	<span style="font-size:9pt; color:#C0C0C0;"><input type="checkbox" id="anoncheckcq" class="anoncheck"/> ASK ANONYMOUSLY</span>
 
 </div>
 
 <div id="queswrapper" style="display:none;">
 
 	<textarea id="quesbox"></textarea>
-	<button class="btn btn-primary askques" disabled="true">Ask Question</button>
+	<button class="btn btn-primary askques" disabled="true">Ask Question</button><br/>
+	<span style="font-size:9pt; color:#C0C0C0;"><input type="checkbox" id="anoncheckq" class="anoncheck"/> ASK ANONYMOUSLY</span>
 
 </div>
 
