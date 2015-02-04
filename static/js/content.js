@@ -99,9 +99,7 @@ $(document).mouseup(function(){
 			var newques = $("#contextquesbox").val();
 		}
 
-		window.uriarr[4] = window.uriarr[4] + '/cques/' +  newques.replace('?', 'xqmx') + '/highlight/' + window.highlight;
-
-		$.get((window.uriarr[4]), function(data){
+		$.get(('/define/'+window.uriarr[0]+'/'+window.uriarr[1]),{answer_part: window.uriarr[2], qh:window.uriarr[3], cques:newques.replace('?', 'xqmx'), highlight:window.highlight}, function(data){
 
 			$this.parent().find('textarea').val('');
 

@@ -277,13 +277,13 @@ def user_logout(request):
 
     return HttpResponseRedirect('/')
 
-def define(request, post_id, simpler_id, answer_part, quabl, cques, highlightx):
+def define(request, post_id, simpler_id):
 
     context = RequestContext(request)
 
-    answer_part = answer_part.replace("xqmx", "?")
+    answer_part = request.GET['answer_part'].replace("xqmx", "?")
 
-    cques = cques.replace('xqmx', '?')
+    cques = request.GET['cques'].replace('xqmx', '?')
 
     anon = User.objects.get(username="Anonymous")
 
@@ -294,7 +294,7 @@ def define(request, post_id, simpler_id, answer_part, quabl, cques, highlightx):
     if answer_part == 'undefined':
         answer_part = ''
 
-    encodedquabl = quabl
+    encodedquabl = request.GET['qh']
 
     answer_part = answer_part.replace('<span id="blankspace">&nbsp;</span></span>', " ")
     answer_part = answer_part.replace('<span id="noblankspace"></span></span>', "")
@@ -304,7 +304,7 @@ def define(request, post_id, simpler_id, answer_part, quabl, cques, highlightx):
     post = Post.objects.get(id=post_id)
     simpler = Simpler.objects.get(id=simpler_id)
 
-    h = highlight.objects.get_or_create(highlight=highlightx, highlight_parent=simpler)[0]
+    h = highlight.objects.get_or_create(highlight=request.GET['highlight'], highlight_parent=simpler)[0]
 
     if cques.find(' xanonx') == -1:
         f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, created = datetime.now(), question = cques)[0]
