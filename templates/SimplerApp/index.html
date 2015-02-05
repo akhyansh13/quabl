@@ -35,9 +35,34 @@
 		<hr/>
 	{% endfor %}
 </div>
-<div id="ocont">
-	Overview content here.
-</div>
+<div id="ocont" style="font-size:10pt;">
+	<h3>Purpose</h3>
+
+	This course will provide a comprehensive introduction to reinforcement learning, a powerful approach to learning from interaction to achieve goals in stochastic and incompletely-known environments. Reinforcement learning has adapted key ideas from machine learning, operations research, control theory, psychology, and neuroscience to produce some strikingly successful applications. The focus is on algorithms for learning what actions to take, and when to take them, so as to optimize long-term performance. This may involve sacrificing immediate reward to obtain greater reward in the long-term or just to obtain more information about the environment. The course will cover Markov decision processes, dynamic programming, temporal-difference learning, policy gradient reinforcement learning methods, Monte Carlo reinforcement learning methods, eligibility traces, the role of function approximation, hierarchical reinforcement learning approaches, and the integration of learning and planning.
+
+	Prerequisites: Interest in learning approaches to artificial intelligence; basic probability theory; computer programming ability. Please talk with the instructor if you want to take the course but have doubts about your qualifications.
+
+	<h3>Syllabus</h3>
+
+	The Reinforcement Learning problem: evaluative feedback, non-associative learning, Rewards and returns, Markov Decision Processes, Value functions, optimality and approximation
+	Dynamic programming: value iteration, policy iteration, asynchronous DP, generalized policy iteration
+	Monte-Carlo methods: policy evaluation, roll outs, on policy and off policy learning, importance sampling
+	Temporal Difference learning: TD prediction, Optimality of TD(0), SARSA, Q-learning, R-learning, Games and after states
+	Eligibility traces: n-step TD prediction, TD(lambda), forward and backward views, Q(lambda), SARSA(lambda), replacing traces and accumulating traces
+	Function Approximation: Value prediction, gradient descent methods, linear function approximation, ANN based function approximation, lazy learning, instability issues
+	Policy Gradient methods: non-associative learning - REINFORCE algorithm, exact gradient methods, estimating gradients, approximate policy gradient algorithms, actor-critic methods
+	Planning and Learning: Model based learning and planning, prioritized sweeping, Dyna, heuristic search, trajectory sampling, E^3 algorithm
+	Hierarchical RL: MAXQ framework, Options framework, HAM framework, airport algorithm, hierarchical policy gradient
+	Case studies: Elevator dispatching, Samuel's checker player, TD-gammon, Acrobot, Helicopter piloting
+
+	<h3>Text Books</h3>
+
+	1. <a href="/sutton/">R. S. Sutton and A. G. Barto: "Reinforcement Learning: An Introduction". Cambridge, MA: MIT Press, 1998.</a>
+
+	<h3>References</h3>
+
+	1. "Neuro-dynamic programming". Dimitri P. Bertsikas and John N. Tsitsiklis.
+	2. "Learning Automata - An Introduction". Kumpati S. Narendra and M. A. L. Thathachar.</div>
 {% endautoescape %}
 {% endif %}
 </div>

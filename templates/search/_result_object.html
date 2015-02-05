@@ -1,21 +1,3 @@
-{% comment %}
-{% with obj=result.object %}</pre>
-<div class="accordion-group">
-<div class="accordion-heading"><a class="accordion-toggle" href="collapse_{{ obj.id }}" data-toggle="collapse" data-parent="#accordion2">
-{% autoescape off %} {{ obj.answer }} {% endautoescape %}
- </a>
-<div style="padding: 8px 15px;">
-Author: {{ obj.author }}
-</div>
-</div>
-<div id="collapse_{{ obj.id }}" class="accordion-body collapse in">
-
-</div>
-</div>
-<pre>
-{% endwith %}
-{% endcomment %}
-
 {% with obj=result.object %}
 <li>{% autoescape off %} {{ obj.answer }}<span class='id' style='display:none;'>{{ obj.id }}</span> {% endautoescape %}</li>
 {% endwith %}

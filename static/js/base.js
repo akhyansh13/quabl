@@ -113,7 +113,9 @@ $(document).ready(function(){
 	});
     $("#q").bind('input propertychange', function(){
     $.get(("/search/?q="+$("#q").val()),function(data){
-				$("#searchresults").html(data);
+			if(data.trim() != '<li> No results found. (Note that only full words are matched.)</li>'){
+					$("#searchresults").html(data);
+				}
 			});
   	});
 
