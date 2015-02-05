@@ -80,7 +80,6 @@ $(document).ready(function(){
 	$("#overview").click(function(){
 		$("#afeed").hide();
 		$("#ocont").show();
-		$(this).css('border-botttom', '4px solid #FFA500');
 	});
 
 	$("#cfeed").click(function(){
@@ -93,7 +92,7 @@ $(document).ready(function(){
 	});
 
 	$(".coursenav").not('#linksnav').click(function(){
-		$(".coursenav").not(this).css('border-bottom', '4px solid #FFFFFF');
+		$(".coursenav").not(this).css('border-bottom', 'none');
 		$(this).css('border-bottom', '4px solid #FFA500');
 	});
 
