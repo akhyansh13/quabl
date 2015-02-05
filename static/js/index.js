@@ -92,6 +92,11 @@ $(document).ready(function(){
 		window.location = '/sutton/' + $(this).closest(".afeedel").find(".activityques").data("parent");
 	});
 
+	$(".coursenav").not('#linksnav').click(function(){
+		$(".coursenav").not(this).css('border-bottom', '4px solid #FFFFFF');
+		$(this).css('border-bottom', '4px solid #FFA500');
+	});
+
 }); //document.ready closed.
 
 function blink(selector){

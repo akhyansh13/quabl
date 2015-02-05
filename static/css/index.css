@@ -61,7 +61,7 @@
 }
 
 #cfeed{
-	border-bottom:6px solid #FFA500;
+	border-bottom:4px solid #FFA500;
 }
 
 #coursenavwrap{
@@ -84,17 +84,8 @@
 	display:none;
 }
 
-#cfeed{
-	float:left;
-}
-
-#overview{
-	float:right;
-}
-
 #linksnav{
 	position:relative;
-	left:26%;
 }
 
 #linkcontainer{

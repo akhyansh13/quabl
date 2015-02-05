@@ -406,6 +406,14 @@ if($("#scrollto").html()!='default'){
 		}
 	});
 
+	blink("#loaddot");
+	setTimeout(function(){
+		$("#loaddot").remove();
+		$(".container").show();
+		$(".header").show();
+	},2000);
+
+
 	/*$("#rearrange").click(function(){
 		$(".answer").each(function(){
 			var parr = $(this).html().split('<p>');
