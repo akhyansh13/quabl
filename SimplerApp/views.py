@@ -178,7 +178,7 @@ def makesimpler(request):                       #View that takes care of additio
     ques = highlightq.objects.get(id=questionid)
     post = ques.highlight.highlight_parent.post
     coefficient = ques.highlight.highlight_parent.coeficient + 1
-    parent_list = 'parent' + str(ques.highlight.highlight_parent.id) + ques.highlight.highlight_parent.parent_list
+    parent_list = 'parent' + str(ques.highlight.highlight_parent.id) + ' ' + ques.highlight.highlight_parent.parent_list
 
     c = Simpler.objects.get_or_create(post=post, question=questionid, answer=simpler_text, simpler_original=simpler_text, coeficient=coefficient, parent_list=parent_list, author=request.user.username, writer=request.user, display=' ')[0]
     l = Link.objects.get_or_create(atext = request.GET['atext'], href = request.GET['link'], simpler=c)[0]
