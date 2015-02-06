@@ -376,6 +376,22 @@ $(document).mouseup(function(){
 
 	});
 
+	$(window).on("scroll", function(){
+		var scrolltop = $(window).scrollTop();
+		var cached_css = ' ';
+		if($("#fixedpane").is(":visible")){
+			if(scrolltop >= $(".nthanswer").offset().top-40){
+				cached_css = $("#fixedpane").attr("style");
+				$("#fixedpane").css({position: "fixed", top:90, left:"65%"});
+				$("#fixedpane").css("width", "21%")
+				$(".triangle").css({"left":"-21px"});
+				}
+				else{
+					$("#fixedpane").attr("style", cached_css);
+					}
+				}
+			});
+
 	blink("#loaddot");
 	setTimeout(function(){
 		$("#loaddot").remove();
