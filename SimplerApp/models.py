@@ -17,8 +17,8 @@ class Post(models.Model):
     topic = models.ForeignKey(topic, null=True, blank=True)
     explores = models.IntegerField(null = False, blank = False, default = 0)
     context = models.CharField(max_length=10000000000, null = False, blank=False, default=' ')
-    created = models.DateTimeField(default=datetime.now())
-    modified = models.DateTimeField(default=datetime.now())
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now_add=True)
     followers = models.ManyToManyField(User, null=True, blank=True)
     def __unicode__(self):
         post_less = show_less(self.post)
@@ -35,8 +35,8 @@ class Simpler(models.Model):
     author = models.CharField(max_length=100000)
     writer = models.ForeignKey(User, null=True, blank=True)
     display = models.CharField(max_length=1000, default=' ')
-    created = models.DateTimeField(default=datetime.now())
-    modified = models.DateTimeField(default=datetime.now())
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now_add=True)
     upvoters = models.ManyToManyField(User, related_name="aupvoted", null=True, blank=True)
 
     def __unicode__(self):
@@ -46,7 +46,7 @@ class Simpler(models.Model):
 class highlight(models.Model):
     highlight = models.CharField(max_length=100000000)
     highlight_parent = models.ForeignKey(Simpler, related_name=u'highlight_parent', blank=True, null=True)
-    created = models.DateTimeField(default=datetime.now())
+    created = models.DateTimeField(auto_now_add=True)
     def __unicode__(self):
         return self.highlight
 
@@ -54,7 +54,7 @@ class highlightq(models.Model):
     highlight = models.ForeignKey(highlight)
     question = models.CharField(max_length=10000000, blank=True, null=True)
     req_by = models.ForeignKey(User, null=True, blank=True)
-    created = models.DateTimeField(default=datetime.now())
+    created = models.DateTimeField(auto_now_add=True)
     upvoters = models.ManyToManyField(User, related_name="qupvoted", null=True, blank=True)
     def __unicode__(self):
         return self.question
@@ -64,8 +64,9 @@ class UserProfile(models.Model):
     full_name = models.CharField(max_length=1000000, default=' ')
     picture = models.ImageField(upload_to='profile_images', blank=True, null=True)
     shortbio = models.CharField(max_length=10000000, default="Don't know :(")
-    created = models.DateTimeField(default=datetime.now())
-    modified = models.DateTimeField(default=datetime.now())
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now_add=True)
+    last_seen = models.DateTimeField(auto_now_add=True)
     def __unicode__(self):
         return self.user.username
 
@@ -73,13 +74,14 @@ class UserNotification(models.Model):
     user = models.ForeignKey(User)
     notification = models.CharField(max_length=10000000)
     status = models.CharField(max_length=10)
-    created = models.DateTimeField(default=datetime.now())
-    modified = models.DateTimeField(default=datetime.now())
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now_add=True)
     def __unicode__(self):
         return str(self.user) + '-' + self.notification
 
 class activity(models.Model):                                   #Model object for all quabl activity *for* a user. Not a particular user's activity.
     activity = models.CharField(max_length=10000000)
+    created = models.DateTimeField(auto_now_add=True)
 
 class Link(models.Model):
 

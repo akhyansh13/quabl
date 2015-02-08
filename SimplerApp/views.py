@@ -21,10 +21,23 @@ def tour(request):
 def index(request):
     context = RequestContext(request)
 
+    uprofile = UserProfile.objects.get(user=request.user)
+
     contextsimplers = Simpler.objects.all().filter(parent_list='contextsimpler')
     context_dict = {'contexts':contextsimplers}
 
-    context_dict['activity'] = activity.objects.all()[::-1]
+    actqueryset = activity.objects.all()[::-1]
+    actquerysetnew = []
+    actquerysetold = []
+
+    for act in actqueryset:
+        if act.created > uprofile.last_seen:
+            actquerysetnew.append(act)
+        else:
+            actquerysetold.append(act)
+
+    context_dict['newact'] = actquerysetnew
+    context_dict['oldact'] = actquerysetold
 
     contextarr = []
 
@@ -38,6 +51,8 @@ def index(request):
     contextarr = contextarr[::-1]
 
     context_dict['contarr'] = contextarr
+
+    context_dict['last'] = uprofile.last_seen
 
     return render_to_response('SimplerApp/index.html', context_dict, context)
 
@@ -307,15 +322,14 @@ def define(request, post_id, simpler_id):
     h = highlight.objects.get_or_create(highlight=request.GET['highlight'], highlight_parent=simpler)[0]
 
     if cques.find(' xanonx') == -1:
-        f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, created = datetime.now(), question = cques)[0]
+        f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, question = cques)[0]
         actobj = activity.objects.create(activity='<span class="getup" data="'+ str(request.user.id) +'"><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> has a question. </span>' + '<div class="activityques " data-id="'+ str(f.id) +'" data-parent="' + str(f.highlight.highlight_parent.id) + '"><a href="/question/'+ str(f.id) +'/">' + f.question + '</a></div>')
     else:
-        f = highlightq.objects.get_or_create(highlight=h, req_by = anon, created = datetime.now(), question = cques.replace(' xanonx', ''))[0]
+        f = highlightq.objects.get_or_create(highlight=h, req_by = anon, question = cques.replace(' xanonx', ''))[0]
         actobj = activity.objects.create(activity='Anonymous<span class="notiftext"> has a question. </span>' + '<div class="activityques " data-id="'+ str(f.id) +'" data-parent="' + str(f.highlight.highlight_parent.id) + '"><a href="/question/'+ str(f.id) +'/">' + f.question + '</a></div>')
 
     simpler.answer = answer_part.replace("idtobesetinview", str(h.id)).replace("texthtmlgoeshere", encodedquabl)
 
-    simpler.modified = datetime.now()
     simpler.save()
 
     #question = highlightq.objects.get_or_create(highlight=f, question=f.description, created = datetime.now())
@@ -340,10 +354,10 @@ def defined(request, h_id, cques):
     anon = User.objects.get(username="Anonymous")
 
     if cques.find(' xanonx') == -1:
-        f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, created = datetime.now(), question = cques.replace('xqmx', '?'))[0]
+        f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, question = cques.replace('xqmx', '?'))[0]
         actobj = activity.objects.create(activity='<span class="getup" data='+ str(request.user.id) +'><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> has a question. </span>' + '<div class="activityques " data-parent="'+ str(f.highlight.highlight_parent.id) +'" data-id="'+ str(f.id) +'">' + '<a href="/question/' + str(f.id) + '">' + f.question + '</a></div>')
     else:
-        f = highlightq.objects.get_or_create(highlight=h, req_by = anon, created = datetime.now(), question = cques.replace('xqmx', '?').replace(' xanonx', ''))[0]
+        f = highlightq.objects.get_or_create(highlight=h, req_by = anon, question = cques.replace('xqmx', '?').replace(' xanonx', ''))[0]
         actobj = activity.objects.create(activity='Anonymous<span class="notiftext"> has a question. </span>' + '<div class="activityques " data-parent="'+ str(f.highlight.highlight_parent.id) +'" data-id="'+ str(f.id) +'">' + '<a href="/question/' + str(f.id) + '">' + f.question + '</a></div>')
 
     h.highlight_parent.post.followers.add(request.user)
@@ -353,60 +367,6 @@ def defined(request, h_id, cques):
             #UserNotification.objects.create(user=u, notification=f.req_by.username + ' added a question on <div data-id="'+ str(f.id) +'"class="simplernotif notiflink">' + h.highlight_parent.answer + '</div>', status='unread', created = datetime.now(), modified = datetime.now())
 
     return HttpResponse(str(f.highlight.highlight_parent.id) + '<cqdelimit>' + f.question + '<cqdelimit>' + str(f.highlight.id) + '<cqdelimit>' + str(f.highlight.highlight_parent.id) + '<cqdelimit>' + str(f.id))
-
-def requestbyuser(request, category, description):
-    context = RequestContext(request)
-
-    if category == 'back_to_post' or category == 'askforsimpler' or category == 'addsimpler': #or category == 'redirected':
-        postid = description.split('postid:')[1].split(';')[0]
-        if request.user.is_authenticated():
-            c = ReqByUser.objects.get_or_create(user=request.user, category=category, description=description)
-            if c[1]:
-                c[0].created = datetime.now()
-            c[0].modified = datetime.now()
-            c[0].frequency = c[0].frequency + 1
-            c[0].save()
-            return HttpResponseRedirect('/simpler/' + postid + '/' + str(c[0].id) + '/')
-        else:
-            return HttpResponseRedirect('/simpler/' + postid)
-
-    elif category == 'notifications':
-        notif_id = int(description)
-        notification = UserNotification.objects.get(id=notif_id)
-        post_id = notification.postid
-        notification.status = 'read'
-        notification.save()
-        c = ReqByUser.objects.get_or_create(user=request.user, category=category, description=description)
-        if c[1]:
-            c[0].created = datetime.now()
-        c[0].modified = datetime.now()
-        c[0].frequency = c[0].frequency + 1
-        c[0].save()
-        simpler_id = notification.simplerid
-        if simpler_id > -1:
-            c = ReqByUser.objects.get_or_create(user=request.user, category='back_to_post', description='postid:' + str(post_id) + ';simplerid:' + str(simpler_id) + ';')
-            if c[1]:
-                c[0].created = datetime.now()
-            c[0].modified = datetime.now()
-            c[0].frequency = c[0].frequency + 1
-            c[0].save()
-            return HttpResponseRedirect('/simpler/' + str(post_id) + '/' + str(c[0].id) + '/')
-        else:
-                return HttpResponseRedirect('/simpler/' + str(post_id) + '/')
-
-    elif category == 'explore':
-        postid = description
-        post = Post.objects.get(id=int(postid))
-        post.explores = post.explores + 1
-        post.save()
-        if request.user.is_authenticated():
-            c = ReqByUser.objects.get_or_create(user=request.user, category=category, description='postid:' + description)
-            if c[1]:
-                c[0].created = datetime.now()
-            c[0].modified = datetime.now()
-            c[0].frequency = c[0].frequency + 1
-            c[0].save()
-        return HttpResponseRedirect('/simpler/' + postid + '/')
 
 def getUserProfile(request, user_id):
     context = RequestContext(request)
@@ -475,3 +435,10 @@ def ucheck(request, type, id):
         return HttpResponse('upvoted')
     else:
         return HttpResponse('unupvoted')
+
+def lastseen(request):
+    context = RequestContext(request)
+    uprofile = UserProfile.objects.get(user=request.user)
+    uprofile.last_seen = datetime.now()
+    uprofile.save()
+    return HttpResponse('success')

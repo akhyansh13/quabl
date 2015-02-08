@@ -23,16 +23,28 @@
 	<h2>CS670, IIT Madras</h2>
 	<div id="coursenavwrap"><span id="cfeed" class="coursenav">COURSE FEED</span> <span id="linksnav" class="coursenav">COURSE CONTENT<span id="linkcontainer"><span id="suttonlink">Reinforcement Learning: An Introduction by Richard S. Sutton</span><br/><span id="scribelink" style="border-top:1px solid #FFA500;">Scribes</span></span></span> <span id='overview' class="coursenav">OVERVIEW</span></div>
 	<div id="afeed">
-	{% for a in activity %}
+	{% for a in newact %}
 	<div class="afeedel">
 		<div class="activity" data-actid="{{a.id}}">
-		{{a.activity}}
+		{{a.activity}} | {{a.created}}
 	</div>
 		<div class="upview">
 			<span class="viewcont"><a href="javascript:;">View Context</a></span>&bull;<a href="javascript:;"><span class="up"></span></a>
 		</div>
 	</div>
 		<hr/>
+	{% endfor %}
+	blah | {{last}}
+	{% for a in oldact %}
+	<div class="afeedel">
+		<div class="activity" data-actid="{{a.id}}">
+			{{a.activity}} | {{a.created}}
+		</div>
+		<div class="upview">
+			<span class="viewcont"><a href="javascript:;">View Context</a></span>&bull;<a href="javascript:;"><span class="up"></span></a>
+		</div>
+	</div>
+	<hr/>
 	{% endfor %}
 </div>
 <div id="ocont" style="font-size:10pt;">

@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from SimplerApp.views import index, csimpler, question, makesimpler, register, user_login, user_logout, addpost, define, requestbyuser, getUserProfile, follow, addpostext, getthumburl, defined, indexalt, tour, sutton, suttonscroll, upvote, ucheck
+from SimplerApp.views import index, csimpler, question, makesimpler, register, user_login, user_logout, addpost, define, getUserProfile, follow, addpostext, getthumburl, defined, indexalt, tour, sutton, suttonscroll, upvote, ucheck, lastseen
 from django.contrib import admin
 from django.conf import settings
 admin.autodiscover()
@@ -22,7 +22,6 @@ urlpatterns = patterns('',
     url(r'^addpost/$', addpost),
     url(r'^define/(?P<post_id>\w+)/(?P<simpler_id>\w+)/$', define),
     url(r'^defined/(?P<h_id>\w+)/(?P<cques>[\w|\W]*)/$', defined),
-    url(r'^request/(?P<category>[\w|\W]+)/(?P<description>[\w|\W]+)/$', requestbyuser),
     url(r'^userprof/(?P<user_id>\w+)/$', getUserProfile),
     url(r'^addpostext/$', addpostext),
     url(r'^thumb/(?P<username>\w+)/$', getthumburl),
@@ -32,6 +31,7 @@ urlpatterns = patterns('',
     url(r'^search/$', include('haystack.urls')),
     url(r'^upvote/(?P<type>\w+)/(?P<id>[\w|\W]*)/$', upvote),
     url(r'^ucheck/(?P<type>\w+)/(?P<id>[\w|\W]*)/$', ucheck),
+    url(r'^lastseen/$', lastseen),
 )
 
 if settings.DEBUG:

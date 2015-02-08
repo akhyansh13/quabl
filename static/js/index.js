@@ -96,6 +96,10 @@ $(document).ready(function(){
 		$(this).css('border-bottom', '4px solid #FFA500');
 	});
 
+	setTimeout(function(){
+		$.get(('/lastseen/'));
+	}, 1000);
+
 }); //document.ready closed.
 
 function blink(selector){
