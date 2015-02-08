@@ -26,7 +26,7 @@
 	{% for a in newact %}
 	<div class="afeedel">
 		<div class="activity" data-actid="{{a.id}}">
-		{{a.activity}} | {{a.created}}
+		{{a.activity}}
 	</div>
 		<div class="upview">
 			<span class="viewcont"><a href="javascript:;">View Context</a></span>&bull;<a href="javascript:;"><span class="up"></span></a>
@@ -34,11 +34,11 @@
 	</div>
 		<hr/>
 	{% endfor %}
-	blah | {{last}}
+	<hr style="border-bottom:1px solid #FFA500;"
 	{% for a in oldact %}
 	<div class="afeedel">
 		<div class="activity" data-actid="{{a.id}}">
-			{{a.activity}} | {{a.created}}
+			{{a.activity}}
 		</div>
 		<div class="upview">
 			<span class="viewcont"><a href="javascript:;">View Context</a></span>&bull;<a href="javascript:;"><span class="up"></span></a>
