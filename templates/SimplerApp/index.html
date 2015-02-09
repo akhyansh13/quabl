@@ -27,12 +27,13 @@
 	<div class="afeedel">
 		<div class="activity" data-actid="{{a.id}}">
 		{{a.activity}}
+		<span class="newact">NEW ACTIVITY</span>
 	</div>
 		<div class="upview">
 			<span class="viewcont"><a href="javascript:;">View Context</a></span>&bull;<a href="javascript:;"><span class="up"></span></a>
 		</div>
 	</div>
-	 <hr style="border-bottom:1px solid #FFA500;">
+	 <hr/>
 	{% endfor %}
 	{% for a in oldact %}
 	<div class="afeedel">

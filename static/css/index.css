@@ -80,6 +80,10 @@
 	font-size:10pt;
 }
 
+.afeedel{
+	position: relative;
+}
+
 #afeed h1{
 	display:none;
 }
@@ -97,6 +101,7 @@
 	background-color:#FFFFFF;
 	padding:10px;
 	border:1px solid #C0C0C0;
+	z-index: 8;
 }
 
 #ocont{
@@ -113,4 +118,16 @@
 
 .upview{
 	margin-top:20px;
+}
+
+.newact{
+	position:absolute;
+	bottom:0;
+	right:0;
+	font-size:9pt;
+	color:grey;
+}
+
+hr{
+	margin-top: 5px;
 }
