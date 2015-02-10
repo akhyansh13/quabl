@@ -38,6 +38,7 @@ def index(request):
 
     context_dict['newact'] = actquerysetnew
     context_dict['oldact'] = actquerysetold
+    context_dict['act'] = actqueryset
 
     contextarr = []
 
@@ -200,7 +201,8 @@ def makesimpler(request):                       #View that takes care of additio
 
     post.followers.add(request.user)
 
-    actobj = activity.objects.create(activity='<span class="getup" data='+ str(request.user.id) +'><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> added an answer. </span>' + '<div class="activityques " data-id="'+ str(ques.id) +'" data-parent="' + str(ques.highlight.highlight_parent.id) + '"><a href="/question/'+ str(ques.id) +'/">' + ques.question + '</a></div><div class="activityans " data-ansid="' + str(c.id) + '">'+ c.answer + '</div>')
+    actobj = activity.objects.create(user=request.user, question = f, answer=c)
+    #actobj = activity.objects.create(activity='<span class="getup" data='+ str(request.user.id) +'><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> added an answer. </span>' + '<div><span class="activitycontext">' + ques.highlight.highlight_parent.answer + '</span><span class="floatques">'+ ques.question +'</span></div><div class="activityques " data-id="'+ str(ques.id) +'" data-highlight="' + str(ques.highlight.id) + '" data-parent="' + str(ques.highlight.highlight_parent.id) + '"><a href="/question/'+ str(ques.id) +'/">' + ques.question + '</a></div><div class="activityans " data-ansid="' + str(c.id) + '">'+ c.answer + '</div>')
 
     #for u in post.followers.all():
         #if u != request.user:
@@ -323,10 +325,12 @@ def define(request, post_id, simpler_id):
 
     if cques.find(' xanonx') == -1:
         f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, question = cques)[0]
-        actobj = activity.objects.create(activity='<span class="getup" data="'+ str(request.user.id) +'"><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> has a question. </span>' + '<div class="activityques " data-id="'+ str(f.id) +'" data-parent="' + str(f.highlight.highlight_parent.id) + '"><a href="/question/'+ str(f.id) +'/">' + f.question + '</a></div>')
+        actobj = activity.objects.create(user=request.user, question = f)
+        #actobj = activity.objects.create(activity='<span class="getup" data="'+ str(request.user.id) +'"><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> has a question. </span>' + '<div class="activityques " data-id="'+ str(f.id) +'" data-parent="' + str(f.highlight.highlight_parent.id) + '"><a href="/question/'+ str(f.id) +'/">' + f.question + '</a></div>')
     else:
         f = highlightq.objects.get_or_create(highlight=h, req_by = anon, question = cques.replace(' xanonx', ''))[0]
-        actobj = activity.objects.create(activity='Anonymous<span class="notiftext"> has a question. </span>' + '<div class="activityques " data-id="'+ str(f.id) +'" data-parent="' + str(f.highlight.highlight_parent.id) + '"><a href="/question/'+ str(f.id) +'/">' + f.question + '</a></div>')
+        actobj = activity.objects.create(user=anon, question = f)
+        #actobj = activity.objects.create(activity='Anonymous<span class="notiftext"> has a question. </span>' + '<div class="activityques " data-id="'+ str(f.id) +'" data-parent="' + str(f.highlight.highlight_parent.id) + '"><a href="/question/'+ str(f.id) +'/">' + f.question + '</a></div>')
 
     simpler.answer = answer_part.replace("idtobesetinview", str(h.id)).replace("texthtmlgoeshere", encodedquabl)
 
@@ -355,10 +359,10 @@ def defined(request, h_id, cques):
 
     if cques.find(' xanonx') == -1:
         f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, question = cques.replace('xqmx', '?'))[0]
-        actobj = activity.objects.create(activity='<span class="getup" data='+ str(request.user.id) +'><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> has a question. </span>' + '<div class="activityques " data-parent="'+ str(f.highlight.highlight_parent.id) +'" data-id="'+ str(f.id) +'">' + '<a href="/question/' + str(f.id) + '">' + f.question + '</a></div>')
+        actobj = activity.objects.create(user=request.user, question = f)
     else:
         f = highlightq.objects.get_or_create(highlight=h, req_by = anon, question = cques.replace('xqmx', '?').replace(' xanonx', ''))[0]
-        actobj = activity.objects.create(activity='Anonymous<span class="notiftext"> has a question. </span>' + '<div class="activityques " data-parent="'+ str(f.highlight.highlight_parent.id) +'" data-id="'+ str(f.id) +'">' + '<a href="/question/' + str(f.id) + '">' + f.question + '</a></div>')
+        actobj = activity.objects.create(user=anon, question = f)
 
     h.highlight_parent.post.followers.add(request.user)
 

@@ -20,34 +20,70 @@
 {% autoescape off %}
 
 	<h1>Reinforcement Learning</h1>
+
 	<h2>CS670, IIT Madras</h2>
-	<div id="coursenavwrap"><span id="cfeed" class="coursenav">COURSE FEED</span> <span id="linksnav" class="coursenav">COURSE CONTENT<span id="linkcontainer"><span id="suttonlink">Reinforcement Learning: An Introduction by Richard S. Sutton</span><br/><span id="scribelink" style="border-top:1px solid #FFA500;">Scribes</span></span></span> <span id='overview' class="coursenav">OVERVIEW</span></div>
+
+	<div id="coursenavwrap">
+
+		<span id="cfeed" class="coursenav">COURSE FEED</span>
+		<span id="linksnav" class="coursenav">COURSE CONTENT<span id="linkcontainer">
+			<span id="suttonlink">Reinforcement Learning: An Introduction by Richard S. Sutton</span><br/>
+			<span id="scribelink" style="border-top:1px solid #FFA500;">Scribes</span></span></span>
+			<span id='overview' class="coursenav">OVERVIEW</span>
+
+		</div>
+
 	<div id="afeed">
-	{% for a in newact %}
-	<div class="afeedel">
+
+	{% for a in act %}
+
+	{% if a.answer %}
+
+	<div class="afeedel ansact">
+
 		<div class="activity" data-actid="{{a.id}}">
-		{{a.activity}}
-		<span class="newact">NEW ACTIVITY</span>
-	</div>
-		<div class="upview">
-			<span class="viewcont"><a href="javascript:;">View Context</a></span>&bull;<a href="javascript:;"><span class="up"></span></a>
+			<span class="getup" data="{{a.user.id}}"><a href="javascript:;">{{a.user.username}}</a></span><span class="notiftext"> added an answer.</span>
+			<div class="contandqueswrap viewcont"><div class="activitycontext">{{a.question.highlight.highlight_parent.answer}}</div><div class="floatques">{{a.question.question}}</div></div>
+			<div class="activityques" data-id="{{a.question.id}}" data-highlight="{{a.question.highlight.id}}" data-parent="{{a.question.highlight.highlight_parent.id}}">
+				<a href="javascript:;">{{a.question.question}}</a>
+				</div>
+				<div class="activityans" data-ansid="{{a.answer.id}}">
+					{{a.answer.answer}}
+					</div>
+					{% if a in newact %}<span class="newact">NEW ACTIVITY</span>{% endif %}
 		</div>
-	</div>
-	 <hr/>
-	{% endfor %}
-	{% for a in oldact %}
-	<div class="afeedel">
-		<div class="activity" data-actid="{{a.id}}">
-			{{a.activity}}
-		</div>
+
 		<div class="upview">
-			<span class="viewcont"><a href="javascript:;">View Context</a></span>&bull;<a href="javascript:;"><span class="up"></span></a>
+			<a href="javascript:;"><span class="up"></span></a>
 		</div>
 	</div>
 	<hr/>
+
+	{% else %}
+
+	<div class="afeedel quesact">
+
+		<div class="activity" data-actid="{{a.id}}">
+			<span class="getup" data="{{a.user.id}}"><a href="javascript:;">{{a.user.username}}</a></span><span class="notiftext"> has this question. </span>
+			<div class="activitycontext">{{a.question.highlight.highlight_parent.answer}}</div>
+			<div class="activityques" data-id="{{a.question.id}}" data-parent="{{a.question.highlight.highlight_parent.id}}">
+				<a href="javascript:;">{{a.question.question}}</a>
+			</div>
+			{% if a in newact %}<span class="newact">NEW ACTIVITY</span>{% endif %}
+		</div>
+		<div class="upview">
+			<a href="javascript:;"><span class="up"></span></a>
+		</div>
+	</div>
+	<hr/>
+
+	{% endif %}
 	{% endfor %}
+
 </div>
+
 <div id="ocont" style="font-size:10pt;">
+
 	<h3>Purpose</h3>
 
 	This course will provide a comprehensive introduction to reinforcement learning, a powerful approach to learning from interaction to achieve goals in stochastic and incompletely-known environments. Reinforcement learning has adapted key ideas from machine learning, operations research, control theory, psychology, and neuroscience to produce some strikingly successful applications. The focus is on algorithms for learning what actions to take, and when to take them, so as to optimize long-term performance. This may involve sacrificing immediate reward to obtain greater reward in the long-term or just to obtain more information about the environment. The course will cover Markov decision processes, dynamic programming, temporal-difference learning, policy gradient reinforcement learning methods, Monte Carlo reinforcement learning methods, eligibility traces, the role of function approximation, hierarchical reinforcement learning approaches, and the integration of learning and planning.
@@ -75,8 +111,10 @@
 
 	1. "Neuro-dynamic programming". Dimitri P. Bertsikas and John N. Tsitsiklis.
 	2. "Learning Automata - An Introduction". Kumpati S. Narendra and M. A. L. Thathachar.</div>
+
 {% endautoescape %}
 {% endif %}
+
 </div>
 <div id="empty"></div>
 {% endblock %}

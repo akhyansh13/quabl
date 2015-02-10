@@ -79,8 +79,10 @@ class UserNotification(models.Model):
     def __unicode__(self):
         return str(self.user) + '-' + self.notification
 
-class activity(models.Model):                                   #Model object for all quabl activity *for* a user. Not a particular user's activity.
-    activity = models.CharField(max_length=10000000)
+class activity(models.Model):                                   #The user field contains the user who acted.
+    user = models.ForeignKey(User, null=True, blank=True)
+    question = models.ForeignKey(highlightq, null=True, blank=True)
+    answer = models.ForeignKey(Simpler, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
 class Link(models.Model):

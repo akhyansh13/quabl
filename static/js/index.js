@@ -1,5 +1,9 @@
 $(document).ready(function(){
 
+	//$(".activitycontext").each(function(){
+		//$(this).append('<div class="contextquestion">' + $(this).closest('.afeedel').find('.activityques').html() + '</div>');
+	//});
+
 	$(".up").each(function(){
 		var $up = $(this);
 		var aans = $up.closest('.afeedel').find(".activityans");

@@ -131,3 +131,27 @@
 hr{
 	margin-top: 5px;
 }
+
+.floatques, .quesact .activityques{
+	width:40%;
+	position:absolute;
+	top:30px;
+	right:0;
+}
+
+.activitycontext{
+	width:60%;
+	padding-right:10px;
+	text-align: justify;
+}
+
+.contandqueswrap:hover{
+	background-color:#F5F5F5;
+	width:100%;
+	cursor:hand;
+	cursor:pointer;
+}
+
+.activityans .highlight{
+	display:none;
+}
