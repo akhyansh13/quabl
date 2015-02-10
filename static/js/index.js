@@ -104,6 +104,10 @@ $(document).ready(function(){
 		$.get(('/lastseen/'));
 	}, 1000);
 
+	$(".activityques a").click(function(){
+		window.location = '/question/' + $(this).closest(".activityques").data("id");
+	});
+
 }); //document.ready closed.
 
 function blink(selector){
