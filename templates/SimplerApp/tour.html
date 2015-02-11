@@ -21,7 +21,8 @@
 
   </div>
   <div id="login" align="center" style="position:relative; top:20%;color:#FFF; display:none;">
-
+    <div style="padding-bottom:10px;"><h3>Enter your Roll Number in caps(e.g AE13B038) and the password is "password".</h3>
+    You'll be asked to change your password when you log in the first first time.</div>
     <form id="login_form" method="post" action="/login/">
       {% csrf_token %}
       <input type="text" name="username" value="" size="30" style="height:46px; font-size:22px; border-radius: 6px; border:none; padding:4px;" placeholder="Username"/>

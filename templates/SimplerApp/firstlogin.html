@@ -1,0 +1,21 @@
+{% load static %}
+<html>
+<head>
+  <title>Quabl</title>
+<script src="{% static 'js/jquery-1.11.1.js' %}"></script>
+<script src="{% static 'js/firstlogin.js' %}"></script>
+</head>
+<body style="background-color:#FFA500;">
+
+  <div id="firstlogin" align="center" style="position:relative; top:20%;color:#FFF;">
+  {% csrf_token %}
+<textarea id="username" style="height:46px; font-size:22px; border-radius: 6px; border:none; padding:4px;" placeholder="Username"></textarea>
+<br /><br/>
+<textarea id="password" style="height:46px; font-size:22px; border-radius: 6px; border:none; padding:4px;" placeholder="Password" ></textarea>
+<br /><br/>
+<textarea id="email" style="height:46px; font-size:22px; border-radius: 6px; border:none; padding:4px;" placeholder="Email"></textarea>
+<br /><br/>
+<button class="btn btn-default" id="sub"><b>Start Quabling :)</b></button>
+</div>
+</body>
+</html>

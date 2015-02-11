@@ -274,7 +274,10 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect('/cs670/')
+                if not request.user.email:
+                    return HttpResponseRedirect('/firstlogin/')
+                else:
+                    return HttpResponseRedirect('/cs670/')
             else:
                 return HttpResponse("Your Quabl account is disabled.")
         else:
@@ -441,4 +444,17 @@ def lastseen(request):
     uprofile = UserProfile.objects.get(user=request.user)
     uprofile.last_seen = datetime.now()
     uprofile.save()
+    return HttpResponse('success')
+
+def firstlogin(request):
+    context = RequestContext(request)
+    return render_to_response('SimplerApp/firstlogin.html', context)
+
+def firstloginsub(request):
+    context=RequestContext(request)
+    request.user.email = request.GET['email']
+    request.user.set_password(request.GET['pass'])
+    request.user.username= request.GET['uid']
+    request.user.save()
+    UserProfile.objects.create(user=request.user)
     return HttpResponse('success')
