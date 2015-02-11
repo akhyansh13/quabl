@@ -1,9 +1,5 @@
 $(document).ready(function(){
 
-	//$(".activitycontext").each(function(){
-		//$(this).append('<div class="contextquestion">' + $(this).closest('.afeedel').find('.activityques').html() + '</div>');
-	//});
-
 	$(".up").each(function(){
 		var $up = $(this);
 		var aans = $up.closest('.afeedel').find(".activityans");
@@ -108,6 +104,12 @@ $(document).ready(function(){
 		window.location = '/question/' + $(this).closest(".activityques").data("id");
 	});
 
+	$.when(openquabls()).then(function(){
+		$(".highlight_dummy").each(function(){
+			var otop = $(this).offset().top;
+			$(this).closest(".afeedel").find(".floatques").offset({top:otop-5});
+		});
+	});
 }); //document.ready closed.
 
 function blink(selector){
@@ -116,4 +118,30 @@ function blink(selector){
 			blink(this);
 		});
 	});
+}
+
+function openquabls(){
+	var defer = $.Deferred();
+	$(".context").each(function(){
+		var hp = $(this).closest(".afeedel").find('.floatques').data('hp');
+		$(this).find(".highlight").each(function(){
+			if($(this).data('id')!=hp){
+				$(this).hide();
+			}
+			else{
+				$this = $(this);
+				var quabl_text = $this.find('.html').html();
+				var simpler_html = $this.closest(".context").html();
+				var h_html = $('<div>').append($this.clone()).html();
+				var h_html_dummy = h_html.replace('class="highlight"', 'class="highlight_dummy"')
+				var new_simpler_html = simpler_html.replace(h_html + quabl_text, '<span class="quabl_full">' + h_html_dummy + quabl_text + '</span>').replace('class="highlight"', '');
+				$this.closest(".context").empty().append(new_simpler_html);
+			}
+		});
+	});
+	setTimeout(function(){
+		defer.resolve();
+	},1000);
+
+	return defer;
 }

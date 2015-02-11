@@ -28,16 +28,12 @@ def index(request):
 
     actqueryset = activity.objects.all()[::-1]
     actquerysetnew = []
-    actquerysetold = []
 
     for act in actqueryset:
         if act.created > uprofile.last_seen:
             actquerysetnew.append(act)
-        else:
-            actquerysetold.append(act)
 
     context_dict['newact'] = actquerysetnew
-    context_dict['oldact'] = actquerysetold
     context_dict['act'] = actqueryset
 
     contextarr = []
@@ -196,12 +192,12 @@ def makesimpler(request):                       #View that takes care of additio
     coefficient = ques.highlight.highlight_parent.coeficient + 1
     parent_list = 'parent' + str(ques.highlight.highlight_parent.id) + ' ' + ques.highlight.highlight_parent.parent_list
 
-    c = Simpler.objects.get_or_create(post=post, question=questionid, answer=simpler_text, simpler_original=simpler_text, coeficient=coefficient, parent_list=parent_list, author=request.user.username, writer=request.user, display=' ')[0]
+    c = Simpler.objects.get_or_create(post=post, question=questionid, answerto = ques.question , answer=simpler_text, simpler_original=simpler_text, coeficient=coefficient, parent_list=parent_list, author=request.user.username, writer=request.user, display=' ')[0]
     l = Link.objects.get_or_create(atext = request.GET['atext'], href = request.GET['link'], simpler=c)[0]
 
     post.followers.add(request.user)
 
-    actobj = activity.objects.create(user=request.user, question = f, answer=c)
+    actobj = activity.objects.create(user=request.user, question = ques, answer=c)
     #actobj = activity.objects.create(activity='<span class="getup" data='+ str(request.user.id) +'><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> added an answer. </span>' + '<div><span class="activitycontext">' + ques.highlight.highlight_parent.answer + '</span><span class="floatques">'+ ques.question +'</span></div><div class="activityques " data-id="'+ str(ques.id) +'" data-highlight="' + str(ques.highlight.id) + '" data-parent="' + str(ques.highlight.highlight_parent.id) + '"><a href="/question/'+ str(ques.id) +'/">' + ques.question + '</a></div><div class="activityans " data-ansid="' + str(c.id) + '">'+ c.answer + '</div>')
 
     #for u in post.followers.all():

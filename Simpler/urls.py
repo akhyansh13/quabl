@@ -11,7 +11,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', tour),
-    url(r'^index/$', index),
+    url(r'^cs670/$', index),
     url(r'^question/(?P<question_id>\w+)/$', question),
     url(r'^context/(?P<simpler_id>\w+)/$', csimpler),
     url(r'^follow/$', follow),
