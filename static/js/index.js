@@ -7,10 +7,12 @@ $(document).ready(function(){
 			var id = $up.closest('.afeedel').find('.activityques').data('id');
 			$.get(('/ucheck/ques/' + id), function(data){
 				if(data == 'upvoted'){
-					$up.empty().append('Un-Upvote');
+					$up.empty().append('Upvoted Question');
+					$up.css('opacity', '0.5');
 				}
 				else if(data=='unupvoted'){
-					$up.empty().append('Upvote');
+					$up.empty().append('Upvote Question');
+					$up.css('opacity', '1');
 				}
 			});
 		}
@@ -18,10 +20,12 @@ $(document).ready(function(){
 			var id = $up.closest('.afeedel').find('.activityans').data('ansid');
 			$.get(('/ucheck/ans/'+ id), function(data){
 				if(data == 'upvoted'){
-					$up.html('Un-Upvote');
+					$up.html('Upvoted Answer');
+					$up.css('opacity', '0.5');
 				}
 				else{
-					$up.html('Upvote');
+					$up.html('Upvote Answer');
+					$up.css('opacity', '1');
 				}
 			});
 		}
@@ -34,10 +38,12 @@ $(document).ready(function(){
 			var id = $(this).closest('.afeedel').find('.activityques').data('id');
 			$.get(('/upvote/ques/' + id), function(data){
 				if(data == 'upvoted'){
-					$up.empty().append('Un-Upvote');
+					$up.empty().append('Upvoted Question');
+					$up.css('opacity', '0.5');
 				}
 				else if(data=='unupvoted'){
-					$up.empty().append('Upvote');
+					$up.empty().append('Upvote Question');
+					$up.css('opacity', '1');
 				}
 			});
 		}
@@ -45,10 +51,12 @@ $(document).ready(function(){
 			var id = $(this).closest('.afeedel').find('.activityans').data('ansid');
 			$.get(('/upvote/ans/'+ id), function(data){
 				if(data == 'upvoted'){
-					$up.html('Un-Upvote');
+					$up.html('Upvoted Answer');
+					$up.css('opacity', '0.5');
 				}
 				else{
-					$up.html('Upvote');
+					$up.html('Upvote Answer');
+					$up.css('opacity', '1');
 				}
 			});
 		}
@@ -101,7 +109,9 @@ $(document).ready(function(){
 	}, 1000);
 
 	$(".activityques a").click(function(){
+		if(!$(this).find('.up')){
 		window.location = '/question/' + $(this).closest(".activityques").data("id");
+	}
 	});
 
 	$.when(openquabls()).then(function(){

@@ -274,7 +274,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect('/index/')
+                return HttpResponseRedirect('/cs670/')
             else:
                 return HttpResponse("Your Quabl account is disabled.")
         else:

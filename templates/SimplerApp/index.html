@@ -43,25 +43,30 @@
 
 		<div class="activity" data-actid="{{a.id}}">
 			<span class="getup" data="{{a.user.id}}"><a href="javascript:;">{{a.user.username}}</a></span><span class="notiftext"> added an answer.</span>
-			<div class="contandqueswrap viewcont"><div class="activitycontext">{% if a.question.highlight.highlight_parent.coeficient >= 1 %}<div class="prevques">{{a.question.highlight.highlight_parent.answerto}}</div>{% endif %}<div class="context">{{a.question.highlight.highlight_parent.answer}}</div></div>
-			<div class="floatques" data-hp="{{a.question.highlight.id}}">{{a.question.question}}
-				<div class="triangle"></div>
-		</div>
+			<div class="anscontandqueswrap contandqueswrap viewcont">
+				<div class="quespluscont">
+					{% if a.question.highlight.highlight_parent.coeficient >= 1 %}
+					<div class="prevques">{{a.question.highlight.highlight_parent.answerto}}</div>
+					{% endif %}
+				<div class="context">{{a.question.highlight.highlight_parent.answer}}</div>
+			</div>
+				<div class="floatques" data-hp="{{a.question.highlight.id}}">
+					{{a.question.question}}
+					<div class="triangle"></div>
+				</div>
 		</div>
 			<div class="activityques" data-id="{{a.question.id}}" data-highlight="{{a.question.highlight.id}}" data-parent="{{a.question.highlight.highlight_parent.id}}">
 				<a href="javascript:;">{{a.question.question}}</a>
 				</div>
 				<div class="activityans" data-ansid="{{a.answer.id}}">
 					{{a.answer.answer}}
+					<div class="upview">
+						<button class="btn btn-primary up"></button>
+					</div>
 					</div>
 					{% if a in newact %}<span class="newact">NEW ACTIVITY</span>{% endif %}
 		</div>
-
-		<div class="upview">
-			<a href="javascript:;"><span class="up"></span></a>
-		</div>
 	</div>
-	<hr/>
 
 	{% else %}
 
@@ -69,18 +74,22 @@
 
 		<div class="activity" data-actid="{{a.id}}">
 			<span class="getup" data="{{a.user.id}}"><a href="javascript:;">{{a.user.username}}</a></span><span class="notiftext"> has this question. </span>
-			<div class="activitycontext">{% if a.question.highlight.highlight_parent.coeficient >= 1 %}<div class="prevques">{{a.question.highlight.highlight_parent.answerto}}</div>{% endif %}<div class="context">{{a.question.highlight.highlight_parent.answer}}</div></div>
-			<div class="activityques floatques" data-id="{{a.question.id}}" data-parent="{{a.question.highlight.highlight_parent.id}}" data-hp="{{a.question.highlight.id}}">
-				<a href="javascript:;">{{a.question.question}}</a>
-				<div class="triangle"></div>
+			<div class="contandqueswrap quescontandqueswrap">
+					<div class="quespluscont">
+					{% if a.question.highlight.highlight_parent.coeficient >= 1 %}<div class="prevques">{{a.question.highlight.highlight_parent.answerto}}</div>{% endif %}
+					<div class="context">{{a.question.highlight.highlight_parent.answer}}</div>
+				</div>
+					<div class="activityques floatques" data-id="{{a.question.id}}" data-parent="{{a.question.highlight.highlight_parent.id}}" data-hp="{{a.question.highlight.id}}">
+						<a class="queslink" href="javascript:;">{{a.question.question}}</a>
+						<div class="triangle"></div>
+						<div class="upview">
+							<button class="btn btn-primary up"></button>
+						</div>
+					</div>
 			</div>
 			{% if a in newact %}<span class="newact">NEW ACTIVITY</span>{% endif %}
 		</div>
-		<div class="upview">
-			<a href="javascript:;"><span class="up"></span></a>
-		</div>
 	</div>
-	<hr/>
 
 	{% endif %}
 	{% endfor %}
