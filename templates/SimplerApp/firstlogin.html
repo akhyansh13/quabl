@@ -4,10 +4,45 @@
   <title>Quabl</title>
 <script src="{% static 'js/jquery-1.11.1.js' %}"></script>
 <script src="{% static 'js/firstlogin.js' %}"></script>
+<link rel="icon" type="image/png" href="/quablmedia/favicon.ico" />
 </head>
+<style>
+body{
+  font-family:"Lucida Grande", "Segoe UI", "Helvetica Neue", Helvetica, Arial, serif, sans-serif;
+}
+.btn{
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.btn-default{
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+</style>
 <body style="background-color:#FFA500;">
-
-  <div id="firstlogin" align="center" style="position:relative; top:20%;color:#FFF;">
+  <div id="logocontainer" align="center"><img src="/quablmedia/logo.svg" style="height:100px;position:relative;top:50px;"></img>
+  <div style="position:relative; top:150px;">
+  <div align="center" style="color:#FFFFFF; font-size:40pt; padding-bottom:20px;">Hi, {{profile.full_name}}! <br/>
+  Quabl is fun, sign up below :)
+  </div>
+  <div align="center" style="color:#FFFFFF; font-size:16pt; padding-bottom:15px;">* All fields are required.</div>
+  <div id="firstlogin" align="center" style="position:relative; top:20%;color:#FFF;padding-bottom:30px;">
   {% csrf_token %}
 <textarea id="username" style="height:46px; font-size:22px; border-radius: 6px; border:none; padding:4px;" placeholder="Username"></textarea>
 <br /><br/>
@@ -16,6 +51,8 @@
 <textarea id="email" style="height:46px; font-size:22px; border-radius: 6px; border:none; padding:4px;" placeholder="Email"></textarea>
 <br /><br/>
 <button class="btn btn-default" id="sub"><b>Start Quabling :)</b></button>
+<div id="logocontainer"><img src="/quablmedia/logo.svg" style="width:100%; height:100%; display:none;"></img>
+</div>
 </div>
 </body>
 </html>

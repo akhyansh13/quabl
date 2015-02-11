@@ -448,7 +448,9 @@ def lastseen(request):
 
 def firstlogin(request):
     context = RequestContext(request)
-    return render_to_response('SimplerApp/firstlogin.html', context)
+    up = UserProfile.objects.get(user=request.user)
+    context_dict = {'profile':up}
+    return render_to_response('SimplerApp/firstlogin.html', context_dict, context)
 
 def firstloginsub(request):
     context=RequestContext(request)
