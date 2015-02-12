@@ -266,7 +266,11 @@ def user_login(request):
     context = RequestContext(request)
 
     if request.method == 'POST':
-        username = request.POST['username'].upper()
+        if User.objects.filter(username=request.POST['username']).exists():
+            username = request.POST['username']
+        else:
+            username = request.POST['username'].upper()
+
         password = request.POST['password']
 
         user = authenticate(username=username, password=password)
