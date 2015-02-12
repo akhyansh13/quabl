@@ -88,7 +88,7 @@ def addpost(request):
     context_text = request.GET['txt']
     ptopic = topic.objects.get_or_create(topic = request.GET['topic'])[0]
     p = Post.objects.get_or_create(topic=ptopic, post=context_text ,author=request.user.username, writer=request.user, context=context_text)[0]
-    s = Simpler.objects.get_or_create(post=p, question=-1, answer=p.context, simpler_original=p.context, coeficient=1, parent_list='contextsimpler', author=request.user.username, writer=request.user, display=' ')[0]
+    s = Simpler.objects.get_or_create(post=p, question=-1, answer=p.context, simpler_original=p.context, coeficient=1, parent_list='contextsimpler', writer=request.user)[0]
     l = Link.objects.get_or_create(atext = request.GET['atext'], href = request.GET['link'], simpler=s, post=p)[0]
     p.followers.add(request.user)
     return HttpResponse(str(s.id))
@@ -192,7 +192,7 @@ def makesimpler(request):                       #View that takes care of additio
     coefficient = ques.highlight.highlight_parent.coeficient + 1
     parent_list = 'parent' + str(ques.highlight.highlight_parent.id) + ' ' + ques.highlight.highlight_parent.parent_list
 
-    c = Simpler.objects.get_or_create(post=post, question=questionid, answerto = ques.question , answer=simpler_text, simpler_original=simpler_text, coeficient=coefficient, parent_list=parent_list, author=request.user.username, writer=request.user, display=' ')[0]
+    c = Simpler.objects.get_or_create(post=post, question=questionid, answerto = ques.question , answer=simpler_text, simpler_original=simpler_text, coeficient=coefficient, parent_list=parent_list, writer=request.user)[0]
     l = Link.objects.get_or_create(atext = request.GET['atext'], href = request.GET['link'], simpler=c)[0]
 
     post.followers.add(request.user)
@@ -403,7 +403,7 @@ def addpostext(request):
     context = RequestContext(request)
     userreqed = User.objects.get(username='anonymous')
     contextpost = request.GET['context']
-    Post.objects.get_or_create(post=contextpost, author = 'anonymous', writer=userreqed, context=contextpost)
+    Post.objects.get_or_create(post=contextpost, writer=userreqed, context=contextpost)
     return HttpResponse('successful')
 
 def getthumburl(request, username):
