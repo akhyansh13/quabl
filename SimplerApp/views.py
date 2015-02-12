@@ -266,7 +266,7 @@ def user_login(request):
     context = RequestContext(request)
 
     if request.method == 'POST':
-        username = request.POST['username']
+        username = request.POST['username'].upper()
         password = request.POST['password']
 
         user = authenticate(username=username, password=password)
