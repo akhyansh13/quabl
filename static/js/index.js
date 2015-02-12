@@ -96,7 +96,12 @@ $(document).ready(function(){
 	});
 
 	$(".viewcont").click(function(){
-		window.location = '/sutton/' + $(this).closest(".afeedel").find(".activityques").data("parent");
+		if(parseInt($(this).data('coef'))>=1){
+			window.location = '/question/' + $(this).data("q");
+		}
+		else{
+			window.location = '/sutton/' + $(this).closest(".afeedel").find(".activityques").data("parent");
+		}
 	});
 
 	$(".coursenav").not('#linksnav').click(function(){
@@ -108,10 +113,8 @@ $(document).ready(function(){
 		$.get(('/lastseen/'));
 	}, 1000);
 
-	$(".activityques a").click(function(){
-		if(!$(this).find('.up')){
-		window.location = '/question/' + $(this).closest(".activityques").data("id");
-	}
+	$(".activityques").click(function(){
+		window.location = '/question/' + $(this).data("id");
 	});
 
 	$.when(openquabls()).then(function(){

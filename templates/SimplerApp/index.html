@@ -43,7 +43,7 @@
 
 		<div class="activity" data-actid="{{a.id}}">
 			<span class="getup" data="{{a.user.id}}"><a href="javascript:;">{{a.user.username}}</a></span><span class="notiftext"> added an answer.</span>
-			<div class="anscontandqueswrap contandqueswrap viewcont">
+			<div class="anscontandqueswrap contandqueswrap viewcont" data-coef="{{a.question.highlight.highlight_parent.coeficient}}" data-q="{{a.question.highlight.highlight_parent.question}}">
 				<div class="quespluscont">
 					{% if a.question.highlight.highlight_parent.coeficient >= 1 %}
 					<div class="prevques">{{a.question.highlight.highlight_parent.answerto}}</div>
