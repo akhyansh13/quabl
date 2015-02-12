@@ -113,7 +113,6 @@
 }
 
 .upview{
-	margin-top:40px;
 	position:relative;
 	padding-top:20px;
 }
@@ -171,9 +170,8 @@ hr{
 }
 
 .quesact .up{
-	position:absolute;
-	bottom:0;
-	right:0;
+	position:relative;
+	left:50%;
 }
 
 .quespluscont{
