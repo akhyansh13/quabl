@@ -3,7 +3,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Simpler.settings')
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
-from models import Post, Simpler, UserForm, UserProfileForm, HighlightDesc, highlightq, highlight, topic, UserNotification, UserProfile, Link, activity
+from models import Post, Simpler, UserForm, UserProfileForm, HighlightDesc, highlightq, highlight, topic, UserNotification, UserProfile, Link, activity, firstloginform
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
@@ -451,16 +451,44 @@ def lastseen(request):
     return HttpResponse('success')
 
 def firstlogin(request):
+    # Like before, get the request's context.
     context = RequestContext(request)
-    up = UserProfile.objects.get(user=request.user)
-    context_dict = {'profile':up}
-    return render_to_response('SimplerApp/firstlogin.html', context_dict, context)
 
-def firstloginsub(request):
-    context=RequestContext(request)
-    request.user.email = request.GET['email']
-    request.user.set_password(request.GET['pass'])
-    request.user.username= request.GET['uid']
-    request.user.save()
-    UserProfile.objects.create(user=request.user)
-    return HttpResponse('success')
+    # A boolean value for telling the template whether the registration was successful.
+    # Set to False initially. Code changes value to True when registration succeeds.
+
+    # If it's a HTTP POST, we're interested in processing form data.
+    if request.method == 'POST':
+        # Attempt to grab information from the raw form information.
+        # Note that we make use of both UserForm and UserProfileForm.
+        profile_form = firstloginform(data=request.POST)
+
+        # If the two forms are valid...
+        if profile_form.is_valid():
+
+            profile = profile_form.save(commit=False)
+            request.user.username = profile.username
+            request.user.set_password(profile.password)
+            request.user.email = profile.email
+            request.user.save()
+            UserProfile.objects.create(user=request.user)
+            return HttpResponseRedirect('/done/')
+
+        else:
+            print profile_form.errors
+
+    # Not a HTTP POST, so we render our form using two ModelForm instances.
+    # These forms will be blank, ready for user input.
+    else:
+        profile_form = firstloginform()
+
+    # Render the template depending on the context.
+    return render_to_response(
+            'SimplerApp/firstlogin.html',
+            {'profile_form': profile_form},
+            context)
+
+
+def done(request):
+    context = RequestContext(request)
+    return render_to_response('SimplerApp/tourprime.html', context)

@@ -1,0 +1,58 @@
+{% load static %}
+<html>
+<head>
+  <title>Quabl</title>
+
+  <link rel="icon" type="image/png" href="/quablmedia/favicon.ico" />
+
+  <link href="{% static 'css/tour.css' %}" rel="stylesheet">
+
+  <script src="{% static 'js/jquery-1.11.1.js' %}"></script>
+
+  <script src="{% static 'js/tour.js' %}"></script>
+
+</head>
+<body>
+  <div id="wrapper">
+    <div id="logowrapper">
+      <img src='/quablmedia/logo.svg' id="biglogo"></img>
+      <div id="introtext">
+        <p>Your username and password have been changed. Login using you new credentials below.</p>
+
+      </div>
+      <div id="login" align="center" style="position:relative; top:20%;color:#FFF; display:none;">
+        <div style="padding-bottom:10px;"><h3>Enter your Roll Number as the username and the default password is "password".</h3>
+          You'll be asked to change your password when you log in the first first time.</div>
+          <form id="login_form" method="post" action="/login/">
+            {% csrf_token %}
+            <input type="text" name="username" value="" size="30" style="height:46px; font-size:22px; border-radius: 6px; border:none; padding:4px;" placeholder="Username"/>
+            <br /><br/>
+            <input type="password" name="password" value="" size="30" style="height:46px; font-size:22px; border-radius: 6px; border:none; padding:4px;" placeholder="Password" />
+            <br /><br/>
+
+            <button class="btn btn-default" type="submit" value="Login"><b>Log In</b></button>
+            {% csrf_token %}
+          </form>
+        </div>
+      </div>
+    </div>
+    <div id="ftwrapper">
+      <div id="ftopbar">
+        <div id="logocontainer"><img src="/quablmedia/logo.svg" style="width:100%; height:100%; display:none;"></img>
+        </div>
+        <div id="signin">Log In</div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-59747902-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+</html>

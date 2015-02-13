@@ -91,6 +91,12 @@ class Link(models.Model):
     simpler = models.ForeignKey(Simpler, null=True, blank=True)
     post = models.ForeignKey(Post, null=True, blank = True)
 
+class firstlogin(models.Model):
+    username = models.CharField(max_length = 100000000, blank=True, null=True)
+    email = models.CharField(max_length = 100000000, blank=True, null=True)
+    password = models.CharField(max_length = 100000000, blank=True, null=True)
+
+
 class UserForm(forms.ModelForm):
 
     password = forms.CharField(widget=forms.PasswordInput())
@@ -109,3 +115,12 @@ class HighlightDesc(forms.ModelForm):
     class Meta:
         model = highlightq
         fields = ('question',)
+
+class firstloginform(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+    username = forms.CharField(max_length = 100000000, widget=forms.Textarea(attrs={'placeholder':'NEW USERNAME', 'rows':'2', 'columns':'40', 'class':'ufield'}))
+    email = forms.CharField(max_length = 100000000, widget=forms.Textarea(attrs={'placeholder':'EMAIL ADDRESS', 'rows': '2', 'columns':'40', 'class':'efield'}))
+
+    class Meta:
+        model = firstlogin
+        fields = ('email', 'username', 'password')

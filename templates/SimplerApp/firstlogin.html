@@ -34,6 +34,10 @@ body{
   background-color: #fff;
   border-color: #ccc;
 }
+
+.ufield, .efield{
+  resize:none;
+}
 </style>
 <body style="background-color:#FFA500;">
   <div id="logocontainer" align="center"><img src="/quablmedia/logo.svg" style="height:100px;position:relative;top:50px;"></img>
@@ -41,16 +45,21 @@ body{
   <div align="center" style="color:#FFFFFF; font-size:40pt; padding-bottom:20px;">Hi, {{profile.full_name}}! <br/>
   Quabl is fun, sign up below :)
   </div>
-  <div align="center" style="color:#FFFFFF; font-size:16pt; padding-bottom:15px;">* All fields are required.</div>
-  <div id="firstlogin" align="center" style="position:relative; top:20%;color:#FFF;padding-bottom:30px;">
+  <form id="profile_form" method="post" action="/firstlogin/"
+  enctype="multipart/form-data">
+
   {% csrf_token %}
-<textarea id="username" style="height:46px; font-size:22px; border-radius: 6px; border:none; padding:4px;" placeholder="Username"></textarea>
-<br /><br/>
-<textarea id="password" style="height:46px; font-size:22px; border-radius: 6px; border:none; padding:4px;" placeholder="Password" ></textarea>
-<br /><br/>
-<textarea id="email" style="height:46px; font-size:22px; border-radius: 6px; border:none; padding:4px;" placeholder="Email"></textarea>
-<br /><br/>
-<button class="btn btn-default" id="sub"><b>Start Quabling :)</b></button>
+
+  <!-- Display each form. The as_p method wraps each element in a paragraph
+  (<p>) element. This ensures each element appears on a new line,
+  making everything look neater. -->
+
+  {{profile_form.email}}<br/><br/>
+  {{profile_form.username}}<br/><br/>
+  <span style="color:#FFF;">NEW PASSWORD</span> {{profile_form.password}}<br/><br/>
+  <!-- Provide a button to click to submit the form. -->
+  <input type="submit" name="submit" value="Register" />
+</form>
 <div id="logocontainer"><img src="/quablmedia/logo.svg" style="width:100%; height:100%; display:none;"></img>
 </div>
 </div>
