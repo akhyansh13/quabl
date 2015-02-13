@@ -464,3 +464,9 @@ def firstloginsub(request):
     request.user.save()
     UserProfile.objects.create(user=request.user)
     return HttpResponse('success')
+
+def sysbio(request):
+    context = RequestContext(request)
+    test = 'test'
+    context_dict = {'test':test}
+    return render_to_response('SimplerApp/sysbio2.html', context_dict, context)
