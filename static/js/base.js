@@ -31,7 +31,7 @@ function deferred_up(getupinstance){		//Pre-fetching User Profiles.
 $(document).ready(function(){
 
 	$(document).on('click', '.search-ac li', function(){
-		var id = parseInt($(this).find('id').html());
+		var id = parseInt($(this).find('.id').html());
 		if(id<1134){
 			window.location = '/sutton/' + id;
 		}
