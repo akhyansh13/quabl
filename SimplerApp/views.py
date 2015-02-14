@@ -13,6 +13,7 @@ from django.contrib.auth.models import User
 import PIL
 from PIL import Image
 import urllib
+from django.core.cache import cache
 
 def tour(request):
     context = RequestContext(request)
@@ -20,6 +21,8 @@ def tour(request):
 
 def index(request):
     context = RequestContext(request)
+
+    cache.clear()
 
     uprofile = UserProfile.objects.get(user=request.user)
 
