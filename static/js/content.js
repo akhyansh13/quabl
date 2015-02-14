@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+	
 	$('.footer').hide();
 
 	blink(".ansloaddot");

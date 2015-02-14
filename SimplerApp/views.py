@@ -492,3 +492,103 @@ def firstlogin(request):
 def done(request):
     context = RequestContext(request)
     return render_to_response('SimplerApp/tourprime.html', context)
+
+def sutton1(request):
+    context = RequestContext(request)
+
+    answers = []
+    for i in range(1134, 1467):
+        if Simpler.objects.filter(id=i).exists():
+            answers.append(Simpler.objects.get(id=i))
+
+    context_dict = {'anscount': len(answers)}
+
+    highlights = highlight.objects.all()
+    questions = highlightq.objects.all()
+    rquestions = []
+
+    for answer in answers:
+        highs = highlights.filter(highlight_parent=answer)
+        for high in highs:
+            rquestions.extend(questions.filter(highlight=high))
+
+    context_dict['rquestions'] = rquestions
+    context_dict['answers'] = answers
+
+    return render_to_response('SimplerApp/content.html', context_dict, context)
+
+def sutton2(request):
+    context = RequestContext(request)
+
+    answers = []
+    for i in range(1469, 1827):
+        if Simpler.objects.filter(id=i).exists():
+            answers.append(Simpler.objects.get(id=i))
+
+    context_dict = {'anscount': len(answers)}
+
+    highlights = highlight.objects.all()
+    questions = highlightq.objects.all()
+    rquestions = []
+
+    for answer in answers:
+        highs = highlights.filter(highlight_parent=answer)
+        for high in highs:
+            rquestions.extend(questions.filter(highlight=high))
+
+    context_dict['rquestions'] = rquestions
+    context_dict['answers'] = answers
+
+    return render_to_response('SimplerApp/content.html', context_dict, context)
+
+def sutton2scroll(request, scrollto):
+    context = RequestContext(request)
+
+    answers = []
+    for i in range(1469, 1827):
+        if Simpler.objects.filter(id=i).exists():
+            answers.append(Simpler.objects.get(id=i))
+
+    context_dict = {'anscount': len(answers)}
+
+    highlights = highlight.objects.all()
+    questions = highlightq.objects.all()
+    rquestions = []
+
+    for answer in answers:
+        highs = highlights.filter(highlight_parent=answer)
+        for high in highs:
+            rquestions.extend(questions.filter(highlight=high))
+
+    context_dict['scrollto'] = scrollto
+
+    context_dict['rquestions'] = rquestions
+    context_dict['answers'] = answers
+
+    return render_to_response('SimplerApp/content.html', context_dict, context)
+
+def sutton1scroll(request ,scrollto):
+    context = RequestContext(request)
+
+    answers = []
+    for i in range(1134, 1467):
+        if Simpler.objects.filter(id=i).exists():
+            answers.append(Simpler.objects.get(id=i))
+
+    context_dict = {'anscount': len(answers)}
+
+    highlights = highlight.objects.all()
+    questions = highlightq.objects.all()
+    rquestions = []
+
+    for answer in answers:
+        highs = highlights.filter(highlight_parent=answer)
+        for high in highs:
+            rquestions.extend(questions.filter(highlight=high))
+
+    context_dict['rquestions'] = rquestions
+    context_dict['answers'] = answers
+
+    context_dict['scrollto'] = scrollto
+
+    return render_to_response('SimplerApp/content.html', context_dict, context)

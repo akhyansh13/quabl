@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from SimplerApp.views import index, csimpler, question, makesimpler, register, user_login, user_logout, addpost, define, getUserProfile, follow, addpostext, getthumburl, defined, indexalt, tour, sutton, suttonscroll, upvote, ucheck, lastseen, firstlogin, done
+from SimplerApp.views import index, csimpler, question, makesimpler, register, user_login, user_logout, addpost, define, getUserProfile, follow, addpostext, getthumburl, defined, indexalt, tour, sutton, suttonscroll, upvote, ucheck, lastseen, firstlogin, done, sutton1, sutton2, sutton1scroll, sutton2scroll
 from django.contrib import admin
 from django.conf import settings
 admin.autodiscover()
@@ -28,6 +28,10 @@ urlpatterns = patterns('',
     url(r'^indexcontext/$', indexalt),
     url(r'^sutton/$', sutton),
     url(r'^sutton/(?P<scrollto>\w+)/$', suttonscroll),
+    url(r'^sutton1/$', sutton1),
+    url(r'^sutton1/(?P<scrollto>\w+)/$', sutton1scroll),
+    url(r'^sutton2/$', sutton2),
+    url(r'^sutton2/(?P<scrollto>\w+)/$', sutton2scroll),
     url(r'^search/$', include('haystack.urls')),
     url(r'^upvote/(?P<type>\w+)/(?P<id>[\w|\W]*)/$', upvote),
     url(r'^ucheck/(?P<type>\w+)/(?P<id>[\w|\W]*)/$', ucheck),
