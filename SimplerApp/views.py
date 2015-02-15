@@ -595,3 +595,9 @@ def sutton1scroll(request ,scrollto):
     context_dict['scrollto'] = scrollto
 
     return render_to_response('SimplerApp/content.html', context_dict, context)
+
+def sysbio(request):
+    context = RequestContext(request)
+    test = 'test'
+    context_dict = {'test':test}
+    return render_to_response('SimplerApp/sysbio2.html', context_dict, context)
