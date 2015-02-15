@@ -1,9 +1,5 @@
 from django.conf.urls import patterns, include, url
-<<<<<<< HEAD
-from SimplerApp.views import index, csimpler, question, makesimpler, register, user_login, user_logout, addpost, define, getUserProfile, follow, addpostext, getthumburl, defined, indexalt, tour, sutton, suttonscroll, upvote, ucheck, lastseen, firstlogin, done, sutton1, sutton2, sutton1scroll, sutton2scroll
-=======
-from SimplerApp.views import index, csimpler, question, makesimpler, register, user_login, user_logout, addpost, define, getUserProfile, follow, addpostext, getthumburl, defined, indexalt, tour, sutton, suttonscroll, upvote, ucheck, lastseen, firstlogin, firstloginsub, sysbio
->>>>>>> origin/pdfquabl
+from SimplerApp.views import index, csimpler, question, makesimpler, register, user_login, user_logout, addpost, define, getUserProfile, follow, addpostext, getthumburl, defined, indexalt, tour, sutton, suttonscroll, upvote, ucheck, lastseen, firstlogin, done, sutton1, sutton2, sutton1scroll, sutton2scroll, sysbio
 from django.contrib import admin
 from django.conf import settings
 admin.autodiscover()
