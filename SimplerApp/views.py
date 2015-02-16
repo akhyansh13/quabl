@@ -468,7 +468,7 @@ def firstlogin(request):
             request.user.set_password(profile.password)
             request.user.email = profile.email
             request.user.save()
-            UserProfile.objects.create(user=request.user)
+            UserProfile.objects.get_or_create(user=request.user)
             return HttpResponseRedirect('/done/')
 
         else:
