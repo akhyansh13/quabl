@@ -454,16 +454,10 @@ def lastseen(request):
     return HttpResponse('success')
 
 def firstlogin(request):
-    # Like before, get the request's context.
     context = RequestContext(request)
 
-    # A boolean value for telling the template whether the registration was successful.
-    # Set to False initially. Code changes value to True when registration succeeds.
-
-    # If it's a HTTP POST, we're interested in processing form data.
     if request.method == 'POST':
-        # Attempt to grab information from the raw form information.
-        # Note that we make use of both UserForm and UserProfileForm.
+
         profile_form = firstloginform(data=request.POST)
 
         # If the two forms are valid...
@@ -480,12 +474,10 @@ def firstlogin(request):
         else:
             print profile_form.errors
 
-    # Not a HTTP POST, so we render our form using two ModelForm instances.
-    # These forms will be blank, ready for user input.
+
     else:
         profile_form = firstloginform()
 
-    # Render the template depending on the context.
     return render_to_response(
             'SimplerApp/firstlogin.html',
             {'profile_form': profile_form},

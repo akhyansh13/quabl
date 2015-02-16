@@ -1,22 +1,12 @@
 $(document).ready(function(){
+
   $(document).mouseup(function(){
+
     window.quabl_html = getSelectionHtml();
 
     if(getSelectionHtml() != ''){
 
-      if($(window.getSelection().getRangeAt(0).commonAncestorContainer).closest('.t').length != 0){
-
-        highlight_parent = $(window.getSelection().getRangeAt(0).commonAncestorContainer).closest('.t');
-
-        window.conans = highlight_parent;
-
-        $.when(simpler_cache($(window.getSelection().getRangeAt(0).commonAncestorContainer).closest('.t'))).then(function(){
-
-          $.when(hidehighlights()).then(function(){
-
             $.when(replaceanswer()).then(function(){
-
-              $(".highlight").css('visibility', 'collapse');
 
               $("#quesboxwrapper").show();
               $("#contextquesbox").focus();
@@ -27,9 +17,6 @@ $(document).ready(function(){
               $(".instruct").html('Enter the related question below.');
 
             });
-          });
-        });
-      }
       selectmode = true;
     }
     else if(selectmode && getSelectionHtml()==''){
@@ -75,7 +62,7 @@ function replaceanswer(){
 
   highlight = highlight.trim();
 
-  var req_span = '<span class="curr_highlight"><span class="html">texthtmlgoeshere</span></span>' + window.quabl_html;
+  var req_span = '<span class="curr_highlight"><span class="html" style="display:none;">texthtmlgoeshere</span></span>' + window.quabl_html;
 
   if(firstel==" "){				//Fixing the Quabl-spacing problem.
     final_span = '<span class="highlight-wrapper">&nbsp;' + req_span;
@@ -102,30 +89,10 @@ function replaceanswer(){
     $(selectedText.childNodes[1]).remove();
   }
 
-
-  $("#ansdump").append($(window.getSelection().getRangeAt(0).commonAncestorContainer).closest('.t').html());
-  $("#ansdump").find(".curr_highlight").attr("data-id","idtobesetinview");
-  $("#ansdump").find(".curr_highlight").removeClass("curr_highlight").addClass("highlight");
-  $("#ansdump").find(".highlight").each(function(){
-    $(this).show();
-    $(this).removeAttr('style');
-  });
-
-  $("#highlightdump").append(window.quabl_html);
-  $("#highlightdump").find(".highlight").remove();
-  var qh = $("#highlightdump").html();
-
-  var answer_part = $("#ansdump").html().replace("?", "xqmx");
-
-  uri = '/define/'+ post_id + '/' + simpler_id +'/ans/'+ answer_part + '/quabl/' + qh;
-
   setTimeout(function(){
     repdefer.resolve();
-    $("#ansdump").empty();
     $("#highlightdump").empty();
   }, 5);
-
-  window.uriarr = [post_id, simpler_id, answer_part, qh, uri];
 
   if(highlight.trim() != '' ){
     window.highlight = highlight;
