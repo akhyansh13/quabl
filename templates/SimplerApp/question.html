@@ -22,7 +22,7 @@
 	<div class="authwrapper">
 
 		<img class="thumb" data-username="{{ques.req_by.username}}"/>
-	<div class="author">Question By <br/><a href="javascript:;" class="getup" data="{{ques.req_by.id}}">{{ques.req_by.first_name}} {{ques.req_by.last_name}}</a></div>
+	<div class="author">Question By <br/><a href="javascript:;" class="getup" data="{{ques.req_by.id}}">{{ques.req_by.username}}</a></div>
 
 </div>
 
@@ -114,6 +114,8 @@
 				<div class="writerinfo">Answer by <br/><a href="javascript:;" class="getup" data="{{answer.writer.id}}">{{answer.writer.username}}</a></div>
 			</div>
 
+			<div style="position:absolute; right:15px; bottom:0;" class="upnumup"><span class="upnum" style="font-size:13pt; color:grey; padding-right:5px;">{{answer.upvoters.all|length}}</span><span style="color:grey;">&bull;</span>
+			<span><button class="btn btn-primary up" data-ansid={{answer.id}} >Upvote Answer</button></span></div>
 		</div>
 
 			<div class="relques"></div>

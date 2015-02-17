@@ -18,14 +18,17 @@ $(document).ready(function(){
 		}
 		else{
 			var id = $up.closest('.afeedel').find('.activityans').data('ansid');
+
 			$.get(('/ucheck/ans/'+ id), function(data){
 				if(data == 'upvoted'){
 					$up.html('Upvoted Answer');
 					$up.css('opacity', '0.5');
+
 				}
 				else{
 					$up.html('Upvote Answer');
 					$up.css('opacity', '1');
+
 				}
 			});
 		}
@@ -49,14 +52,20 @@ $(document).ready(function(){
 		}
 		else{
 			var id = $(this).closest('.afeedel').find('.activityans').data('ansid');
+			var upnum =	parseInt($up.closest(".upnumup").find('.upnum').html());
+
 			$.get(('/upvote/ans/'+ id), function(data){
 				if(data == 'upvoted'){
 					$up.html('Upvoted Answer');
 					$up.css('opacity', '0.5');
+					$up.closest('.upnumup').find('.upnum').html(upnum+1);
+
 				}
 				else{
 					$up.html('Upvote Answer');
 					$up.css('opacity', '1');
+					$up.closest('.upnumup').find('.upnum').html(upnum-1);
+
 				}
 			});
 		}

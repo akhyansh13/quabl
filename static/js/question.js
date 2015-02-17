@@ -1,5 +1,41 @@
 $(document).ready(function(){
 
+	$(".up").each(function(){
+		var $up = $(this);
+			var id = $up.data('ansid');
+			$.get(('/ucheck/ans/'+ id), function(data){
+				if(data == 'upvoted'){
+					$up.html('Upvoted Answer');
+					$up.css('opacity', '0.5');
+				}
+				else{
+					$up.html('Upvote Answer');
+					$up.css('opacity', '1');
+				}
+			});
+	});
+
+	$(document).on('click', '.up', function(){
+		var $up = $(this);
+			var id = $(this).data('ansid');
+			var upnum =	parseInt($(this).closest(".upnumup").find('.upnum').html());
+			$.get(('/upvote/ans/'+ id), function(data){
+				if(data == 'upvoted'){
+					$up.html('Upvoted Answer');
+					$up.css('opacity', '0.5');
+					$up.closest('.upnumup').find('.upnum').html(upnum+1);
+				}
+				else{
+					// decrease by one.
+					$up.html('Upvote Answer');
+					$up.css('opacity', '1');
+					$up.closest('.upnumup').find('.upnum').html(upnum-1);
+				}
+			});
+		return false;
+	});
+
+
 	$('.footer').hide();
 
 	blink(".ansloaddot");
