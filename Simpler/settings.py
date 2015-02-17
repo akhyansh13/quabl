@@ -30,6 +30,8 @@ MEDIA_ROOT = os.path.join(PROJECT_PATH, 'quablmedia')
 MEDIA_URL = '/quablmedia/'
 ADMIN_MEDIA_PREFIX = '/quablmedia/admin/'
 
+LOGIN_URL = '/login/'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 

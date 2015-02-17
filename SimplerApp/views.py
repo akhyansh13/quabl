@@ -19,6 +19,7 @@ def tour(request):
     context = RequestContext(request)
     return render_to_response('SimplerApp/tour.html', context)
 
+@login_required
 def index(request):
     context = RequestContext(request)
 
@@ -96,6 +97,7 @@ def addpost(request):
     p.followers.add(request.user)
     return HttpResponse(str(s.id))
 
+@login_required
 def question(request, question_id):
     context = RequestContext(request)
     ques = highlightq.objects.get(id=int(question_id))
@@ -122,6 +124,7 @@ def question(request, question_id):
 
     return render_to_response('SimplerApp/question.html', context_dict, context)
 
+@login_required
 def sutton(request):
     context = RequestContext(request)
 
@@ -142,6 +145,7 @@ def sutton(request):
 
     return render_to_response('SimplerApp/content.html', context_dict, context)
 
+@login_required
 def suttonscroll(request, scrollto):
     context = RequestContext(request)
 
@@ -488,6 +492,7 @@ def done(request):
     context = RequestContext(request)
     return render_to_response('SimplerApp/tourprime.html', context)
 
+@login_required
 def sutton1(request):
     context = RequestContext(request)
 
@@ -512,6 +517,7 @@ def sutton1(request):
 
     return render_to_response('SimplerApp/content.html', context_dict, context)
 
+@login_required
 def sutton2(request):
     context = RequestContext(request)
 
@@ -536,6 +542,7 @@ def sutton2(request):
 
     return render_to_response('SimplerApp/content.html', context_dict, context)
 
+@login_required
 def sutton2scroll(request, scrollto):
     context = RequestContext(request)
 
@@ -562,6 +569,7 @@ def sutton2scroll(request, scrollto):
 
     return render_to_response('SimplerApp/content.html', context_dict, context)
 
+@login_required
 def sutton1scroll(request ,scrollto):
     context = RequestContext(request)
 

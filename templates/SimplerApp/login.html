@@ -1,14 +1,14 @@
 {% extends 'SimplerApp/base.html' %}
 {% block body_block %}
 <div style="padding-bottom:300px;">
-<h1>Login to Quabl.</h1>
+<h1 align="center">Login to Quabl.</h1>
 
-        <form id="login_form" method="post" action="/login/">
+        <form id="login_form" align="center" method="post" action="/login/">
             {% csrf_token %}
-            Username: <input type="text" name="username" value="" size="50" style="height:46px;"/>
-            <br />
-            Password: <input type="password" name="password" value="" size="50" />
-            <br />
+            <span style="font-size:10pt; color:grey;">USERNAME</span> <input type="text" name="username" value="" size="50" style="height:46px;"/>
+            <br /><br/>
+            <span style="font-size:10pt; color:grey;">PASSWORD</span> <input type="password" name="password" value="" size="50" style="height:46px;" />
+            <br /><br/>
 
             <input type="submit" value="Login" />
         </form>
