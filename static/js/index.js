@@ -110,6 +110,7 @@ $(document).ready(function(){
 		$("#afeed").hide();
 		$("#ocont").hide();
 		$("#linkspage").show();
+		$("#contentind").hide("fast");
 	});
 
 	$(".viewcont").click(function(){
