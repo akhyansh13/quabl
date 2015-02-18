@@ -30,6 +30,8 @@
 
 	<div class="mainques" data-id="{{ques.id}}" data-hid="{{ques.highlight.id}}">{{ques}}</div>
 
+ 	<div id="details">{% if ques.assignment == 'y' %}{{ques.highlight.highlight_parent.answer}}{% endif %}</div>
+
 	<div id="numjumwrapper" class='numjumpwrapper'><span class="numanswers"><a href="javascript:;" class="showquill" style="text-decoration:none;">Add Answer</a> <span id="bull">&bull;</span> <span id="anscounti">{{anscount}} Answers </span><span id="anscountf" style="display:none;"><a href="javascript:;" style="text-decoration:none;">View {{anscount}} Answers </a></span></span></div>
 
 </div>

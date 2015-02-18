@@ -194,3 +194,10 @@ hr{
 .context{
 	text-align:justify;
 }
+
+.assign{
+	background-color:#FFA500;
+	padding:5px;
+	border-radius:3px;
+	color:#FFFFFF;
+}

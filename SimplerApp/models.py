@@ -55,6 +55,7 @@ class highlightq(models.Model):
     req_by = models.ForeignKey(User, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     upvoters = models.ManyToManyField(User, related_name="qupvoted", null=True, blank=True)
+    assignment = models.CharField(max_length=20, null=True, blank=True)
     def __unicode__(self):
         return self.question
 

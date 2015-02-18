@@ -77,7 +77,9 @@
 	<div class="afeedel quesact">
 
 		<div class="activity" data-actid="{{a.id}}">
-			<span class="getup" data="{{a.user.id}}"><a href="javascript:;">{{a.user.username}}</a></span><span class="notiftext"> has this question. </span>
+			<span class="getup" data="{{a.user.id}}"><a href="javascript:;">{{a.user.username}}</a></span><span class="notiftext">
+				{% if a.question.assignment == 'y' %} assigned a question. {% else %}
+				has this question. {% endif %}</span>
 			<div class="contandqueswrap quescontandqueswrap">
 					<div class="quespluscont">
 					{% if a.question.highlight.highlight_parent.coeficient >= 1 %}<div class="prevques">{{a.question.highlight.highlight_parent.answerto}}</div>{% endif %}
@@ -92,6 +94,7 @@
 					</div>
 			</div>
 			{% if a in newact %}<span class="newact">NEW ACTIVITY</span>{% endif %}
+			{% if a.question.assignment == 'y' %} <span class="assign">Assignment</span> {% endif %}
 		</div>
 	</div>
 
