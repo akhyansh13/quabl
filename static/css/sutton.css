@@ -1,8 +1,4 @@
 /* Space out content a bit */
-.header, .container{
-  display:none;
-}
-
 body {
   padding-bottom: 0px;
   z-index:1;
@@ -285,6 +281,7 @@ textarea {
   left: 50%;
   margin-top: -50px;
   margin-left: -50px;
+  display:none;
 }
 
 .instruct, #qinst{

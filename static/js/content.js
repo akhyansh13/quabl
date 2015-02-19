@@ -1,5 +1,13 @@
 $(document).ready(function(){
 
+	if($("#scrollto").html() =='default'){
+		$(function() {
+			$("img.lazy").lazyload({
+				threshold : 400
+			});
+		});
+	}
+
 	$('.footer').hide();
 
 	blink(".ansloaddot");
@@ -410,25 +418,24 @@ $(document).mouseup(function(){
 				}
 			});
 
-	blink("#loaddot");
-	setTimeout(function(){
-		$("#loaddot").remove();
-		$(".container").show();
-		$(".header").show();
 		if($("#scrollto").html()!='default'){
+
 			$(".answer").each(function(){
 				if($("#scrollto").html()==$(this).data('id')){
 					window.ansscroll = $(this);
 				}
 			});
-
-
 			$('html, body').animate({
 				scrollTop: window.ansscroll.offset().top - 55
 			}, 500);
-
+			setTimeout(function(){
+				$(function() {
+					$("img.lazy").lazyload({
+						threshold : 400
+					});
+				});
+			}, 600);
 		}
-	},2000);
 
 
 	/*$("#rearrange").click(function(){

@@ -1,5 +1,9 @@
 $(document).ready(function(){
 
+	$("img").each(function(){
+		$(this).attr("src", $(this).data('original'));
+	});
+
 	$(".up").each(function(){
 		var $up = $(this);
 			var id = $up.data('ansid');
@@ -302,7 +306,7 @@ $(document).mouseup(function(){
 	$(".assigncheck").click(function(evt){
 		evt.stopPropagation();
 	});
-	
+
 
 	$(".addsimp").click(function(){					//add simpler button code [AJAX].
 

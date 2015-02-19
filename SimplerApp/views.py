@@ -3,7 +3,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Simpler.settings')
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
-from models import Post, Simpler, UserForm, UserProfileForm, HighlightDesc, highlightq, highlight, topic, UserNotification, UserProfile, Link, activity, firstloginform
+from models import Post, Simpler, UserForm, UserProfileForm, HighlightDesc, highlightq, highlight, topic, UserNotification, UserProfile, Link, activity, firstloginform, fback
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
@@ -54,6 +54,8 @@ def index(request):
     context_dict['contarr'] = contextarr
 
     context_dict['last'] = uprofile.last_seen
+
+    context_dict['uprofile'] = uprofile
 
     return render_to_response('SimplerApp/index.html', context_dict, context)
 
@@ -128,7 +130,11 @@ def question(request, question_id):
 def sutton(request):
     context = RequestContext(request)
 
-    answers = Simpler.objects.all().filter(question=-100)
+    answers = []
+    for i in range(804, 1107):
+        if Simpler.objects.filter(id=i).exists():
+            answers.append(Simpler.objects.get(id=i))
+
     context_dict = {'anscount': len(answers)}
 
     highlights = highlight.objects.all()
@@ -609,3 +615,15 @@ def sysbio(request):
     test = 'test'
     context_dict = {'test':test}
     return render_to_response('SimplerApp/sysbio2.html', context_dict, context)
+
+def feedback(request, fdback):
+    context = RequestContext(request)
+    fback.objects.create(fback=request.user.username + fdback.replace('xqmx', '?'))
+    return HttpResponse('success')
+
+def enotification(request, enotif):
+    context = RequestContext(request)
+    up = UserProfile.objects.get(user=request.user)
+    up.emailnotif = enotif
+    up.save()
+    return HttpResponse('success')

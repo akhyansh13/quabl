@@ -114,12 +114,14 @@
 			{% block body_block %}{% endblock %}
 			</div>
 			<div id="loaddot"></div>
+			<div id="feedback" style="position:fixed; bottom:20px;right:20px;">
+				<span id="close" style="display:none; position:absolute; right:2px;"><a href="javascript:;">close</a></span>
+				<span style="display:none;" id="feedbackbox"><textarea id="ftext" style="border:solid 1px #C0C0C0; font-size:9pt; height:80px; padding:10px; border-radius:3px; margin:5px;" placeholder="Tell us what you want us to build or improve. We'll get right to it."></textarea><span style="position:relative; bottom:20px;"><button class="btn btn-default fbtn" style="border-radius:0px;">Shoot</button></span></span>
+				<span id="fsub"><a href='javascript:;'>Feedback</a></span>
+			</div>
 	</body>
 	<script src="{% static 'js/bootstrap.js' %}"></script>
 	<script src="{% static 'quill/quill.js' %}"></script>
-	<script type="text/javascript"
-	src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-	</script>
 <script>
     var editor = new Quill('#editor', {
     modules: {

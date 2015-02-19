@@ -1,5 +1,25 @@
 $(document).ready(function(){
 
+	$("img.lazy").lazyload({
+		threshold : 400
+	});
+
+	$(".jimp").click(function(){
+		$.get(('/enotif/jimp'), function(data){
+			$("#enotifset").html('Settings have been updated.');
+		});
+	});
+
+	$(".all").click(function(){
+		$.get(('/enotif/all'), function(data){
+			$("#enotifset").html('Your settings have been updated.');
+		});
+	});
+
+	$("img").each(function(){
+		$(this).attr("src", $(this).data('original'));
+	});
+
 	$(".up").each(function(){
 		var $up = $(this);
 		var aans = $up.closest('.afeedel').find(".activityans");

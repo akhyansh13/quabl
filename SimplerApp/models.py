@@ -67,6 +67,7 @@ class UserProfile(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now_add=True)
     last_seen = models.DateTimeField(auto_now_add=True)
+    emailnotif = models.CharField(max_length=1000000, default='blank')
     def __unicode__(self):
         return self.user.username
 
@@ -97,6 +98,8 @@ class firstlogin(models.Model):
     email = models.CharField(max_length = 100000000, blank=True, null=True)
     password = models.CharField(max_length = 100000000, blank=True, null=True)
 
+class fback(models.Model):
+    fback = models.CharField(max_length=100000000, blank=True, null=True)
 
 class UserForm(forms.ModelForm):
 

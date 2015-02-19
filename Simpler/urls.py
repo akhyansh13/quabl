@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from SimplerApp.views import index, csimpler, question, makesimpler, register, user_login, user_logout, addpost, define, getUserProfile, follow, addpostext, getthumburl, defined, indexalt, tour, sutton, suttonscroll, upvote, ucheck, lastseen, firstlogin, done, sutton1, sutton2, sutton1scroll, sutton2scroll, sysbio
+from SimplerApp.views import index, csimpler, question, makesimpler, register, user_login, user_logout, addpost, define, getUserProfile, follow, addpostext, getthumburl, defined, indexalt, tour, sutton, suttonscroll, upvote, ucheck, lastseen, firstlogin, done, sutton1, sutton2, sutton1scroll, sutton2scroll, sysbio, feedback, enotification
 from django.contrib import admin
 from django.conf import settings
 admin.autodiscover()
@@ -39,6 +39,8 @@ urlpatterns = patterns('',
     url(r'^firstlogin/$', firstlogin),
     url(r'^done/$', done),
     url(r'^sysbio/$', sysbio),
+    url(r'^feedback/(?P<fdback>\w+)/$', feedback),
+    url(r'^enotif/(?P<enotif>\w+)/$', enotification),
 )
 
 if settings.DEBUG:

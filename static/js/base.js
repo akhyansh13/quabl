@@ -30,6 +30,27 @@ function deferred_up(getupinstance){		//Pre-fetching User Profiles.
 
 $(document).ready(function(){
 
+	$("#fsub").click(function(){
+		$(this).hide(function(){
+			$("#feedbackbox").show();
+			$("#close").show();
+		});
+	});
+
+	$(".fbtn").click(function(){
+		var furl = '/feedback/' + $("#ftext").val().replace('?', 'xqmx');
+		$.get((furl), function(){
+			$("#feedbackbox").hide();
+		});
+	});
+
+	$("#close").click(function(){
+		$(this).hide();
+		$("#feedbackbox").hide(function(){
+			$("#fsub").show();
+		});
+	});
+
 	$(document).on('click', '.search-ac li', function(){
 		var id = parseInt($(this).find('.id').html());
 		if(id<1134){
