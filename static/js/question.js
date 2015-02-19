@@ -135,6 +135,14 @@ $(document).mouseup(function(){
 			var newques = $("#contextquesbox").val();
 		}
 
+		if($("#assigncheckcq").is(":checked")){
+			var newques = $("#contextquesbox").val() + ' xassignx';
+		}
+		else{
+			var newques = $("#contextquesbox").val();
+		}
+
+
 		$.get(('/define/'+window.uriarr[0]+'/'+window.uriarr[1]),{answer_part: window.uriarr[2], qh:window.uriarr[3], cques:newques.replace('?', 'xqmx'), highlight:window.highlight}, function(data){
 
 			$this.parent().find('textarea').val('');
@@ -189,6 +197,14 @@ $(document).mouseup(function(){
 		else{
 			var newques = $("#quesbox").val();
 		}
+
+		if($("#assigncheckq").is(":checked")){
+			var newques = $("#quesbox").val() + ' xassignx';
+		}
+		else{
+			var newques = $("#quesbox").val();
+		}
+
 		var uri = '/defined/' + String(window.highclicked) + '/' + newques.replace('?','xqmx');
 
 		$.get((uri), function(data){
@@ -282,6 +298,11 @@ $(document).mouseup(function(){
 	$(".anoncheck").click(function(evt){
 		evt.stopPropagation();
 	});
+
+	$(".assigncheck").click(function(evt){
+		evt.stopPropagation();
+	});
+	
 
 	$(".addsimp").click(function(){					//add simpler button code [AJAX].
 

@@ -84,9 +84,13 @@
 	<div class="afeedel quesact">
 
 		<div class="activity" data-actid="{{a.id}}">
+			{% if a.user.username == 'Anonymous' %}
+			<span class="notiftext">Question asked anonymously.</span>
+			{% else %}
 			<span class="getup" data="{{a.user.id}}"><a href="javascript:;">{{a.user.username}}</a></span><span class="notiftext">
 				{% if a.question.assignment == 'y' %} assigned a question. {% else %}
 				has this question. {% endif %}</span>
+				{% endif %}
 			<div class="contandqueswrap quescontandqueswrap">
 					<div class="quespluscont">
 					{% if a.question.highlight.highlight_parent.coeficient >= 1 %}<div class="prevques">{{a.question.highlight.highlight_parent.answerto}}</div>{% endif %}
@@ -95,9 +99,11 @@
 					<div class="activityques floatques" data-id="{{a.question.id}}" data-parent="{{a.question.highlight.highlight_parent.id}}" data-hp="{{a.question.highlight.id}}">
 						<a class="queslink" href="javascript:;">{{a.question.question}}</a>
 						<div class="triangle"></div>
+						{% if a.question.assignment != 'y' %}
 						<div class="upview">
 							<button class="btn btn-primary up"></button>
 						</div>
+						{% endif %}
 					</div>
 			</div>
 			{% if a in newact %}<span class="newact">NEW ACTIVITY</span>{% endif %}

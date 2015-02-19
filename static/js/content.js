@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	
+
 	$('.footer').hide();
 
 	blink(".ansloaddot");
@@ -99,6 +99,13 @@ $(document).mouseup(function(){
 			var newques = $("#contextquesbox").val();
 		}
 
+		if($("#assigncheckcq").is(":checked")){
+			var newques = $("#contextquesbox").val() + ' xassignx';
+		}
+		else{
+			var newques = $("#contextquesbox").val();
+		}
+
 		$.get(('/define/'+window.uriarr[0]+'/'+window.uriarr[1]),{answer_part: window.uriarr[2], qh:window.uriarr[3], cques:newques.replace('?', 'xqmx'), highlight:window.highlight}, function(data){
 
 			$this.parent().find('textarea').val('');
@@ -149,6 +156,13 @@ $(document).mouseup(function(){
 
 		if($("#anoncheckq").is(":checked")){
 			var newques = $("#quesbox").val() + ' xanonx';
+		}
+		else{
+			var newques = $("#quesbox").val();
+		}
+
+		if($("#assigncheckq").is(":checked")){
+			var newques = $("#quesbox").val() + ' xassignx';
 		}
 		else{
 			var newques = $("#quesbox").val();
@@ -245,6 +259,10 @@ $(document).mouseup(function(){
 	});
 
 	$(".anoncheck").click(function(evt){
+		evt.stopPropagation();
+	});
+
+	$(".assigncheck").click(function(evt){
 		evt.stopPropagation();
 	});
 

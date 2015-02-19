@@ -334,9 +334,13 @@ def define(request, post_id, simpler_id):
     h = highlight.objects.get_or_create(highlight=request.GET['highlight'], highlight_parent=simpler)[0]
 
     if cques.find(' xanonx') == -1:
-        f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, question = cques)[0]
-        actobj = activity.objects.create(user=request.user, question = f)
-        #actobj = activity.objects.create(activity='<span class="getup" data="'+ str(request.user.id) +'"><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> has a question. </span>' + '<div class="activityques " data-id="'+ str(f.id) +'" data-parent="' + str(f.highlight.highlight_parent.id) + '"><a href="/question/'+ str(f.id) +'/">' + f.question + '</a></div>')
+        if cques.find(' xassignx') == -1:
+            f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, question = cques)[0]
+            actobj = activity.objects.create(user=request.user, question = f)
+        else:
+            f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, question = cques.replace(' xassignx', ''), assignment='y')[0]
+            actobj = activity.objects.create(user=request.user, question = f)
+            #actobj = activity.objects.create(activity='<span class="getup" data="'+ str(request.user.id) +'"><a href="javascript:;">' + request.user.username + '</a></span><span class="notiftext"> has a question. </span>' + '<div class="activityques " data-id="'+ str(f.id) +'" data-parent="' + str(f.highlight.highlight_parent.id) + '"><a href="/question/'+ str(f.id) +'/">' + f.question + '</a></div>')
     else:
         f = highlightq.objects.get_or_create(highlight=h, req_by = anon, question = cques.replace(' xanonx', ''))[0]
         actobj = activity.objects.create(user=anon, question = f)
@@ -368,8 +372,12 @@ def defined(request, h_id, cques):
     anon = User.objects.get(username="Anonymous")
 
     if cques.find(' xanonx') == -1:
-        f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, question = cques.replace('xqmx', '?'))[0]
-        actobj = activity.objects.create(user=request.user, question = f)
+        if cques.find(' xassignx') == -1:
+            f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, question = cques.replace('xqmx', '?'))[0]
+            actobj = activity.objects.create(user=request.user, question = f)
+        else:
+            f = highlightq.objects.get_or_create(highlight=h, req_by = request.user, question = cques.replace('xqmx', '?').replace(' xassignx', ''), assignment='y')[0]
+            actobj = activity.objects.create(user=request.user, question = f)
     else:
         f = highlightq.objects.get_or_create(highlight=h, req_by = anon, question = cques.replace('xqmx', '?').replace(' xanonx', ''))[0]
         actobj = activity.objects.create(user=anon, question = f)
