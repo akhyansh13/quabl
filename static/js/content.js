@@ -3,8 +3,8 @@ $(document).ready(function(){
 	$('.answer').each(function() {
 		$(this).find('img').each(function(){
 			var aspect_ratio = $(this).attr('height') / $(this).attr('width') * 100;
-			$(this).wrap('<span style="padding-bottom: ' + aspect_ratio + '%;position:relative;">');
-			// $(this).css({position:"absolute", top:0, left:0});
+			$(this).wrap('<div style="padding-bottom: ' + aspect_ratio + '%;position:relative; display:inline;">');
+		        //$(this).css({position:"absolute", top:0, left:0});
 		});
 	});
 
