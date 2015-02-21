@@ -79,7 +79,7 @@
 					{{a.answer.answer}}
 					<div class="upview">
 						<div class="author" style="float:left; margin-right:10px;">Answer By <br/><a href="javascript:;" class="getup" data="{{a.answer.writer.id}}">{{a.answer.writer.username}}</a></div>
-						<div class="upnumup"><span><button class="btn btn-primary up"></button></span> <span style="color:grey;">&bull;</span> <span class="upnum" style="color:grey;">{{a.answer.upvoters.all|length}}</span></div>
+						<div class="upnumup"><span><button class="btn btn-primary up"></button></span> <span style="color:grey;"><span class="upnum" style="color:grey; display:none;">{{a.answer.upvoters.all|length}}</span></div>
 					</div>
 					</div>
 					{% if a in newact %}<span class="newact">NEW ACTIVITY</span>{% endif %}

@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	
+
 	$(".jimp").click(function(){
 		$.get(('/enotif/jimp'), function(data){
 			$("#enotifset").html('Settings have been updated.');
@@ -34,15 +34,25 @@ $(document).ready(function(){
 		}
 		else{
 			var id = $up.closest('.afeedel').find('.activityans').data('ansid');
-
+			var upnum = parseInt($up.closest(".upnumup").find('.upnum').html());
 			$.get(('/ucheck/ans/'+ id), function(data){
 				if(data == 'upvoted'){
-					$up.html('Upvoted Answer');
+					if(upnum == 1){
+						$up.html('Upvoted Answer (1 Upvote)');
+					}
+					else{
+						$up.html('Upvoted Answer ('+ upnum +' Upvotes)');
+					}
 					$up.css('opacity', '0.5');
 
 				}
 				else{
-					$up.html('Upvote Answer');
+					if(upnum == 1){
+						$up.html('Upvote Answer (1 Upvote)');
+					}
+					else{
+						$up.html('Upvote Answer ('+ upnum +' Upvotes)');
+					}
 					$up.css('opacity', '1');
 
 				}
@@ -72,16 +82,24 @@ $(document).ready(function(){
 
 			$.get(('/upvote/ans/'+ id), function(data){
 				if(data == 'upvoted'){
-					$up.html('Upvoted Answer');
 					$up.css('opacity', '0.5');
 					$up.closest('.upnumup').find('.upnum').html(upnum+1);
-
+					if(parseInt($up.closest('.upnumup').find('.upnum').html())==1){
+						$up.html('Upvoted Answer (1 Upvote)');
+					}
+					else{
+						$up.html('Upvoted Answer ('+ $up.closest('.upnumup').find('.upnum').html() +' Upvotes)');
+					}
 				}
 				else{
-					$up.html('Upvote Answer');
 					$up.css('opacity', '1');
 					$up.closest('.upnumup').find('.upnum').html(upnum-1);
-
+					if(parseInt($up.closest('.upnumup').find('.upnum').html())==1){
+						$up.html('Upvote Answer (1 Upvote)');
+					}
+					else{
+						$up.html('Upvote Answer ('+ $up.closest('.upnumup').find('.upnum').html() +' Upvotes)');
+					}
 				}
 			});
 		}

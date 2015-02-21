@@ -6,15 +6,29 @@ $(document).ready(function(){
 
 	$(".up").each(function(){
 		var $up = $(this);
+		var upnum =	parseInt($(this).closest(".upnumup").find('.upnum').html());
+
 			var id = $up.data('ansid');
 			$.get(('/ucheck/ans/'+ id), function(data){
 				if(data == 'upvoted'){
-					$up.html('Upvoted Answer');
+					if(upnum == 1){
+						$up.html('Upvoted Answer (1 Upvote)');
+					}
+					else{
+						$up.html('Upvoted Answer ('+ upnum +' Upvotes)');
+					}
 					$up.css('opacity', '0.5');
+
 				}
 				else{
-					$up.html('Upvote Answer');
+					if(upnum == 1){
+						$up.html('Upvote Answer (1 Upvote)');
+					}
+					else{
+						$up.html('Upvote Answer ('+ upnum +' Upvotes)');
+					}
 					$up.css('opacity', '1');
+
 				}
 			});
 	});
@@ -25,15 +39,24 @@ $(document).ready(function(){
 			var upnum =	parseInt($(this).closest(".upnumup").find('.upnum').html());
 			$.get(('/upvote/ans/'+ id), function(data){
 				if(data == 'upvoted'){
-					$up.html('Upvoted Answer');
 					$up.css('opacity', '0.5');
 					$up.closest('.upnumup').find('.upnum').html(upnum+1);
+					if(parseInt($up.closest('.upnumup').find('.upnum').html())==1){
+						$up.html('Upvoted Answer (1 Upvote)');
+					}
+					else{
+						$up.html('Upvoted Answer ('+ $up.closest('.upnumup').find('.upnum').html() +' Upvotes)');
+					}
 				}
 				else{
-					// decrease by one.
-					$up.html('Upvote Answer');
 					$up.css('opacity', '1');
 					$up.closest('.upnumup').find('.upnum').html(upnum-1);
+					if(parseInt($up.closest('.upnumup').find('.upnum').html())==1){
+						$up.html('Upvote Answer (1 Upvote)');
+					}
+					else{
+						$up.html('Upvote Answer ('+ $up.closest('.upnumup').find('.upnum').html() +' Upvotes)');
+					}
 				}
 			});
 		return false;
