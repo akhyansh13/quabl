@@ -1,4 +1,8 @@
 $(document).ready(function(){
+        
+	$(".answer").find("a").each(function(){
+		striptag_jq($(this));
+	});
 
 	$('.answer').each(function() {
 		$(this).find('img').each(function(){
