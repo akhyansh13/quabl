@@ -1,12 +1,12 @@
 $(document).ready(function(){
 
-	if($("#scrollto").html() =='default'){
-		$(function() {
-			$("img.lazy").lazyload({
-				threshold : 400
-			});
+	$('.answer').each(function() {
+		$(this).find('img').each(function(){
+			var aspect_ratio = $(this).attr('height') / $(this).attr('width') * 100;
+			$(this).wrap('<span style="padding-bottom: ' + aspect_ratio + '%;position:relative;">');
+			// $(this).css({position:"absolute", top:0, left:0});
 		});
-	}
+	});
 
 	$('.footer').hide();
 
@@ -418,24 +418,24 @@ $(document).mouseup(function(){
 				}
 			});
 
-		if($("#scrollto").html()!='default'){
-
-			$(".answer").each(function(){
-				if($("#scrollto").html()==$(this).data('id')){
-					window.ansscroll = $(this);
-				}
-			});
-			$('html, body').animate({
-				scrollTop: window.ansscroll.offset().top - 55
-			}, 500);
+			blink("#loaddot");
 			setTimeout(function(){
-				$(function() {
-					$("img.lazy").lazyload({
-						threshold : 400
+				$("#loaddot").remove();
+				$(".container").show();
+				$(".header").show();
+				if($("#scrollto").html()!='default'){
+
+					$(".answer").each(function(){
+						if($("#scrollto").html()==$(this).data('id')){
+							window.ansscroll = $(this);
+						}
 					});
-				});
-			}, 600);
-		}
+					$('html, body').animate({
+						scrollTop: window.ansscroll.offset().top - 55
+					}, 500);
+				}
+			},1000);
+
 
 
 	/*$("#rearrange").click(function(){

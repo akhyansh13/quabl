@@ -1,9 +1,5 @@
 $(document).ready(function(){
-
-	$("img.lazy").lazyload({
-		threshold : 400
-	});
-
+	
 	$(".jimp").click(function(){
 		$.get(('/enotif/jimp'), function(data){
 			$("#enotifset").html('Settings have been updated.');

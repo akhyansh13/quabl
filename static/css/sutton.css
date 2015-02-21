@@ -1,3 +1,11 @@
+.container{
+  display:none;
+}
+
+.header{
+  display:none;
+}
+
 /* Space out content a bit */
 body {
   padding-bottom: 0px;
@@ -200,11 +208,6 @@ textarea {
   padding-right:10px;
 }
 
-.answer img{
-  padding-top:10px;
-  padding-bottom:10px;
-}
-
 .glyphicon-chevron-down{
   font-size:10pt;
 }
@@ -387,7 +390,7 @@ textarea {
 
 .answer img{
   max-width:100%;
-  height:inherit;
+  height:auto;
 }
 
 #searchbox{
