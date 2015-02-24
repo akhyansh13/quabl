@@ -1,29 +1,86 @@
 $(document).ready(function(){
 
+  window.selectmode = false;
+
   $(document).mouseup(function(){
 
-    window.quabl_html = getSelectionHtml();
+    if(getSelectionHtml().trim() != ''){
 
-    if(getSelectionHtml() != ''){
+      window.selectmode = true;
 
-            $.when(replaceanswer()).then(function(){
+      window.line_arr = [];
 
-              $("#quesboxwrapper").show();
-              $("#contextquesbox").focus();
+      $("#empty").append(getSelectionHtml());
 
-              window.onehview = true;
-              $("body").addClass("noselect");
+      $("#empty").find(".t").each(function(){
+        window.line_arr.push($(this).attr("class"));
+      });
+      var selector1 = '.' + window.line_arr[0].split(" ").join('.');
+      var selector2 = '.' + window.line_arr[window.line_arr.length-1].split(" ").join('.');
+      var firstline_full = $(selector1).first().html();
+      var first_selection_html = $("#empty").find(selector1).html();
+      var last_selection_html = $("#empty").find(selector2).html();
+      var lastline_full = $(selector2).first().html();
 
-              $(".instruct").html('Enter the related question below.');
+      $(selector1).first().html(firstline_full.replace(first_selection_html, '<span class="highlight_wrapper">'+first_selection_html+'</span>'));
+      $(selector2).first().html(lastline_full.replace(last_selection_html, '<span class="highlight_wrapper">'+last_selection_html+'</span>'));
 
-            });
-      selectmode = true;
+      var l;
+      for (l = 1; l < window.line_arr.length-1; ++l) {
+        var selector = "." + window.line_arr[l].split(" ").join('.');
+        var shtml = $(selector).first().html();
+        $(selector).first().html('<span class="highlight_wrapper">' + shtml + "</span>");
+      }
+
+      $("#quesboxwrapper").show();
+      $("#contextquesbox").focus();
+
+      window.onehview = true;
+      $("body").addClass("noselect");
+
+      $(".instruct").html('Enter the related question below.');
     }
-    else if(selectmode && getSelectionHtml()==''){
-      selectmode = false;
-      clearSelection();
-    }  });
+    else if(window.selectmode && getSelectionHtml()==''){
+
+        $("#quescrate").empty();
+
+        $(".instruct").html('Select any text to add a question<br/> Or, click on a dot to view related question(s).')
+
+        $(".instruct").show('fast');
+
+        $("#qinst").hide();
+
+        $("#quesboxwrapper").hide();
+
+        $("#queswrapper").hide();
+
+        $("body").removeClass("noselect");
+
+        window.selectmode = false;
+
+        clearSelection();
+
+        var l;
+        for (l = 0; l < window.line_arr.length; ++l) {
+          var selector = "." + window.line_arr[l].split(" ").join('.');
+          $(selector).first().find(".highlight_wrapper").removeClass("highlight_wrapper");
+          if(l==window.line_arr.length-1){
+            window.line_arr = [];
+            $("#empty").empty();
+          }
+        }
+
+      }
+  });
 });
+
+function clearSelection() {
+  if ( document.selection ) {
+    document.selection.empty();
+  } else if ( window.getSelection ) {
+    window.getSelection().removeAllRanges();
+  }
+}
 
 function getSelectionHtml() {
   var html = "";
@@ -44,64 +101,6 @@ function getSelectionHtml() {
   return html;
 }
 
-function replaceanswer(){
-
-  var repdefer = $.Deferred();
-
-  var final_span = " ";
-
-  var simpler_id = $(window.getSelection().getRangeAt(0).commonAncestorContainer).closest('.t').attr("class");
-
-  var selection = window.getSelection().getRangeAt(0);
-  var selectedText = selection.extractContents();
-  var highlight = String(selectedText.textContent);
-
-  var highlight_arr = highlight.split("");
-  var firstel = highlight_arr[0];
-  var lastel = highlight_arr[highlight_arr.length-1];
-
-  highlight = highlight.trim();
-
-  var req_span = '<span class="curr_highlight"><span class="html" style="display:none;">texthtmlgoeshere</span></span>' + window.quabl_html;
-
-  if(firstel==" "){				//Fixing the Quabl-spacing problem.
-    final_span = '<span class="highlight-wrapper">&nbsp;' + req_span;
-  }
-  else{
-    final_span = '<span class="highlight-wrapper">' + req_span;
-  }
-  if(lastel==" "){
-    final_span = final_span + '<span id="blankspace">&nbsp;</span></span>';
-  }
-  else{
-    final_span = final_span + '<span id="noblankspace"></span></span>';
-  }
-
-  var span = $(final_span);
-  //The new highlight has class curr_highlight and the new checkbox has class curr_checkedhigh. They have related CSS.
-
-  if(highlight.trim() != ''){
-    selection.insertNode(span[0]);
-  }
-
-  if (selectedText.childNodes[1] != undefined){
-    console.log(selectedText.childNodes[1]);
-    $(selectedText.childNodes[1]).remove();
-  }
-
-  setTimeout(function(){
-    repdefer.resolve();
-    $("#highlightdump").empty();
-  }, 5);
-
-  if(highlight.trim() != '' ){
-    window.highlight = highlight;
-  }
-
-
-  return repdefer;
-}
-
 function hidehighlights(){
 
   var hldefer = $.Deferred();
@@ -113,4 +112,8 @@ function hidehighlights(){
   },5);
 
   return hldefer;
+}
+
+function striptag_jq(element){
+  element.contents().unwrap();
 }
