@@ -1,5 +1,11 @@
 $(document).ready(function(){
 
+  $(".t span").each(function(){
+    if($(this).html().trim() != ''){
+      $(this).css("display", "inline");
+    }
+  });
+
   window.selectmode = false;
 
   $(document).mouseup(function(){
@@ -22,7 +28,7 @@ $(document).ready(function(){
       var last_selection_html = $("#empty").find(selector2).html();
       var lastline_full = $(selector2).first().html();
 
-      $(selector1).first().html(firstline_full.replace(first_selection_html, '<span class="highlight_wrapper">'+first_selection_html+'</span>'));
+      $(selector1).first().html(firstline_full.replace(first_selection_html, '<span class="highlight_wrapper"><span class="highlight"></span>'+first_selection_html+'</span>'));
       $(selector2).first().html(lastline_full.replace(last_selection_html, '<span class="highlight_wrapper">'+last_selection_html+'</span>'));
 
       var l;
@@ -63,7 +69,8 @@ $(document).ready(function(){
         var l;
         for (l = 0; l < window.line_arr.length; ++l) {
           var selector = "." + window.line_arr[l].split(" ").join('.');
-          $(selector).first().find(".highlight_wrapper").removeClass("highlight_wrapper");
+          var hwhtml = $(selector).first().find(".highlight_wrapper").html();
+          $(selector).first().find(".highlight_wrapper").replaceWith(hwhtml);
           if(l==window.line_arr.length-1){
             window.line_arr = [];
             $("#empty").empty();
