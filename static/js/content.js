@@ -1,5 +1,5 @@
 $(document).ready(function(){
-        
+
 	$(".answer").find("a").each(function(){
 		striptag_jq($(this));
 	});
@@ -107,11 +107,7 @@ $(document).mouseup(function(){
 		if($("#anoncheckcq").is(":checked")){
 			var newques = $("#contextquesbox").val() + ' xanonx';
 		}
-		else{
-			var newques = $("#contextquesbox").val();
-		}
-
-		if($("#assigncheckcq").is(":checked")){
+		else if($("#assigncheckcq").is(":checked")){
 			var newques = $("#contextquesbox").val() + ' xassignx';
 		}
 		else{
