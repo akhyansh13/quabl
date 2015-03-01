@@ -158,11 +158,7 @@ $(document).mouseup(function(){
 		if($("#anoncheckcq").is(":checked")){
 			var newques = $("#contextquesbox").val() + ' xanonx';
 		}
-		else{
-			var newques = $("#contextquesbox").val();
-		}
-
-		if($("#assigncheckcq").is(":checked")){
+		else if($("#assigncheckcq").is(":checked")){
 			var newques = $("#contextquesbox").val() + ' xassignx';
 		}
 		else{
