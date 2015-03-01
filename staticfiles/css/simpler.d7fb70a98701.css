@@ -1,0 +1,198 @@
+/* Space out content a bit */
+body {
+  padding-bottom: 0px;
+  z-index:1;
+  font-family:"Lucida Grande", "Segoe UI", "Helvetica Neue", Helvetica, Arial, serif, sans-serif;
+  font-size:12pt;
+}
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.marketing,
+.footer {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+/* Custom page header */
+.header {
+  height: 50px;
+  background-color:#F5F5F5;
+  padding-right:10%;
+  border-bottom: 1px solid #DDD;
+  margin-bottom: 30px;
+  box-shadow: 0px 3px 2px -2px rgba(200, 200, 200, 0.3);
+  width:100%;
+  z-index:10;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 50px;
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+/* Customize container */
+@media (min-width: 768px) {
+  .container {
+    max-width: 60%;
+    padding-top:85px;
+    padding-bottom: 50px;
+  }
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+.jumbotron {
+  border-bottom: 1px solid #e5e5e5;
+}
+.jumbotron .btn {
+  padding: 14px 24px;
+  font-size: 21px;
+}
+
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .marketing,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+
+textarea {
+ overflow: auto;
+   border-width:1px;
+   border-style:solid; /* Uniform border across textarea as opposed to the shadowy default design */
+   border-color:#C0C0C0;
+   resize: none;   /*The resize handle is removed */
+   padding: 2px; /* padding for the TEXT that goes into the textarea */
+}
+
+#header-wrapper{
+  position: fixed;
+  top:0;
+  width: 100%;
+  z-index: 2;
+}
+
+#profblock{
+  padding-left: 20%;
+  padding-right: 20%;
+  padding-bottom: 20px;
+  padding-top: 50px;
+  width: 100%;
+  min-height: 400px;
+  background-color:#F5F5F5;
+  z-index: 2;
+  display: none;
+}
+
+#fname{
+  font-weight:bold;
+  font-size:22pt;
+  padding-bottom:10px;
+}
+
+.category{
+  font-weight:bold;
+  color:#999;
+}
+
+.contextbox{
+  width: 100%;
+}
+
+#main-logo{
+  color:#FFFFFF;
+  text-decoration:none;
+  background-color:#FFA500;
+  padding-top:11.45px;
+  padding-bottom:17px;
+  border-radius:5px;
+  font-size:25pt;
+  padding-left:10px;
+  padding-right:10px;
+}
+
+.ql-container{
+  background-color: #FFFFFF;
+  border:1px solid lightgray;
+  word-wrap:break-word;
+  font-size:12pt;
+}
+
+#toolbar{
+  padding-bottom:0px;
+}
+
+.ql-editor{
+  height: 200px;
+}
+
+.ql-btn,
+.ql-btn:hover{
+  border-radius:0px;
+  font-size:13pt;
+  border-color:#FFFFFF;
+  position:relative;
+  top:1px;
+}
+
+.preview{
+  display: none;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.html{
+  display:none;
+}
+
+#addcontexttoggle{
+  text-decoration:none;
+  color:#333;
+}
+
+.dropdown-menu{
+  width: 400px;
+  height:300px;
+  overflow:auto;
+}
+
+#searchbox{
+  overflow:hidden;
+  position:absolute;
+  margin-left:10px;
+  height: 40px;
+  margin-top: 5px;
+  border-radius: 3px;
+  width: 300px;
+  border: solid 1px #C0C0C0;
+  padding-top: 9px;
+  padding-left: 7px;
+}

@@ -2,6 +2,7 @@ import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Simpler.settings')
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from models import Post, Simpler, UserForm, UserProfileForm, HighlightDesc, highlightq, highlight, topic, UserNotification, UserProfile, Link, activity, firstloginform, fback
 from django.contrib.auth import authenticate, login, logout
@@ -18,6 +19,19 @@ from django.core.cache import cache
 def tour(request):
     context = RequestContext(request)
     return render_to_response('SimplerApp/tour.html', context)
+
+def page404(request):
+    return render(request,'SimplerApp/404.html')
+
+def page500(request):
+    return render(request,'SimplerApp/500.html')
+
+def page403(request):
+    return render(request,'SimplerApp/403.html')
+
+def page400(request):
+    return render(request,'SimplerApp/400.html')
+
 
 @login_required
 def index(request):

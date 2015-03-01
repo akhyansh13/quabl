@@ -1,0 +1,47 @@
+.highlight{
+  display: inline-block;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  background-color: #FFC966;
+  margin-right: 3px;
+  cursor: hand;
+  cursor: pointer;
+}
+
+.highlight_dummy{
+  display: inline-block;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  background-color: #FFC966;
+  margin-right: 3px;
+}
+
+.quabl_full{
+  border-radius:12px;
+  background-color: #FFFFCC;
+  color:#555;
+  z-index:5;
+}
+
+.highlight,
+.next,
+.btngrp,
+.author,
+.quespane,
+.header,
+#Post {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+::selection {
+  background:#FFFFCC;
+}
+::-moz-selection {
+  background: #FFFFCC;
+}

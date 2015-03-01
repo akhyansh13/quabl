@@ -1,0 +1,37 @@
+.DescBox{
+	height:20em;
+	width:80%;
+}
+
+.curr_highlight{
+  display: inline-block;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  background-color: rgba(255, 165, 0, 0.60);
+  margin-right: 3px;
+  cursor: hand;
+  cursor: pointer;
+	margin-left:5px;
+}
+
+.panel-title{
+	line-height: inherit;
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: normal;
+}
+
+.highlight,
+.next,
+.btngrp,
+.author,
+.quespane,
+.header,
+#Post {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
