@@ -1,0 +1,75 @@
+.search {
+  position: relative;
+  margin: 0 auto;
+  width: 500px;
+  bottom: 47px;
+}
+.search input {
+  height: 26px;
+  width: 100%;
+  padding: 0 12px 0 25px;
+  background: white url("../img/search.png") 8px 6px no-repeat;
+  border: 1px solid;
+  border-color: #a8acbc #babdcc #c0c3d2;
+  border-radius: 13px;
+  -webkit-appearance: textfield;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-box-shadow: inset 0 1px #e5e7ed, 0 1px #fcfcfc;
+  box-shadow: inset 0 1px #e5e7ed, 0 1px #fcfcfc;
+  position: relative;
+  top: 5px;
+}
+.search input:focus {
+  outline: 0;
+  border-color: #66b1ee;
+  -webkit-box-shadow: 0 0 2px rgba(85, 168, 236, 0.9);
+  box-shadow: 0 0 2px rgba(85, 168, 236, 0.9);
+}
+.search input:focus + .search-ac {
+  display: block;
+}
+
+.search-ac {
+  display: none;
+  position: absolute;
+  top: 35px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: #fdfdfd;
+  border: 1px solid;
+  border-color: #C0C0C0;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  word-wrap: break-word;
+  overflow-y: scroll;
+  height: 600px;
+  padding-left:0px;
+  font-size: 10pt;
+  cursor: hand;
+  cursor: pointer;
+}
+.search-ac:hover {
+  display: block;
+}
+
+.search-ac h1{
+  font-size:12pt;
+}
+
+.search-ac li {
+  display: block;
+  border-bottom: solid 1px #C0C0C0;
+  padding:10px;
+}
+
+.search-ac li:hover {
+  background-color:#F5F5F5;
+}
+
+.search-ac li:first-child {
+  margin-top: -1px;
+}

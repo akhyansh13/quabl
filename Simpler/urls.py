@@ -44,6 +44,11 @@ urlpatterns = patterns('',
     url(r'^addquabl/$', addquabl)
 )
 
+handler404 = 'SimplerApp.views.page404'
+handler500 = 'SimplerApp.views.page500'
+handler403 = 'SimplerApp.views.page403'
+handler400 = 'SimplerApp.views.page400'
+
 if settings.DEBUG:
     urlpatterns += patterns('',
         (r'^quablmedia/(?P<path>.*)$', 'django.views.static.serve', {

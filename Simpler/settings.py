@@ -1,3 +1,4 @@
+
 """
 Django settings for Simpler project.
 
@@ -39,11 +40,14 @@ LOGIN_URL = '/login/'
 SECRET_KEY = 'm7#lqu_8d!2^o6ivaws0$h897w05rgdggw$@raln4obdg89jo#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+
+
 
 
 # Application definition
@@ -100,8 +104,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 STATIC_URL = '/static/'
 LOGIN_URL = '/login/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",

@@ -4,6 +4,6 @@ sys.path.append('/home/ubuntu/public_html/quabl.com/Simpler')
 os.environ['DJANGO_SETTINGS_MODULE'] = 'Simpler.settings'
 
 from django.core.wsgi import get_wsgi_application
+from dj_static import Cling, MediaCling
 
-application = get_wsgi_application()
-
+application = Cling(MediaCling(get_wsgi_application()))
