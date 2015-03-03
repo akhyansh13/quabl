@@ -612,8 +612,12 @@ def sutton1scroll(request ,scrollto):
 
 def sysbio(request):
     context = RequestContext(request)
-    test = 'test'
-    context_dict = {'test':test}
+    harr = []
+    answer = Simpler.objects.get(answer='sysbio2')
+    h = highlight.objects.all().filter(highlight_parent=answer)
+    for x in h:
+        harr.append(highlightq.objects.all().filter(highlight=x))
+    context_dict = {'harr':harr}
     return render_to_response('SimplerApp/sysbio2.html', context_dict, context)
 
 def feedback(request, fdback):
@@ -627,3 +631,12 @@ def enotification(request, enotif):
     up.emailnotif = enotif
     up.save()
     return HttpResponse('success')
+
+def addquabl(request):
+    context = RequestContext(request)
+    final = request.GET['final']
+    ques = request.GET['ques']
+    s = Simpler.objects.get(answer="sysbio2")
+    hlight = highlight.objects.create(highlight=final, highlight_parent = s)
+    hlightq = highlightq.objects.create(highlight=hlight, question=ques)
+    return HttpResponse(hlightq.question)

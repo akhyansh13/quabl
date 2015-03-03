@@ -12,8 +12,8 @@
 .highlight_dummy{
   display: inline-block;
   border-radius: 50%;
-  width: 12px;
-  height: 12px;
+  width: 24px;
+  height: 24px;
   background-color: #FFC966;
   margin-right: 3px;
 }
