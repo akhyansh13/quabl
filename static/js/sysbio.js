@@ -8,7 +8,9 @@ $(document).ready(function(){
     var selector1 = htmlarr[1];
     var firstline_full = $(selector1).first().html();
     var rep = htmlarr[0].split('&gt;').join('>').split('&lt;').join('<');         //Removes the unicode encoding for '>' and '<' to let the replacing happen.
-    $(selector1).first().html(firstline_full.replace(rep, '<span class="highlight" data-id="'+ highlight_id +'"></span>'+rep));
+    if(firstline_full.search('highlight')==-1){                   //Doesn't support overlapping highlights.
+      $(selector1).first().html(firstline_full.replace(rep, '<span class="highlight" data-id="'+ highlight_id +'"></span>'+rep));
+    }
   });
 
   $(".t span").each(function(){
@@ -23,6 +25,10 @@ $(document).ready(function(){
 
   $(document).mouseup(function(){
 
+    $("#queswrapper").hide();
+
+    $("#quesboxwrapper").hide();
+
     if(window.onehmode==true){
 
       $(".quablques").each(function(){
@@ -35,17 +41,31 @@ $(document).ready(function(){
 
       $(".instruct").show();
 
+      $(".highlight_wrapper").each(function(){
+        var hhtml = $(this).html();
+        $(this).replaceWith(hhtml);
+      });
+
       window.onehmode = false;
 
     }
 
     if(getSelectionHtml().trim() != ''){
 
-      window.selectmode = true;
+      setTimeout(function(){
+        window.selectmode = true;
+      }, 10);
 
       window.line_arr = [];
 
-      $("#empty").append(getSelectionHtml());
+      if($(window.getSelection().getRangeAt(0).commonAncestorContainer).closest(".t").length == 1){
+        var oneclass = $(window.getSelection().getRangeAt(0).commonAncestorContainer).closest(".t").attr("class");
+        window.line_arr.push(oneclass);
+        $("#empty").append('<div class="'+ oneclass +'">'+ getSelectionHtml() +'</div>');
+      }
+      else{
+        $("#empty").append(getSelectionHtml());
+      }
 
       $("#empty").find(".t").each(function(){
         window.line_arr.push($(this).attr("class"));
@@ -74,7 +94,7 @@ $(document).ready(function(){
 
       $(".instruct").html('Enter the related question below.');
     }
-    else if(window.selectmode && getSelectionHtml().trim()==''){
+    if(window.selectmode){
 
         $(".instruct").html('Select any text to add a question<br/> Or, click on a dot to view related question(s).')
 
@@ -82,50 +102,22 @@ $(document).ready(function(){
 
         $("#qinst").hide();
 
-        $("#quesboxwrapper").hide();
-
-        $("#queswrapper").hide();
-
         $("body").removeClass("noselect");
 
-        window.selectmode = false;
+        $(".highlight_wrapper").each(function(){
+          var hhtml = $(this).html();
+          $(this).replaceWith(hhtml);
+        });
 
         clearSelection();
 
-        var l;
-        for (l = 0; l < window.line_arr.length; ++l) {
-          var selector = "." + window.line_arr[l].split(" ").join('.');
-          var hwhtml = $(selector).first().find(".highlight_wrapper").html();
-          $(selector).first().find(".highlight_wrapper").replaceWith(hwhtml);
-          if(l==window.line_arr.length-1){
-            window.line_arr = [];
-            $("#empty").empty();
-          }
-        }
+        window.line_arr = [];
+
+        $("#empty").empty();
+
+        window.selectmode = false;
 
       }
-  });
-
-  $(".askcontques").click(function(){
-    var ques = $("#contextquesbox").val();
-    var selector1 = '.' + window.line_arr[0].split(" ").join('.');
-    var selector2 = '.' + window.line_arr[window.line_arr.length-1].split(" ").join('.');
-    var first_selection_html = $("#empty").find(selector1).html();
-    var last_selection_html = $("#empty").find(selector2).html();
-    var firstline_full = $(selector1).first().html();
-    var final = first_selection_html;
-
-    var l;
-    for (l = 0; l < window.line_arr.length; ++l) {
-      var selector = "." + window.line_arr[l].split(" ").join('.');
-      final = final + 'xdelimitx' + selector;
-      if(l == window.line_arr.length-1){
-        final = final + 'xdelimitx' + last_selection_html;
-      }
-    }
-    $.get(('/addquabl/'), {final:final, ques:ques}, function(data){
-      $(selector1).first().html(firstline_full.replace(first_selection_html, '<span class="highlight"></span>'+first_selection_html));
-    });
   });
 
   $(document).keyup(function(){				//Code for the deactivation/activation of the Add Answer button.
@@ -162,7 +154,7 @@ $(document).ready(function(){
 
       $(".instruct").hide('fast');
       $("#qinst").show();
-      $("#quesboxwrapper").show();
+      $("#queswrapper").show();
 
   });
 
@@ -222,9 +214,66 @@ $(document).ready(function(){
     evt.stopPropagation();
   });
 
-  // $(document).on("click",function(){
-  //   if()
-  // });
+  $(".askcontques").click(function(){
+    var ques = $("#contextquesbox").val();
+    var selector1 = '.' + window.line_arr[0].split(" ").join('.');
+    var selector2 = '.' + window.line_arr[window.line_arr.length-1].split(" ").join('.');
+    var first_selection_html = $("#empty").find(selector1).html();
+    var last_selection_html = $("#empty").find(selector2).html();
+    var firstline_full = $(selector1).first().html();
+    var final = first_selection_html;
+
+    var l;
+    for (l = 0; l < window.line_arr.length; ++l) {
+      var selector = "." + window.line_arr[l].split(" ").join('.');
+      final = final + 'xdelimitx' + selector;
+      if(l == window.line_arr.length-1){
+        final = final + 'xdelimitx' + last_selection_html;
+      }
+    }
+    window.final = final;
+    $.get(('/addquabl/'), {final:final, ques:ques}, function(data){
+      $(selector1).first().html(firstline_full.replace(first_selection_html, '<span class="highlight" data-id="'+ data.split('xdatax')[0] +'"></span>'+first_selection_html));
+      $("#harr").append('<div class="hq"><span class="highlighthtml" data-id="'+ data.split('xdatax')[0] +'">'+ window.final +'</span><span class="hquestion">'+ ques +'</span></div>');
+      $("#hqs").append('<div class="hques"><span class="hhtml" data-id="'+ data.split('xdatax')[0] +'" style="display:none;">'+ window.final +'</span><span class="quablques" data-id="'+ data.split('xdatax')[0] +'"><a href="/question/'+ data.split('xdatax')[1] +'/">'+ ques +'</a></span></div>');
+
+      $("#qinst").show();
+
+      $("#contextquesbox").val('');
+
+      $(".instruct").html('Select any text to add a question<br/> Or, click on a dot to view related question(s).')
+
+      $(".instruct").hide();
+
+      $("body").removeClass("noselect");
+
+      clearSelection();
+
+      window.line_arr = [];
+
+      $("#empty").empty();
+
+      window.selectmode = false;
+
+      setTimeout(function(){
+        window.onehmode = true;
+        window.clicked_highlight = data.split('xdatax')[0];
+      }, 5);
+      //<div class="hq"><span class="highlighthtml" data-id="{{hq.highlight.id}}">{{hq.highlight.highlight}}</span><span class="hquestion">{{hq.question}}</span></div>
+
+    });
+  });
+
+  $(".askques").click(function(){
+    var newques = $("#quesbox").val();
+    $.get(('/addquablnew/'), {hid: window.clicked_highlight, ques : newques}, function(data){
+      $("#quesbox").val('');
+      var hid = data.split("xdatax")[0];
+      var qid = data.split("xdatax")[1];
+      var ques = data.split("xdatax")[2];
+      $("#hqs").append('<div class="hques"><span class="quablques" data-id="'+ hid +'"><a href="/question/'+ qid +'/">'+ ques +'</a></span></div>');
+    });
+  });
 
 });       //document.ready closes.
 
@@ -276,9 +325,7 @@ function openquabl(hid){
 
   $(".highlighthtml").each(function(){
 
-    console.log(hid);
-
-    if($(this).data('id') == highlight_id ){
+    if($(this).data('id') == hid ){
 
       var htmlarr = $(this).html().split("xdelimitx");
       var highlight_id = $(this).data('id');
@@ -301,3 +348,16 @@ function openquabl(hid){
   });
 
 }
+
+// function inArray(r, inarr){
+//   var l;
+//   for (l = 0; l < inarr.length; ++l) {
+//     if(inarr[l]==r){
+//       return true;
+//       break;
+//     }
+//     else(){
+//
+//     }
+//   }
+// }

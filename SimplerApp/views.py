@@ -627,11 +627,13 @@ def sutton1scroll(request ,scrollto):
 def sysbio(request):
     context = RequestContext(request)
     harr = []
-    answer = Simpler.objects.get(answer='sysbio2')
-    h = highlight.objects.all().filter(highlight_parent=answer)
-    for x in h:
-        harr.append(highlightq.objects.all().filter(highlight=x))
-    context_dict = {'harr':harr}
+    context_dict = {'null':0}
+    if Simpler.objects.all().filter(answer = 'sysbio2').exists():
+        answer = Simpler.objects.get(answer='sysbio2')
+        h = highlight.objects.all().filter(highlight_parent=answer)
+        for x in h:
+            harr.append(highlightq.objects.all().filter(highlight=x))
+            context_dict['harr'] = harr
     return render_to_response('SimplerApp/sysbio2.html', context_dict, context)
 
 def feedback(request, fdback):
@@ -650,7 +652,20 @@ def addquabl(request):
     context = RequestContext(request)
     final = request.GET['final']
     ques = request.GET['ques']
-    s = Simpler.objects.get(answer="sysbio2")
-    hlight = highlight.objects.create(highlight=final, highlight_parent = s)
-    hlightq = highlightq.objects.create(highlight=hlight, question=ques)
-    return HttpResponse(hlightq.question)
+    if Simpler.objects.all().filter(answer="sysbio2").exists():
+        s = Simpler.objects.get(answer="sysbio2")
+        hlight = highlight.objects.create(highlight=final, highlight_parent = s)
+        hlightq = highlightq.objects.create(highlight=hlight, question=ques, req_by=request.user)
+        return HttpResponse(str(hlight.id) + 'xdatax' + str(hlightq.id))
+    else:
+        return HttpResponse('None')
+    #<div class="hq"><span class="highlighthtml" data-id="{{hq.highlight.id}}">{{hq.highlight.highlight}}</span><span class="hquestion">{{hq.question}}</span></div>
+
+def addquablnew(request):
+    context = RequestContext(request)
+    ques = request.GET['ques']
+    hid = request.GET['hid']
+    hlt = highlight.objects.get(id=int(hid))
+    hlq = highlightq.objects.create(highlight=hlt, question=ques, req_by=request.user)
+    retval = hid + 'xdatax' + str(hlq.id) + 'xdatax' + ques
+    return HttpResponse(retval)
